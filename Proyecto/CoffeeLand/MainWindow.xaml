@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="CoffeeLand.MainWindow"
+﻿<Controls:MetroWindow x:Name="frmIncio" x:Class="CoffeeLand.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,25 +7,54 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Height="578" 
-        Width="401"
+        Width="370"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"              
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        ShowTitleBar="False" Loaded="MetroWindow_Loaded">
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Icons.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        ShowTitleBar="False" Loaded="MetroWindow_Loaded" Visibility="Visible">
 
 
-    <Grid>
-        <Controls:ProgressRing IsActive="True" Margin="171,390,162,97" />
-        <Image x:Name="image" HorizontalAlignment="Left" Height="220" Margin="80,76,0,0" VerticalAlignment="Top" Width="239" Source="Resources/256x256.png"/>
+    <Grid x:Name="pnlPrincipal" RenderTransformOrigin="0.523,0.42">
+        <Grid.Triggers>
+            <!-- Animates the rectangle's opacity. -->
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                                    Storyboard.TargetName="pnlLogin" 
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="0.0" To="9.0" Duration="0:0:5" 
+                                    BeginTime="0:0:5"
+                                     />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        <Grid x:Name="pnlCarga" HorizontalAlignment="Left" Height="527" Margin="10,10,0,0" VerticalAlignment="Top" Width="342" Background="White">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="220" Margin="57,44,0,0" VerticalAlignment="Top" Width="239" Source="Resources/256x256.png" />
+            <Controls:ProgressRing IsActive="True" Margin="148,354,134,113" />
+        </Grid>
+        <Grid x:Name="pnlLogin" HorizontalAlignment="Left" Height="527" Margin="10,10,0,0" VerticalAlignment="Top" Width="342" Background="White" Opacity="0">
+            <Label x:Name="label" Content="INICIO" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" FontSize="64" FontFamily="Arial Rounded MT Bold">
+                <Label.Foreground>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                </Label.Foreground>
+            </Label>
+            <Label x:Name="label_Copy" Content="DE" HorizontalAlignment="Left" Margin="145,72,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Arial Rounded MT Bold">
+                <Label.Foreground>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                </Label.Foreground>
+            </Label>
+            <Label x:Name="label_Copy1" Content="SESIÓN" HorizontalAlignment="Left" Margin="78,104,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Rounded MT Bold">
+                <Label.Foreground>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                </Label.Foreground>
+            </Label>
+            <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="78,303,0,0" VerticalAlignment="Top" Width="209" Height="36"/>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="36" Margin="78,250,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="207"/>
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="145,379,0,0" VerticalAlignment="Top" Width="75"/>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>

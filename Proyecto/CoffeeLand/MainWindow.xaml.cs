@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
-
+using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace CoffeeLand
 {
@@ -26,12 +27,16 @@ namespace CoffeeLand
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-        
+            
         }
+
+     
     }
 }
+
+      
