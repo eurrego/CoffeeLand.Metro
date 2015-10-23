@@ -10,35 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
 
-
 namespace CoffeeLand
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para frmPrincipal.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class frmPrincipal : MetroWindow
     {
-
-        public MainWindow()
+        public frmPrincipal()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        private void btnIngresar_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
+            menu.IsOpen = true;
         }
     }
 }
-
-      

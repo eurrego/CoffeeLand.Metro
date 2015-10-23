@@ -15,6 +15,14 @@
         ResizeMode="NoResize"
         ShowTitleBar="False" Loaded="MetroWindow_Loaded" Visibility="Visible">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
 
     <Grid x:Name="pnlPrincipal" RenderTransformOrigin="0.523,0.42">
         <Grid.Triggers>
@@ -27,7 +35,7 @@
                                     Storyboard.TargetProperty="Opacity"
                                     From="0.0" To="9.0" Duration="0:0:5" 
                                     BeginTime="0:0:5"
-                                     />
+                         />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -52,9 +60,20 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </Label.Foreground>
             </Label>
-            <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="78,303,0,0" VerticalAlignment="Top" Width="209" Height="36"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="36" Margin="78,250,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="207"/>
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="145,379,0,0" VerticalAlignment="Top" Width="75"/>
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="70,317,0,0" VerticalAlignment="Top" Width="192" Height="36"  Controls:TextBoxHelper.Watermark="Contraseña" VerticalContentAlignment="Center" FontSize="16"  />
+            <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="36" Margin="70,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Controls:TextBoxHelper.Watermark="Usuario" VerticalContentAlignment="Center" FontSize="16"   />
+            <Button x:Name="btnIngresar" Content="INGRESAR" HorizontalAlignment="Left" Margin="117,406,0,0" VerticalAlignment="Top" Width="105"  Height="38" Click="btnIngresar_Click"/>
+            <Rectangle HorizontalAlignment="Left" Height="36" Margin="264,251,0,0" VerticalAlignment="Top" Width="37"  Stroke="#FFD7D2D7" Opacity="0.5">
+                <Rectangle.Fill>
+                    <VisualBrush Visual="{StaticResource appbar_user}" />
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle HorizontalAlignment="Left" Height="36" Margin="264,317,0,0" VerticalAlignment="Top" Width="37"  Stroke="#FFD7D2D7" Opacity="0.5">
+                <Rectangle.Fill>
+                    <VisualBrush Visual="{StaticResource appbar_key}" />
+                </Rectangle.Fill>
+            </Rectangle>
+
         </Grid>
     </Grid>
 </Controls:MetroWindow>
