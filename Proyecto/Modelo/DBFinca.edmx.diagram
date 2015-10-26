@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea25dfdcd331402db56bb3914b8edab7" Name="Diagram1">
+        <EntityTypeShape EntityType="DBFincaModel.AbonoCompra" Width="1.5" PointX="14.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.AbonoDeuda" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.AbonoEgreso" Width="1.5" PointX="15.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Arboles" Width="1.5" PointX="4" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Compra" Width="1.5" PointX="12" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Compra_Insumo" Width="1.5" PointX="14.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Concepto" Width="1.5" PointX="10.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Departamento" Width="1.5" PointX="1.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.DeudaPersona" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Egreso" Width="1.5" PointX="13" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Finca" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Insumo" Width="1.5" PointX="12" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Labor" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Labor_Lote" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.LaborLote_Insumo" Width="1.5" PointX="14.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Lote" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.MovimientoProduccion" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.MovimientosArboles" Width="1.5" PointX="6.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Municipio" Width="1.5" PointX="1.5" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Persona" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Produccion" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Producto" Width="1.5" PointX="3.75" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Proveedor" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.RegistroPago" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.RegistroPago_DeudaPersona" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.RegistroPagoSalario" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.SalarioPersonaPermanente" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.SalarioPersonaTemporal" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.TipoArbol" Width="1.5" PointX="1.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.TipoContratoPersona" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.TipoDocumento" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.TipoInsumo" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Venta" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
+        <AssociationConnector Association="DBFincaModel.FK_AbonoCompra_Compra" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_AbonoDeuda_DeudaPersona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_AbonoEgreso_Egreso" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Arboles_Lote" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Arboles_TipoArbol" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_MovimientosArboles_Arboles" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Compra_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_CompraInsumo_Compra" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_AbonoCompra_Insumo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Egreso_Concepto" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Finca_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Municipio_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_DeudaPersona_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_RegistroPagoDeudaPersona_DeudaPersona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Finca_Municipio" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Lote_Finca" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Insumo_TipoInsumo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_LaborLoteInsumo_Insumo" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_LaborLote_Labor" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_LaborLote_Lote" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_LaborLoteInsumo_LaborLote" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_SalarioPersonaTemporal_LaborLote" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Produccion_Lote" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_MovimientoProduccion_Produccion" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_MovimientoProduccion_Venta" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Persona_TipoContratoPersona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Persona_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_SalarioPersonaPermanente_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_SalarioPersonaTemporal_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_Venta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_RegistroPagoDeudaPersona_RegistroPago" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_RegistroPagoSalario_RegistroPago" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_RegistroPagoSalario_idSalarioPersonaTemporal" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFincaModel.FK_RegistroPagoSalario_SalarioPersonaPermanente" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

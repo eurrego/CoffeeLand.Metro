@@ -13,7 +13,10 @@
         GlowBrush="{DynamicResource AccentColorBrush}"              
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        ShowTitleBar="False" Loaded="MetroWindow_Loaded" Visibility="Visible">
+        ShowTitleBar="False" 
+        Loaded="MetroWindow_Loaded" 
+        Visibility="Visible"
+        IsCloseButtonEnabled="False">
 
     <Window.Resources>
         <ResourceDictionary>

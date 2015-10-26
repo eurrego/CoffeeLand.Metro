@@ -26,9 +26,31 @@ namespace CoffeeLand
             InitializeComponent();
         }
 
-        private void btnMenu_Click(object sender, RoutedEventArgs e)
+
+        private void btnArboles_Click(object sender, RoutedEventArgs e)
         {
-            menu.IsOpen = true;
+            frmTipoArboles miTipoArboles = new frmTipoArboles();
+            miTipoArboles.ShowDialog();
+        }
+
+        private void btnGestionTerrenos_Click(object sender, RoutedEventArgs e)
+        {
+            GestionTerrenos.IsOpen = true;
+        }
+
+        private void btnAdministracionEmpleados_Click(object sender, RoutedEventArgs e)
+        {
+            administracionEmpleados.IsOpen = true;
+        }
+
+        private void btnAdministracionCostos_Click(object sender, RoutedEventArgs e)
+        {
+            administracionCostos.IsOpen = true;
+        }
+
+        private void btnAdministracionVentas_Click(object sender, RoutedEventArgs e)
+        {
+            administracionVentas.IsOpen = true;
         }
     }
 }

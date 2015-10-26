@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +51,150 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbonoCompra.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AbonoDeuda.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AbonoEgreso.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Arboles.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compra.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Compra_Insumo.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concepto.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBFinca.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBFinca.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBFinca.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBFinca.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBFinca.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Departamento.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeudaPersona.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Egreso.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Finca.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Insumo.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Labor.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LaborLote_Insumo.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Labor_Lote.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lote.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientoProduccion.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientosArboles.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MTipoArbol.cs" />
+    <Compile Include="Municipio.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Persona.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Produccion.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Producto.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedor.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroPago.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroPagoSalario.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroPago_DeudaPersona.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalarioPersonaPermanente.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalarioPersonaTemporal.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoArbol.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoContratoPersona.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDocumento.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoInsumo.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Venta.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DBFinca.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBFinca.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DBFinca.edmx.diagram">
+      <DependentUpon>DBFinca.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBFinca.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBFinca.edmx</DependentUpon>
+      <LastGenOutput>DBFinca.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBFinca.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBFinca.edmx</DependentUpon>
+      <LastGenOutput>DBFinca.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

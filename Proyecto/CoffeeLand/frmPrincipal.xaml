@@ -6,8 +6,9 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
-        Title="CoffeeLand" Height="648.993" Width="1155"
-        WindowState= "Maximized" >
+        Title="CoffeeLand" Height="689.993" Width="1155"
+        WindowState= "Maximized"
+        >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -18,14 +19,249 @@
     </Window.Resources>
 
     <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="menu" Header="Menú" Position="Left" Width="400" Theme ="Accent" AnimateOpacity="True"
-                             IsOpen="True">
-                
+        <Controls:FlyoutsControl x:Name="ControlesFlyouts">
+            <Controls:Flyout x:Name="GestionTerrenos"
+                             Header="Gestión de Terrenos"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="False"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="400">
+                <Grid Width="350">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Expander x:Name="expanderGestionTerrenos" Header="Gestionar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="92" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnGestionarTerrenos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tree_leaf}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label2" Content="Gestionar Terrenos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                        <Expander x:Name="expanderConfiguracion" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="213" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnLotes"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_image}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label22" Content="Crear Lotes" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnLabores"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_list}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label22_Copy" Content="Crear Labores" HorizontalAlignment="Left" Margin="68,67,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnArboles"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnArboles_Click">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tree}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label22_Copy1" Content="Crear Tipos de Arboles" HorizontalAlignment="Left" Margin="68,124,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="administracionEmpleados"
+                             Header="Administración de Empleados"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="False"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="400">
+                <Grid Width="350">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Expander x:Name="expanderAdminEmpleados" Header="Gestionar Empleados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="145" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnPrestamos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_money}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label212" Content="Prestamos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnPrestamos_Copy"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="17" Height="24" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_currency_dollar}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label212_Copy" Content="Pagos" HorizontalAlignment="Left" Margin="68,64,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                        <Expander x:Name="expanderConfiguracionEmeplados" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="93" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnEmpleados"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_user_add}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label2221" Content="Crear Empleados" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="administracionCostos"
+                             Header="Administración de Costos"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="False"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="400">
+                <Grid Width="350">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Expander x:Name="expanderAdminCostos" Header="Gestionar Costos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="145" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnCompras"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_money}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label2122" Content="Compras" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnGastos"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="17" Height="24" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_currency_dollar}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label21256" Content="Gastos" HorizontalAlignment="Left" Margin="68,64,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                        <Expander x:Name="expanderConfiguracionCostos" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="265" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnProveedores"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_user_add}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label222178" Content="Crear Proveedores" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnProveedores_Copy"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_beer}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label222178_Copy" Content="Crear Insumos" HorizontalAlignment="Left" Margin="68,70,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnProveedores_Copy1"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_brick}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label222178_Copy1" Content="Crear Tipo de Insumos" HorizontalAlignment="Left" Margin="68,126,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnProveedores_Copy2"  HorizontalAlignment="Left" Margin="10,171,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_chess_king}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label222178_Copy2" Content="Crear Conceptos" HorizontalAlignment="Left" Margin="68,184,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="administracionVentas"
+                             Header="Administración de Ventas"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="False"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="400">
+                <Grid Width="350">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Expander x:Name="expanderGestionVentas" Header="Gestionar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="92" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnGestionarVentas"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_bed}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label278" Content="Gestionar Ventas" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                        <Expander x:Name="expanderConfiguracionVentas" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="93" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnProductos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_projector}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label224" Content="Crear Productos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
+
+
     <Grid>
-        <Button x:Name="btnMenu" Content="Menù" HorizontalAlignment="Left" Margin="374,63,0,0" VerticalAlignment="Top" Width="87" Height="65" Click="btnMenu_Click"/>
+        <Grid x:Name="pnlBienvenida" HorizontalAlignment="Left" Height="219" Margin="210,10,0,0" VerticalAlignment="Top" Width="873">
+            <Label x:Name="label1" Content="Bienvenido" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="64" FontFamily="Segoe UI Light" Margin="48,0,0,0"/>
+        </Grid>
+        <Controls:Tile x:Name="btnGestionTerrenos" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Gestión de Terrenos" Click="btnGestionTerrenos_Click" Margin="22,0,0,538" Height="81" Width="87" HorizontalAlignment="Left" TitleFontSize="10" VerticalAlignment="Bottom"/>
+        <Controls:Tile x:Name="btnAdministracionEmpleados" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Empleados" Click="btnAdministracionEmpleados_Click" Margin="22,0,0,430" Height="81" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <Controls:Tile x:Name="btnAdministracionCostos" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Costos" Click="btnAdministracionCostos_Click" Margin="22,0,0,323" Height="82" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+        <Controls:Tile x:Name="btnAdministracionVentas" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Ventas" Margin="22,0,0,207" Height="82" Width="87" TitleFontSize="10" Click="btnAdministracionVentas_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+        <Controls:Tile x:Name="btnReportes" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Rerportes" Margin="22,0,0,96" Height="82" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+
     </Grid>
 </Controls:MetroWindow>
