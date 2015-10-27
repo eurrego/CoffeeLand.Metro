@@ -44,22 +44,40 @@
                              Text="{Binding Descripcion}"/>
 
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="97,278,0,0" VerticalAlignment="Top" Width="82" Height="38" Click="btnGuardar_Click"/>
-                    <DataGrid x:Name="tblTipoArbol" HorizontalAlignment="Left"
-                              Margin="23,146,0,0" 
-                              VerticalAlignment="Top" 
-                              Height="334" 
-                              Width="426" 
-                              Grid.Column="1" 
-                              ItemsSource="{Binding}"
-                              Style="{StaticResource AzureDataGrid}" 
-                              GridLinesVisibility="Horizontal" 
-                              CanUserAddRows="False" 
-                              CanUserDeleteRows="False" 
-                              BorderThickness ="1"
-                              IsReadOnly="True"
-                              >
-                        
-
+                    <DataGrid x:Name="tblTipoArbol" Margin="23,166,23,35" AutoGenerateColumns="False" Grid.Column="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding NombreTipoArbol}" Header="Nombre" Width="150" IsReadOnly="True"/>
+                            <DataGridTextColumn   Binding="{Binding Name}"  Header="Descripcion" Width="276" IsReadOnly="True" />
+                        </DataGrid.Columns>
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="0" Background="Azure" Padding="10">
+                                    <Grid Margin="5,0,0,0" MinWidth="650" HorizontalAlignment="Left">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="125"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="125"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="125"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Estado" Margin="10,0,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBox Margin="3" Grid.Row="0" Grid.Column="1" Text="{Binding Path=EstadoTipoArbol}" MaxHeight="35" />
+                                        <TextBlock Text="Id" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <TextBox Margin="3" Grid.Row="1" Grid.Column="1" Text="{Binding Path=idTipoArbol}" MaxHeight="35"/>
+                                        <Button Margin="6" Grid.Row="1" Grid.Column="3" Content="Eliminar"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
                     </DataGrid>
                     <TextBox x:Name="txtBuscarNombre" Margin="23,41,269,0"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
@@ -71,7 +89,7 @@
                     <CheckBox x:Name="chkInhabilitar" Content="Inhabilitar" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Grid.Column="1" Checked="chkInhabilitar_Checked" Unchecked="chkInhabilitar_Unchecked"/>
                     <Label x:Name="label_Copy" Content="Cantidad de Registros:" HorizontalAlignment="Left" Margin="277,106,0,0" VerticalAlignment="Top" Width="135" Grid.Column="1"/>
                     <Label x:Name="lblTotal" Content="10" HorizontalAlignment="Left" Margin="412,107,0,0" VerticalAlignment="Top" Width="37" Grid.Column="1"/>
-                   
+
                 </Grid>
             </TabItem>
         </TabControl>

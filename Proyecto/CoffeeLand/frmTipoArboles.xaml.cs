@@ -42,17 +42,17 @@ namespace CoffeeLand
         // Define el estilo de las celdas 
         private void EstilosCeldas()
         {
-            tblTipoArbol.Columns[1].Header = "Nombre";
-            tblTipoArbol.Columns[2].Header= "Descripción";
+            //tblTipoArbol.Columns[1].Header = "Nombre";
+            //tblTipoArbol.Columns[2].Header= "Descripción";
             lblTotal.Content = tblTipoArbol.Items.Count.ToString(); ;
         }
 
         //Método para ocultar columnas
         private void OcultarColumnas()
         {
-            tblTipoArbol.Columns[0].Visibility = Visibility.Hidden;
-            tblTipoArbol.Columns[3].Visibility = Visibility.Hidden;
-            tblTipoArbol.Columns[4].Visibility = Visibility.Hidden;
+            //tblTipoArbol.Columns[0].Visibility = Visibility.Hidden;
+            //tblTipoArbol.Columns[3].Visibility = Visibility.Hidden;
+            //tblTipoArbol.Columns[4].Visibility = Visibility.Hidden;
 
         }
 
