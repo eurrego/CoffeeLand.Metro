@@ -126,34 +126,20 @@ namespace CoffeeLand
             Mostrar();
         }
 
-        private void chkInhabilitar_Checked(object sender, RoutedEventArgs e)
-        {
-
-            tblTipoArbol.Columns[0].Visibility = Visibility.Visible;
-        }
-
-        private void chkInhabilitar_Unchecked(object sender, RoutedEventArgs e)
-        {
-            tblTipoArbol.Columns[0].Visibility = Visibility.Hidden;
-        }
 
         private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
             BuscarNombre();
         }
 
-        private void btnBuscar_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarNombre();
-        }
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-         
+            var variable = System.Data.Entity.DynamicProxies.TipoArbol_6DBA4D960DD0FB54B763D94CD2C1DC40CC0F08315CC7C89E4D130E6750D53C25
+
+            var nombre = tblTipoArbol.SelectedItems.IndexOf(0);
+            mensajeError(nombre.ToString());
+
+
         }
-
-
-
-      
     }
 }

@@ -8,6 +8,7 @@ namespace Modelo
 {
     public class MTipoArbol
     {
+
         #region Singleton
 
         private static MTipoArbol instance;
@@ -41,7 +42,6 @@ namespace Modelo
             }
 
         }
-
 
         public List<TipoArbol> buscarTipoArbol(String NombreArbol)
         {
