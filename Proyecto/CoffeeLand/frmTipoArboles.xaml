@@ -32,24 +32,39 @@
                     <TextBox Name="txtNombre" Margin="30,10,21,0"
                              Controls:TextBoxHelper.UseFloatingWatermark="True"
                              Controls:TextBoxHelper.Watermark="Nombre" 
-                             Controls:TextBoxHelper.ClearTextButton="True" Height="42" VerticalAlignment="Top"
+                             Controls:TextBoxHelper.ClearTextButton="True" Height="42" VerticalAlignment="Top" 
+                             />
+                    <TextBox Name="txtId" Margin="23,70,350,0"
+                             Height="42" VerticalAlignment="Top" Grid.Column="1"
+                             Visibility="Collapsed"
                              />
                     <TextBox Name="txtDescripcion" Margin="30,66,21,0"
                              Controls:TextBoxHelper.UseFloatingWatermark="True"
                              Controls:TextBoxHelper.Watermark="Descripción"
-                             TextWrapping="Wrap" Height="42" VerticalAlignment="Top"
+                             TextWrapping="Wrap" Height="67" VerticalAlignment="Top" 
                             />
 
-                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Top" Width="82" Height="38" Click="btnGuardar_Click" Grid.Column="1" />
-                    <DataGrid x:Name="tblTipoArbol" BorderThickness="2" Margin="30,166,23,35" AutoGenerateColumns="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2" AlternatingRowBackground="LightSkyBlue">
+                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+                            Margin="23,10,0,0" VerticalAlignment="Top" Width="82" 
+                            Height="38" Click="btnGuardar_Click" Grid.Column="1" />
+
+                    <DataGrid x:Name="tblTipoArbol" BorderThickness="2" Margin="30,166,23,35" AutoGenerateColumns="False" 
+                              HorizontalAlignment="Stretch" 
+                              HorizontalContentAlignment="Stretch" 
+                              CanUserAddRows="False" 
+                              CanUserDeleteRows="False"
+                              Grid.ColumnSpan="2"
+                              >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding NombreTipoArbol}" Header="Nombre" Width="150" IsReadOnly="True"/>
                             <DataGridTextColumn   Binding="{Binding Descripcion}"  Header="Descripción" Width="274" IsReadOnly="True" />
                         </DataGrid.Columns>
+
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
+
                                 <Border BorderThickness="0" Background="WhiteSmoke" Padding="10">
-                                    <Grid Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
+                                    <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="60"></ColumnDefinition>
                                             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -66,10 +81,31 @@
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Estado" Foreground="Black" Margin="10,0,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                        <TextBox Margin="3" Text="{Binding EstadoTipoArbol}" Grid.Row="0" Grid.Column="1" IsEnabled="False" MaxHeight="35" />
-                                        <TextBlock Text="Id" Foreground="Black" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"  HorizontalAlignment="Left" />
-                                        <TextBox Margin="3" Text="{Binding idTipoArbol}" Grid.Row="1" Grid.Column="1" IsEnabled="False" MaxHeight="25"/>
+
+                                        <TextBox x:Name="txtId" Margin="3" 
+                                                 Text="{Binding idTipoArbol}"
+                                                 Grid.Row="1"
+                                                 Grid.Column="0"
+                                                 IsEnabled="False" 
+                                                 MaxHeight="45"
+                                                 Visibility="Collapsed"  />
+
+                                        <TextBox x:Name="txtNombre" Margin="3" 
+                                                 Text="{Binding NombreTipoArbol}"
+                                                 Grid.Row="1"
+                                                 Grid.Column="0"
+                                                 IsEnabled="False" 
+                                                 MaxHeight="25"
+                                                 Visibility="Collapsed"  />
+
+                                        <TextBox x:Name="txtDescripcion" Margin="3" 
+                                                 Text="{Binding Descripcion}"
+                                                 Grid.Row="1"
+                                                 Grid.Column="0"
+                                                 IsEnabled="False" 
+                                                 MaxHeight="25"
+                                                 Visibility="Collapsed"/>
+
                                         <Button x:Name="btnModificar" Margin="8" Grid.Row="1" Grid.Column="4" Width="53" Height="52" RenderTransformOrigin="0.467,0.419" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click">
                                             <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
@@ -77,6 +113,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </Button>
+
                                         <Button x:Name="btnInhabilitar" Margin="8" Grid.Row="1" Grid.Column="5" Width="53"  Height="52" RenderTransformOrigin="0.467,0.419" Style="{DynamicResource MetroCircleButtonStyle}">
                                             <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
@@ -84,6 +121,7 @@
                                                 </Rectangle.OpacityMask>
                                             </Rectangle>
                                         </Button>
+
                                     </Grid>
                                 </Border>
                             </DataTemplate>

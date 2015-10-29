@@ -17,6 +17,7 @@ using MahApps.Metro.Controls.Dialogs;
 
 using Modelo;
 using System.Data;
+using System.Windows.Controls.Primitives;
 
 namespace CoffeeLand
 {
@@ -26,7 +27,6 @@ namespace CoffeeLand
     public partial class frmTipoArboles : MetroWindow
     {
         bool validacion;
-        byte idTipoArbol = 0;
 
         public frmTipoArboles()
         {
@@ -78,7 +78,7 @@ namespace CoffeeLand
         {
             txtNombre.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            idTipoArbol = 0;
+            txtId.Text = string.Empty;
         }
 
         //mostrar
@@ -107,7 +107,7 @@ namespace CoffeeLand
         {
             string rpta = "";
 
-            if (idTipoArbol == 0)
+            if (txtId.Text == string.Empty)
             {
                 if (validarCampos())
                 {
@@ -119,7 +119,7 @@ namespace CoffeeLand
             }
             else if (validarCampos())
             {
-                rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, idTipoArbol, 2).ToString();
+                rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
                 Limpiar();
             }
@@ -134,12 +134,47 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            var variable = System.Data.Entity.DynamicProxies.TipoArbol_6DBA4D960DD0FB54B763D94CD2C1DC40CC0F08315CC7C89E4D130E6750D53C25
+            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
 
-            var nombre = tblTipoArbol.SelectedItems.IndexOf(0);
-            mensajeError(nombre.ToString());
+            if (dgRow == null)
+            {
+                return;
+            }
 
+            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
+            DataTemplate template = dgdPresenter.ContentTemplate;
 
+            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
+            string nombre = text.Text;
+            txtNombre.Text = nombre;
+
+            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
+            string descripcion = text2.Text;
+            txtDescripcion.Text = descripcion;
+
+            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
+            string id = text3.Text;
+            txtId.Text = id;
         }
+
+        public static T FindVisualChild<T>(DependencyObject obj)
+        where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is T)
+                    return (T)child;
+                else
+                { T childOfChild = FindVisualChild<T>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }
