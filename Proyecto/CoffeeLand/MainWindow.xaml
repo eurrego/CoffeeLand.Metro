@@ -47,7 +47,7 @@
             <Image x:Name="image" HorizontalAlignment="Left" Height="220" Margin="57,44,0,0" VerticalAlignment="Top" Width="239" Source="Resources/256x256.png" />
             <Controls:ProgressRing IsActive="True" Margin="148,354,134,113" />
         </Grid>
-        <Grid x:Name="pnlLogin" HorizontalAlignment="Left" Height="527" Margin="10,10,0,0" VerticalAlignment="Top" Width="342" Background="White" Opacity="0">
+        <Grid x:Name="pnlLogin" HorizontalAlignment="Left" Height="527" Margin="10,10,0,0" VerticalAlignment="Top" Width="342" Background="White" Opacity="0.005">
             <Label x:Name="label" Content="INICIO" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" FontSize="64" FontFamily="Arial Rounded MT Bold">
                 <Label.Foreground>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
@@ -63,19 +63,48 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </Label.Foreground>
             </Label>
-            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="70,317,0,0" VerticalAlignment="Top" Width="192" Height="36"  Controls:TextBoxHelper.Watermark="Contraseña" VerticalContentAlignment="Center" FontSize="16"  />
-            <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="36" Margin="70,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" Controls:TextBoxHelper.Watermark="Usuario" VerticalContentAlignment="Center" FontSize="16"   />
-            <Button x:Name="btnIngresar" Content="INGRESAR" HorizontalAlignment="Left" Margin="117,406,0,0" VerticalAlignment="Top" Width="105"  Height="38" Click="btnIngresar_Click"/>
-            <Rectangle HorizontalAlignment="Left" Height="36" Margin="264,251,0,0" VerticalAlignment="Top" Width="37"  Stroke="#FFD7D2D7" Opacity="0.5">
-                <Rectangle.Fill>
-                    <VisualBrush Visual="{StaticResource appbar_user}" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle HorizontalAlignment="Left" Height="36" Margin="264,317,0,0" VerticalAlignment="Top" Width="37"  Stroke="#FFD7D2D7" Opacity="0.5">
-                <Rectangle.Fill>
-                    <VisualBrush Visual="{StaticResource appbar_key}" />
-                </Rectangle.Fill>
-            </Rectangle>
+            <PasswordBox x:Name="txtPassword" 
+                         HorizontalAlignment="Left" 
+                         Margin="58,320,0,0" 
+                         VerticalAlignment="Top" 
+                         Width="229" Height="50"  
+                         Controls:TextBoxHelper.Watermark="Contraseña" 
+                         Controls:TextBoxHelper.UseFloatingWatermark="True"
+                         VerticalContentAlignment="Center"
+                         FontSize="16" 
+                        />
+
+            <TextBox x:Name="txtUsuario"
+                     HorizontalAlignment="Left" 
+                     Height="50" Margin="58,245,0,0" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Top" 
+                     Width="229" Controls:TextBoxHelper.Watermark="Usuario" 
+                     Controls:TextBoxHelper.UseFloatingWatermark="True"
+                     VerticalContentAlignment="Center" 
+                     FontSize="16"  
+                     Style="{DynamicResource ButtonCommandMetroTextBox}"
+                     Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}" >
+                <Controls:TextBoxHelper.ButtonContent>
+                    <Rectangle Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="20" Height="20">
+                        <Rectangle.Resources>
+                            <SolidColorBrush x:Key="BlackBrush" Color="Gray" />
+                        </Rectangle.Resources>
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_user}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Controls:TextBoxHelper.ButtonContent>
+            </TextBox>
+
+            <Button x:Name="btnIngresar" 
+                    Content="INGRESAR" 
+                    HorizontalAlignment="Left" 
+                    Margin="117,406,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="105"  Height="38" 
+                    Click="btnIngresar_Click"
+                    Style="{StaticResource AccentedSquareButtonStyle}"/>
 
         </Grid>
     </Grid>

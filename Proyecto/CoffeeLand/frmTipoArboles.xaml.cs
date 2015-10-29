@@ -42,18 +42,7 @@ namespace CoffeeLand
         // Define el estilo de las celdas 
         private void EstilosCeldas()
         {
-            //tblTipoArbol.Columns[1].Header = "Nombre";
-            //tblTipoArbol.Columns[2].Header= "Descripción";
             lblTotal.Content = tblTipoArbol.Items.Count.ToString(); ;
-        }
-
-        //Método para ocultar columnas
-        private void OcultarColumnas()
-        {
-            //tblTipoArbol.Columns[0].Visibility = Visibility.Hidden;
-            //tblTipoArbol.Columns[3].Visibility = Visibility.Hidden;
-            //tblTipoArbol.Columns[4].Visibility = Visibility.Hidden;
-
         }
 
         // Validación de campos
@@ -85,7 +74,6 @@ namespace CoffeeLand
         private void Mostrar()
         {
             tblTipoArbol.ItemsSource = MTipoArbol.GetInstance().consultarTipoArbol();
-            OcultarColumnas();
             EstilosCeldas();
         }
 
@@ -94,7 +82,6 @@ namespace CoffeeLand
         private void BuscarNombre()
         {
             tblTipoArbol.ItemsSource = MTipoArbol.GetInstance().buscarTipoArbol(txtBuscarNombre.Text);
-            OcultarColumnas();
             EstilosCeldas();
         }
 
@@ -122,6 +109,10 @@ namespace CoffeeLand
                 rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
                 Limpiar();
+                lblEstado.Content = "REGISTRAR TIPOS DE ARBOLES";
+                btnGuardar.Margin = new Thickness(667, 36, 0, 0);
+                btnCancelar.Visibility = Visibility.Hidden;
+                gridConsultar.IsEnabled = true;
             }
             Mostrar();
         }
@@ -155,6 +146,11 @@ namespace CoffeeLand
             TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
             string id = text3.Text;
             txtId.Text = id;
+
+            lblEstado.Content = "MODIFICAR TIPOS DE ARBOLES";
+            btnGuardar.Margin =new Thickness(556,36,0,0);
+            btnCancelar.Visibility = Visibility.Visible;
+            gridConsultar.IsEnabled = false;
         }
 
         public static T FindVisualChild<T>(DependencyObject obj)
@@ -175,6 +171,60 @@ namespace CoffeeLand
             return null;
         }
 
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Limpiar();
+            lblEstado.Content = "REGISTRAR TIPOS DE ARBOLES";
+            btnGuardar.Margin = new Thickness(667, 36, 0, 0);
+            btnCancelar.Visibility = Visibility.Hidden;
+            gridConsultar.IsEnabled = true;
+        }
 
+        private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
+
+            if (dgRow == null)
+            {
+                return;
+            }
+
+            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
+            DataTemplate template = dgdPresenter.ContentTemplate;
+
+            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
+            string nombre = text.Text;
+            
+
+            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
+            string descripcion = text2.Text;
+           
+
+            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
+            string id = text3.Text;
+        
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Aceptar",
+                NegativeButtonText = "Cancelar",
+                ColorScheme = MetroDialogOptions.ColorScheme
+            };
+
+            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Inhabilitar el Registro?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+            if (result != MessageDialogResult.Negative)
+            {
+                byte idTipoArbol;
+                string rpta = "";
+
+                idTipoArbol = Convert.ToByte(id);
+
+                rpta = MTipoArbol.GetInstance().registrarTipoArbol(nombre, descripcion, idTipoArbol, 3).ToString();
+                await this.ShowMessageAsync("CoffeeLand",rpta);
+                Mostrar();
+            }
+                
+            }
+        }
     }
-}
