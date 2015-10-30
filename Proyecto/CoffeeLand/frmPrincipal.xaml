@@ -184,7 +184,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label222178_Copy" Content="Crear Insumos" HorizontalAlignment="Left" Margin="68,70,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnTipoInsumos"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnTipoInsumos"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnTipoInsumos_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_brick}"/>
@@ -236,7 +236,7 @@
                         </Expander>
                         <Expander x:Name="expanderConfiguracionVentas" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="93" IsExpanded="True">
                             <Grid Background="White">
-                                <Button x:Name="btnProductos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnProductos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnProductos_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_projector}"/>

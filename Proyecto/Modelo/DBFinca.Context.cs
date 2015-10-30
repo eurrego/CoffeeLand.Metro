@@ -102,5 +102,47 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionConcepto", nombreConceptoParameter, descripcionParameter, idConceptoParameter, opcParameter);
         }
+    
+        public virtual ObjectResult<string> gestionTipoInsumo(string nombreTipoInsumo, string descripcion, Nullable<int> idTipoInsumo, Nullable<int> opc)
+        {
+            var nombreTipoInsumoParameter = nombreTipoInsumo != null ?
+                new ObjectParameter("NombreTipoInsumo", nombreTipoInsumo) :
+                new ObjectParameter("NombreTipoInsumo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idTipoInsumoParameter = idTipoInsumo.HasValue ?
+                new ObjectParameter("idTipoInsumo", idTipoInsumo) :
+                new ObjectParameter("idTipoInsumo", typeof(int));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionTipoInsumo", nombreTipoInsumoParameter, descripcionParameter, idTipoInsumoParameter, opcParameter);
+        }
+    
+        public virtual ObjectResult<string> gestionProducto(string nombreProducto, string descripcion, Nullable<int> idProducto, Nullable<int> opc)
+        {
+            var nombreProductoParameter = nombreProducto != null ?
+                new ObjectParameter("NombreProducto", nombreProducto) :
+                new ObjectParameter("NombreProducto", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("idProducto", idProducto) :
+                new ObjectParameter("idProducto", typeof(int));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionProducto", nombreProductoParameter, descripcionParameter, idProductoParameter, opcParameter);
+        }
     }
 }

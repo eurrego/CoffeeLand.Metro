@@ -58,5 +58,17 @@ namespace CoffeeLand
             frmConceptos miConcepto = new frmConceptos();
             miConcepto.ShowDialog();
         }
+
+        private void btnTipoInsumos_Click(object sender, RoutedEventArgs e)
+        {
+            frmTipoInsumo MiTipoInsumo = new frmTipoInsumo();
+            MiTipoInsumo.ShowDialog();
+        }
+
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
+        {
+            frmProductos miProducto = new frmProductos();
+            miProducto.ShowDialog();
+        }
     }
 }

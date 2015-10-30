@@ -121,7 +121,9 @@
     <Compile Include="MovimientosArboles.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="MProducto.cs" />
     <Compile Include="MTipoArbol.cs" />
+    <Compile Include="MTipoInsumo.cs" />
     <Compile Include="Municipio.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

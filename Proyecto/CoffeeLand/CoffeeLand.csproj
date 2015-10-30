@@ -80,7 +80,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmTipoArboles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmTipoInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,8 +106,14 @@
     <Compile Include="frmPrincipal.xaml.cs">
       <DependentUpon>frmPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmProductos.xaml.cs">
+      <DependentUpon>frmProductos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmTipoArboles.xaml.cs">
       <DependentUpon>frmTipoArboles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoInsumo.xaml.cs">
+      <DependentUpon>frmTipoInsumo.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

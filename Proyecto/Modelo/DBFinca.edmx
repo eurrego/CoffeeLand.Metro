@@ -734,10 +734,22 @@
           <Parameter Name="idConcepto" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="gestionProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="idProducto" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
         <Function Name="gestionTipoArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreArbol" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idTipoArbol" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionTipoInsumo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreTipoInsumo" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="idTipoInsumo" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="DBFincaModelStoreContainer">
@@ -1888,6 +1900,18 @@
             <Parameter Name="idConcepto" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="gestionTipoInsumo" ReturnType="Collection(String)">
+            <Parameter Name="NombreTipoInsumo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idTipoInsumo" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="gestionProducto" ReturnType="Collection(String)">
+            <Parameter Name="NombreProducto" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idProducto" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -2245,6 +2269,8 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="gestionTipoArboles" FunctionName="DBFincaModel.Store.gestionTipoArboles" />
           <FunctionImportMapping FunctionImportName="gestionConcepto" FunctionName="DBFincaModel.Store.gestionConcepto" />
+          <FunctionImportMapping FunctionImportName="gestionTipoInsumo" FunctionName="DBFincaModel.Store.gestionTipoInsumo" />
+          <FunctionImportMapping FunctionImportName="gestionProducto" FunctionName="DBFincaModel.Store.gestionProducto" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
