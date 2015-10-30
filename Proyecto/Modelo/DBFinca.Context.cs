@@ -81,5 +81,26 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionTipoArboles", nombreArbolParameter, descripcionParameter, idTipoArbolParameter, opcParameter);
         }
+    
+        public virtual ObjectResult<string> gestionConcepto(string nombreConcepto, string descripcion, Nullable<int> idConcepto, Nullable<int> opc)
+        {
+            var nombreConceptoParameter = nombreConcepto != null ?
+                new ObjectParameter("NombreConcepto", nombreConcepto) :
+                new ObjectParameter("NombreConcepto", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idConceptoParameter = idConcepto.HasValue ?
+                new ObjectParameter("idConcepto", idConcepto) :
+                new ObjectParameter("idConcepto", typeof(int));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionConcepto", nombreConceptoParameter, descripcionParameter, idConceptoParameter, opcParameter);
+        }
     }
 }

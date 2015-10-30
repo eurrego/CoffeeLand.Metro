@@ -22,13 +22,13 @@ using System.Windows.Controls.Primitives;
 namespace CoffeeLand
 {
     /// <summary>
-    /// Lógica de interacción para frmTipoArboles.xaml
+    /// Lógica de interacción para frmConceptos.xaml
     /// </summary>
-    public partial class frmTipoArboles : MetroWindow
+    public partial class frmConceptos : MetroWindow
     {
         bool validacion;
 
-        public frmTipoArboles()
+        public frmConceptos()
         {
             InitializeComponent();
         }
@@ -42,7 +42,7 @@ namespace CoffeeLand
         // Define el estilo de las celdas 
         private void EstilosCeldas()
         {
-            lblTotal.Content = tblTipoArbol.Items.Count.ToString(); ;
+            lblTotal.Content = tblConceptos.Items.Count.ToString(); ;
         }
 
         // Validación de campos
@@ -73,8 +73,7 @@ namespace CoffeeLand
         //mostrar
         private void Mostrar()
         {
-
-            tblTipoArbol.ItemsSource = MTipoArbol.GetInstance().consultarTipoArbol();
+            tblConceptos.ItemsSource = MConcepto.GetInstance().ConsultarConcepto();
             EstilosCeldas();
         }
 
@@ -82,11 +81,11 @@ namespace CoffeeLand
         //Método para Buscar por nombre
         private void BuscarNombre()
         {
-            tblTipoArbol.ItemsSource = MTipoArbol.GetInstance().buscarTipoArbol(txtBuscarNombre.Text);
+            tblConceptos.ItemsSource = MConcepto.GetInstance().ConsultarParametroConcepto(txtBuscarNombre.Text);
             EstilosCeldas();
         }
 
-        private void frmTipoArboles1_Loaded(object sender, RoutedEventArgs e)
+        private void frmConcepto_Loaded(object sender, RoutedEventArgs e)
         {
             Mostrar();
         }
@@ -99,25 +98,23 @@ namespace CoffeeLand
             {
                 if (validarCampos())
                 {
-                    rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, 0, 1).ToString();
+                    rpta = MConcepto.GetInstance().GestionConcepto(txtNombre.Text, txtDescripcion.Text, 0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
-
                     Limpiar();
                 }
             }
             else if (validarCampos())
             {
-                rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2).ToString();
+                rpta = MConcepto.GetInstance().GestionConcepto(txtNombre.Text, txtDescripcion.Text, Convert.ToByte(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
                 Limpiar();
-                lblEstado.Content = "REGISTRAR TIPOS DE ARBOLES";
+                lblEstado.Content = "REGISTRAR CONCEPTOS";
                 btnGuardar.Margin = new Thickness(667, 36, 0, 0);
                 btnCancelar.Visibility = Visibility.Hidden;
                 gridConsultar.IsEnabled = true;
             }
             Mostrar();
         }
-
 
         private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -126,7 +123,7 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
+            DataGridRow dgRow = (DataGridRow)(tblConceptos.ItemContainerGenerator.ContainerFromItem(tblConceptos.SelectedItem));
 
             if (dgRow == null)
             {
@@ -148,7 +145,7 @@ namespace CoffeeLand
             string id = text3.Text;
             txtId.Text = id;
 
-            lblEstado.Content = "MODIFICAR TIPOS DE ARBOLES";
+            lblEstado.Content = "MODIFICAR CONCEPTOS";
             btnGuardar.Margin = new Thickness(556, 36, 0, 0);
             btnCancelar.Visibility = Visibility.Visible;
             gridConsultar.IsEnabled = false;
@@ -176,7 +173,7 @@ namespace CoffeeLand
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
-            lblEstado.Content = "REGISTRAR TIPOS DE ARBOLES";
+            lblEstado.Content = "REGISTRAR CONCEPTOS";
             btnGuardar.Margin = new Thickness(667, 36, 0, 0);
             btnCancelar.Visibility = Visibility.Hidden;
             gridConsultar.IsEnabled = true;
@@ -184,7 +181,7 @@ namespace CoffeeLand
 
         private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
+            DataGridRow dgRow = (DataGridRow)(tblConceptos.ItemContainerGenerator.ContainerFromItem(tblConceptos.SelectedItem));
 
             if (dgRow == null)
             {
@@ -217,16 +214,15 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-                byte idTipoArbol;
+                byte idConcepto;
                 string rpta = "";
 
-                idTipoArbol = Convert.ToByte(id);
+                idConcepto = Convert.ToByte(id);
 
-                rpta = MTipoArbol.GetInstance().registrarTipoArbol(nombre, descripcion, idTipoArbol, 3).ToString();
+                rpta = MConcepto.GetInstance().GestionConcepto(nombre, descripcion, idConcepto, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }
-
         }
     }
 }

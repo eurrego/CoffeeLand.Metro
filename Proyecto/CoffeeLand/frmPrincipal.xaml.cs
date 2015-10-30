@@ -52,5 +52,11 @@ namespace CoffeeLand
         {
             administracionVentas.IsOpen = true;
         }
+
+        private void btnConceptos_Click(object sender, RoutedEventArgs e)
+        {
+            frmConceptos miConcepto = new frmConceptos();
+            miConcepto.ShowDialog();
+        }
     }
 }

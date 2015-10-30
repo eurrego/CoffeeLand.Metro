@@ -176,7 +176,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label222178" Content="Crear Proveedores" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnProveedores_Copy"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnInsumos"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_beer}"/>
@@ -184,7 +184,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label222178_Copy" Content="Crear Insumos" HorizontalAlignment="Left" Margin="68,70,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnProveedores_Copy1"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnTipoInsumos"  HorizontalAlignment="Left" Margin="10,114,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_brick}"/>
@@ -192,7 +192,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label222178_Copy1" Content="Crear Tipo de Insumos" HorizontalAlignment="Left" Margin="68,126,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnProveedores_Copy2"  HorizontalAlignment="Left" Margin="10,171,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnConceptos"  HorizontalAlignment="Left" Margin="10,171,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnConceptos_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_chess_king}"/>
