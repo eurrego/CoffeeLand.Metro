@@ -30,15 +30,8 @@ namespace Modelo
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionTipoArboles(NombreArbol, Descripcion, idTipoArbol, opc);
-                var mensaje = string.Empty;
-
-                //foreach (var item in rpta)
-                //{
-                //    mensaje += item.Mensaje;
-                //}
-
-                return rpta;
+                var rpta = entity.gestionTipoArboles(NombreArbol, Descripcion, idTipoArbol, opc).First();
+                return rpta.Mensaje;
             }
 
         }

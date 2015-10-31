@@ -176,7 +176,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label222178" Content="Crear Proveedores" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnInsumos"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnInsumos"  HorizontalAlignment="Left" Margin="10,57,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnInsumos_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_beer}"/>

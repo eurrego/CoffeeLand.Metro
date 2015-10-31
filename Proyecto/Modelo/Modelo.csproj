@@ -99,6 +99,9 @@
     <Compile Include="Finca.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="gestionTipoArboles_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="Insumo.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

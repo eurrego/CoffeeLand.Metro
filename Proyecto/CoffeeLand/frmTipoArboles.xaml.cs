@@ -155,6 +155,7 @@ namespace CoffeeLand
         }
 
         public static T FindVisualChild<T>(DependencyObject obj)
+
         where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
@@ -169,7 +170,6 @@ namespace CoffeeLand
                         return childOfChild;
                 }
             }
-
             return null;
         }
 

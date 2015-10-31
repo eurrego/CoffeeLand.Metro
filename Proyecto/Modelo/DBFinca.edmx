@@ -734,10 +734,46 @@
           <Parameter Name="idConcepto" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="gestionInsumo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTipoInsumo" Type="tinyint" Mode="In" />
+          <Parameter Name="nombreInsumo" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="marca" Type="varchar" Mode="In" />
+          <Parameter Name="unidadMedida" Type="varchar" Mode="In" />
+          <Parameter Name="idInsumo" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionLabor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipoPagoLabor" Type="varchar" Mode="In" />
+          <Parameter Name="nombreLabor" Type="varchar" Mode="In" />
+          <Parameter Name="modificaArbol" Type="bit" Mode="In" />
+          <Parameter Name="requiereInsumo" Type="bit" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="idLabor" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombrePersona" Type="varchar" Mode="In" />
+          <Parameter Name="genero" Type="char" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="fechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="documentoPerosna" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+          <Parameter Name="idTipoDocumento" Type="tinyint" Mode="In" />
+          <Parameter Name="idTipoContrato" Type="tinyint" Mode="In" />
+        </Function>
         <Function Name="gestionProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idProducto" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nit" Type="varchar" Mode="In" />
+          <Parameter Name="nombreProveedor" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="TipoDocumento" Type="varchar" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionTipoArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1888,7 +1924,7 @@
             <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
             <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
           </AssociationSet>
-          <FunctionImport Name="gestionTipoArboles" ReturnType="Collection(String)">
+          <FunctionImport Name="gestionTipoArboles" ReturnType="Collection(DBFincaModel.gestionTipoArboles_Result)">
             <Parameter Name="NombreArbol" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="idTipoArbol" Mode="In" Type="Int32" />
@@ -1912,7 +1948,46 @@
             <Parameter Name="idProducto" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="gestionInsumo" ReturnType="Collection(String)">
+            <Parameter Name="idTipoInsumo" Mode="In" Type="Byte" />
+            <Parameter Name="nombreInsumo" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="unidadMedida" Mode="In" Type="String" />
+            <Parameter Name="idInsumo" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="gestionLabor" ReturnType="Collection(String)">
+            <Parameter Name="TipoPagoLabor" Mode="In" Type="String" />
+            <Parameter Name="nombreLabor" Mode="In" Type="String" />
+            <Parameter Name="modificaArbol" Mode="In" Type="Boolean" />
+            <Parameter Name="requiereInsumo" Mode="In" Type="Boolean" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="idLabor" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="gestionPersona" ReturnType="Collection(String)">
+            <Parameter Name="nombrePersona" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="fechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="documentoPerosna" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoDocumento" Mode="In" Type="Byte" />
+            <Parameter Name="idTipoContrato" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="gestionProveedor" ReturnType="Collection(String)">
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="nombreProveedor" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="TipoDocumento" Mode="In" Type="String" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="gestionTipoArboles_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2267,10 +2342,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="gestionTipoArboles" FunctionName="DBFincaModel.Store.gestionTipoArboles" />
+          <FunctionImportMapping FunctionImportName="gestionTipoArboles" FunctionName="DBFincaModel.Store.gestionTipoArboles" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.gestionTipoArboles_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="gestionConcepto" FunctionName="DBFincaModel.Store.gestionConcepto" />
           <FunctionImportMapping FunctionImportName="gestionTipoInsumo" FunctionName="DBFincaModel.Store.gestionTipoInsumo" />
           <FunctionImportMapping FunctionImportName="gestionProducto" FunctionName="DBFincaModel.Store.gestionProducto" />
+          <FunctionImportMapping FunctionImportName="gestionInsumo" FunctionName="DBFincaModel.Store.gestionInsumo" />
+          <FunctionImportMapping FunctionImportName="gestionLabor" FunctionName="DBFincaModel.Store.gestionLabor" />
+          <FunctionImportMapping FunctionImportName="gestionPersona" FunctionName="DBFincaModel.Store.gestionPersona" />
+          <FunctionImportMapping FunctionImportName="gestionProveedor" FunctionName="DBFincaModel.Store.gestionProveedor" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
