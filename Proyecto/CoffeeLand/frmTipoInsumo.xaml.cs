@@ -214,12 +214,12 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-                byte idConcepto;
+                byte idTipoInsumo;
                 string rpta = "";
 
-                idConcepto = Convert.ToByte(id);
+                idTipoInsumo = Convert.ToByte(id);
 
-                rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(nombre, descripcion, idConcepto, 3).ToString();
+                rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(nombre, descripcion, idTipoInsumo, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }

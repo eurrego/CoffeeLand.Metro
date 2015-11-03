@@ -55,15 +55,8 @@ namespace Modelo
         {
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionProducto(NombreProducto, Descripcion, idProducto, opcion);
-
-                var mensaje = string.Empty;
-                //foreach (var item in rpta)
-                //{
-                //    mensaje += item.Mensaje;
-                //}
-
-                return rpta.ToString();
+                var rpta = entity.gestionProducto(NombreProducto, Descripcion, idProducto, opcion).First();
+                return rpta.Mensaje;
             }
         }
 

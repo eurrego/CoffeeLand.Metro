@@ -55,15 +55,8 @@ namespace Modelo
         {
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionTipoInsumo(nombre, descripcion, id, opcion);
-
-                var mensaje = string.Empty;
-                //foreach (var item in rpta)
-                //{
-                //    mensaje += item.Mensaje;
-                //}
-
-                return rpta.ToString();
+                var rpta = entity.gestionTipoInsumo(nombre, descripcion, id, opcion).First();
+                return rpta.Mensaje;
             }
         }
     }

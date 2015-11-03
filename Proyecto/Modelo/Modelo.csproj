@@ -99,7 +99,19 @@
     <Compile Include="Finca.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="gestionConcepto_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gestionInsumo_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gestionProducto_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="gestionTipoArboles_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gestionTipoInsumo_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="Insumo.cs">
@@ -118,6 +130,7 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="MConcepto.cs" />
+    <Compile Include="MInsumo.cs" />
     <Compile Include="MovimientoProduccion.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
