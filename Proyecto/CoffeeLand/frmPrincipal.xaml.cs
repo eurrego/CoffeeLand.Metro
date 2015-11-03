@@ -76,5 +76,11 @@ namespace CoffeeLand
             frmInsumo miInsumo = new frmInsumo();
             miInsumo.ShowDialog();
         }
+
+        private void btnLabores_Click(object sender, RoutedEventArgs e)
+        {
+            frmLabores misLabores = new frmLabores();
+            misLabores.ShowDialog();
+        }
     }
 }
