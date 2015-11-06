@@ -1966,7 +1966,7 @@
             <Parameter Name="idLabor" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="gestionPersona" ReturnType="Collection(String)">
+          <FunctionImport Name="gestionPersona" ReturnType="Collection(DBFincaModel.gestionPersona_Result)">
             <Parameter Name="nombrePersona" Mode="In" Type="String" />
             <Parameter Name="genero" Mode="In" Type="String" />
             <Parameter Name="telefono" Mode="In" Type="String" />
@@ -2001,6 +2001,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="gestionLabor_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="gestionPersona_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2399,7 +2402,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="gestionPersona" FunctionName="DBFincaModel.Store.gestionPersona" />
+          <FunctionImportMapping FunctionImportName="gestionPersona" FunctionName="DBFincaModel.Store.gestionPersona" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.gestionPersona_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="gestionProveedor" FunctionName="DBFincaModel.Store.gestionProveedor" />
           </EntityContainerMapping>
       </Mapping>

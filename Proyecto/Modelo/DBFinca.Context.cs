@@ -211,7 +211,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLabor_Result>("gestionLabor", tipoPagoLaborParameter, nombreLaborParameter, modificaArbolParameter, requiereInsumoParameter, descripcionParameter, idLaborParameter, opcParameter);
         }
     
-        public virtual ObjectResult<string> gestionPersona(string nombrePersona, string genero, string telefono, Nullable<System.DateTime> fechaNacimiento, Nullable<int> documentoPerosna, Nullable<int> opc, Nullable<byte> idTipoDocumento, Nullable<byte> idTipoContrato)
+        public virtual ObjectResult<gestionPersona_Result> gestionPersona(string nombrePersona, string genero, string telefono, Nullable<System.DateTime> fechaNacimiento, Nullable<int> documentoPerosna, Nullable<int> opc, Nullable<byte> idTipoDocumento, Nullable<byte> idTipoContrato)
         {
             var nombrePersonaParameter = nombrePersona != null ?
                 new ObjectParameter("nombrePersona", nombrePersona) :
@@ -245,7 +245,7 @@ namespace Modelo
                 new ObjectParameter("idTipoContrato", idTipoContrato) :
                 new ObjectParameter("idTipoContrato", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionPersona", nombrePersonaParameter, generoParameter, telefonoParameter, fechaNacimientoParameter, documentoPerosnaParameter, opcParameter, idTipoDocumentoParameter, idTipoContratoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionPersona_Result>("gestionPersona", nombrePersonaParameter, generoParameter, telefonoParameter, fechaNacimientoParameter, documentoPerosnaParameter, opcParameter, idTipoDocumentoParameter, idTipoContratoParameter);
         }
     
         public virtual ObjectResult<string> gestionProveedor(string nit, string nombreProveedor, string telefono, string direccion, string tipoDocumento, Nullable<int> opc)

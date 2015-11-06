@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +114,9 @@
     </Compile>
     <Compile Include="frmConceptos.xaml.cs">
       <DependentUpon>frmConceptos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmpleado.xaml.cs">
+      <DependentUpon>frmEmpleado.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmInsumo.xaml.cs">
       <DependentUpon>frmInsumo.xaml</DependentUpon>
