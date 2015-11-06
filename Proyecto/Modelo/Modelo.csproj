@@ -105,6 +105,9 @@
     <Compile Include="gestionInsumo_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="gestionLabor_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="gestionProducto_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -131,6 +134,7 @@
     </Compile>
     <Compile Include="MConcepto.cs" />
     <Compile Include="MInsumo.cs" />
+    <Compile Include="MLabores.cs" />
     <Compile Include="MovimientoProduccion.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

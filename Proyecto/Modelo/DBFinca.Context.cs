@@ -178,7 +178,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionInsumo_Result>("gestionInsumo", idTipoInsumoParameter, nombreInsumoParameter, descripcionParameter, marcaParameter, unidadMedidaParameter, idInsumoParameter, opcParameter);
         }
     
-        public virtual ObjectResult<string> gestionLabor(string tipoPagoLabor, string nombreLabor, Nullable<bool> modificaArbol, Nullable<bool> requiereInsumo, string descripcion, Nullable<int> idLabor, Nullable<int> opc)
+        public virtual ObjectResult<gestionLabor_Result> gestionLabor(string tipoPagoLabor, string nombreLabor, Nullable<bool> modificaArbol, Nullable<bool> requiereInsumo, string descripcion, Nullable<int> idLabor, Nullable<int> opc)
         {
             var tipoPagoLaborParameter = tipoPagoLabor != null ?
                 new ObjectParameter("TipoPagoLabor", tipoPagoLabor) :
@@ -208,7 +208,7 @@ namespace Modelo
                 new ObjectParameter("opc", opc) :
                 new ObjectParameter("opc", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionLabor", tipoPagoLaborParameter, nombreLaborParameter, modificaArbolParameter, requiereInsumoParameter, descripcionParameter, idLaborParameter, opcParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLabor_Result>("gestionLabor", tipoPagoLaborParameter, nombreLaborParameter, modificaArbolParameter, requiereInsumoParameter, descripcionParameter, idLaborParameter, opcParameter);
         }
     
         public virtual ObjectResult<string> gestionPersona(string nombrePersona, string genero, string telefono, Nullable<System.DateTime> fechaNacimiento, Nullable<int> documentoPerosna, Nullable<int> opc, Nullable<byte> idTipoDocumento, Nullable<byte> idTipoContrato)
