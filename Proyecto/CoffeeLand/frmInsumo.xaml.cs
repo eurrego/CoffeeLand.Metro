@@ -132,65 +132,20 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblInsumo.ItemContainerGenerator.ContainerFromItem(tblInsumo.SelectedItem));
+            Insumo item = tblInsumo.SelectedItem as Insumo;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-            txtNombre.Text = nombre;
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-            txtDescripcion.Text = descripcion;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-            txtId.Text = id;
-
-            TextBox text4 = (TextBox)template.FindName("txtMarca", dgdPresenter);
-            string marca = text4.Text;
-            txtMarca.Text = marca;
-
-            TextBox text5 = (TextBox)template.FindName("txtUnidadMedida", dgdPresenter);
-            string unidadMedida = text5.Text;
-            txtUnidadMedida.Text = unidadMedida;
-
-            TextBox text6 = (TextBox)template.FindName("txtTipoInsumo", dgdPresenter);
-            string idTipoInsumo = text6.Text;
-            cmbTipoInsumo.SelectedValue = idTipoInsumo;
-
+            txtNombre.Text = item.NombreInsumo;
+            txtDescripcion.Text = item.Descripcion;
+            txtId.Text = item.idInsumo.ToString();
+            txtMarca.Text = item.Marca;
+            txtUnidadMedida.Text = item.UnidadMedida;
+            cmbTipoInsumo.SelectedValue = item.idTipoInsumo;
 
             lblEstado.Content = "MODIFICAR INSUMOS";
             btnGuardar.Margin = new Thickness(402, 48, 0, 0);
             btnCancelar.Visibility = Visibility.Visible;
             tabConsultar.IsEnabled = false;
             tabRegistrar.Focus();
-        }
-
-        public static T FindVisualChild<T>(DependencyObject obj)
-        where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-
-            return null;
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -205,34 +160,14 @@ namespace CoffeeLand
 
         private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblInsumo.ItemContainerGenerator.ContainerFromItem(tblInsumo.SelectedItem));
+            Insumo item = tblInsumo.SelectedItem as Insumo;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-            
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-        
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-
-            TextBox text4 = (TextBox)template.FindName("txtMarca", dgdPresenter);
-            string marca = text4.Text;
-
-            TextBox text5 = (TextBox)template.FindName("txtUnidadMedida", dgdPresenter);
-            string unidadMedida = text5.Text;
-
-            TextBox text6 = (TextBox)template.FindName("txtTipoInsumo", dgdPresenter);
-            string idTipoInsumo = text6.Text;
+            string nombre = item.NombreInsumo;
+            string descripcion = item.Descripcion;
+            int id = item.idInsumo;
+            string marca = item.Marca;
+            string unidadMedida = item.UnidadMedida;
+            byte idTipoInsumo = Convert.ToByte(item.idTipoInsumo);
 
             var mySettings = new MetroDialogSettings()
             {
@@ -245,14 +180,9 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-                byte idTipoIn;
-                int idInsumo;
                 string rpta = "";
 
-                idTipoIn = Convert.ToByte(idTipoInsumo);
-                idInsumo = Convert.ToInt32(id);
-
-                rpta = MInsumo.GetInstance().GestionInsumo(idTipoIn, nombre, descripcion, marca, unidadMedida, idInsumo, 3).ToString();
+                rpta = MInsumo.GetInstance().GestionInsumo(idTipoInsumo, nombre, descripcion, marca, unidadMedida, id, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }

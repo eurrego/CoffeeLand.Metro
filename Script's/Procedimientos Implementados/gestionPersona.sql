@@ -34,6 +34,7 @@ else if(@opc=2)
 			Telefono=@telefono,
 			FechaNacimineto=@fechaNacimiento,
 			idTipoContratoPersona=@idTipoContrato
+			where DocumentoPersona = @documentoPerosna
 			set @mensaje = 'Actualización exitosa'
 
 		end

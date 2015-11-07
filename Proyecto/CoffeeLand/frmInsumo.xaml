@@ -59,16 +59,7 @@
         		    Controls:TextBoxHelper.Watermark="Nombre" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
                     Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
-                    >
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True"   
-                        ValidatesOnExceptions="True">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    />
 
                     <TextBox x:Name="txtMarca" Margin="56,282,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
@@ -191,38 +182,6 @@
                                                  IsEnabled="False" 
                                                  Height="40" 
                                                  Visibility="Visible"  />
-
-                                        <TextBox x:Name="txtId" Margin="3" 
-                                                 Text="{Binding idInsumo}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtMarca" Margin="3" 
-                                                 Text="{Binding Marca}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtNombre" Margin="3" 
-                                                 Text="{Binding NombreInsumo}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtDescripcion" Margin="3" 
-                                                 Text="{Binding Descripcion}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

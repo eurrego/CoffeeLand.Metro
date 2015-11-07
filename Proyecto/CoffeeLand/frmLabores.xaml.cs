@@ -165,30 +165,14 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblLabores.ItemContainerGenerator.ContainerFromItem(tblLabores.SelectedItem));
+            Labor item = tblLabores.SelectedItem as Labor;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-            txtNombre.Text = nombre;
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-            txtDescripcion.Text = descripcion;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-            txtId.Text = id;
-
-            CheckBox text4 = (CheckBox)template.FindName("chkRequiereInsumo", dgdPresenter);
-            if (text4.IsChecked == true)
+            txtId.Text = item.idLabor.ToString();
+            txtNombre.Text = item.NombreLabor;
+            txtDescripcion.Text = item.Descripcion;
+            cmbTipoPago.SelectedItem = item.TipoPagoLabor;
+         
+            if (item.ModificaArboles == true)
             {
                 rbtnArbolesSi.IsChecked = true;
                 rbtnArbolesNo.IsChecked = false;
@@ -199,9 +183,7 @@ namespace CoffeeLand
                 rbtnArbolesNo.IsChecked = true;
             }
 
-
-            CheckBox text5 = (CheckBox)template.FindName("chkModificaArboles", dgdPresenter);
-            if (text5.IsChecked == true)
+            if (item.RequiereInsumo == true)
             {
                 rbtnInsumoSi.IsChecked = true;
                 rbtnInsumoNo.IsChecked = false;
@@ -212,11 +194,6 @@ namespace CoffeeLand
                 rbtnInsumoNo.IsChecked = true;
             }
 
-            TextBox text6 = (TextBox)template.FindName("txtTipoPago", dgdPresenter);
-            string tipoPago = text6.Text;
-            cmbTipoPago.SelectedItem = tipoPago;
-
-
             lblEstado.Content = "MODIFICAR INSUMOS";
             btnGuardar.Margin = new Thickness(402, 26, 0, 0);
             btnCancelar.Visibility = Visibility.Visible;
@@ -224,24 +201,7 @@ namespace CoffeeLand
             tabRegistrar.Focus();
         }
 
-        public static T FindVisualChild<T>(DependencyObject obj)
-         where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-
-            return null;
-        }
+       
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -255,34 +215,14 @@ namespace CoffeeLand
 
         private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblLabores.ItemContainerGenerator.ContainerFromItem(tblLabores.SelectedItem));
+            Labor item = tblLabores.SelectedItem as Labor;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-
-            CheckBox text4 = (CheckBox)template.FindName("chkRequiereInsumo", dgdPresenter);
-            bool insumo = Convert.ToBoolean(text4.IsChecked);
-
-            CheckBox text5 = (CheckBox)template.FindName("chkModificaArboles", dgdPresenter);
-            bool modifica = Convert.ToBoolean(text5.IsChecked);
-
-            TextBox text6 = (TextBox)template.FindName("txtTipoPago", dgdPresenter);
-            string tipoPago = text6.Text;
-
+            int id = item.idLabor;
+            string nombre = item.NombreLabor;
+            string descripcion = item.Descripcion;
+            bool insumo = item.RequiereInsumo;
+            bool modifica = item.ModificaArboles;
+            string tipoPago = item.TipoPagoLabor;
 
             var mySettings = new MetroDialogSettings()
             {
@@ -295,13 +235,9 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-
-                int idInsumo;
                 string rpta = "";
 
-                idInsumo = Convert.ToInt32(id);
-
-                rpta = MLabores.GetInstance().GestionLabor(tipoPago, nombre, insumo, modifica, descripcion, idInsumo, 3).ToString();
+                rpta = MLabores.GetInstance().GestionLabor(tipoPago, nombre, insumo, modifica, descripcion, id, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }

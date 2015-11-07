@@ -64,44 +64,6 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-
-                <DataGrid.RowDetailsTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="0" Background="WhiteSmoke" Padding="0">
-                            <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBox x:Name="txtId" Margin="3" 
-                                                 Text="{Binding idProducto}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-                                <TextBox x:Name="txtNombre" Margin="3" 
-                                                 Text="{Binding NombreProducto}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"  />
-                                <TextBox x:Name="txtDescripcion" Margin="3" 
-                                                 Text="{Binding Descripcion}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </DataGrid.RowDetailsTemplate>
             </DataGrid>
 
             <TextBox x:Name="txtBuscarNombre" Margin="24,16,426,0"

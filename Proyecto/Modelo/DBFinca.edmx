@@ -768,14 +768,6 @@
           <Parameter Name="idProducto" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
-        <Function Name="gestionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nit" Type="varchar" Mode="In" />
-          <Parameter Name="nombreProveedor" Type="varchar" Mode="In" />
-          <Parameter Name="telefono" Type="varchar" Mode="In" />
-          <Parameter Name="direccion" Type="varchar" Mode="In" />
-          <Parameter Name="TipoDocumento" Type="varchar" Mode="In" />
-          <Parameter Name="opc" Type="int" Mode="In" />
-        </Function>
         <Function Name="gestionTipoArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreArbol" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -2409,7 +2401,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="gestionProveedor" FunctionName="DBFincaModel.Store.gestionProveedor" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

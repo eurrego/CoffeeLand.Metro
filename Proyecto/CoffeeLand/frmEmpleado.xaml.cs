@@ -36,9 +36,9 @@ namespace CoffeeLand
         }
 
         // mensaje de Error
-        private void mensajeError(string mensaje)
+        private async void mensajeError(string mensaje)
         {
-            this.ShowMessageAsync("Error", mensaje);
+           await this.ShowMessageAsync("Error", mensaje);
         }
 
         // Define el estilo de las celdas 
@@ -51,7 +51,7 @@ namespace CoffeeLand
         private bool validarCampos()
         {
 
-            if (cmbTipoDocumento.SelectedIndex == 0 || cmbTipoContrato.SelectedIndex == 0 || cmbGenero.SelectedIndex == 0 ||  txtNombre.Text == string.Empty || txtDocumento.Text == string.Empty || txtTelefono.Text == string.Empty)
+            if ( cmbTipoDocumento.SelectedIndex == 0 || cmbTipoContrato.SelectedIndex == 0 || cmbGenero.SelectedIndex == 0 || txtNombre.Text == string.Empty || txtDocumento.Text == string.Empty || txtTelefono.Text == string.Empty || dtdFechaNacimiento.SelectedDate == null)
             {
                 mensajeError("Debe Ingresar todos los Campos");
                 validacion = false;
@@ -70,6 +70,7 @@ namespace CoffeeLand
             cmbGenero.SelectedIndex = 0;
             cmbTipoContrato.SelectedIndex = 0;
             cmbTipoDocumento.SelectedIndex = 0;
+            dtdFechaNacimiento.SelectedDate = null;
             txtNombre.Text = string.Empty;
             txtDocumento.Text = string.Empty;
             txtTelefono.Text = string.Empty;
@@ -85,7 +86,6 @@ namespace CoffeeLand
             EstilosCeldas();
         }
 
-
         //Método para Buscar por nombre
         private void BuscarNombre()
         {
@@ -93,7 +93,7 @@ namespace CoffeeLand
             EstilosCeldas();
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        private void frmEmpleado1_Loaded(object sender, RoutedEventArgs e)
         {
             Mostrar();
             tabConsultar.Focus();
@@ -104,6 +104,15 @@ namespace CoffeeLand
             BuscarNombre();
         }
 
+        private void cmbGenero_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> data = new List<string>();
+            data.Add("Seleccione un Género...");
+            data.Add("M");
+            data.Add("F");
+            cmbGenero.ItemsSource = data;
+        }
+
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             string rpta = "";
@@ -112,7 +121,7 @@ namespace CoffeeLand
             {
                 if (validarCampos())
                 {
-                    rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text,Convert.ToString(cmbGenero.SelectedItem),txtTelefono.Text,Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtDocumento.Text), 1, Convert.ToByte(cmbTipoDocumento.SelectedValue), Convert.ToByte(cmbTipoContrato.SelectedValue));
+                    rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text, Convert.ToString(cmbGenero.SelectedItem), txtTelefono.Text, Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtDocumento.Text), 1, Convert.ToByte(cmbTipoDocumento.SelectedValue), Convert.ToByte(cmbTipoContrato.SelectedValue));
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                     tabConsultar.Focus();
@@ -127,89 +136,74 @@ namespace CoffeeLand
                 btnGuardar.Margin = new Thickness(520, 48, 0, 0);
                 btnCancelar.Visibility = Visibility.Collapsed;
                 tabConsultar.IsEnabled = true;
+                txtDocumento.IsEnabled = true;
+                cmbTipoDocumento.IsEnabled = true;
                 tabConsultar.Focus();
             }
             Mostrar();
         }
 
-        private void cmbGenero_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<string> data = new List<string>();
-            data.Add("Seleccione un Género...");
-            data.Add("M");
-            data.Add("F");
-
-            cmbGenero.ItemsSource = data;
-        }
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblEmpleado.ItemContainerGenerator.ContainerFromItem(tblEmpleado.SelectedItem));
+            Persona item = tblEmpleado.SelectedItem as Persona;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombrePersona", dgdPresenter);
-            string nombre = text.Text;
-            txtNombre.Text = nombre;
-
-            TextBox text2 = (TextBox)template.FindName("txtGenero", dgdPresenter);
-            string genero = text2.Text;
-            cmbGenero.SelectedItem = genero;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-            txtId.Text = id;
-
-            TextBox text4 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string documento = text4.Text;
-            txtDocumento.Text = documento;
-
-            TextBox text5 = (TextBox)template.FindName("txtFecha", dgdPresenter);
-            dtdFechaNacimiento.DisplayDate = Convert.ToDateTime(text5.Text);
-
-            TextBox text6 = (TextBox)template.FindName("txtTipoContrato", dgdPresenter);
-            string tipoContrato = text6.Text;
-            cmbTipoContrato.SelectedValue = tipoContrato;
-
-            TextBox text7 = (TextBox)template.FindName("txtIdTipoDocumento", dgdPresenter);
-            string tipoDocumento = text7.Text;
-            cmbTipoDocumento.SelectedValue = tipoDocumento;
-
-            TextBox text8 = (TextBox)template.FindName("txtTelefono", dgdPresenter);
-            string telefono = text8.Text;
-            txtTelefono.Text = telefono;
-
+            txtId.Text = item.DocumentoPersona;
+            txtNombre.Text = item.NombrePersona;
+            txtDocumento.Text = item.DocumentoPersona;
+            txtTelefono.Text = item.Telefono;
+            cmbGenero.SelectedItem = item.Genero;
+            cmbTipoContrato.SelectedValue = item.idTipoContratoPersona;
+            cmbTipoDocumento.SelectedValue = item.idTipoDocumento;
+            dtdFechaNacimiento.SelectedDate = item.FechaNacimineto;
 
             lblEstado.Content = "MODIFICAR EMPLEADOS";
             btnGuardar.Margin = new Thickness(402, 48, 0, 0);
             btnCancelar.Visibility = Visibility.Visible;
             tabConsultar.IsEnabled = false;
+            txtDocumento.IsEnabled = false;
+            cmbTipoDocumento.IsEnabled = false;
             tabRegistrar.Focus();
         }
 
-        public static T FindVisualChild<T>(DependencyObject obj)
-        where T : DependencyObject
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
+            Limpiar();
+            lblEstado.Content = "REGISTRAR EMPLEADOS";
+            btnGuardar.Margin = new Thickness(520, 26, 0, 0);
+            btnCancelar.Visibility = Visibility.Collapsed;
+            tabConsultar.IsEnabled = true;
+            tabConsultar.Focus();
+        }
 
-            return null;
+        private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
+        {
+            Persona item = tblEmpleado.SelectedItem as Persona;
+
+            int id = Convert.ToInt32(item.DocumentoPersona);
+            string nombre = item.NombrePersona;
+            string telefono = item.Telefono;
+            string genero = item.Genero;
+            byte tipoContrato = item.idTipoContratoPersona;
+            byte tipoDocumento = item.idTipoDocumento;
+            DateTime fecha = item.FechaNacimineto;
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Aceptar",
+                NegativeButtonText = "Cancelar",
+                ColorScheme = MetroDialogOptions.ColorScheme
+            };
+
+            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Inhabilitar el Registro?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+            if (result != MessageDialogResult.Negative)
+            {
+                string rpta = "";
+
+                rpta = MPersona.GetInstance().GestionPersona(nombre, genero, telefono, fecha, id, 3, tipoDocumento, tipoContrato).ToString();
+                await this.ShowMessageAsync("CoffeeLand", rpta);
+                Mostrar();
+            }
         }
     }
 }

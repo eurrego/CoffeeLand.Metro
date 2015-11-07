@@ -123,27 +123,11 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoInsumo.ItemContainerGenerator.ContainerFromItem(tblTipoInsumo.SelectedItem));
+            TipoInsumo item = tblTipoInsumo.SelectedItem as TipoInsumo;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-            txtNombre.Text = nombre;
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-            txtDescripcion.Text = descripcion;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-            txtId.Text = id;
+            txtId.Text = item.idTipoInsumo.ToString();
+            txtNombre.Text = item.NombreTipoInsumo;
+            txtDescripcion.Text = item.Descripcion;
 
             lblEstado.Content = "MODIFICAR TIPOS DE INSUMOS";
             btnGuardar.Margin = new Thickness(556, 36, 0, 0);
@@ -181,27 +165,12 @@ namespace CoffeeLand
 
         private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoInsumo.ItemContainerGenerator.ContainerFromItem(tblTipoInsumo.SelectedItem));
 
-            if (dgRow == null)
-            {
-                return;
-            }
+            TipoInsumo item = tblTipoInsumo.SelectedItem as TipoInsumo;
 
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-
+            byte id = item.idTipoInsumo;
+            string nombre = item.NombreTipoInsumo;
+            string descripcion = item.Descripcion;
 
             var mySettings = new MetroDialogSettings()
             {
@@ -214,12 +183,10 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-                byte idTipoInsumo;
+              
                 string rpta = "";
 
-                idTipoInsumo = Convert.ToByte(id);
-
-                rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(nombre, descripcion, idTipoInsumo, 3).ToString();
+                rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(nombre, descripcion, id, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }

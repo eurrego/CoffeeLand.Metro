@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="CoffeeLand.frmEmpleado"
+﻿<Controls:MetroWindow x:Name="frmEmpleado1" x:Class="CoffeeLand.frmEmpleado"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
-        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" >
+        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmEmpleado1_Loaded"  >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,11 +24,10 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
-    <Grid x:Name="gridPrincipal" Height="551" VerticalAlignment="Top" HorizontalAlignment="Left" Width="682">
-        <TabControl Margin="0,10,0,-16"  Height="557" VerticalAlignment="Top">
+    <Grid x:Name="gridPrincipal">
+        <TabControl Margin="0,10,0,-10">
             <TabItem x:Name="tabRegistrar" Header="Registrar">
-                <Grid x:Name="gridRegistrar" Background="White" Margin="2,3,0,-2" HorizontalAlignment="Left" Width="676">
+                <Grid x:Name="gridRegistrar" Height="513" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
                     <Button x:Name="btnCabezera"  HorizontalAlignment="Left"
                             Margin="54,40,0,0" Width="52" 
                             RenderTransformOrigin="0.467,0.419"  
@@ -37,7 +36,7 @@
                             Background="#FF41B1E1" BorderBrush="#FF41B1E1" >
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource WhiteBrush}">
                             <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_fan_box}"/>
+                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_app_plus}"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </Button>
@@ -45,13 +44,13 @@
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
             	    Margin="520,48,0,0" VerticalAlignment="Top" Width="90" 
             	    Height="38" 
-                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
+                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click"  />
 
                     <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
             	    Margin="520,48,0,0" VerticalAlignment="Top" Width="91" 
             	    Height="38" 
                     Style="{StaticResource AccentedSquareButtonStyle}"
-                    Visibility="Collapsed" Background="#FFE4B9B9"  />
+                    Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"  />
 
                     <Label x:Name="lblEstado" Content="REGISTRAR EMPLEADOS" HorizontalAlignment="Left" Margin="108,50,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
@@ -60,16 +59,7 @@
         		    Controls:TextBoxHelper.Watermark="Nombre Completo" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
                     Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
-                    >
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True"   
-                                    ValidatesOnExceptions="True">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    />
 
                     <TextBox x:Name="txtTelefono" Margin="59,375,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
@@ -82,7 +72,7 @@
             	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                     Visibility="Collapsed"/>
 
-                    <ComboBox x:Name="cmbTipoDocumento" HorizontalAlignment="Left"
+                    <ComboBox x:Name="cmbTipoDocumento"  HorizontalAlignment="Left"
                               DisplayMemberPath="NombreTipoDocumento" 
                               SelectedValuePath="idTipoDocumento"
                               IsSynchronizedWithCurrentItem="true" 
@@ -90,11 +80,12 @@
                               Width="261" Height="42"
                               SelectedIndex="0"
                               />
+
                     <TextBox x:Name="txtDocumento" Margin="355,214,0,0"
-                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
-                    	Controls:TextBoxHelper.Watermark="Nro Documento" 
-                    	Controls:TextBoxHelper.ClearTextButton="True" 
-                    	Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" />
+        		    Controls:TextBoxHelper.UseFloatingWatermark="True"
+        		    Controls:TextBoxHelper.Watermark="Nro Documento" 
+        		    Controls:TextBoxHelper.ClearTextButton="True" 
+                    Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" />
 
                     <DatePicker x:Name="dtdFechaNacimiento" HorizontalAlignment="Left" Margin="59,297,0,0" 
                                 VerticalAlignment="Top" 
@@ -102,39 +93,41 @@
                                 Controls:TextBoxHelper.Watermark="Fecha de Nacimiento"
                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
                                 />
+
                     <ComboBox x:Name="cmbGenero" HorizontalAlignment="Left"
-                    	Margin="355,297,0,0" VerticalAlignment="Top"
-                    	Width="261" Height="42"
-                    	SelectedIndex="0" Loaded="cmbGenero_Loaded"
+                              Margin="355,297,0,0" VerticalAlignment="Top"
+                              Width="261" Height="42"
+                              SelectedIndex="0" Loaded="cmbGenero_Loaded"
                               />
+
                     <ComboBox x:Name="cmbTipoContrato" HorizontalAlignment="Left"
-                    	DisplayMemberPath="NombreTipoContratoPersona" 
-                    	SelectedValuePath="idTipoContratoPersona"
-                    	IsSynchronizedWithCurrentItem="true" 
-                    	Margin="355,375,0,0" VerticalAlignment="Top"
-                    	Width="261" Height="42"
-                    	SelectedIndex="0"
-                        />
+                              DisplayMemberPath="NombreTipoContratoPersona" 
+                    	      SelectedValuePath="idTipoContratoPersona"
+                              Margin="355,375,0,0" VerticalAlignment="Top"
+                              IsSynchronizedWithCurrentItem="true" 
+                              Width="261" Height="42"
+                              SelectedIndex="0"
+                              />
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabConsultar" Header="Consultar">
-                <Grid x:Name="gridConsultar" Height="515" VerticalAlignment="Bottom" Margin="3,0,-6,-7">
+                <Grid x:Name="gridConsultar" Height="513" VerticalAlignment="Bottom" Margin="3,0,-3,7">
 
-                    <DataGrid x:Name="tblEmpleado" BorderThickness="1" Margin="24,76,0,0" AutoGenerateColumns="False" 
+                    <DataGrid x:Name="tblEmpleado" BorderThickness="1" Margin="24,76,0,24" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
                               CanUserDeleteRows="False"
-                              Style="{StaticResource AzureDataGrid}" Width="623" Height="406" VerticalAlignment="Top"
+                              Style="{StaticResource AzureDataGrid}" Width="622"
                               >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding DocumentoPersona}" Header="Documento" Width="130" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding NombrePersona}" Header="Nombre" Width="200" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Telefono}"  Header="Teléfono" Width="100" IsReadOnly="True" />
+                            <DataGridTextColumn   Binding="{Binding NombrePersona}"  Header="Nombre " Width="200" IsReadOnly="True" />
+                            <DataGridTextColumn   Binding="{Binding Telefono}"  Header="Télefono" Width="100" IsReadOnly="True" />
                             <DataGridTemplateColumn Width="90" Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click" >
+                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
@@ -147,7 +140,7 @@
                             <DataGridTemplateColumn Width="112" Header="Inhabilitar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitar_Click"   >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
@@ -186,15 +179,15 @@
                                                  IsReadOnly="True"
                                                  Visibility="Visible" />
 
-                                        <TextBox x:Name="txtFecha"  Margin="3" 
-                                                    Grid.Row="1"
-                                                    Grid.Column="0"
-                                                    Text="{Binding FechaNacimineto}"
-                                                    IsEnabled="False" 
-                                                    MaxHeight="130"
-                                                    Controls:TextBoxHelper.Watermark="Fecha de Nacimiento"
-                                                    Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                                    />
+                                        <TextBox x:Name="txtFecha" Margin="3" 
+                                                 Text="{Binding FechaNacimineto}"
+                                                 Controls:TextBoxHelper.Watermark="Fecha de Nacimiento"
+                                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
+                                                 Grid.Row="1"
+                                                 Grid.Column="0"
+                                                 IsEnabled="False" 
+                                                 MaxHeight="130"
+                                                 Visibility="Visible"  />
 
                                         <TextBox x:Name="txtTipoContrato" Margin="3" 
                                                  Text="{Binding idTipoContratoPersona}"
@@ -205,38 +198,6 @@
                                                  IsEnabled="False" 
                                                  MaxHeight="130"
                                                  Visibility="Visible"  />
-
-                                        <TextBox x:Name="txtId" Margin="3" 
-                                                 Text="{Binding DocumentoPersona}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtNombrePersona" Margin="3" 
-                                                 Text="{Binding NombrePersona}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtTelefono" Margin="3" 
-                                                 Text="{Binding Telefono}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtIdTipoDocumento" Margin="3" 
-                                                 Text="{Binding idTipoDocumento}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="1"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -269,6 +230,5 @@
 
         </TabControl>
     </Grid>
-
 
 </Controls:MetroWindow>

@@ -47,33 +47,24 @@
                     </Button>
 
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
-            	    Margin="520,26,0,0" VerticalAlignment="Top" Width="90" 
-            	    Height="38" 
-                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
+            	            Margin="520,26,0,0" VerticalAlignment="Top" Width="90" 
+            	            Height="38" 
+                            Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
 
                     <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
-            	    Margin="520,26,0,0" VerticalAlignment="Top" Width="91" 
-            	    Height="38" 
-                    Style="{StaticResource AccentedSquareButtonStyle}"
-                    Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"  />
+            	            Margin="520,26,0,0" VerticalAlignment="Top" Width="91" 
+            	            Height="38" 
+                            Style="{StaticResource AccentedSquareButtonStyle}"
+                            Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"  />
 
                     <Label x:Name="lblEstado" Content="REGISTRAR LABORES" HorizontalAlignment="Left" Margin="108,28,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
                     <TextBox x:Name="txtNombre" Margin="57,107,0,0"
-        		    Controls:TextBoxHelper.UseFloatingWatermark="True"
-        		    Controls:TextBoxHelper.Watermark="Nombre" 
-        		    Controls:TextBoxHelper.ClearTextButton="True" 
-                    Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
-                    >
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True"   
-                        ValidatesOnExceptions="True">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+        		            Controls:TextBoxHelper.UseFloatingWatermark="True"
+        		            Controls:TextBoxHelper.Watermark="Nombre" 
+        		            Controls:TextBoxHelper.ClearTextButton="True" 
+                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
+                        />
 
                     <TextBox x:Name="txtId" Margin="380,36,278,0"
             	    Controls:TextBoxHelper.Watermark="id"
@@ -183,38 +174,6 @@
                                                   MaxHeight="130"
                                                   Visibility="Visible" 
                                                   />
-
-                                        <TextBox x:Name="txtId" Margin="3" 
-                                                 Text="{Binding idLabor}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtTipoPago" Margin="3" 
-                                                 Text="{Binding TipoPagoLabor}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="45"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtNombre" Margin="3" 
-                                                 Text="{Binding NombreLabor}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"  />
-
-                                        <TextBox x:Name="txtDescripcion" Margin="3" 
-                                                 Text="{Binding Descripcion}"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="25"
-                                                 Visibility="Collapsed"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

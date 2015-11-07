@@ -126,27 +126,11 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
+            TipoArbol item = tblTipoArbol.SelectedItem as TipoArbol;
 
-            if (dgRow == null)
-            {
-                return;
-            }
-
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-            txtNombre.Text = nombre;
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-            txtDescripcion.Text = descripcion;
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-            txtId.Text = id;
+            txtId.Text = item.idTipoArbol.ToString();
+            txtNombre.Text = item.NombreTipoArbol;
+            txtDescripcion.Text = item.Descripcion;
 
             lblEstado.Content = "MODIFICAR TIPOS DE ARBOLES";
             btnGuardar.Margin = new Thickness(556, 36, 0, 0);
@@ -154,24 +138,6 @@ namespace CoffeeLand
             gridConsultar.IsEnabled = false;
         }
 
-        public static T FindVisualChild<T>(DependencyObject obj)
-
-        where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
-        }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -184,27 +150,12 @@ namespace CoffeeLand
 
         private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow dgRow = (DataGridRow)(tblTipoArbol.ItemContainerGenerator.ContainerFromItem(tblTipoArbol.SelectedItem));
 
-            if (dgRow == null)
-            {
-                return;
-            }
+            TipoArbol item = tblTipoArbol.SelectedItem as TipoArbol;
 
-            DataGridDetailsPresenter dgdPresenter = FindVisualChild<DataGridDetailsPresenter>(dgRow);
-            DataTemplate template = dgdPresenter.ContentTemplate;
-
-            TextBox text = (TextBox)template.FindName("txtNombre", dgdPresenter);
-            string nombre = text.Text;
-
-
-            TextBox text2 = (TextBox)template.FindName("txtDescripcion", dgdPresenter);
-            string descripcion = text2.Text;
-
-
-            TextBox text3 = (TextBox)template.FindName("txtId", dgdPresenter);
-            string id = text3.Text;
-
+            byte id = item.idTipoArbol;
+            string nombre = item.NombreTipoArbol;
+            string descripcion = item.Descripcion;
 
             var mySettings = new MetroDialogSettings()
             {
@@ -217,12 +168,10 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-                byte idTipoArbol;
+
                 string rpta = "";
 
-                idTipoArbol = Convert.ToByte(id);
-
-                rpta = MTipoArbol.GetInstance().registrarTipoArbol(nombre, descripcion, idTipoArbol, 3).ToString();
+                rpta = MTipoArbol.GetInstance().registrarTipoArbol(nombre, descripcion, id, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }
