@@ -14,7 +14,7 @@ begin
 				begin
 					insert into TipoInsumo (NombreTipoInsumo,Descripcion)
 					values (@NombreTipoInsumo,@Descripcion)
-					set @mensaje = 'Registro exitoso'
+					set @mensaje = 'Registro exitoso!'
 				end
 
 			 else
@@ -31,7 +31,7 @@ begin
 			NombreTipoInsumo = @NombreTipoInsumo,
 			Descripcion = @Descripcion
 			where idTipoInsumo = @idTipoInsumo
-			set @mensaje = 'Actualización exitosa'
+			set @mensaje = 'Actualización exitosa!'
 		end
 
 	else if (@opc = 3)
@@ -42,7 +42,7 @@ begin
 			EstadoTipoInsumo = 'I'
 			where idTipoInsumo= @idTipoInsumo
 
-			set @mensaje = 'Inhabilitacion exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 	select @mensaje  as Mensaje
 

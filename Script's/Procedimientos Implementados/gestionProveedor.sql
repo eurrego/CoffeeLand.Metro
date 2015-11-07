@@ -14,7 +14,7 @@ create proc gestionProveedor
 					 begin
 						 insert into Proveedor (Nit,NombreProveedor,Telefono,Direccion,TipoDocumento)
 						 values (@nit,@nombreProveedor,@telefono,@direccion,@TipoDocumento)
-						 set @mensaje = 'Registro exitoso'
+						 set @mensaje = 'Registro exitoso!'
 					 end
 
 				else
@@ -40,7 +40,7 @@ create proc gestionProveedor
 			Direccion=@direccion,
 			TipoDocumento = @TipoDocumento
 			where Nit = @nit 
-			set @mensaje = 'Actualización exitosa'
+			set @mensaje = 'Actualización exitosa!'
 		end
 
   else if (@opc = 3)
@@ -51,7 +51,7 @@ create proc gestionProveedor
 			EstadoProveedor = 'I'
 			where Nit= @nit
 
-			set @mensaje = 'Inhabilitación exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 		select @mensaje  as Mensaje
  end

@@ -22,6 +22,10 @@ if(@opc=1)
 				values (@idTipoDocumento,@documentoPerosna,@idTipoContrato,@nombrePersona,@genero,@telefono,@fechaNacimiento)
 				set @mensaje = 'Registro exitoso'
 			end
+		else
+			begin
+				set @mensaje = 'Existe un Empleado con este documento'
+			end
 	 end
 
 else if(@opc=2)
@@ -35,7 +39,7 @@ else if(@opc=2)
 			FechaNacimineto=@fechaNacimiento,
 			idTipoContratoPersona=@idTipoContrato
 			where DocumentoPersona = @documentoPerosna
-			set @mensaje = 'Actualización exitosa'
+			set @mensaje = 'Actualización exitosa!'
 
 		end
 else if (@opc = 3)
@@ -46,7 +50,7 @@ else if (@opc = 3)
 			EstadoPersona = 'I'
 			where DocumentoPersona = @documentoPerosna
 
-			set @mensaje = 'Inhabilitación exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 		
 	select @mensaje  as Mensaje

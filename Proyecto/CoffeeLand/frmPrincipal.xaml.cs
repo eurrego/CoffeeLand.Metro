@@ -88,5 +88,11 @@ namespace CoffeeLand
             frmEmpleado miEmpleado = new frmEmpleado();
             miEmpleado.ShowDialog();
         }
+
+        private void btnProveedores_Click(object sender, RoutedEventArgs e)
+        {
+            frmProveedor miProveedor = new frmProveedor();
+            miProveedor.ShowDialog();
+        }
     }
 }

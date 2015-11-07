@@ -14,7 +14,7 @@ create proc gestionLabor
 				 begin
 					 insert into Labor(TipoPagoLabor,NombreLabor,ModificaArboles,RequiereInsumo,Descripcion)
 					 values (@TipoPagoLabor,@nombreLabor,@modificaArbol,@requiereInsumo,@descripcion)
-					 set @mensaje = 'Registro exitoso'
+					 set @mensaje = 'Registro exitoso!'
 				 end
 
 			else
@@ -34,7 +34,7 @@ create proc gestionLabor
 				 RequiereInsumo=@requiereInsumo,
 				 Descripcion = @descripcion
 				 where idLabor = @idLabor
-				 set @mensaje = 'Actualizacion exitosa'
+				 set @mensaje = 'Actualización exitosa!'
 			end
 
 	 else if (@opc = 3)
@@ -44,7 +44,7 @@ create proc gestionLabor
 				EstadoLabor = 'I'
 				where idLabor= @idLabor
 
-				set @mensaje = 'inhabilitacion exitosa'
+				set @mensaje = 'Inhabilitación exitosa'
 		end
 
 			select @mensaje  as Mensaje

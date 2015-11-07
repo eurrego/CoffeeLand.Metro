@@ -15,7 +15,7 @@ begin
 				begin
 					insert into TipoArbol(NombreTipoArbol,Descripcion)
 					values (@NombreArbol,@Descripcion)
-					set @mensaje = 'Registro exitoso'
+					set @mensaje = 'Registro exitoso!'
 				end
 
 			 else
@@ -32,7 +32,7 @@ begin
 			NombreTipoArbol = @NombreArbol,
 			Descripcion = @Descripcion
 			where idTipoArbol = @idTipoArbol
-			set @mensaje = 'Actualizacion exitosa'
+			set @mensaje = 'Actualización exitosa!'
 		end
 
 	else if (@opc = 3)
@@ -43,7 +43,7 @@ begin
 			EstadoTipoArbol = 'i'
 			where idTipoArbol= @idTipoArbol
 
-			set @mensaje = 'inhabilitacion exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 	select @mensaje  as Mensaje
 

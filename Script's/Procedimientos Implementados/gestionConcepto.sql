@@ -12,7 +12,7 @@ begin
 				begin
 					insert into Concepto (NombreConcepto,Descripcion)
 					values (@NombreConcepto,@Descripcion)
-					set @mensaje = 'Registro exitoso'
+					set @mensaje = 'Registro exitoso!'
 				end
 
 			 else
@@ -29,7 +29,7 @@ begin
 			NombreConcepto = @NombreConcepto,
 			Descripcion = @Descripcion
 			where idConcepto = @idConcepto
-			set @mensaje = 'Actualizacion exitosa'
+			set @mensaje = 'Actualización exitosa!'
 		end
 
 	else if (@opc=3)   
@@ -40,7 +40,7 @@ begin
 			EstadoConcepto = 'I'
 			where idConcepto= @idConcepto
 
-			set @mensaje = 'inhabilitacion exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 	select @mensaje  as Mensaje
 

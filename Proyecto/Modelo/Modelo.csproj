@@ -114,6 +114,9 @@
     <Compile Include="gestionProducto_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="gestionProveedor_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="gestionTipoArboles_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -146,6 +149,7 @@
     </Compile>
     <Compile Include="MPersona.cs" />
     <Compile Include="MProducto.cs" />
+    <Compile Include="MProveedor.cs" />
     <Compile Include="MTipoArbol.cs" />
     <Compile Include="MTipoInsumo.cs" />
     <Compile Include="Municipio.cs">

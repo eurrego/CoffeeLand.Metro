@@ -248,7 +248,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionPersona_Result>("gestionPersona", nombrePersonaParameter, generoParameter, telefonoParameter, fechaNacimientoParameter, documentoPerosnaParameter, opcParameter, idTipoDocumentoParameter, idTipoContratoParameter);
         }
     
-        public virtual ObjectResult<string> gestionProveedor(string nit, string nombreProveedor, string telefono, string direccion, string tipoDocumento, Nullable<int> opc)
+        public virtual ObjectResult<gestionProveedor_Result> gestionProveedor(string nit, string nombreProveedor, string telefono, string direccion, string tipoDocumento, Nullable<int> opc)
         {
             var nitParameter = nit != null ?
                 new ObjectParameter("nit", nit) :
@@ -274,7 +274,7 @@ namespace Modelo
                 new ObjectParameter("opc", opc) :
                 new ObjectParameter("opc", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionProveedor", nitParameter, nombreProveedorParameter, telefonoParameter, direccionParameter, tipoDocumentoParameter, opcParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionProveedor_Result>("gestionProveedor", nitParameter, nombreProveedorParameter, telefonoParameter, direccionParameter, tipoDocumentoParameter, opcParameter);
         }
     }
 }

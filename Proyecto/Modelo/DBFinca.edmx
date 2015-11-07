@@ -768,6 +768,14 @@
           <Parameter Name="idProducto" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="gestionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nit" Type="varchar" Mode="In" />
+          <Parameter Name="nombreProveedor" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="TipoDocumento" Type="varchar" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
         <Function Name="gestionTipoArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreArbol" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -1968,7 +1976,7 @@
             <Parameter Name="idTipoDocumento" Mode="In" Type="Byte" />
             <Parameter Name="idTipoContrato" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="gestionProveedor" ReturnType="Collection(String)">
+          <FunctionImport Name="gestionProveedor" ReturnType="Collection(DBFincaModel.gestionProveedor_Result)">
             <Parameter Name="nit" Mode="In" Type="String" />
             <Parameter Name="nombreProveedor" Mode="In" Type="String" />
             <Parameter Name="telefono" Mode="In" Type="String" />
@@ -1996,6 +2004,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="gestionPersona_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="gestionProveedor_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2397,6 +2408,13 @@
           <FunctionImportMapping FunctionImportName="gestionPersona" FunctionName="DBFincaModel.Store.gestionPersona" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.gestionPersona_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="gestionProveedor" FunctionName="DBFincaModel.Store.gestionProveedor" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.gestionProveedor_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>

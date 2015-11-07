@@ -30,7 +30,7 @@ begin
 			NombreProducto = @NombreProducto,
 			Descripcion = @Descripcion
 			where idProducto = @idProducto
-			set @mensaje = 'Actualizacion exitosa'
+			set @mensaje = 'Actualización exitosa!'
 		end
 
 	else if (@opc = 3)
@@ -41,7 +41,7 @@ begin
 			EstadoProducto = 'I'
 			where idProducto= @idProducto
 
-			set @mensaje = 'inhabilitacion exitosa'
+			set @mensaje = 'Inhabilitación exitosa!'
 		end
 	select @mensaje  as Mensaje
 
