@@ -97,7 +97,7 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                         <Expander x:Name="expanderAdminEmpleados" Header="Gestionar Empleados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="145" IsExpanded="True">
                             <Grid Background="White">
-                                <Button x:Name="btnPrestamos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnPrestamos"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnPrestamos_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_money}"/>
@@ -105,7 +105,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label212" Content="Prestamos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnPrestamos_Copy"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnPagos"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
                                     <Rectangle Width="17" Height="24" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_currency_dollar}"/>

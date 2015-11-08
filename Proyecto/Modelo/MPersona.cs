@@ -36,7 +36,6 @@ namespace Modelo
                 return query.ToList();
             }
 
-            
         }
 
         public List<Persona> ConsultarParametroPersona(string parametro)

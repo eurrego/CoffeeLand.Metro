@@ -148,6 +148,7 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="MPersona.cs" />
+    <Compile Include="MPrestamosEmpleados.cs" />
     <Compile Include="MProducto.cs" />
     <Compile Include="MProveedor.cs" />
     <Compile Include="MTipoArbol.cs" />

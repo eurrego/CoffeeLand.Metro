@@ -94,5 +94,11 @@ namespace CoffeeLand
             frmProveedor miProveedor = new frmProveedor();
             miProveedor.ShowDialog();
         }
+
+        private void btnPrestamos_Click(object sender, RoutedEventArgs e)
+        {
+            frmPrestamosEmpleados misPrestamos = new frmPrestamosEmpleados();
+            misPrestamos.ShowDialog();
+        }
     }
 }
