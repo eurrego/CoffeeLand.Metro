@@ -26,6 +26,7 @@ namespace Modelo
         public decimal Valor { get; set; }
         public System.DateTime Fecha { get; set; }
         public string EstadoCuenta { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbonoDeuda> AbonoDeuda { get; set; }

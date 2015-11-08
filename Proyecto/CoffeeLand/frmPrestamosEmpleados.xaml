@@ -23,6 +23,40 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="ControlesFlyouts">
+            <Controls:Flyout x:Name="FlyoutAbonos"
+                             Header="Realizar Abono"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="True"
+                             AnimateOpacity="True"
+                             IsModal="False"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="300">
+                <Grid Width="250">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="30">
+                        <TextBox x:Name="txtAbono" Margin="3"
+                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
+                    	Controls:TextBoxHelper.Watermark="Valor Abono" 
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Height="42" VerticalAlignment="Top" 
+                        Visibility="Visible"/>
+
+                        <Button x:Name="btnConfirmarAbono" Content="Guardar" HorizontalAlignment="Center" 
+            	                    Margin="10" VerticalAlignment="Top" Width="80" 
+            	                    Height="28" 
+                                    Style="{StaticResource SquareButtonStyle}"  />
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
@@ -72,44 +106,120 @@
                         </Grid>
                     </Expander>
 
-                    <GroupBox x:Name="groupRegistrar" Header="Registrar" HorizontalAlignment="Left" Margin="20,92,0,0" VerticalAlignment="Top" Height="453" Width="368">
+                    <GroupBox x:Name="groupRegistrar" Header="Registrar" HorizontalAlignment="Left" Margin="20,92,0,0" VerticalAlignment="Top" Height="272" Width="317">
                         <Grid>
 
                             <TextBox x:Name="txtDescripcion" Margin="16,87,0,0"
                     		Controls:TextBoxHelper.UseFloatingWatermark="True"
                     		Controls:TextBoxHelper.Watermark="Descripción" 
                     		Controls:TextBoxHelper.ClearTextButton="True" 
-                    		Height="63" VerticalAlignment="Top" HorizontalAlignment="Left" Width="318" />
+                    		Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="274" />
 
                             <TextBox x:Name="txtValor" Margin="16,24,0,0"
                         	Controls:TextBoxHelper.UseFloatingWatermark="True"
                         	Controls:TextBoxHelper.Watermark="Valor" 
                         	Controls:TextBoxHelper.ClearTextButton="True" 
-                        	Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" />
+                        	Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129" />
 
-                            <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="190,24,0,0" 
+                            <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="161,24,0,0" 
                             	VerticalAlignment="Top" 
-                            	Height="37" Width="144"
+                            	Height="37" Width="129"
                             	Controls:TextBoxHelper.Watermark="Fecha "
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
                                 />
 
+                            <Button x:Name="btnGuardar" Style="{DynamicResource MetroCircleButtonStyle}"
+                            Margin="87,153,161,23" 
+                            Visibility="Visible" Click="btnGuardar_Click" >
+                                <Rectangle Width="15" Height="15" Fill="{DynamicResource BlackBrush}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_save}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+
+                            <Button x:Name="btnCancelar" Style="{DynamicResource MetroCircleButtonStyle}"
+                            Margin="160,153,88,23" 
+                            Visibility="Visible" Click="btnCancelar_Click" >
+                                <Rectangle Width="15" Height="15" Fill="{DynamicResource BlackBrush}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_close}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Button>
+
 
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="groupDeudas" Header="Deudas a la Fecha" HorizontalAlignment="Left" Margin="408,92,0,0" VerticalAlignment="Top" Height="453" Width="361"/>
+                    <GroupBox x:Name="groupDeudas" Header="Deudas a la Fecha"
+                              HorizontalAlignment="Left" Margin="358,92,0,0" 
+                              VerticalAlignment="Top" Height="453" Width="411">
+                        <Grid>
+                            <TextBlock x:Name="lblTotal" HorizontalAlignment="Left" Margin="73,17,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="24"/>
+                            <TextBlock x:Name="info" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667"/>
+                            <Button x:Name="btnAbonos" Content="Abono" HorizontalAlignment="Left" 
+            	                    Margin="309,19,0,0" VerticalAlignment="Top" Width="80" 
+            	                    Height="28" 
+                                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnAbonos_Click" />
+
+                            <DataGrid x:Name="tblPrestamos" BorderThickness="1" Margin="10,62,0,10" AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              HorizontalContentAlignment="Stretch" 
+                              CanUserAddRows="False" 
+                              CanUserDeleteRows="False"
+                              Style="{StaticResource AzureDataGrid}" Width="379"
+                              >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Valor}" Header="Valor" Width="130" IsReadOnly="True"/>
+                                    <DataGridTextColumn   Binding="{Binding Fecha}"  Header="Fecha " Width="245" IsReadOnly="True" />
+                                </DataGrid.Columns>
+
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="0" Background="WhiteSmoke" Padding="10">
+                                            <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+
+                                                </Grid.RowDefinitions>
+
+                                                <TextBox x:Name="txtDescripcion" Margin="3" 
+                                                 Text="{Binding Descripcion}"
+                                                 Controls:TextBoxHelper.Watermark="Descripción"
+                                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
+                                                 Grid.Row="0"
+                                                 Grid.Column="0"
+                                                 IsEnabled="False" 
+                                                 MaxHeight="130"
+                                                 IsReadOnly="True"
+                                                 Visibility="Visible" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+                            </DataGrid>
+
+                        </Grid>
+                    </GroupBox>
 
 
-
-
+                    <GroupBox x:Name="groupUltimaFecha" 
+                              Header="Último Prestamo" HorizontalAlignment="Left" 
+                              Margin="20,379,0,0" VerticalAlignment="Top" Height="166" Width="317">
+                        <Grid>
+                            <TextBlock x:Name="lblUltimafecha" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="No hay nada por Aquí..." VerticalAlignment="Top" Height="107" Width="285" FontSize="24" Foreground="#FF92C6F9" TextAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabAbonos" Header="Abonos">
-                <Grid x:Name="gridAbonos" Height="563" VerticalAlignment="Bottom" Margin="3,0,-3,7">
 
-                </Grid>
-            </TabItem>
         </TabControl>
     </Grid>
-
 </Controls:MetroWindow>

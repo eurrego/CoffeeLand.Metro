@@ -86,6 +86,7 @@
           <Property Name="Valor" Type="money" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="EstadoCuenta" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Egreso">
           <Key>
@@ -788,6 +789,12 @@
           <Parameter Name="idTipoInsumo" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="insercionDeudaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentoPersona" Type="varchar" Mode="In" />
+          <Parameter Name="valor" Type="money" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -1061,6 +1068,7 @@
           <NavigationProperty Name="AbonoDeuda" Relationship="Self.FK_AbonoDeuda_DeudaPersona" FromRole="DeudaPersona" ToRole="AbonoDeuda" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_DeudaPersona_Persona" FromRole="DeudaPersona" ToRole="Persona" />
           <NavigationProperty Name="RegistroPago_DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_DeudaPersona" FromRole="DeudaPersona" ToRole="RegistroPago_DeudaPersona" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Egreso">
           <Key>
@@ -1984,6 +1992,12 @@
             <Parameter Name="TipoDocumento" Mode="In" Type="String" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="insercionDeudaEmpleado" ReturnType="Collection(DBFincaModel.insercionDeudaEmpleado_Result)">
+            <Parameter Name="DocumentoPersona" Mode="In" Type="String" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2007,6 +2021,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="gestionProveedor_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="insercionDeudaEmpleado_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2098,6 +2115,7 @@
           <EntitySetMapping Name="DeudaPersona">
             <EntityTypeMapping TypeName="DBFincaModel.DeudaPersona">
               <MappingFragment StoreEntitySet="DeudaPersona">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idDeudaPersona" ColumnName="idDeudaPersona" />
                 <ScalarProperty Name="DocumentoPersona" ColumnName="DocumentoPersona" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -2415,6 +2433,13 @@
           <FunctionImportMapping FunctionImportName="gestionProveedor" FunctionName="DBFincaModel.Store.gestionProveedor" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.gestionProveedor_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="insercionDeudaEmpleado" FunctionName="DBFincaModel.Store.insercionDeudaEmpleado" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.insercionDeudaEmpleado_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>

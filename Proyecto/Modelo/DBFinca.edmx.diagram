@@ -29,7 +29,7 @@
         <EntityTypeShape EntityType="DBFincaModel.Producto" Width="1.5" PointX="3.75" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Proveedor" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.RegistroPago" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBFincaModel.RegistroPago_DeudaPersona" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.RegistroPago_DeudaPersona" Width="2.125" PointX="7.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.RegistroPagoSalario" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.SalarioPersonaPermanente" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.SalarioPersonaTemporal" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />

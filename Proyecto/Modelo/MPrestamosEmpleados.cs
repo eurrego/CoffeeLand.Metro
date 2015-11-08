@@ -57,21 +57,52 @@ namespace Modelo
             }
         }
 
-        //public object ConsultarDeudaEmpleado(string parametro)
-        //{
-        //    using (var entity = new DBFincaEntities())
-        //    {
-        //        var query = entity.DeudaPersona.Where(i => i.DocumentoPersona.Contains(parametro)).Select(t => new
-        //        {
+        public List<DeudaPersona> ConsultarDeudaEmpleado(string parametro)
+        {
+            using (var entity = new DBFincaEntities())
+            {
 
-        //            t.Valor,
-        //            t.Fecha,
-        //            t.Descripcion,
-        //            t.EstadoCuenta
-        //        }).Where(i => i.EstadoCuenta.Equals("D"));
+                var query = from c in entity.DeudaPersona
+                            where c.EstadoCuenta == "D" && c.DocumentoPersona.Equals(parametro)
+                            select c;
 
-        //        return query.ToList();
-        //    }
-        //}
+                return query.ToList();
+            }
+        }
+
+        public DateTime ConsultarFecha()
+        {
+            DateTime query = new DateTime(01/01/2015);
+
+            using (var entity = new DBFincaEntities())
+            {
+                var val = (from d in entity.DeudaPersona
+                           select d).Count();
+
+                if (val == 0)
+                {
+                    return query;
+                }
+                else
+                {
+                     query = (from c in entity.DeudaPersona
+                                 select c.Fecha).Max();
+
+                    return query;
+                }
+               
+            }
+        }
+
+        public string insercionDeudaEmpleado(string documento, decimal valor , DateTime fecha, string descripcion )
+        {
+
+            using (var entity = new DBFincaEntities())
+            {
+                var rpta = entity.insercionDeudaEmpleado(documento, valor, fecha, descripcion).First();
+                return rpta.Mensaje;
+            }
+
+        }
     }
 }

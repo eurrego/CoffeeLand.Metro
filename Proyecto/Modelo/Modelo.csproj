@@ -123,6 +123,9 @@
     <Compile Include="gestionTipoInsumo_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="insercionDeudaEmpleado_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="Insumo.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

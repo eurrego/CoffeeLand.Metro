@@ -276,5 +276,26 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionProveedor_Result>("gestionProveedor", nitParameter, nombreProveedorParameter, telefonoParameter, direccionParameter, tipoDocumentoParameter, opcParameter);
         }
+    
+        public virtual ObjectResult<insercionDeudaEmpleado_Result> insercionDeudaEmpleado(string documentoPersona, Nullable<decimal> valor, Nullable<System.DateTime> fecha, string descripcion)
+        {
+            var documentoPersonaParameter = documentoPersona != null ?
+                new ObjectParameter("DocumentoPersona", documentoPersona) :
+                new ObjectParameter("DocumentoPersona", typeof(string));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionDeudaEmpleado_Result>("insercionDeudaEmpleado", documentoPersonaParameter, valorParameter, fechaParameter, descripcionParameter);
+        }
     }
 }
