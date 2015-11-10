@@ -146,7 +146,7 @@
                              Width="400">
                 <Grid Width="350">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                        <Expander x:Name="expanderAdminCostos" Header="Gestionar Costos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="145" IsExpanded="True">
+                        <Expander x:Name="expanderAdminCostos" Header="Gestionar Costos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="440" Height="207" IsExpanded="True">
                             <Grid Background="White">
                                 <Button x:Name="btnCompras"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
@@ -164,6 +164,14 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label21256" Content="Gastos" HorizontalAlignment="Left" Margin="68,64,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="btnEstadoCuenta"  HorizontalAlignment="Left" Margin="10,104,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="17" Height="24" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_archive}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="lblEstadoCuenta" Content="Estado de Cuenta" HorizontalAlignment="Left" Margin="68,116,0,0" VerticalAlignment="Top"/>
                             </Grid>
                         </Expander>
                         <Expander x:Name="expanderConfiguracionCostos" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="265" IsExpanded="True">
