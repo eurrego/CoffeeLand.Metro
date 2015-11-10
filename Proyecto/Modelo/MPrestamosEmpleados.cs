@@ -70,27 +70,27 @@ namespace Modelo
             }
         }
 
-        public DateTime ConsultarFecha()
+        public DateTime ConsultarFecha(string parametro)
         {
-            DateTime query = new DateTime(01/01/2015);
 
             using (var entity = new DBFincaEntities())
             {
-                var val = (from d in entity.DeudaPersona
-                           select d).Count();
 
-                if (val == 0)
+                var cantidad = (from c in entity.DeudaPersona
+                             where c.DocumentoPersona.Equals(parametro)
+                             select c.Fecha).Count();
+
+                if (cantidad == 0)
                 {
-                    return query;
+                    return DateTime.Now;
                 }
                 else
                 {
-                     query = (from c in entity.DeudaPersona
+                    var query = (from c in entity.DeudaPersona
+                                 where c.DocumentoPersona.Equals(parametro)
                                  select c.Fecha).Max();
-
                     return query;
-                }
-               
+                }                   
             }
         }
 

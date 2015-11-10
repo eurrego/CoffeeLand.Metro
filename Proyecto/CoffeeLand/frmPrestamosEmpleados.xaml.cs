@@ -30,6 +30,7 @@ namespace CoffeeLand
         public frmPrestamosEmpleados()
         {
             InitializeComponent();
+           
         }
 
         // mensaje de Error
@@ -73,7 +74,6 @@ namespace CoffeeLand
             {
                 tblPrestamos.ItemsSource = MPrestamosEmpleados.GetInstance().ConsultarDeudaEmpleado(txtBuscarDocumento.Text);
             }
-
             deudaTotal();
         }
 
@@ -88,8 +88,8 @@ namespace CoffeeLand
                 cmbEmpleado.SelectedIndex = 0;
                 txtBuscarDocumento.Text = string.Empty;
                 lblEmpleado.Text = "Seleccione un Empleado";
-                groupRegistrar.IsEnabled = false;
-                groupDeudas.IsEnabled = false;
+                btnAbonos.IsEnabled = false;
+                btnGuardar.IsEnabled = false;
                 Limpiar();
             }
             else
@@ -101,8 +101,8 @@ namespace CoffeeLand
                 cmbEmpleado.SelectedIndex = 0;
                 txtBuscarDocumento.Text = string.Empty;
                 lblEmpleado.Text = "Seleccione un Empleado";
-                groupRegistrar.IsEnabled = false;
-                groupDeudas.IsEnabled = false;
+                btnAbonos.IsEnabled = false;
+                btnGuardar.IsEnabled = false;
                 Limpiar();
             }
         }
@@ -110,8 +110,8 @@ namespace CoffeeLand
         private void frmPrestamosEmpleados1_Loaded(object sender, RoutedEventArgs e)
         {
             cmbEmpleado.ItemsSource = MPrestamosEmpleados.GetInstance().ConsultarEmpleado();
-            groupRegistrar.IsEnabled = false;
-            groupDeudas.IsEnabled = false;
+            btnAbonos.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
         }
 
         private void cmbEmpleado_LostFocus(object sender, RoutedEventArgs e)
@@ -119,19 +119,58 @@ namespace CoffeeLand
             if (cmbEmpleado.SelectedIndex == 0)
             {
                 lblEmpleado.Text = "Seleccione un Empleado";
-                groupRegistrar.IsEnabled = false;
-                groupDeudas.IsEnabled = false;
+                btnAbonos.IsEnabled = false;
+                btnGuardar.IsEnabled = false;
             }
             else
             {
                 Persona item = cmbEmpleado.SelectedItem as Persona;
                 lblEmpleado.Text = item.NombrePersona;
                 Mostrar();
-                groupRegistrar.IsEnabled = true;
-                groupDeudas.IsEnabled = true;
+                if (tblPrestamos.Items.Count == 0)
+                {
+                    btnAbonos.IsEnabled = false;
+                }
+                else
+                {
+                    btnAbonos.IsEnabled = true;
+                }
+                btnGuardar.IsEnabled = true;
 
-                DateTime fechaReciente = MPrestamosEmpleados.GetInstance().ConsultarFecha();
-                lblUltimafecha.Text = string.Format("{0:D}", fechaReciente);
+
+
+                DateTime fechaMax = MPrestamosEmpleados.GetInstance().ConsultarFecha(cmbEmpleado.SelectedValue.ToString());
+                DateTime newDate = DateTime.Now;
+
+                // Difference in days, hours, and minutes.
+                TimeSpan ts = newDate - fechaMax;
+
+                // Difference in days.
+                int differenceInDays = ts.Days;
+
+                if (differenceInDays > 1)
+                {
+                    lblUltimafecha.Text = "Hace " + differenceInDays.ToString() + " Dia(s)" ;
+                }
+
+                else if (differenceInDays >= 30)
+                {
+                    lblUltimafecha.Text = "Mas de " + differenceInDays.ToString() + " Mes(es)";
+                   
+                }
+                else if (differenceInDays >= 365)
+                {
+                    lblUltimafecha.Text = "Mas de " + differenceInDays.ToString() + " Año(s)";
+                }
+                else if (differenceInDays == 1)
+                {
+                    lblUltimafecha.Text = "Hoy";
+                }
+                else if (differenceInDays == 0)
+                {
+                    lblUltimafecha.Text = "No hay nada por Aquí...";
+                }
+               
             }
         }
 
@@ -152,21 +191,25 @@ namespace CoffeeLand
                 {
                     mensajeError("No existe ningún Empleado con este Documento ");
                     list.ItemsSource = null;
-                    groupRegistrar.IsEnabled = false;
-                    groupDeudas.IsEnabled = false;
+                    btnAbonos.IsEnabled = false;
+                    btnGuardar.IsEnabled = false;
                 }
                 else
                 {
                     Persona item = list.SelectedItem as Persona;
                     lblEmpleado.Text = item.NombrePersona;
                     list.ItemsSource = null;
-                    groupRegistrar.IsEnabled = true;
-                    groupDeudas.IsEnabled = true;
+                    if (tblPrestamos.Items.Count == 0)
+                    {
+                        btnAbonos.IsEnabled = false;
+                    }
+                    else
+                    {
+                        btnAbonos.IsEnabled = true;
+                    }
+
+                    btnGuardar.IsEnabled = true;
                     Mostrar();
-
-                    DateTime fechaReciente = MPrestamosEmpleados.GetInstance().ConsultarFecha();
-                    lblUltimafecha.Text = string.Format("{0:D}", fechaReciente);
-
                 }
             }
             
