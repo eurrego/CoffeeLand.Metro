@@ -297,5 +297,30 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionDeudaEmpleado_Result>("insercionDeudaEmpleado", documentoPersonaParameter, valorParameter, fechaParameter, descripcionParameter);
         }
+    
+        public virtual ObjectResult<insercionAbonoDeuda_Result> insercionAbonoDeuda(Nullable<decimal> valor, Nullable<System.DateTime> fecha, Nullable<int> idDeuda, Nullable<decimal> newValor, Nullable<int> opc)
+        {
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var idDeudaParameter = idDeuda.HasValue ?
+                new ObjectParameter("idDeuda", idDeuda) :
+                new ObjectParameter("idDeuda", typeof(int));
+    
+            var newValorParameter = newValor.HasValue ?
+                new ObjectParameter("newValor", newValor) :
+                new ObjectParameter("newValor", typeof(decimal));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionAbonoDeuda_Result>("insercionAbonoDeuda", valorParameter, fechaParameter, idDeudaParameter, newValorParameter, opcParameter);
+        }
     }
 }

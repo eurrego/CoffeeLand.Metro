@@ -9,7 +9,9 @@
         Height="600"
         Width="692"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
+        Left="170"
+        Top="60"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmEmpleado1_Loaded"  >

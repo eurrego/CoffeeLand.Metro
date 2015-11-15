@@ -30,7 +30,7 @@ namespace CoffeeLand
         public frmPrestamosEmpleados()
         {
             InitializeComponent();
-           
+
         }
 
         // mensaje de Error
@@ -51,16 +51,18 @@ namespace CoffeeLand
         }
 
         // define la deuda total
-        private void deudaTotal()
+        private decimal deudaTotal()
         {
             decimal total = 0;
 
             foreach (DeudaPersona item in tblPrestamos.ItemsSource)
             {
-               total += item.Valor;
+                total += item.Valor;
             }
-            
+
             lblTotal.Text = string.Format("{0:c}", total);
+
+            return total;
         }
 
         //mostrar
@@ -75,36 +77,6 @@ namespace CoffeeLand
                 tblPrestamos.ItemsSource = MPrestamosEmpleados.GetInstance().ConsultarDeudaEmpleado(txtBuscarDocumento.Text);
             }
             deudaTotal();
-        }
-
-        private void btnBusqueda_Click(object sender, RoutedEventArgs e)
-        {
-            if (btnBusqueda.IsChecked == true)
-            {
-                lblBusqueda.Content = "Documento";
-                txtBuscarDocumento.Visibility = Visibility.Visible;
-                btnBuscarDocumento.Visibility = Visibility.Visible;
-                cmbEmpleado.Visibility = Visibility.Collapsed;
-                cmbEmpleado.SelectedIndex = 0;
-                txtBuscarDocumento.Text = string.Empty;
-                lblEmpleado.Text = "Seleccione un Empleado";
-                btnAbonos.IsEnabled = false;
-                btnGuardar.IsEnabled = false;
-                Limpiar();
-            }
-            else
-            {
-                lblBusqueda.Content = "Nombre";
-                txtBuscarDocumento.Visibility = Visibility.Collapsed;
-                btnBuscarDocumento.Visibility = Visibility.Collapsed;
-                cmbEmpleado.Visibility = Visibility.Visible;
-                cmbEmpleado.SelectedIndex = 0;
-                txtBuscarDocumento.Text = string.Empty;
-                lblEmpleado.Text = "Seleccione un Empleado";
-                btnAbonos.IsEnabled = false;
-                btnGuardar.IsEnabled = false;
-                Limpiar();
-            }
         }
 
         private void frmPrestamosEmpleados1_Loaded(object sender, RoutedEventArgs e)
@@ -127,6 +99,7 @@ namespace CoffeeLand
                 Persona item = cmbEmpleado.SelectedItem as Persona;
                 lblEmpleado.Text = item.NombrePersona;
                 Mostrar();
+
                 if (tblPrestamos.Items.Count == 0)
                 {
                     btnAbonos.IsEnabled = false;
@@ -135,42 +108,9 @@ namespace CoffeeLand
                 {
                     btnAbonos.IsEnabled = true;
                 }
+
                 btnGuardar.IsEnabled = true;
 
-
-
-                DateTime fechaMax = MPrestamosEmpleados.GetInstance().ConsultarFecha(cmbEmpleado.SelectedValue.ToString());
-                DateTime newDate = DateTime.Now;
-
-                // Difference in days, hours, and minutes.
-                TimeSpan ts = newDate - fechaMax;
-
-                // Difference in days.
-                int differenceInDays = ts.Days;
-
-                if (differenceInDays > 1)
-                {
-                    lblUltimafecha.Text = "Hace " + differenceInDays.ToString() + " Dia(s)" ;
-                }
-
-                else if (differenceInDays >= 30)
-                {
-                    lblUltimafecha.Text = "Mas de " + differenceInDays.ToString() + " Mes(es)";
-                   
-                }
-                else if (differenceInDays >= 365)
-                {
-                    lblUltimafecha.Text = "Mas de " + differenceInDays.ToString() + " Año(s)";
-                }
-                else if (differenceInDays == 1)
-                {
-                    lblUltimafecha.Text = "Hoy";
-                }
-                else if (differenceInDays == 0)
-                {
-                    lblUltimafecha.Text = "No hay nada por Aquí...";
-                }
-               
             }
         }
 
@@ -199,6 +139,8 @@ namespace CoffeeLand
                     Persona item = list.SelectedItem as Persona;
                     lblEmpleado.Text = item.NombrePersona;
                     list.ItemsSource = null;
+                    Mostrar();
+
                     if (tblPrestamos.Items.Count == 0)
                     {
                         btnAbonos.IsEnabled = false;
@@ -209,15 +151,8 @@ namespace CoffeeLand
                     }
 
                     btnGuardar.IsEnabled = true;
-                    Mostrar();
                 }
             }
-            
-        }
-
-        private void expTipoBusqueda_MouseLeave(object sender, MouseEventArgs e)
-        {
-            expTipoBusqueda.IsExpanded = false;
         }
 
         private void btnAbonos_Click(object sender, RoutedEventArgs e)
@@ -247,32 +182,149 @@ namespace CoffeeLand
 
             string rpta = "";
 
-                if (validarCampos())
+            if (validarCampos())
+            {
+                if (cmbEmpleado.IsVisible)
                 {
-                    if (cmbEmpleado.IsVisible)
-                    {
-                        rpta = MPrestamosEmpleados.GetInstance().insercionDeudaEmpleado(cmbEmpleado.SelectedValue.ToString(),Convert.ToDecimal(txtValor.Text),Convert.ToDateTime(dtdFecha.SelectedDate),txtDescripcion.Text).ToString();
-                        this.ShowMessageAsync("Mensaje", rpta);
-                        Limpiar();
-                    }
-                    else
-                    {
-                        rpta = MPrestamosEmpleados.GetInstance().insercionDeudaEmpleado(txtBuscarDocumento.Text, Convert.ToDecimal(txtValor.Text), Convert.ToDateTime(dtdFecha.SelectedDate), txtDescripcion.Text).ToString();
-                        this.ShowMessageAsync("Mensaje", rpta);
-                        Limpiar();
-                    }
-
+                    rpta = MPrestamosEmpleados.GetInstance().insercionDeudaEmpleado(cmbEmpleado.SelectedValue.ToString(), Convert.ToDecimal(txtValor.Text), Convert.ToDateTime(dtdFecha.SelectedDate), txtDescripcion.Text).ToString();
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    Limpiar();
+                    btnAbonos.IsEnabled = true;
                 }
-         
+                else
+                {
+                    rpta = MPrestamosEmpleados.GetInstance().insercionDeudaEmpleado(txtBuscarDocumento.Text, Convert.ToDecimal(txtValor.Text), Convert.ToDateTime(dtdFecha.SelectedDate), txtDescripcion.Text).ToString();
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    Limpiar();
+                    btnAbonos.IsEnabled = true;
+                }
+
+            }
+
             Mostrar();
         }
 
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        private void btnCrearEmpleado_Click(object sender, RoutedEventArgs e)
         {
-            dtdFecha.SelectedDate = null;
-            txtValor.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-            txtAbono.Text = string.Empty;
+            Close();
+            frmEmpleado miEmpleado = new frmEmpleado();
+            miEmpleado.Show();
+        }
+
+        private void btnBusqueda1_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = FindResource("cmButton") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
+        }
+
+        private void btnDocumento_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNombre_Click(object sender, RoutedEventArgs e)
+        {
+            txtBuscarDocumento.Visibility = Visibility.Collapsed;
+            btnBuscarDocumento.Visibility = Visibility.Collapsed;
+            cmbEmpleado.Visibility = Visibility.Visible;
+            cmbEmpleado.SelectedIndex = 0;
+            txtBuscarDocumento.Text = string.Empty;
+            lblEmpleado.Text = "Seleccione un Empleado";
+            btnAbonos.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            Limpiar();
+        }
+
+        private void btnDocumento_Click(object sender, RoutedEventArgs e)
+        {
+            txtBuscarDocumento.Visibility = Visibility.Visible;
+            btnBuscarDocumento.Visibility = Visibility.Visible;
+            cmbEmpleado.Visibility = Visibility.Collapsed;
+            cmbEmpleado.SelectedIndex = 0;
+            txtBuscarDocumento.Text = string.Empty;
+            lblEmpleado.Text = "Seleccione un Empleado";
+            btnAbonos.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            Limpiar();
+        }
+
+        private void btnConfirmarAbono_Click(object sender, RoutedEventArgs e)
+        {
+            string rpta = "";
+
+            if (txtAbono.Text != string.Empty)
+            {
+                decimal valor = Convert.ToDecimal(txtAbono.Text);
+
+                if (Convert.ToInt32(deudaTotal()) < Convert.ToInt32(valor))
+                {
+                    mensajeError("El valor del Abono no debe superar el total del Prestamo");
+                    txtAbono.Text = string.Empty;
+                }
+                else
+                {
+                    while (valor != 0)
+                    {
+                        DateTime newDate = DateTime.Now;
+                        int idDeuda = 0;
+                        decimal valorTotal = 0;
+
+                        for (int i = 0; i < tblPrestamos.Items.Count; i++)
+                        {
+                            tblPrestamos.SelectedIndex = i;
+                            DeudaPersona item = tblPrestamos.SelectedItem as DeudaPersona;
+
+                            var fecha = item.Fecha;
+
+                            TimeSpan ts = newDate - fecha;
+
+                            if (ts.Days > 0)
+                            {
+                                newDate = fecha;
+                                idDeuda = item.idDeudaPersona;
+                                valorTotal = item.Valor;
+                            }
+                            else if (ts.Days == 0)
+                            {
+                                newDate = fecha;
+                                idDeuda = item.idDeudaPersona;
+                                valorTotal = item.Valor;
+                            }
+                        }
+
+                        if (valor == valorTotal)
+                        {
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda, 0, 1);
+                            valor = 0;
+                        }
+                        else if (valorTotal > valor)
+                        {
+                            decimal newValor = valorTotal - valor;
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda, newValor, 2);
+                            valor = 0;
+                        }
+                        else if (valorTotal < valor)
+                        {
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valorTotal, DateTime.Now, idDeuda, 0, 3);
+                            valor = valor - valorTotal;
+                        }
+
+                        Limpiar();
+                        Mostrar();
+                    }
+                    this.ShowMessageAsync("Mensaje", rpta);
+
+                    if (tblPrestamos.Items.Count == 0)
+                    {
+                        btnAbonos.IsEnabled = false;
+                    }
+                }
+            }
+            else
+            {
+                mensajeError("Debe ingresar el valor del Abono");
+            }
         }
     }
 }

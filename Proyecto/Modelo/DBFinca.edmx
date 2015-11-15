@@ -789,6 +789,13 @@
           <Parameter Name="idTipoInsumo" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="insercionAbonoDeuda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="valor" Type="money" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="idDeuda" Type="int" Mode="In" />
+          <Parameter Name="newValor" Type="money" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
         <Function Name="insercionDeudaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DocumentoPersona" Type="varchar" Mode="In" />
           <Parameter Name="valor" Type="money" Mode="In" />
@@ -1998,6 +2005,13 @@
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="insercionAbonoDeuda" ReturnType="Collection(DBFincaModel.insercionAbonoDeuda_Result)">
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="idDeuda" Mode="In" Type="Int32" />
+            <Parameter Name="newValor" Mode="In" Type="Decimal" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2024,6 +2038,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="insercionDeudaEmpleado_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="insercionAbonoDeuda_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2440,6 +2457,13 @@
           <FunctionImportMapping FunctionImportName="insercionDeudaEmpleado" FunctionName="DBFincaModel.Store.insercionDeudaEmpleado" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.insercionDeudaEmpleado_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="insercionAbonoDeuda" FunctionName="DBFincaModel.Store.insercionAbonoDeuda" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.insercionAbonoDeuda_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>

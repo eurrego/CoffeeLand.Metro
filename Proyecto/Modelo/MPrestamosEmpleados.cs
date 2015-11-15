@@ -70,30 +70,6 @@ namespace Modelo
             }
         }
 
-        public DateTime ConsultarFecha(string parametro)
-        {
-
-            using (var entity = new DBFincaEntities())
-            {
-
-                var cantidad = (from c in entity.DeudaPersona
-                             where c.DocumentoPersona.Equals(parametro)
-                             select c.Fecha).Count();
-
-                if (cantidad == 0)
-                {
-                    return DateTime.Now;
-                }
-                else
-                {
-                    var query = (from c in entity.DeudaPersona
-                                 where c.DocumentoPersona.Equals(parametro)
-                                 select c.Fecha).Max();
-                    return query;
-                }                   
-            }
-        }
-
         public string insercionDeudaEmpleado(string documento, decimal valor , DateTime fecha, string descripcion )
         {
 
@@ -102,7 +78,17 @@ namespace Modelo
                 var rpta = entity.insercionDeudaEmpleado(documento, valor, fecha, descripcion).First();
                 return rpta.Mensaje;
             }
-
         }
+
+        public string insercionAbonoDeuda( decimal valor, DateTime fecha, int idDeuda , decimal newValor, int opcion)
+        {
+
+            using (var entity = new DBFincaEntities())
+            {
+                var rpta = entity.insercionAbonoDeuda( valor, fecha, idDeuda, newValor, opcion).First();
+                return rpta.Mensaje;
+            }
+        }
+
     }
 }

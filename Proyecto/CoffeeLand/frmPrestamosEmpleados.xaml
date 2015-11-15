@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
         ResizeMode="NoResize"
@@ -16,14 +17,43 @@
         Height="650" Width="886.5" Loaded="frmPrestamosEmpleados1_Loaded">
 
     <Window.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <ContextMenu x:Key = "cmButton">
+                <MenuItem x:Name="btnNombre" 
+                          Header="Nombre" Click="btnNombre_Click"/>
+                <MenuItem x:Name="btnDocumento"
+                          Header="Documento" Click="btnDocumento_Click" />
+            </ContextMenu>
+
         </ResourceDictionary>
     </Window.Resources>
+
+
+
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button x:Name="btnBusqueda1" Content="Búsqueda" Click="btnBusqueda1_Click" />
+            <Button x:Name="btnCrearEmpleado" Click="btnCrearEmpleado_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                        Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_user}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                        VerticalAlignment="Center"
+                         Text="Crear Empleado" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="ControlesFlyouts">
@@ -43,6 +73,7 @@
                              Width="300">
                 <Grid Width="250">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="30">
+                        
                         <TextBox x:Name="txtAbono" Margin="3"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
                     	Controls:TextBoxHelper.Watermark="Valor Abono" 
@@ -50,10 +81,16 @@
                         Height="42" VerticalAlignment="Top" 
                         Visibility="Visible"/>
 
+                        <DatePicker x:Name="dtdFechaAbono" 
+                                    SelectedDate= "{x:Static sys:DateTime.Now}" IsEnabled="False"
+                                    Margin="5"
+                                    VerticalAlignment="Top" 
+                                    Height="42"/>
+
                         <Button x:Name="btnConfirmarAbono" Content="Guardar" HorizontalAlignment="Center" 
             	                    Margin="10" VerticalAlignment="Top" Width="80" 
             	                    Height="28" 
-                                    Style="{StaticResource SquareButtonStyle}"  />
+                                    Style="{StaticResource SquareButtonStyle}" Click="btnConfirmarAbono_Click"  />
                     </StackPanel>
                 </Grid>
             </Controls:Flyout>
@@ -62,7 +99,7 @@
 
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
-            <TabItem x:Name="tabPrestamos" Header="Prestamos">
+            <TabItem x:Name="tabPrestamos" Header="Prestamos" Margin="18,0,-18,0">
                 <Grid x:Name="gridPrestamos" Height="570" VerticalAlignment="Top" Background="White" Margin="-2,-9,2,0">
 
                     <TextBox x:Name="txtBuscarDocumento" Margin="24,22,537,0"
@@ -95,63 +132,33 @@
 
                     <TextBlock x:Name="lblEmpleado" HorizontalAlignment="Left" Margin="358,22,0,0" TextWrapping="Wrap" Text="Seleccione un Empleado" VerticalAlignment="Top" Height="37" Width="395" FontSize="32" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
 
-                    <Expander x:Name="expTipoBusqueda" Header="Tipo de Búsqueda" HorizontalAlignment="Left" Margin="696,-29,0,0" VerticalAlignment="Top" Height="112" Width="165" FlowDirection="RightToLeft" MouseLeave="expTipoBusqueda_MouseLeave" >
-                        <Grid Background="White">
-                            <ToggleButton x:Name="btnBusqueda" Width="50"  Height="50" Margin="10,10,0,0" Style="{DynamicResource MetroCircleToggleButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="btnBusqueda_Click" >
-                                <Rectangle Width="20"  Height="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_city}"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </ToggleButton>
-                            <Label x:Name="lblBusqueda" Content="Nombre" HorizontalAlignment="Left" Margin="62,21,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="13.333" FontWeight="Bold"/>
-                        </Grid>
-                    </Expander>
-
-                    <GroupBox x:Name="groupRegistrar" Header="Registrar" HorizontalAlignment="Left" Margin="20,92,0,0" VerticalAlignment="Top" Height="272" Width="317">
+                    <GroupBox x:Name="groupRegistrar" Header="Registrar" HorizontalAlignment="Left" Margin="19,92,0,0" VerticalAlignment="Top" Height="453" Width="317">
                         <Grid>
 
-                            <TextBox x:Name="txtDescripcion" Margin="16,87,0,0"
-                    		Controls:TextBoxHelper.UseFloatingWatermark="True"
-                    		Controls:TextBoxHelper.Watermark="Descripción" 
-                    		Controls:TextBoxHelper.ClearTextButton="True" 
-                    		Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="274" />
-
-                            <TextBox x:Name="txtValor" Margin="16,24,0,0"
+                            <TextBox x:Name="txtValor" Margin="16,34,0,0"
                         	Controls:TextBoxHelper.UseFloatingWatermark="True"
                         	Controls:TextBoxHelper.Watermark="Valor" 
                         	Controls:TextBoxHelper.ClearTextButton="True" 
-                        	Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129" />
+                        	Height="43" VerticalAlignment="Top" HorizontalAlignment="Left" Width="274" />
 
-                            <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="161,24,0,0" 
+                            <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="16,108,0,0" 
                             	VerticalAlignment="Top" 
-                            	Height="37" Width="129"
+                            	Height="43" Width="274"
                             	Controls:TextBoxHelper.Watermark="Fecha "
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
                                 Controls:TextBoxHelper.ClearTextButton="True"
                                 />
 
-                            <Button x:Name="btnGuardar" Style="{DynamicResource MetroCircleButtonStyle}"
-                            Margin="87,153,161,23" 
-                            Visibility="Visible" Click="btnGuardar_Click" >
-                                <Rectangle Width="15" Height="15" Fill="{DynamicResource BlackBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_save}"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Button>
+                            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+            	                    Margin="104,307,0,0" VerticalAlignment="Top" Width="94" 
+            	                    Height="33" 
+                                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click"  />
 
-                            <Button x:Name="btnCancelar" Style="{DynamicResource MetroCircleButtonStyle}"
-                            Margin="160,153,88,23" 
-                            Visibility="Visible" Click="btnCancelar_Click" >
-                                <Rectangle Width="15" Height="15" Fill="{DynamicResource BlackBrush}">
-                                    <Rectangle.OpacityMask>
-                                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_close}"/>
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
-                            </Button>
-
-
+                            <TextBox x:Name="txtDescripcion" Margin="16,183,0,0"
+                            	Controls:TextBoxHelper.UseFloatingWatermark="True"
+                            	Controls:TextBoxHelper.Watermark="Descripción" 
+                            	Controls:TextBoxHelper.ClearTextButton="True" 
+                            	Height="73" VerticalAlignment="Top" HorizontalAlignment="Left" Width="274" />
                         </Grid>
                     </GroupBox>
                     <GroupBox x:Name="groupDeudas" Header="Deudas a la Fecha"
@@ -185,15 +192,6 @@
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                        </Grid>
-                    </GroupBox>
-
-
-                    <GroupBox x:Name="groupUltimaFecha" 
-                              Header="Último Prestamo" HorizontalAlignment="Left" 
-                              Margin="20,379,0,0" VerticalAlignment="Top" Height="166" Width="317">
-                        <Grid>
-                            <TextBlock x:Name="lblUltimafecha" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="No hay nada por Aquí..." VerticalAlignment="Top" Height="91" Width="285" FontSize="32" Foreground="#FF92C6F9" TextAlignment="Center" RenderTransformOrigin="0.523,0.606"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
