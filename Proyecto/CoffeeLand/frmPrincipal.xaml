@@ -50,7 +50,7 @@
                         </Expander>
                         <Expander x:Name="expanderConfiguracion" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="213" IsExpanded="True">
                             <Grid Background="White">
-                                <Button x:Name="btnLotes"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnLotes"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnLotes_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_image}"/>

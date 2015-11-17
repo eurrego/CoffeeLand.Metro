@@ -100,5 +100,11 @@ namespace CoffeeLand
             frmPrestamosEmpleados misPrestamos = new frmPrestamosEmpleados();
             misPrestamos.ShowDialog();
         }
+
+        private void btnLotes_Click(object sender, RoutedEventArgs e)
+        {
+            frmLotes misLotes = new frmLotes();
+            misLotes.ShowDialog();
+        }
     }
 }

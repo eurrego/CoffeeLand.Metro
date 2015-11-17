@@ -88,6 +88,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmLotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmPrestamosEmpleados.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,9 @@
     </Compile>
     <Compile Include="frmLabores.xaml.cs">
       <DependentUpon>frmLabores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmLotes.xaml.cs">
+      <DependentUpon>frmLotes.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmPrestamosEmpleados.xaml.cs">
       <DependentUpon>frmPrestamosEmpleados.xaml</DependentUpon>
