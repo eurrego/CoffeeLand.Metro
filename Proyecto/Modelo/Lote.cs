@@ -27,6 +27,7 @@ namespace Modelo
         public string NombreLote { get; set; }
         public string Observaciones { get; set; }
         public string EstadoLote { get; set; }
+        public string Cuadras { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Arboles> Arboles { get; set; }

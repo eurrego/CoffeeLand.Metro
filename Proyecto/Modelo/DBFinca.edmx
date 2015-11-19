@@ -165,6 +165,7 @@
           <Property Name="NombreLote" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Observaciones" Type="varchar" MaxLength="100" />
           <Property Name="EstadoLote" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Cuadras" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -1173,6 +1174,7 @@
           <NavigationProperty Name="Finca" Relationship="Self.FK_Lote_Finca" FromRole="Lote" ToRole="Finca" />
           <NavigationProperty Name="Labor_Lote" Relationship="Self.FK_LaborLote_Lote" FromRole="Lote" ToRole="Labor_Lote" />
           <NavigationProperty Name="Produccion" Relationship="Self.FK_Produccion_Lote" FromRole="Lote" ToRole="Produccion" />
+          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -2218,6 +2220,7 @@
           <EntitySetMapping Name="Lote">
             <EntityTypeMapping TypeName="DBFincaModel.Lote">
               <MappingFragment StoreEntitySet="Lote">
+                <ScalarProperty Name="Cuadras" ColumnName="Cuadras" />
                 <ScalarProperty Name="idLote" ColumnName="idLote" />
                 <ScalarProperty Name="idFinca" ColumnName="idFinca" />
                 <ScalarProperty Name="NombreLote" ColumnName="NombreLote" />

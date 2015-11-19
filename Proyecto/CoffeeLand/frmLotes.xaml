@@ -43,7 +43,7 @@
                     </Button>
 
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
-            	    Margin="520,24,0,0" VerticalAlignment="Top" Width="90" 
+            	    Margin="747,22,0,0" VerticalAlignment="Top" Width="90" 
             	    Height="38" 
                     Style="{StaticResource AccentedSquareButtonStyle}"  />
 
@@ -55,14 +55,14 @@
 
                     <Label x:Name="lblEstado" Content="REGISTRAR LOTES" HorizontalAlignment="Left" Margin="96,31,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
-                    <TextBox x:Name="txtNombre" Margin="43,97,0,0"
+                    <TextBox x:Name="txtNombre" Margin="44,97,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
         		    Controls:TextBoxHelper.Watermark="Nombre" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
-                    Height="49" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264"
+                    Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264"
                     />
 
-                    <TextBox x:Name="txtDescripcion" Margin="44,248,0,0"
+                    <TextBox x:Name="txtDescripcion" Margin="46,227,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
         		    Controls:TextBoxHelper.Watermark="Descripción" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
@@ -73,14 +73,14 @@
             	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                     Visibility="Collapsed"/>
 
-                    <TextBox x:Name="txtCuadras" Margin="43,170,0,0"
+                    <TextBox x:Name="txtCuadras" Margin="45,162,0,0"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
                     	Controls:TextBoxHelper.Watermark="Cuadras" 
                     	Controls:TextBoxHelper.ClearTextButton="True" 
-                    	Height="49" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
+                    	Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
 
 
-                    <GroupBox x:Name="groupArboles" Header="Registrar Árboles" HorizontalAlignment="Left" Margin="333,97,0,0" VerticalAlignment="Top" Width="514" Height="427">
+                    <GroupBox x:Name="groupArboles" Header="Registrar Árboles" HorizontalAlignment="Left" Margin="334,95,0,0" VerticalAlignment="Top" Width="514" Height="427">
                         <Grid>
                             <ComboBox x:Name="cmbTipoContrato" HorizontalAlignment="Left"
                             	DisplayMemberPath="NombreTipoContratoPersona" 
@@ -102,7 +102,8 @@
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
                                 Controls:TextBoxHelper.ClearTextButton="True"
                                 />
-                            <DataGrid x:Name="tblArboles" BorderThickness="1" Margin="26,127,0,24" AutoGenerateColumns="False" 
+
+                            <DataGrid x:Name="tblArboles" BorderThickness="0" Margin="26,128,0,22.8" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
@@ -110,12 +111,12 @@
                               Style="{StaticResource AzureDataGrid}" Width="452"
                               >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding DocumentoPersona}" Header="tipo Árbol " Width="100" IsReadOnly="True"/>
-                                    <DataGridTextColumn   Binding="{Binding NombrePersona}"  Header="Cantidad " Width="85" IsReadOnly="True" />
+                                    <DataGridTextColumn  Header="tipo Árbol " Width="100" IsReadOnly="True"/>
+                                    <DataGridTextColumn  Header="Cantidad " Width="85" IsReadOnly="True" />
                                     <DataGridTemplateColumn Header="Fecha"  Width="100" IsReadOnly ="False">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding Fecha}" IsEnabled="False"/>
+                                                <DatePicker IsEnabled="False"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -132,7 +133,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="100" Header="Eliminar">
+                                    <DataGridTemplateColumn Width="86" Header="Eliminar">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
@@ -147,10 +148,14 @@
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
+                            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" 
+                            	Margin="387,71,0,0" VerticalAlignment="Top" Width="90" 
+                            	Height="28" 
+                            	Style="{StaticResource AccentedSquareButtonStyle}"  />
 
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="groupCantidad" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="43,354,0,0" VerticalAlignment="Top" Width="264" Height="170">
+                    <GroupBox x:Name="groupCantidad" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="264" Height="193">
                         <Grid>
                             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="119,33,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="40" Foreground="#FF92C6F9" FontWeight="Bold"/>
                         </Grid>

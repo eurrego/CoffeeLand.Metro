@@ -24,9 +24,26 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmLotes : MetroWindow
     {
+        // variable para controlar que los campos esten llenos
+        bool validacion = false;
+
         public frmLotes()
         {
             InitializeComponent();
+        }
+
+        // mensaje de Error
+        private async void mensajeError(string mensaje)
+        {
+            await this.ShowMessageAsync("Error", mensaje);
+        }
+
+        // limpiar Controles
+        private void Limpiar()
+        {
+            txtNombre.Text = string.Empty;
+            txtCuadras.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
         }
     }
 }
