@@ -39,11 +39,27 @@ namespace CoffeeLand
         }
 
         // limpiar Controles
-        private void Limpiar()
+        private void LimpiarControlesLote()
         {
             txtNombre.Text = string.Empty;
             txtCuadras.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
         }
+
+        // limpiar Controles
+        private void LimpiarControlesArbol()
+        {
+            cmbTipoArbol.SelectedIndex = 0;
+            txtCantidad.Text = string.Empty;
+            dtdFecha.SelectedDate = null;
+        }
+
+        //mostrar
+        private void Mostrar()
+        {
+           
+        }
+
+
     }
 }

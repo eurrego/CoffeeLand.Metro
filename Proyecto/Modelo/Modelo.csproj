@@ -147,6 +147,7 @@
     <Compile Include="MConcepto.cs" />
     <Compile Include="MInsumo.cs" />
     <Compile Include="MLabores.cs" />
+    <Compile Include="MLote.cs" />
     <Compile Include="MovimientoProduccion.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

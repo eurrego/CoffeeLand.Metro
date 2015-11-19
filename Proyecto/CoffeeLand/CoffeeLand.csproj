@@ -108,6 +108,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmPrueba.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmTipoArboles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +154,9 @@
     </Compile>
     <Compile Include="frmProveedor.xaml.cs">
       <DependentUpon>frmProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrueba.xaml.cs">
+      <DependentUpon>frmPrueba.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmTipoArboles.xaml.cs">
       <DependentUpon>frmTipoArboles.xaml</DependentUpon>
