@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmGastos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmInsumo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +133,9 @@
     </Compile>
     <Compile Include="frmEmpleado.xaml.cs">
       <DependentUpon>frmEmpleado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmGastos.xaml.cs">
+      <DependentUpon>frmGastos.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmInsumo.xaml.cs">
       <DependentUpon>frmInsumo.xaml</DependentUpon>
