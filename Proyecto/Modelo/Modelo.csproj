@@ -144,6 +144,7 @@
     <Compile Include="Lote.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="MArboles.cs" />
     <Compile Include="MConcepto.cs" />
     <Compile Include="MInsumo.cs" />
     <Compile Include="MLabores.cs" />

@@ -24,7 +24,7 @@ namespace Modelo
 
         #endregion
 
-        public List<TipoArbol> ConsultarEmpleado()
+        public List<TipoArbol> ConsultarTipoArbol()
         {
             using (var entity = new DBFincaEntities())
             {
