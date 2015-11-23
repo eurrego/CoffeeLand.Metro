@@ -25,21 +25,21 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmGastos : MetroWindow
     {
-
+        public static DataTable dt ;
         int index = -1;
-        public static DataTable dt = new DataTable();
+
         // variable para controlar que los campos esten llenos
         bool validacion = false;
 
         public frmGastos()
         {
             InitializeComponent();
-
+           
         }
 
         public void crearTabla()
         {
-
+            dt = new DataTable();
             dt.Columns.Add("idConcepto");
             dt.Columns.Add("Concepto");
             dt.Columns.Add("Descripcion");
@@ -129,6 +129,8 @@ namespace CoffeeLand
             if (validarCampos())
             {
 
+                crearTabla();
+
                 if (cmbTipoPago.Text.Equals("Efectivo"))
                 {
                     dt.Rows.Add(cmbConcepto.SelectedValue, cmbConcepto.Text, txtDescripcionGasto.Text, Convert.ToDateTime(dtdFechaGasto.SelectedDate), txtValor.Text, cmbTipoPago.Text, "P");
@@ -141,24 +143,11 @@ namespace CoffeeLand
                 }
 
                 tblGastos.ItemsSource = dt.DefaultView;
-            
-
-
             }
-
-            borrarDataTable();
             limpiarCampos();
-
         }
 
-        private void MetroWindow_Closed(object sender, EventArgs e)
-        {
-        }
-
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
+    
 
         private void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
@@ -176,28 +165,24 @@ namespace CoffeeLand
             txtDescripcionGasto.Text = string.Empty;
         }
 
-        public void borrarDataTable()
-        {
-            dt.Columns.Remove("idConcepto");
-            
-            dt.Columns.Remove("Despricion");
-            dt.Columns.Remove("Fecha");
-            dt.Columns.Remove("Valor");
-            ;
-            dt.Columns.Remove("EstadoCuenta");
-
-        }
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             index = tblGastos.SelectedIndex;
             cmbConcepto.SelectedValue = dt.Rows[index].ItemArray[0];
             txtValor.Text = dt.Rows[index].ItemArray[4].ToString();
             cmbTipoPago.SelectedValue = dt.Rows[index].ItemArray[5];
-            dtdFechaGasto.SelectedDate = Convert.ToDateTime(dt.Rows[index].ItemArray[3]);
-            txtDescripcionGasto.Text = dt.Rows[index].ItemArray[2].ToString();
+            dtdFechaGasto.SelectedDate= Convert.ToDateTime(dt.Rows[index].ItemArray[3]);
+            txtDescripcionGasto.Text= dt.Rows[index].ItemArray[2].ToString();
+           
+            dt.Clear();
+        }
 
-
+        private void btnCrearConcepto_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            frmConceptos frm = new frmConceptos();
+            frm.ShowDialog();
+           
         }
     }
 }
