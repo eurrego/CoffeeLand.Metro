@@ -129,6 +129,7 @@
     <Compile Include="insercionDeudaEmpleado_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="InsercionMultiplesTablas.cs" />
     <Compile Include="Insumo.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -145,6 +146,7 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="MConcepto.cs" />
+    <Compile Include="MGastos.cs" />
     <Compile Include="MInsumo.cs" />
     <Compile Include="MLabores.cs" />
     <Compile Include="MovimientoProduccion.cs">
@@ -223,7 +225,6 @@
     <Content Include="DBFinca.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBFinca.edmx</DependentUpon>
-      <LastGenOutput>DBFinca.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DBFinca.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
