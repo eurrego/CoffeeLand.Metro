@@ -76,9 +76,9 @@ namespace CoffeeLand
         private bool validarCampos()
         {
 
-            if (cmbTipoArbol.SelectedIndex == 0 || txtCantidad.Text == string.Empty ||  dtdFecha.SelectedDate == null)
+            if (cmbTipoArbol.SelectedIndex == 0 || txtCantidad.Text == string.Empty || txtCantidad.Text == 0.ToString() || dtdFecha.SelectedDate == null)
             {
-                mensajeError("Debe Ingresar todos los Campos");
+                mensajeError("Debe Ingresar todos los Campos, el campo Cantidad no debe ser 0");
                 validacion = false;
             }
             else
@@ -96,12 +96,10 @@ namespace CoffeeLand
 
             foreach (DataRowView item in tblArboles.ItemsSource)
             {
-                total += Convert.ToDecimal(item.Row.ItemArray[2]) ;
+                total += Convert.ToDecimal(item.Row.ItemArray[2]);
             }
 
-            
-
-            lblCantidad.Text =  total.ToString();
+            lblCantidad.Text = total.ToString();
 
             return total;
         }
@@ -134,6 +132,7 @@ namespace CoffeeLand
                     btnCancelarEdicion.Visibility = Visibility.Collapsed;
                     btnAgregar.Margin = new Thickness(387, 71, 0, 0);
                     index = -1;
+                    cantidadTotal();
                     LimpiarControlesArbol();
                 }
              
@@ -152,6 +151,7 @@ namespace CoffeeLand
             btnCancelarEdicion.Visibility = Visibility.Visible;
 
             tblArboles.IsEnabled = false;
+          
         }
 
         private void btnInhabilitar_Click(object sender, RoutedEventArgs e)
@@ -159,6 +159,7 @@ namespace CoffeeLand
             index = tblArboles.SelectedIndex;
             dt.Rows[index].Delete();
             index = -1;
+            cantidadTotal();
         }
 
         private void btnCancelarEdicion_Click(object sender, RoutedEventArgs e)

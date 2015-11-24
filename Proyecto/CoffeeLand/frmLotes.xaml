@@ -28,9 +28,9 @@
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
             <TabItem x:Name="tabRegistrar" Header="Registrar">
-                <Grid x:Name="gridRegistrar" Height="559" VerticalAlignment="Top" Background="White" Margin="3,8,-3,0">
+                <Grid x:Name="gridRegistrar" Height="569" VerticalAlignment="Top" Background="White" Margin="6,-5,1,0">
                     <Button x:Name="btnCabezera"  HorizontalAlignment="Left"
-                            Margin="44,22,0,0" Width="52" 
+                            Margin="44,13,0,0" Width="52" 
                             RenderTransformOrigin="0.467,0.419"  
                             Style="{DynamicResource MetroCircleButtonStyle}" 
                             Height="52" VerticalAlignment="Top"
@@ -43,26 +43,26 @@
                     </Button>
 
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
-            	    Margin="747,22,0,0" VerticalAlignment="Top" Width="90" 
+            	    Margin="747,13,0,0" VerticalAlignment="Top" Width="90" 
             	    Height="38" 
                     Style="{StaticResource AccentedSquareButtonStyle}"  />
 
                     <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
-            	    Margin="636,22,0,0" VerticalAlignment="Top" Width="90" 
+            	    Margin="747,22,0,0" VerticalAlignment="Top" Width="90" 
             	    Height="38" 
                     Style="{StaticResource AccentedSquareButtonStyle}"
-                    Visibility="Visible" Background="#FFE4B9B9" />
+                    Visibility="Collapsed" Background="#FFE4B9B9" />
 
-                    <Label x:Name="lblEstado" Content="REGISTRAR LOTES" HorizontalAlignment="Left" Margin="96,31,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
+                    <Label x:Name="lblEstado" Content="REGISTRAR LOTES" HorizontalAlignment="Left" Margin="96,22,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
-                    <TextBox x:Name="txtNombre" Margin="44,97,0,0"
+                    <TextBox x:Name="txtNombre" Margin="46,103,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
         		    Controls:TextBoxHelper.Watermark="Nombre" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
                     Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264"
                     />
 
-                    <TextBox x:Name="txtDescripcion" Margin="46,227,0,0"
+                    <TextBox x:Name="txtDescripcion" Margin="47,239,0,0"
         		    Controls:TextBoxHelper.UseFloatingWatermark="True"
         		    Controls:TextBoxHelper.Watermark="Descripción" 
         		    Controls:TextBoxHelper.ClearTextButton="True" 
@@ -73,14 +73,14 @@
             	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                     Visibility="Collapsed"/>
 
-                    <TextBox x:Name="txtCuadras" Margin="45,162,0,0"
+                    <TextBox x:Name="txtCuadras" Margin="45,173,0,0"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
                     	Controls:TextBoxHelper.Watermark="Cuadras" 
                     	Controls:TextBoxHelper.ClearTextButton="True" 
                     	Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
 
 
-                    <GroupBox x:Name="groupArboles" Header="Registrar Árboles" HorizontalAlignment="Left" Margin="334,95,0,0" VerticalAlignment="Top" Width="514" Height="427">
+                    <GroupBox x:Name="groupArboles" Header="Registrar Árboles" HorizontalAlignment="Left" Margin="334,74,0,0" VerticalAlignment="Top" Width="514" Height="467">
                         <Grid>
                             <ComboBox x:Name="cmbTipoArbol" HorizontalAlignment="Left"
                             	DisplayMemberPath="NombreTipoArbol" 
@@ -103,7 +103,7 @@
                                 Controls:TextBoxHelper.ClearTextButton="True"
                                 />
 
-                            <DataGrid x:Name="tblArboles" BorderThickness="0" Margin="26,128,0,22.8" AutoGenerateColumns="False" 
+                            <DataGrid x:Name="tblArboles" BorderThickness="0" Margin="26,128,0,10" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
@@ -134,7 +134,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="86" Header="Eliminar">
+                                    <DataGridTemplateColumn Width="80" Header="Eliminar">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitar_Click" >
@@ -164,15 +164,15 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox x:Name="groupCantidad" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="264" Height="193">
-                        <DockPanel HorizontalAlignment="Center" >
-                            <TextBlock x:Name="lblCantidad" HorizontalAlignment="Center" Margin="3,35,0,66" TextWrapping="Wrap" Text="0" FontSize="40" Foreground="#FF92C6F9" FontWeight="Bold" Width="27"/>
-                        </DockPanel >
+                    <GroupBox x:Name="groupCantidad" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="266" Height="210">
+                        <Grid>
+                            <TextBlock x:Name="lblCantidad" HorizontalAlignment="Center" Margin="33,38,36,53" VerticalAlignment="Center" TextAlignment="Center" Text="0" FontSize="40" Foreground="#FF92C6F9" FontWeight="Bold" Width="183"/>
+                        </Grid >
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabConsultar" Header="Consultar">
-                <Grid x:Name="gridConsultar" Height="513" VerticalAlignment="Bottom" Margin="3,0,-3,7">
+                <Grid x:Name="gridConsultar" Height="565" VerticalAlignment="Bottom" Margin="3,0,-1,7">
 
                     <DataGrid x:Name="tblEmpleado" BorderThickness="1" Margin="24,76,0,24" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
