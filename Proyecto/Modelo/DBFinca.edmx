@@ -803,6 +803,7 @@
           <Parameter Name="fecha" Type="date" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_InsertMultiplesGastos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -2014,6 +2015,7 @@
             <Parameter Name="newValor" Mode="In" Type="Decimal" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_InsertMultiplesGastos" />
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2471,6 +2473,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertMultiplesGastos" FunctionName="DBFincaModel.Store.SP_InsertMultiplesGastos" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

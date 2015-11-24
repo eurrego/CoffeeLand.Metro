@@ -106,5 +106,11 @@ namespace CoffeeLand
             frmLotes misLotes = new frmLotes();
             misLotes.ShowDialog();
         }
+
+        private void btnGastos_Click(object sender, RoutedEventArgs e)
+        {
+            frmGastos misGastos = new frmGastos();
+            misGastos.ShowDialog();
+        }
     }
 }

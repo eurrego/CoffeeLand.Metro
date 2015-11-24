@@ -80,7 +80,7 @@ namespace Modelo
                     new TipoContratoPersona
                     {
                         idTipoContratoPersona = 0,
-                        NombreTipoContratoPersona = "Seleccione un Tipo de Contrato...",
+                        NombreTipoContratoPersona = "Seleccione un Tipo de Contrato",
                     }
                 };
 
