@@ -55,16 +55,7 @@ namespace CoffeeLand
             await this.ShowMessageAsync("Error", mensaje);
         }
 
-        // limpiar Controles
-        private void Limpiar()
-        {
-            dtdFechaGasto.SelectedDate = null;
-            txtValor.Text = string.Empty;
-            txtDescripcionGasto.Text = string.Empty;
-            cmbConcepto.SelectedIndex = 0;
-            cmbTipoPago.SelectedIndex = 0;
-
-        }
+      
 
         // Validación de campos
         private bool validarCampos()

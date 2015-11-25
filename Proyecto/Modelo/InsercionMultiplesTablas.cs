@@ -13,17 +13,7 @@ namespace Modelo
 {
     public partial class DBFincaEntities : DbContext
     {
-        public virtual int SP_InsertMultiplesDeudas(DataTable dtDatos)
-        {
-            var datos = new SqlParameter("DTDeudas", SqlDbType.Structured);
-            datos.Value = dtDatos;
-            datos.TypeName = "dbo.DeudaEmpleado";
-
-            string command = "EXEC SP_InsertMultiplesDeudas @DTDeudas";
-
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
-        }
-
+        
 
         public virtual int SP_InsertMultiplesGastos(DataTable dtDatos)
         {
