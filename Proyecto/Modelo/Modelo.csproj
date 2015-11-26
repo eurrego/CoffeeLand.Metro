@@ -161,6 +161,7 @@
     <Compile Include="MPrestamosEmpleados.cs" />
     <Compile Include="MProducto.cs" />
     <Compile Include="MProveedor.cs" />
+    <Compile Include="MTerrenos.cs" />
     <Compile Include="MTipoArbol.cs" />
     <Compile Include="MTipoInsumo.cs" />
     <Compile Include="Municipio.cs">

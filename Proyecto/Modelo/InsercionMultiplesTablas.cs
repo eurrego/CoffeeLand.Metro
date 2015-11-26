@@ -13,7 +13,12 @@ namespace Modelo
 {
     public partial class DBFincaEntities : DbContext
     {
+<<<<<<< HEAD
        
+=======
+        
+
+>>>>>>> 37e70da21b14203dd3b7aeb181bb0c16392c87f3
         public virtual int SP_InsertMultiplesGastos(DataTable dtDatos)
         {
             var datos = new SqlParameter("DTgastos", SqlDbType.Structured);

@@ -112,5 +112,11 @@ namespace CoffeeLand
             frmGastos misGastos = new frmGastos();
             misGastos.ShowDialog();
         }
+
+        private void btnGestionarTerrenos_Click(object sender, RoutedEventArgs e)
+        {
+            frmTerrenos misTerrenos = new frmTerrenos();
+            misTerrenos.ShowDialog();
+        }
     }
 }
