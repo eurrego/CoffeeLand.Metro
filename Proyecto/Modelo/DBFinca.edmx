@@ -165,7 +165,7 @@
           <Property Name="NombreLote" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Observaciones" Type="varchar" MaxLength="100" />
           <Property Name="EstadoLote" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Cuadras" Type="varchar" MaxLength="15" />
+          <Property Name="Cuadras" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -803,7 +803,6 @@
           <Parameter Name="fecha" Type="date" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="SP_InsertMultiplesGastos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -1170,12 +1169,12 @@
           <Property Name="idFinca" Type="Byte" Nullable="false" />
           <Property Name="NombreLote" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EstadoLote" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Arboles" Relationship="Self.FK_Arboles_Lote" FromRole="Lote" ToRole="Arboles" />
           <NavigationProperty Name="Finca" Relationship="Self.FK_Lote_Finca" FromRole="Lote" ToRole="Finca" />
           <NavigationProperty Name="Labor_Lote" Relationship="Self.FK_LaborLote_Lote" FromRole="Lote" ToRole="Labor_Lote" />
           <NavigationProperty Name="Produccion" Relationship="Self.FK_Produccion_Lote" FromRole="Lote" ToRole="Produccion" />
-          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -2015,7 +2014,23 @@
             <Parameter Name="newValor" Mode="In" Type="Decimal" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_InsertMultiplesGastos" />
+          <FunctionImport Name="gestionLotes" ReturnType="Collection(String)">
+            <Parameter Name="nombreLote" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+            <Parameter Name="cuadras" Mode="In" Type="String" />
+            <Parameter Name="idLote" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="gestionPersonaG" ReturnType="Collection(String)">
+            <Parameter Name="nombrePersona" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="fechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="documentoPerosna" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoDocumento" Mode="In" Type="Byte" />
+            <Parameter Name="idTipoContrato" Mode="In" Type="Byte" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2473,7 +2488,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_InsertMultiplesGastos" FunctionName="DBFincaModel.Store.SP_InsertMultiplesGastos" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

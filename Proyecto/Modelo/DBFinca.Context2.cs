@@ -323,9 +323,66 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionAbonoDeuda_Result>("insercionAbonoDeuda", valorParameter, fechaParameter, idDeudaParameter, newValorParameter, opcParameter);
         }
     
-        public virtual int SP_InsertMultiplesGastos()
+        public virtual ObjectResult<string> gestionLotes(string nombreLote, string observaciones, string cuadras, Nullable<int> idLote, Nullable<int> opc)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertMultiplesGastos");
+            var nombreLoteParameter = nombreLote != null ?
+                new ObjectParameter("nombreLote", nombreLote) :
+                new ObjectParameter("nombreLote", typeof(string));
+    
+            var observacionesParameter = observaciones != null ?
+                new ObjectParameter("observaciones", observaciones) :
+                new ObjectParameter("observaciones", typeof(string));
+    
+            var cuadrasParameter = cuadras != null ?
+                new ObjectParameter("cuadras", cuadras) :
+                new ObjectParameter("cuadras", typeof(string));
+    
+            var idLoteParameter = idLote.HasValue ?
+                new ObjectParameter("idLote", idLote) :
+                new ObjectParameter("idLote", typeof(int));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionLotes", nombreLoteParameter, observacionesParameter, cuadrasParameter, idLoteParameter, opcParameter);
+        }
+    
+        public virtual ObjectResult<string> gestionPersonaG(string nombrePersona, string genero, string telefono, Nullable<System.DateTime> fechaNacimiento, Nullable<int> documentoPerosna, Nullable<int> opc, Nullable<byte> idTipoDocumento, Nullable<byte> idTipoContrato)
+        {
+            var nombrePersonaParameter = nombrePersona != null ?
+                new ObjectParameter("nombrePersona", nombrePersona) :
+                new ObjectParameter("nombrePersona", typeof(string));
+    
+            var generoParameter = genero != null ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("fechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("fechaNacimiento", typeof(System.DateTime));
+    
+            var documentoPerosnaParameter = documentoPerosna.HasValue ?
+                new ObjectParameter("documentoPerosna", documentoPerosna) :
+                new ObjectParameter("documentoPerosna", typeof(int));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            var idTipoDocumentoParameter = idTipoDocumento.HasValue ?
+                new ObjectParameter("idTipoDocumento", idTipoDocumento) :
+                new ObjectParameter("idTipoDocumento", typeof(byte));
+    
+            var idTipoContratoParameter = idTipoContrato.HasValue ?
+                new ObjectParameter("idTipoContrato", idTipoContrato) :
+                new ObjectParameter("idTipoContrato", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionPersonaG", nombrePersonaParameter, generoParameter, telefonoParameter, fechaNacimientoParameter, documentoPerosnaParameter, opcParameter, idTipoDocumentoParameter, idTipoContratoParameter);
         }
     }
 }

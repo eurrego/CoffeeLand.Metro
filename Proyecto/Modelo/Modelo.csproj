@@ -72,7 +72,7 @@
     <Compile Include="Concepto.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBFinca.Context.cs">
+    <Compile Include="DBFinca.Context2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBFinca.Context.tt</DependentUpon>
@@ -227,6 +227,7 @@
     <Content Include="DBFinca.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBFinca.edmx</DependentUpon>
+      <LastGenOutput>DBFinca.Context2.cs</LastGenOutput>
     </Content>
     <Content Include="DBFinca.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
