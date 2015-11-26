@@ -25,23 +25,18 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmLotes : MetroWindow
     {
-        int index = -1;
-
-        public static DataTable dt = new DataTable();
-       
         // variable para controlar que los campos esten llenos
         bool validacion = false;
 
         public frmLotes()
         {
             InitializeComponent();
+        }
 
-
-            dt.Columns.Add("idTipoArbol");
-            dt.Columns.Add("NombreTipoArbol");
-            dt.Columns.Add("Cantidad");
-            dt.Columns.Add("Fecha", typeof(DateTime));
-
+        // Define el estilo de las celdas 
+        private void EstilosCeldas()
+        {
+            lblTotal.Content = tblLotes.Items.Count.ToString(); ;
         }
 
         // mensaje de Error
@@ -50,35 +45,13 @@ namespace CoffeeLand
             await this.ShowMessageAsync("Error", mensaje);
         }
 
-        // limpiar Controles lote
-        private void LimpiarControlesLote()
-        {
-            txtNombre.Text = string.Empty;
-            txtCuadras.Text = string.Empty;
-            txtDescripcion.Text = string.Empty;
-        }
-
-        // limpiar Controles arboles
-        private void LimpiarControlesArbol()
-        {
-            cmbTipoArbol.SelectedIndex = 0;
-            txtCantidad.Text = string.Empty;
-            dtdFecha.SelectedDate = null;
-        }
-
-        //mostrar
-        private void Mostrar()
-        {
-            cmbTipoArbol.ItemsSource = MLote.GetInstance().ConsultarTipoArbol();
-        }
-
         // Validación de campos
         private bool validarCampos()
         {
 
-            if (cmbTipoArbol.SelectedIndex == 0 || txtCantidad.Text == string.Empty || txtCantidad.Text == 0.ToString() || dtdFecha.SelectedDate == null)
+            if (txtNombre.Text == string.Empty || txtCuadras.Text == 0.ToString() || txtDescripcion.Text == null)
             {
-                mensajeError("Debe Ingresar todos los Campos, el campo Cantidad no debe ser 0");
+                mensajeError("Debe Ingresar todos los Campos");
                 validacion = false;
             }
             else
@@ -89,87 +62,114 @@ namespace CoffeeLand
             return validacion;
         }
 
-        // define el total de arboles
-        private decimal cantidadTotal()
+        // limpiar Controles lote
+        private void LimpiarControlesLote()
         {
-            decimal total = 0;
-
-            foreach (DataRowView item in tblArboles.ItemsSource)
-            {
-                total += Convert.ToDecimal(item.Row.ItemArray[2]);
-            }
-
-            lblCantidad.Text = total.ToString();
-
-            return total;
+            txtNombre.Text = string.Empty;
+            txtCuadras.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
         }
 
+        //mostrar
+        private void Mostrar()
+        {
+            tblLotes.ItemsSource = MLote.GetInstance().ConsultarLotes();
+            EstilosCeldas();
+        }
+
+        //Método para Buscar por nombre
+        private void BuscarNombre()
+        {
+            tblLotes.ItemsSource = MLote.GetInstance().ConsultarParametroLote(txtBuscarNombre.Text);
+            EstilosCeldas();
+        }
 
         private void frmLotes1_Loaded(object sender, RoutedEventArgs e)
         {
             Mostrar();
         }
 
-        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
+            string rpta = "";
 
-            if (validarCampos())
+            if (txtId.Text == string.Empty)
             {
-                if (index < 0)
+                if (validarCampos())
                 {
-                    dt.Rows.Add(Convert.ToByte(cmbTipoArbol.SelectedValue), cmbTipoArbol.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate));
-                    tblArboles.ItemsSource = dt.DefaultView;
-
-                    lblTotal.Content = tblArboles.Items.Count.ToString();
-                    cantidadTotal();
-                    LimpiarControlesArbol();
+                    rpta = MLote.GetInstance().GestionLote(txtNombre.Text, txtDescripcion.Text, txtCuadras.Text,  0, 1).ToString();
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    LimpiarControlesLote();
                 }
-                else
-                {
-                    dt.Rows[index].Delete();
-                    dt.Rows.Add(Convert.ToByte(cmbTipoArbol.SelectedValue), cmbTipoArbol.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate));
-                    tblArboles.IsEnabled = true;
-                    btnCancelarEdicion.Visibility = Visibility.Collapsed;
-                    btnAgregar.Margin = new Thickness(387, 71, 0, 0);
-                    index = -1;
-                    cantidadTotal();
-                    LimpiarControlesArbol();
-                }
-             
             }
+            else if (validarCampos())
+            {
+                rpta = MLote.GetInstance().GestionLote(txtNombre.Text, txtDescripcion.Text, txtCuadras.Text, Convert.ToInt32(txtId.Text), 2).ToString();
+                this.ShowMessageAsync("Mensaje", rpta);
+                LimpiarControlesLote();
+                lblEstado.Content = "REGISTRAR LOTES";
+                btnGuardar.Margin = new Thickness(668, 31, 0, 0);
+                btnCancelar.Visibility = Visibility.Collapsed;
+                gridConsultar.IsEnabled = true;
+            }
+            Mostrar();
+        }
+
+        private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BuscarNombre();
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            index = tblArboles.SelectedIndex;
+            Lote item = tblLotes.SelectedItem as Lote;
 
-            cmbTipoArbol.SelectedValue = dt.Rows[index].ItemArray[0];
-            txtCantidad.Text = dt.Rows[index].ItemArray[2].ToString();
-            dtdFecha.SelectedDate = Convert.ToDateTime(dt.Rows[index].ItemArray[3]);
+            txtNombre.Text = item.NombreLote;
+            txtDescripcion.Text = item.Observaciones;
+            txtCuadras.Text = item.Cuadras;
+            txtId.Text = item.idLote.ToString();
 
-            btnAgregar.Margin = new Thickness(272, 71, 0, 0);
-            btnCancelarEdicion.Visibility = Visibility.Visible;
-
-            tblArboles.IsEnabled = false;
-          
+            lblEstado.Content = "MODIFICAR LOTES";
+            btnGuardar.Margin = new Thickness(556, 31, 0, 0);
+            btnCancelar.Visibility = Visibility.Visible;
+            gridConsultar.IsEnabled = false;
         }
 
-        private void btnInhabilitar_Click(object sender, RoutedEventArgs e)
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            index = tblArboles.SelectedIndex;
-            dt.Rows[index].Delete();
-            index = -1;
-            cantidadTotal();
+            LimpiarControlesLote();
+            lblEstado.Content = "REGISTRAR LOTES";
+            btnGuardar.Margin = new Thickness(688, 31, 0, 0);
+            btnCancelar.Visibility = Visibility.Hidden;
+            gridConsultar.IsEnabled = true;
         }
 
-        private void btnCancelarEdicion_Click(object sender, RoutedEventArgs e)
+        private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
         {
-            index = -1;
-            btnCancelarEdicion.Visibility = Visibility.Collapsed;
-            btnAgregar.Margin = new Thickness(387, 71, 0, 0);
-            tblArboles.IsEnabled = true;
+            Lote item = tblLotes.SelectedItem as Lote;
 
-            LimpiarControlesArbol();
+            string nombre = item.NombreLote;
+            string descripcion = item.Observaciones;
+            string cuadras = item.Cuadras;
+            byte id = Convert.ToByte(item.idLote);
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Aceptar",
+                NegativeButtonText = "Cancelar",
+                ColorScheme = MetroDialogOptions.ColorScheme
+            };
+
+            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Inhabilitar el Registro?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+            if (result != MessageDialogResult.Negative)
+            {
+                string rpta = "";
+
+                rpta = MLote.GetInstance().GestionLote(nombre, descripcion, cuadras, id, 3).ToString();
+                await this.ShowMessageAsync("CoffeeLand", rpta);
+                Mostrar();
+            }
         }
     }
 }

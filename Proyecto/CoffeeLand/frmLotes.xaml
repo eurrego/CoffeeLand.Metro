@@ -6,14 +6,13 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
+          Height="647"
+        Width="828"
         ResizeMode="NoResize"
-        WindowStartupLocation="Manual"
-        Left="50"
-        Top="35" 
+        WindowStartupLocation="CenterScreen"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
-        GlowBrush="{DynamicResource AccentColorBrush}"
-        Height="650" Width="886.5" Loaded="frmLotes1_Loaded" >
+        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmLotes1_Loaded"  >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,212 +25,78 @@
     </Window.Resources>
 
     <Grid x:Name="gridPrincipal">
-        <TabControl Margin="0,10,0,-10">
-            <TabItem x:Name="tabRegistrar" Header="Registrar">
-                <Grid x:Name="gridRegistrar" Height="569" VerticalAlignment="Top" Background="White" Margin="6,-5,1,0">
-                    <Button x:Name="btnCabezera"  HorizontalAlignment="Left"
-                            Margin="44,13,0,0" Width="52" 
-                            RenderTransformOrigin="0.467,0.419"  
-                            Style="{DynamicResource MetroCircleButtonStyle}" 
-                            Height="52" VerticalAlignment="Top"
-                            Background="#FF41B1E1" BorderBrush="#FF41B1E1" >
-                        <Rectangle Width="20" Height="20" Fill="{DynamicResource WhiteBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_app_plus}"/>
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Button>
+        <Grid x:Name="gridConsultar" Height="390" VerticalAlignment="Bottom" Margin="2,0,-2,1">
 
-                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
-            	    Margin="747,13,0,0" VerticalAlignment="Top" Width="90" 
-            	    Height="38" 
-                    Style="{StaticResource AccentedSquareButtonStyle}"  />
-
-                    <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
-            	    Margin="747,22,0,0" VerticalAlignment="Top" Width="90" 
-            	    Height="38" 
-                    Style="{StaticResource AccentedSquareButtonStyle}"
-                    Visibility="Collapsed" Background="#FFE4B9B9" />
-
-                    <Label x:Name="lblEstado" Content="REGISTRAR LOTES" HorizontalAlignment="Left" Margin="96,22,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
-
-                    <TextBox x:Name="txtNombre" Margin="46,103,0,0"
-        		    Controls:TextBoxHelper.UseFloatingWatermark="True"
-        		    Controls:TextBoxHelper.Watermark="Nombre" 
-        		    Controls:TextBoxHelper.ClearTextButton="True" 
-                    Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264"
-                    />
-
-                    <TextBox x:Name="txtDescripcion" Margin="47,239,0,0"
-        		    Controls:TextBoxHelper.UseFloatingWatermark="True"
-        		    Controls:TextBoxHelper.Watermark="Descripción" 
-        		    Controls:TextBoxHelper.ClearTextButton="True" 
-                    Height="72" VerticalAlignment="Top" HorizontalAlignment="Left" Width="263" />
-
-                    <TextBox x:Name="txtId" Margin="380,36,278,0"
-            	    Controls:TextBoxHelper.Watermark="id"
-            	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
-                    Visibility="Collapsed"/>
-
-                    <TextBox x:Name="txtCuadras" Margin="45,173,0,0"
-                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
-                    	Controls:TextBoxHelper.Watermark="Cuadras" 
-                    	Controls:TextBoxHelper.ClearTextButton="True" 
-                    	Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
-
-
-                    <GroupBox x:Name="groupArboles" Header="Registrar Árboles" HorizontalAlignment="Left" Margin="334,74,0,0" VerticalAlignment="Top" Width="514" Height="467">
-                        <Grid>
-                            <ComboBox x:Name="cmbTipoArbol" HorizontalAlignment="Left"
-                            	DisplayMemberPath="NombreTipoArbol" 
-                            	SelectedValuePath="idTipoArbol"
-                            	Margin="26,22,0,0" VerticalAlignment="Top"
-                            	IsSynchronizedWithCurrentItem="true" 
-                            	Width="210" Height="29"
-                            	SelectedIndex="0"
-                              />
-                            <TextBox x:Name="txtCantidad" Margin="272,22,0,0"
-                            	Controls:TextBoxHelper.Watermark="Cantidad" 
-                            	Controls:TextBoxHelper.ClearTextButton="True" 
-                            	Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="206"
-                            />
-                            <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="26,71,0,0" 
-                            	VerticalAlignment="Top" 
-                            	Height="28" Width="210"
-                            	Controls:TextBoxHelper.Watermark="Fecha Evento "
-                            	Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                Controls:TextBoxHelper.ClearTextButton="True"
-                                />
-
-                            <DataGrid x:Name="tblArboles" BorderThickness="0" Margin="26,128,0,10" AutoGenerateColumns="False" 
-                              HorizontalAlignment="Left" 
+            <DataGrid x:Name="tblLotes" BorderThickness="1" Margin="24,76,36,24" AutoGenerateColumns="False" 
+                              HorizontalAlignment="Stretch" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
                               CanUserDeleteRows="False"
-                              Style="{StaticResource AzureDataGrid}" Width="452"
+                              Style="{StaticResource AzureDataGrid}"
                               >
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn  Header="Tipo Árbol" Binding="{ Binding NombreTipoArbol}" Width="100" IsReadOnly="True"/>
-                                    <DataGridTextColumn  Header="Cantidad " Binding="{ Binding Cantidad}" Width="85" IsReadOnly="True" />
-                                    <DataGridTextColumn  Header="idTipoArbol " Binding="{ Binding idTipoArbol}" Width="85" IsReadOnly="True" Visibility="Collapsed" />
-                                    <DataGridTemplateColumn Header="Fecha"  Width="100" IsReadOnly ="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <DatePicker IsEnabled="False" SelectedDate="{Binding Fecha}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="80" Header="Editar">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click" >
-                                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
-                                                        <Rectangle.OpacityMask>
-                                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
-                                                        </Rectangle.OpacityMask>
-                                                    </Rectangle>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="80" Header="Eliminar">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitar_Click" >
-                                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
-                                                        <Rectangle.OpacityMask>
-                                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
-                                                        </Rectangle.OpacityMask>
-                                                    </Rectangle>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                            <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" 
-                            	Margin="387,71,0,0" VerticalAlignment="Top" Width="90" 
-                            	Height="28" 
-                            	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnAgregar_Click"  />
-
-                            <Button x:Name="btnCancelarEdicion" Content="cancelar" HorizontalAlignment="Left" 
-            	                Margin="387,71,0,0" VerticalAlignment="Top" Width="90" 
-            	                Height="28" 
-                                Style="{StaticResource AccentedSquareButtonStyle}"
-                                Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelarEdicion_Click" />
-
-                        </Grid>
-                    </GroupBox>
-
-                    <GroupBox x:Name="groupCantidad" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="266" Height="210">
-                        <Grid>
-                            <TextBlock x:Name="lblCantidad" HorizontalAlignment="Center" Margin="33,38,36,53" VerticalAlignment="Center" TextAlignment="Center" Text="0" FontSize="40" Foreground="#FF92C6F9" FontWeight="Bold" Width="183"/>
-                        </Grid >
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="tabConsultar" Header="Consultar">
-                <Grid x:Name="gridConsultar" Height="565" VerticalAlignment="Bottom" Margin="3,0,-1,7">
-
-                    <DataGrid x:Name="tblEmpleado" BorderThickness="1" Margin="24,76,0,24" AutoGenerateColumns="False" 
-                              HorizontalAlignment="Left" 
-                              HorizontalContentAlignment="Stretch" 
-                              CanUserAddRows="False" 
-                              CanUserDeleteRows="False"
-                              Style="{StaticResource AzureDataGrid}" Width="622"
-                              >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding DocumentoPersona}" Header="Documento" Width="130" IsReadOnly="True"/>
-                            <DataGridTextColumn   Binding="{Binding NombrePersona}"  Header="Nombre " Width="200" IsReadOnly="True" />
-                            <DataGridTextColumn   Binding="{Binding Telefono}"  Header="Télefono" Width="100" IsReadOnly="True" />
-                            <DataGridTemplateColumn Width="90" Header="Editar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
-                                            <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
-                                                <Rectangle.OpacityMask>
-                                                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
-                                                </Rectangle.OpacityMask>
-                                            </Rectangle>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="112" Header="Inhabilitar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
-                                            <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
-                                                <Rectangle.OpacityMask>
-                                                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
-                                                </Rectangle.OpacityMask>
-                                            </Rectangle>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-
-                        <DataGrid.RowDetailsTemplate>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding NombreLote}" Header="Nombre" Width="250" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Cuadras}" Header="Cuadras" Width="150" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Width="100" Header="Editar">
+                        <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="0" Background="WhiteSmoke" Padding="10">
-                                    <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="250"></ColumnDefinition>
-                                            <ColumnDefinition Width="80"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="50"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
+                                <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click" >
+                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="100" Header="Inhabilitar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitar_Click" >
+                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="160" Header="Registrar Arboles">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnRegistrarArboles"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tree}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
 
-                                        </Grid.RowDefinitions>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" Background="WhiteSmoke" Padding="5">
+                            <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="80"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
 
-                                        <TextBox x:Name="txtGenero" Margin="3" 
-                                                 Text="{Binding Genero}"
-                                                 Controls:TextBoxHelper.Watermark="Género"
+                                </Grid.RowDefinitions>
+
+                                <TextBox x:Name="txtDescripcion" Margin="3" 
+                                                 Text="{Binding Observaciones}"
+                                                 Controls:TextBoxHelper.Watermark="Observaciones"
                                                  Controls:TextBoxHelper.UseFloatingWatermark="True"
                                                  Grid.Row="0"
                                                  Grid.Column="0"
@@ -239,56 +104,84 @@
                                                  MaxHeight="130"
                                                  IsReadOnly="True"
                                                  Visibility="Visible" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
 
-                                        <TextBox x:Name="txtFecha" Margin="3" 
-                                                 Text="{Binding FechaNacimineto}"
-                                                 Controls:TextBoxHelper.Watermark="Fecha de Nacimiento"
-                                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                                 Grid.Row="1"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="130"
-                                                 Visibility="Visible"  />
 
-                                        <TextBox x:Name="txtTipoContrato" Margin="3" 
-                                                 Text="{Binding idTipoContratoPersona}"
-                                                 Controls:TextBoxHelper.Watermark="Tipo de Contrato"
-                                                 Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                                 Grid.Row="2"
-                                                 Grid.Column="0"
-                                                 IsEnabled="False" 
-                                                 MaxHeight="130"
-                                                 Visibility="Visible"  />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>
-                    </DataGrid>
+            </DataGrid>
 
-                    <TextBox x:Name="txtBuscarNombre" Margin="24,20,0,0"
+            <TextBox x:Name="txtBuscarNombre" Margin="24,16,426,0"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
                     	Controls:TextBoxHelper.Watermark="Nombre" 
                         Height="42" VerticalAlignment="Top" 
+                     
                         Style="{DynamicResource ButtonCommandMetroTextBox}"
-                        Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}" HorizontalAlignment="Left" Width="241" >
-                        <Controls:TextBoxHelper.ButtonContent>
-                            <Rectangle Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="20" Height="20">
-                                <Rectangle.Resources>
-                                    <SolidColorBrush x:Key="BlackBrush" Color="Gray" />
-                                </Rectangle.Resources>
-                                <Rectangle.Fill>
-                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_magnify}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
-                        </Controls:TextBoxHelper.ButtonContent>
-                    </TextBox>
+                        Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}" TextChanged="txtBuscarNombre_TextChanged" >
+                <Controls:TextBoxHelper.ButtonContent>
+                    <Rectangle Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="20" Height="20">
+                        <Rectangle.Resources>
+                            <SolidColorBrush x:Key="BlackBrush" Color="Gray" />
+                        </Rectangle.Resources>
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_magnify}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Controls:TextBoxHelper.ButtonContent>
+            </TextBox>
 
-                    <Label x:Name="label_Copy" Content="Cantidad de Registros:" Margin="436,31,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="172"/>
-                    <Label x:Name="lblTotal" Content="10" Margin="608,31,0,0" VerticalAlignment="Top" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
-                </Grid>
+            <Label x:Name="label_Copy" Content="Cantidad de Registros:" HorizontalAlignment="Left" Margin="573,36,0,0" VerticalAlignment="Top" Width="198" FontSize="16"/>
+            <Label x:Name="lblTotal" Content="10" HorizontalAlignment="Left" Margin="746,33,0,0" VerticalAlignment="Top" Width="38" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold"/>
+        </Grid>
 
-            </TabItem>
+        <Grid x:Name="gridRegistrar" Height="220" VerticalAlignment="Top" Background="#FFFAFAF5" Margin="2,0,-2,0">
 
-        </TabControl>
+            <Button x:Name="btnCabezera"  HorizontalAlignment="Left" Margin="27,28,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Background="#FF41B1E1" BorderBrush="#FF41B1E1">
+                <Rectangle Width="20" Height="20" Fill="{DynamicResource WhiteBrush}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_city}"/>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+
+            <TextBox x:Name="txtNombre" Margin="27,101,398,0"
+        		Controls:TextBoxHelper.UseFloatingWatermark="True"
+        		Controls:TextBoxHelper.Watermark="Nombre" 
+        		Controls:TextBoxHelper.ClearTextButton="True" 
+                Height="42" VerticalAlignment="Top" />
+
+            <TextBox x:Name="txtCuadras" Margin="452,101,42,0"
+        		Controls:TextBoxHelper.UseFloatingWatermark="True"
+        		Controls:TextBoxHelper.Watermark="Cuadras" 
+        		Controls:TextBoxHelper.ClearTextButton="True" 
+                Height="42" VerticalAlignment="Top" />
+
+
+            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+            	Margin="688,31,0,0" VerticalAlignment="Top" Width="90" 
+            	Height="38"
+                Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
+
+            <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
+            	Margin="688,31,0,0" VerticalAlignment="Top" Width="91" 
+            	Height="38"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"/>
+
+            <Label x:Name="lblEstado" Content="REGISTRAR LOTES" HorizontalAlignment="Left" Margin="81,38,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
+
+            <TextBox x:Name="txtId" Margin="380,36,278,0"
+            	Controls:TextBoxHelper.Watermark="id"
+            	TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
+                Visibility="Collapsed"/>
+
+            <TextBox x:Name="txtDescripcion" Margin="27,162,42,0"
+            	Controls:TextBoxHelper.UseFloatingWatermark="True"
+            	Controls:TextBoxHelper.Watermark="Descripción"
+            	Controls:TextBoxHelper.ClearTextButton="True" 
+            	TextWrapping="Wrap" Height="42" VerticalAlignment="Top" />
+        </Grid>
     </Grid>
 </Controls:MetroWindow>
+

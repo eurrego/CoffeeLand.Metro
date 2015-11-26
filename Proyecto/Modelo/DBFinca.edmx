@@ -754,6 +754,13 @@
           <Parameter Name="idLabor" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="gestionLotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreLote" Type="varchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar" Mode="In" />
+          <Parameter Name="cuadras" Type="varchar" Mode="In" />
+          <Parameter Name="idLote" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
         <Function Name="gestionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombrePersona" Type="varchar" Mode="In" />
           <Parameter Name="genero" Type="char" Mode="In" />
@@ -2014,22 +2021,12 @@
             <Parameter Name="newValor" Mode="In" Type="Decimal" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="gestionLotes" ReturnType="Collection(String)">
+          <FunctionImport Name="gestionLotes" ReturnType="Collection(DBFincaModel.gestionLotes_Result)">
             <Parameter Name="nombreLote" Mode="In" Type="String" />
             <Parameter Name="observaciones" Mode="In" Type="String" />
             <Parameter Name="cuadras" Mode="In" Type="String" />
             <Parameter Name="idLote" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="gestionPersonaG" ReturnType="Collection(String)">
-            <Parameter Name="nombrePersona" Mode="In" Type="String" />
-            <Parameter Name="genero" Mode="In" Type="String" />
-            <Parameter Name="telefono" Mode="In" Type="String" />
-            <Parameter Name="fechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="documentoPerosna" Mode="In" Type="Int32" />
-            <Parameter Name="opc" Mode="In" Type="Int32" />
-            <Parameter Name="idTipoDocumento" Mode="In" Type="Byte" />
-            <Parameter Name="idTipoContrato" Mode="In" Type="Byte" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
@@ -2060,6 +2057,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="insercionAbonoDeuda_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="gestionLotes_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2484,6 +2484,13 @@
           <FunctionImportMapping FunctionImportName="insercionAbonoDeuda" FunctionName="DBFincaModel.Store.insercionAbonoDeuda" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.insercionAbonoDeuda_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="gestionLotes" FunctionName="DBFincaModel.Store.gestionLotes" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.gestionLotes_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>

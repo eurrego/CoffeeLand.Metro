@@ -108,6 +108,9 @@
     <Compile Include="gestionLabor_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="gestionLotes_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="gestionPersona_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
