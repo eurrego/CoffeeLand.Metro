@@ -165,7 +165,7 @@
           <Property Name="NombreLote" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Observaciones" Type="varchar" MaxLength="100" />
           <Property Name="EstadoLote" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Cuadras" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cuadras" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -730,6 +730,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="gestionArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idLote" Type="smallint" Mode="In" />
+          <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="gestionConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreConcepto" Type="varchar" Mode="In" />
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
@@ -1176,7 +1182,7 @@
           <Property Name="idFinca" Type="Byte" Nullable="false" />
           <Property Name="NombreLote" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EstadoLote" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Arboles" Relationship="Self.FK_Arboles_Lote" FromRole="Lote" ToRole="Arboles" />
           <NavigationProperty Name="Finca" Relationship="Self.FK_Lote_Finca" FromRole="Lote" ToRole="Finca" />
@@ -2028,6 +2034,12 @@
             <Parameter Name="idLote" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="gestionArboles" ReturnType="Collection(DBFincaModel.gestionArboles_Result)">
+            <Parameter Name="idLote" Mode="In" Type="Int16" />
+            <Parameter Name="idTipoArbol" Mode="In" Type="Byte" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2060,6 +2072,9 @@
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="gestionLotes_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="gestionArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
@@ -2491,6 +2506,13 @@
           <FunctionImportMapping FunctionImportName="gestionLotes" FunctionName="DBFincaModel.Store.gestionLotes" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.gestionLotes_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="gestionArboles" FunctionName="DBFincaModel.Store.gestionArboles" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.gestionArboles_Result">
                 <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>

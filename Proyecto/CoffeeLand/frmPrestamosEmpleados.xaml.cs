@@ -218,10 +218,7 @@ namespace CoffeeLand
             cm.IsOpen = true;
         }
 
-        private void btnDocumento_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+ 
 
         private void btnNombre_Click(object sender, RoutedEventArgs e)
         {

@@ -17,6 +17,7 @@ using MahApps.Metro.Controls.Dialogs;
 
 using Modelo;
 using System.Data;
+using System.Collections;
 
 namespace CoffeeLand
 {
@@ -25,6 +26,9 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmArboles : MetroWindow
     {
+        int index = -1;
+        public static DataTable dt = new DataTable();
+
         bool validacion = false;
         int lote = 0;
 
@@ -40,17 +44,12 @@ namespace CoffeeLand
             this.ShowMessageAsync("Error", mensaje);
         }
 
-        // Define el estilo de las celdas 
-        private void EstilosCeldas()
-        {
-            lblTotal.Content = tblArboles.Items.Count.ToString(); ;
-        }
 
         // Validación de campos
         private bool validarCampos()
         {
 
-            if (cmbLote.SelectedIndex == 0 || cmbLote.SelectedIndex == 0 || txtCantidad.Text == string.Empty || dtdFecha.SelectedDate == null)
+            if (cmbLote.SelectedIndex == 0 || txtCantidad.Text == string.Empty || dtdFecha.SelectedDate == null)
             {
                 mensajeError("Debe Ingresar todos los Campos");
                 validacion = false;
@@ -66,7 +65,6 @@ namespace CoffeeLand
         // limpiar Controles
         private void Limpiar()
         {
-            cmbLote.SelectedIndex = 0;
             cmbTipoArbol.SelectedIndex = 0;
             txtCantidad.Text = string.Empty;
             dtdFecha.SelectedDate = null;
@@ -75,16 +73,74 @@ namespace CoffeeLand
         //mostrar
         private void Mostrar()
         {
-            cmbLote.ItemsSource = MArbol.GetInstance().ConsultarLote();
             cmbTipoArbol.ItemsSource = MArbol.GetInstance().ConsultarTipoArbol();
-            EstilosCeldas();
+            tblArboles.ItemsSource =   MArbol.GetInstance().ConsultarArboles() as IEnumerable;
+            cmbTipoArbol.SelectedValue = 0;
         }
+
+        // define el total de arboles
+        private decimal cantidadTotal()
+        {
+            decimal total = 0;
+
+            //foreach (DataRowView item in tblArboles.ItemsSource)
+            //{
+            //    total += Convert.ToDecimal(item.Row.ItemArray[2]);
+            //}
+
+            lblTotal.Text = total.ToString();
+
+            return total;
+        }
+
 
         private void frmArboles1_Loaded(object sender, RoutedEventArgs e)
         {
             Mostrar();
+            cantidadTotal();
+            cmbLote.ItemsSource = MArbol.GetInstance().ConsultarLote();
             cmbLote.SelectedValue = lote;
-            cmbTipoArbol.SelectedValue = 0;
+        }
+
+        private void cmbLote_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbLote.SelectedIndex == 0)
+            {
+                lblLote.Text = "Seleccione un Lote";
+            }
+            else
+            {
+                Lote item = cmbLote.SelectedItem as Lote;
+                lblLote.Text = item.NombreLote;
+            }
+        }
+
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+       
+
+        }
+
+        private void btnInhabilitar_Click(object sender, RoutedEventArgs e)
+        {
+   
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            string rpta = "";
+
+            if (validarCampos())
+            {
+                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue),Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text) , Convert.ToDateTime(dtdFecha.SelectedDate)).ToString();
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    Limpiar();
+                    
+            }
+
+            Mostrar();
+            cantidadTotal();
         }
     }
 }

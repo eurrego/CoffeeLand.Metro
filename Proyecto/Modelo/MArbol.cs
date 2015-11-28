@@ -65,5 +65,32 @@ namespace Modelo
                 return query.ToList();
             }
         }
+
+        public object ConsultarArboles()
+        {
+            using (var entity = new DBFincaEntities())
+            {
+
+                var query = from c in entity.Arboles join t in entity.TipoArbol on c.idTIpoArbol equals t.idTipoArbol
+                            select new {
+                                idTipoArbol = c.idTIpoArbol,
+                                NombreTipoArbol = t.NombreTipoArbol,
+                                Cantidad = c.Cantidad
+                            };
+
+                return query.ToList();
+            }
+        }
+
+        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
+        {
+
+            using (var entity = new DBFincaEntities())
+            {
+                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
+                return rpta.Mensaje;
+            }
+        }
+
     }
 }

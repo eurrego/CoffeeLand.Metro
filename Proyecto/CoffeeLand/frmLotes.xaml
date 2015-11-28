@@ -177,7 +177,7 @@
             	TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                 Visibility="Collapsed"/>
 
-            <TextBox x:Name="txtDescripcion" Margin="27,162,42,0"
+            <TextBox x:Name="txtDescripcion" Margin="27,162,398,0"
             	Controls:TextBoxHelper.UseFloatingWatermark="True"
             	Controls:TextBoxHelper.Watermark="Descripción"
             	Controls:TextBoxHelper.ClearTextButton="True" 

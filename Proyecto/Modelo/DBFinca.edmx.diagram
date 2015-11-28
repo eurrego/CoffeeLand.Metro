@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="DBFincaModel.AbonoCompra" Width="1.5" PointX="14.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.AbonoDeuda" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.AbonoEgreso" Width="1.5" PointX="15.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBFincaModel.Arboles" Width="1.5" PointX="4" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.Arboles" Width="1.5" PointX="3.375" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Compra" Width="1.5" PointX="12" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Compra_Insumo" Width="1.5" PointX="14.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Concepto" Width="1.5" PointX="10.75" PointY="12.25" IsExpanded="true" />
@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="DBFincaModel.LaborLote_Insumo" Width="1.5" PointX="14.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Lote" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.MovimientoProduccion" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBFincaModel.MovimientosArboles" Width="2" PointX="6.375" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFincaModel.MovimientosArboles" Width="2" PointX="5.625" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Municipio" Width="1.5" PointX="1.5" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Persona" Width="1.875" PointX="2.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFincaModel.Produccion" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />

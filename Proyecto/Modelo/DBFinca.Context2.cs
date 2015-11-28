@@ -347,5 +347,26 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLotes_Result>("gestionLotes", nombreLoteParameter, observacionesParameter, cuadrasParameter, idLoteParameter, opcParameter);
         }
+    
+        public virtual ObjectResult<gestionArboles_Result> gestionArboles(Nullable<short> idLote, Nullable<byte> idTipoArbol, Nullable<int> cantidad, Nullable<System.DateTime> fecha)
+        {
+            var idLoteParameter = idLote.HasValue ?
+                new ObjectParameter("idLote", idLote) :
+                new ObjectParameter("idLote", typeof(short));
+    
+            var idTipoArbolParameter = idTipoArbol.HasValue ?
+                new ObjectParameter("idTipoArbol", idTipoArbol) :
+                new ObjectParameter("idTipoArbol", typeof(byte));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionArboles_Result>("gestionArboles", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter);
+        }
     }
 }
