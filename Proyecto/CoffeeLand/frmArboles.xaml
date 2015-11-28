@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Name="frmLotes1" x:Class="CoffeeLand.frmArboles"
+﻿<Controls:MetroWindow x:Name="frmArboles1" x:Class="CoffeeLand.frmArboles"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,13 +6,13 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
-          Height="600"
-        Width="692"
+          Height="550"
+        Width="674"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
-        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmLabores1_Loaded">
+        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmArboles1_Loaded">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -28,10 +28,9 @@
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
             <TabItem x:Name="tabRegistrar" Header="Registrar">
-                <Grid x:Name="gridRegistrar" Height="513" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
+                <Grid x:Name="gridRegistrar" Height="459" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="293*"/>
-                        <RowDefinition Height="220*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Button x:Name="btnCabezera"  HorizontalAlignment="Left"
                             Margin="54,18,0,0" Width="52" 
@@ -49,21 +48,21 @@
                     <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
             	            Margin="520,26,0,0" VerticalAlignment="Top" Width="90" 
             	            Height="38" 
-                            Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
+                            Style="{StaticResource AccentedSquareButtonStyle}"  />
 
                     <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
             	            Margin="520,26,0,0" VerticalAlignment="Top" Width="91" 
             	            Height="38" 
                             Style="{StaticResource AccentedSquareButtonStyle}"
-                            Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"  />
+                            Visibility="Collapsed" Background="#FFE4B9B9"  />
 
-                    <Label x:Name="lblEstado" Content="REGISTRAR LABORES" HorizontalAlignment="Left" Margin="108,28,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
+                    <Label x:Name="lblEstado" Content="REGISTRAR ARBOLES" HorizontalAlignment="Left" Margin="108,28,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
-                    <TextBox x:Name="txtNombre" Margin="56,251,0,0"
+                    <TextBox x:Name="txtCantidad" Margin="355,223,0,0"
         		            Controls:TextBoxHelper.UseFloatingWatermark="True"
-        		            Controls:TextBoxHelper.Watermark="Nombre" 
+        		            Controls:TextBoxHelper.Watermark="Cantidad" 
         		            Controls:TextBoxHelper.ClearTextButton="True" 
-                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
+                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="253"
                         />
 
                     <TextBox x:Name="txtId" Margin="380,36,278,0"
@@ -71,24 +70,26 @@
             	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                     Visibility="Collapsed"/>
 
-                    <TextBox x:Name="txtDescripcion" Margin="56,70,0,0"
-            	    Controls:TextBoxHelper.UseFloatingWatermark="True"
-            	    Controls:TextBoxHelper.Watermark="Descripción"
-            	    Controls:TextBoxHelper.ClearTextButton="True" 
-            	    TextWrapping="Wrap" Height="98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554" Grid.Row="1" />
-
-                    <ComboBox x:Name="cmbTipoPago" HorizontalAlignment="Left"
-                              Margin="57,112,0,0" VerticalAlignment="Top"
+                    <ComboBox x:Name="cmbLote" HorizontalAlignment="Left"
+                              DisplayMemberPath="NombreLote"
+                              SelectedValuePath="idLote"
+                              Margin="54,137,0,0" VerticalAlignment="Top"
                               Width="554" Height="42"
-                              SelectedIndex="0" 
-                              Loaded="cmbTipoPago_Loaded"
-                              />
+                              SelectedIndex="0"
+                     />
+                    <ComboBox x:Name="cmbTipoArbol" HorizontalAlignment="Left"
+                    	Margin="54,223,0,0" VerticalAlignment="Top"
+                    	Width="267" Height="42"
+                        DisplayMemberPath="NombreTipoArbol"
+                        SelectedValuePath="idTipoArbol"
+                    />
+                    <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" Margin="54,315,0,0" VerticalAlignment="Top" Width="553" Height="42" SelectedDateFormat="Long"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabConsultar" Header="Consultar">
                 <Grid x:Name="gridConsultar" Height="513" VerticalAlignment="Bottom" Margin="3,0,-3,7">
 
-                    <DataGrid x:Name="tblLabores" BorderThickness="1" Margin="24,76,0,24" AutoGenerateColumns="False" 
+                    <DataGrid x:Name="tblArboles" BorderThickness="1" Margin="24,126,0,24" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
@@ -102,7 +103,7 @@
                             <DataGridTemplateColumn Width="90" Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click"  >
+                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
@@ -115,7 +116,7 @@
                             <DataGridTemplateColumn Width="112" Header="Inhabilitar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitar_Click"  >
+                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
@@ -126,52 +127,14 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-
-                        <DataGrid.RowDetailsTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="0" Background="WhiteSmoke" Padding="10">
-                                    <Grid x:Name="gridTabla" Margin="0,0,0,0" MinWidth="100" HorizontalAlignment="Left">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="250"></ColumnDefinition>
-                                            <ColumnDefinition Width="130"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="20"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-
-                                        </Grid.RowDefinitions>
-
-                                        <CheckBox x:Name="chkRequiereInsumo" Content=" Requiere Insumo" 
-                                                  IsChecked="{Binding RequiereInsumo}"
-                                                  Grid.Row="0"
-                                                  Grid.Column="0"
-                                                  IsEnabled="False" 
-                                                  MaxHeight="130"
-                                                  Visibility="Visible" 
-                                                  />
-
-                                        <CheckBox x:Name="chkModificaArboles" Content=" Modifica la Cantidad Arboles" 
-                                                  IsChecked="{Binding ModificaArboles}"
-                                                  Grid.Row="2"
-                                                  Grid.Column="0"
-                                                  IsEnabled="False" 
-                                                  MaxHeight="130"
-                                                  Visibility="Visible" 
-                                                  />
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>
                     </DataGrid>
 
-                    <TextBox x:Name="txtBuscarNombre" Margin="24,20,0,0"
+                    <TextBox x:Name="txtBuscarNombre" Margin="24,63,0,0"
                     	Controls:TextBoxHelper.UseFloatingWatermark="True"
                     	Controls:TextBoxHelper.Watermark="Nombre" 
                         Height="42" VerticalAlignment="Top" 
                         Style="{DynamicResource ButtonCommandMetroTextBox}"
-                        Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}" HorizontalAlignment="Left" Width="241" TextChanged="txtBuscarNombre_TextChanged" >
+                        Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}" HorizontalAlignment="Left" Width="241"  >
                         <Controls:TextBoxHelper.ButtonContent>
                             <Rectangle Margin="0,0,0,0" HorizontalAlignment="Stretch" Width="20" Height="20">
                                 <Rectangle.Resources>
@@ -184,8 +147,8 @@
                         </Controls:TextBoxHelper.ButtonContent>
                     </TextBox>
 
-                    <Label x:Name="label_Copy" Content="Cantidad de Registros:" Margin="436,31,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="172"/>
-                    <Label x:Name="lblTotal" Content="10" Margin="608,31,0,0" VerticalAlignment="Top" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
+                    <Label x:Name="label_Copy" Content="Cantidad de Registros:" Margin="440,79,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="172"/>
+                    <Label x:Name="lblTotal" Content="10" Margin="612,79,0,0" VerticalAlignment="Top" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
                 </Grid>
 
             </TabItem>

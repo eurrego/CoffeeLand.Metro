@@ -171,5 +171,13 @@ namespace CoffeeLand
                 Mostrar();
             }
         }
+
+        private void btnRegistrarArboles_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+            Lote item = tblLotes.SelectedItem as Lote;
+            frmArboles misArboles = new frmArboles(item.idLote);
+            misArboles.ShowDialog();
+        }
     }
 }

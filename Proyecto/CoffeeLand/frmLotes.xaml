@@ -37,6 +37,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding NombreLote}" Header="Nombre" Width="250" IsReadOnly="True"/>
                     <DataGridTextColumn Binding="{Binding Cuadras}" Header="Cuadras" Width="150" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding idLote}" Header="idLote" Width="150" IsReadOnly="True" Visibility="Collapsed"/>
                     <DataGridTemplateColumn Width="100" Header="Editar">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -66,7 +67,7 @@
                     <DataGridTemplateColumn Width="160" Header="Registrar Arboles">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnRegistrarArboles"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                <Button x:Name="btnRegistrarArboles"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnRegistrarArboles_Click" >
                                     <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_tree}"/>

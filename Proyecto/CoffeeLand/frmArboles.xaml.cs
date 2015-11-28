@@ -25,9 +25,66 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmArboles : MetroWindow
     {
-        public frmArboles()
+        bool validacion = false;
+        int lote = 0;
+
+        public frmArboles(int lote)
         {
             InitializeComponent();
+            this.lote = lote;
+        }
+
+        // mensaje de Error
+        private void mensajeError(string mensaje)
+        {
+            this.ShowMessageAsync("Error", mensaje);
+        }
+
+        // Define el estilo de las celdas 
+        private void EstilosCeldas()
+        {
+            lblTotal.Content = tblArboles.Items.Count.ToString(); ;
+        }
+
+        // Validación de campos
+        private bool validarCampos()
+        {
+
+            if (cmbLote.SelectedIndex == 0 || cmbLote.SelectedIndex == 0 || txtCantidad.Text == string.Empty || dtdFecha.SelectedDate == null)
+            {
+                mensajeError("Debe Ingresar todos los Campos");
+                validacion = false;
+            }
+            else
+            {
+                validacion = true;
+            }
+
+            return validacion;
+        }
+
+        // limpiar Controles
+        private void Limpiar()
+        {
+            cmbLote.SelectedIndex = 0;
+            cmbTipoArbol.SelectedIndex = 0;
+            txtCantidad.Text = string.Empty;
+            dtdFecha.SelectedDate = null;
+        }
+
+        //mostrar
+        private void Mostrar()
+        {
+            cmbLote.ItemsSource = MArbol.GetInstance().ConsultarLote();
+            cmbTipoArbol.ItemsSource = MArbol.GetInstance().ConsultarTipoArbol();
+            EstilosCeldas();
+        }
+
+        private void frmArboles1_Loaded(object sender, RoutedEventArgs e)
+        {
+            Mostrar();
+            cmbLote.SelectedValue = lote;
+            cmbTipoArbol.SelectedValue = 0;
         }
     }
 }

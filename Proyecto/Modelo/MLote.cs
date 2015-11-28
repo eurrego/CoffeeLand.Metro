@@ -24,27 +24,6 @@ namespace Modelo
 
         #endregion
 
-        public List<TipoArbol> ConsultarTipoArbol()
-        {
-            using (var entity = new DBFincaEntities())
-            {
-                List<TipoArbol> lista = new List<TipoArbol>()
-                {
-                    new TipoArbol
-                    {
-                        idTipoArbol = 0,
-                        NombreTipoArbol = "Seleccione un Tipo de Arbol..."
-                    }
-                };
-
-                var query = lista.Union(from c in entity.TipoArbol
-                                        where c.EstadoTipoArbol == "A"
-                                        select c);
-
-                return query.ToList();
-            }
-        }
-
         public List<Lote> ConsultarLotes()
         {
             using (var entity = new DBFincaEntities())
