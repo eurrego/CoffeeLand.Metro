@@ -24,6 +24,13 @@ namespace Modelo
 
         #endregion
 
+        public string NombreTipoArbol { get; set; }
+        public int Cantidad { get; set; }
+        public int idTipoArbol { get; set; }
+
+
+
+
         public List<Lote> ConsultarLote()
         {
             using (var entity = new DBFincaEntities())
@@ -66,13 +73,31 @@ namespace Modelo
             }
         }
 
-        public object ConsultarArboles()
+        public int ConsultarCantidad(int parametroLote)
         {
             using (var entity = new DBFincaEntities())
             {
 
-                var query = from c in entity.Arboles join t in entity.TipoArbol on c.idTIpoArbol equals t.idTipoArbol
-                            select new {
+                var query = from c in entity.Arboles
+                            where c.idLote == parametroLote
+                            select new { c.Cantidad };
+
+                int cantidad = query.Sum(total => total.Cantidad);
+
+                return cantidad;
+            }
+        }
+
+        public object ConsultarArboles(int parametroLote)
+        {
+            using (var entity = new DBFincaEntities())
+            {
+
+                var query = from c in entity.Arboles
+                            join t in entity.TipoArbol on c.idTIpoArbol equals t.idTipoArbol
+                            where c.idLote == parametroLote
+                            select new
+                            {
                                 idTipoArbol = c.idTIpoArbol,
                                 NombreTipoArbol = t.NombreTipoArbol,
                                 Cantidad = c.Cantidad
@@ -82,15 +107,30 @@ namespace Modelo
             }
         }
 
-        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
+
+    public List<MovimientosArboles> ConsultarMovimiento(int parametroArboles)
+    {
+        using (var entity = new DBFincaEntities())
         {
 
-            using (var entity = new DBFincaEntities())
-            {
-                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
-                return rpta.Mensaje;
-            }
+            var query = from c in entity.MovimientosArboles
+                        where c.idArboles == parametroArboles
+                        select c;
+            return query.ToList();
         }
-
     }
+
+
+
+    public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
+    {
+
+        using (var entity = new DBFincaEntities())
+        {
+            var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
+            return rpta.Mensaje;
+        }
+    }
+
+}
 }

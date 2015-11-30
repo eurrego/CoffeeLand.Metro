@@ -26,8 +26,6 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmArboles : MetroWindow
     {
-        int index = -1;
-        public static DataTable dt = new DataTable();
 
         bool validacion = false;
         int lote = 0;
@@ -73,33 +71,23 @@ namespace CoffeeLand
         //mostrar
         private void Mostrar()
         {
-            cmbTipoArbol.ItemsSource = MArbol.GetInstance().ConsultarTipoArbol();
-            tblArboles.ItemsSource =   MArbol.GetInstance().ConsultarArboles() as IEnumerable;
+            tblArboles.ItemsSource = MArbol.GetInstance().ConsultarArboles(Convert.ToInt32(cmbLote.SelectedValue)) as IEnumerable;
             cmbTipoArbol.SelectedValue = 0;
         }
 
         // define el total de arboles
-        private decimal cantidadTotal()
+        private void cantidadTotal()
         {
-            decimal total = 0;
-
-            //foreach (DataRowView item in tblArboles.ItemsSource)
-            //{
-            //    total += Convert.ToDecimal(item.Row.ItemArray[2]);
-            //}
-
-            lblTotal.Text = total.ToString();
-
-            return total;
+            lblTotal.Text = MArbol.GetInstance().ConsultarCantidad(Convert.ToInt32(cmbLote.SelectedValue)).ToString();
         }
 
 
         private void frmArboles1_Loaded(object sender, RoutedEventArgs e)
         {
-            Mostrar();
-            cantidadTotal();
+            cmbTipoArbol.ItemsSource = MArbol.GetInstance().ConsultarTipoArbol();
             cmbLote.ItemsSource = MArbol.GetInstance().ConsultarLote();
             cmbLote.SelectedValue = lote;
+            Mostrar();
         }
 
         private void cmbLote_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -112,19 +100,8 @@ namespace CoffeeLand
             {
                 Lote item = cmbLote.SelectedItem as Lote;
                 lblLote.Text = item.NombreLote;
+                Mostrar();
             }
-        }
-
-
-        private void btnModificar_Click(object sender, RoutedEventArgs e)
-        {
-       
-
-        }
-
-        private void btnInhabilitar_Click(object sender, RoutedEventArgs e)
-        {
-   
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -140,7 +117,19 @@ namespace CoffeeLand
             }
 
             Mostrar();
-            cantidadTotal();
+        }
+
+        private void btnDetalle_Click(object sender, RoutedEventArgs e)
+        {
+ 
+ 
+
+            lblLoteConsultar.Text = lblLote.Text;
+            //lblArbol.Text = item.Cantidad.ToString();
+
+            //tblMovimientosArboles.ItemsSource = MArbol.GetInstance().ConsultarMovimiento();
+            gridConsultar.Focus();
+
         }
     }
 }
