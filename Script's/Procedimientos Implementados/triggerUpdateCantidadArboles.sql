@@ -1,6 +1,6 @@
- create trigger InsertCantidadArboles
+ create trigger UpdateCantidadArboles
   on MovimientosArboles
-  for insert
+  for update
   as
    declare @idArboles int
    declare @cantidad int
