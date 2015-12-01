@@ -26,7 +26,7 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmArboles : MetroWindow
     {
-
+        int idTipoArbol = 0;
         bool validacion = false;
         int lote = 0;
 
@@ -121,15 +121,37 @@ namespace CoffeeLand
 
         private void btnDetalle_Click(object sender, RoutedEventArgs e)
         {
- 
- 
-
             lblLoteConsultar.Text = lblLote.Text;
-            //lblArbol.Text = item.Cantidad.ToString();
+            tabConsultar.IsEnabled = true;
 
-            //tblMovimientosArboles.ItemsSource = MArbol.GetInstance().ConsultarMovimiento();
-            gridConsultar.Focus();
+            object objeto = tblArboles.SelectedItem;
+            Type t = objeto.GetType();
+            lblArbol.Text = t.GetProperty("NombreTipoArbol").GetValue(objeto).ToString();
 
+            lblArbol.Text = t.GetProperty("NombreTipoArbol").GetValue(objeto).ToString();
+            int idArboles = Convert.ToInt32(t.GetProperty("idArboles").GetValue(objeto));
+            idTipoArbol = Convert.ToInt32(t.GetProperty("idTipoArbol").GetValue(objeto));
+
+            tblMovimientosArboles.ItemsSource = MArbol.GetInstance().ConsultarMovimiento(idArboles);
+            tabConsultar.Focus();
+        }
+
+        private void tabRegistrar_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tabConsultar.IsEnabled = false;
+            idTipoArbol = 0;
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            MovimientosArboles item = tblArboles.SelectedItem as MovimientosArboles;
+
+            txtCantidad.Text = item.Cantidad.ToString();
+            dtdFecha.SelectedDate = item.Fecha;
+            cmbTipoArbol.SelectedValue = idTipoArbol;
+
+            tabRegistrar.Focus();
+            
         }
     }
 }

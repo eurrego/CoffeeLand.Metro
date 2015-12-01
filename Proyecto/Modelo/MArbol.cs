@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,8 @@ namespace Modelo
 
         public object ConsultarArboles(int parametroLote)
         {
+
+
             using (var entity = new DBFincaEntities())
             {
 
@@ -98,6 +101,7 @@ namespace Modelo
                             where c.idLote == parametroLote
                             select new
                             {
+                                idArboles = c.idArboles,
                                 idTipoArbol = c.idTIpoArbol,
                                 NombreTipoArbol = t.NombreTipoArbol,
                                 Cantidad = c.Cantidad
@@ -108,29 +112,28 @@ namespace Modelo
         }
 
 
-    public List<MovimientosArboles> ConsultarMovimiento(int parametroArboles)
-    {
-        using (var entity = new DBFincaEntities())
+        public List<MovimientosArboles> ConsultarMovimiento(int parametroArboles)
+        {
+            using (var entity = new DBFincaEntities())
+            {
+                var query = from c in entity.MovimientosArboles
+                            where c.idArboles == parametroArboles
+                            select c;
+                return query.ToList();
+            }
+        }
+
+
+
+        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
         {
 
-            var query = from c in entity.MovimientosArboles
-                        where c.idArboles == parametroArboles
-                        select c;
-            return query.ToList();
+            using (var entity = new DBFincaEntities())
+            {
+                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
+                return rpta.Mensaje;
+            }
         }
+
     }
-
-
-
-    public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
-    {
-
-        using (var entity = new DBFincaEntities())
-        {
-            var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
-            return rpta.Mensaje;
-        }
-    }
-
-}
 }

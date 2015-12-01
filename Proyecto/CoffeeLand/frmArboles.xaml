@@ -30,7 +30,7 @@
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
 
-            <TabItem x:Name="tabRegistrar" Header="Registrar">
+            <TabItem x:Name="tabRegistrar" Header="Registrar" GotFocus="tabRegistrar_GotFocus">
                 <Grid x:Name="gridRegistrar" Height="561" VerticalAlignment="Top" Background="White" Margin="-2,0,2,0">
 
                     <TextBox x:Name="txtBuscarDocumento" Margin="24,22,537,0"
@@ -82,6 +82,7 @@
 
                                     <DataGridTextColumn  Header="Tipo Árbol" Binding="{ Binding NombreTipoArbol}" Width="200" IsReadOnly="True"/>
                                     <DataGridTextColumn  Header="Cantidad " Binding="{ Binding Cantidad}" Width="190" IsReadOnly="True" />
+                                    <DataGridTextColumn  Header="idArboles" Binding="{ Binding idArboles}" Width="200" IsReadOnly="True" Visibility="Collapsed"/>
                                     <DataGridTextColumn  Header="idTipoArbol " Binding="{ Binding idTipoArbol}" Width="85" IsReadOnly="True" Visibility="Collapsed" />
 
                                     <DataGridTemplateColumn Width="80" Header="Detalle">
@@ -115,7 +116,7 @@
                     	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabConsultar" Header="Detalle" >
+            <TabItem x:Name="tabConsultar" Header=""  IsEnabled="False">
                 <Grid x:Name="gridConsultar" Height="558" VerticalAlignment="Bottom" Margin="3,0,-3,7">
 
                     <DataGrid x:Name="tblMovimientosArboles" BorderThickness="1" Margin="24,76,0,24" AutoGenerateColumns="False" 
@@ -130,14 +131,14 @@
                             <DataGridTemplateColumn Header="Fecha"  Width="430" IsReadOnly ="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker IsEnabled="False" SelectedDate="{Binding Fecha}"/>
+                                        <DatePicker IsEnabled="False" SelectedDate="{Binding Fecha}" SelectedDateFormat="Long"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Width="99" Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}">
+                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificar_Click">
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
@@ -165,8 +166,10 @@
 
                     <Label x:Name="label_Copy" Content="Cantidad de Registros:" Margin="626,27,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="172"/>
                     <Label x:Name="lblTotal1" Content="10" Margin="798,27,0,0" VerticalAlignment="Top" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>
-                    <TextBlock x:Name="lblLoteConsultar" HorizontalAlignment="Left" Margin="24,22,0,0" TextWrapping="Wrap" Text="Lote" VerticalAlignment="Top" Height="37" Width="230" FontSize="32" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
-                    <TextBlock x:Name="lblArbol" HorizontalAlignment="Left" Margin="273,22,0,0" TextWrapping="Wrap" Text="Arbol" VerticalAlignment="Top" Height="37" Width="230" FontSize="32" Foreground="#FF56BF87" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                    <TextBlock x:Name="lblLoteConsultar" HorizontalAlignment="Left" Margin="24,30,0,0" TextWrapping="Wrap" Text="Lote" VerticalAlignment="Top" Height="37" Width="230" FontSize="32" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                    <TextBlock x:Name="lblArbol" HorizontalAlignment="Left" Margin="273,30,0,0" TextWrapping="Wrap" Text="Arbol" VerticalAlignment="Top" Height="37" Width="230" FontSize="32" Foreground="#FF56BF87" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                    <Label x:Name="label_Copy1" Content="Lote" Margin="21,-1,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="44"/>
+                    <Label x:Name="label_Copy2" Content="Tipo de Árbol" Margin="268,-1,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="116"/>
                 </Grid>
 
             </TabItem>
