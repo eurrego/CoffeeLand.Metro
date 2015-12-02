@@ -113,16 +113,16 @@ namespace CoffeeLand
             {
                 if (txtId.Text == string.Empty)
                 {
-                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), 1).ToString();
+                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), 0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                 }
                 else
                 {
-                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), 2).ToString();
+                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), Convert.ToInt32(txtId.Text), 2).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
-                }    
+                }
             }
 
             Mostrar();
@@ -160,6 +160,41 @@ namespace CoffeeLand
             cmbTipoArbol.SelectedValue = idTipoArbol;
             txtId.Text = cmbLote.SelectedValue.ToString();
             tabRegistrar.Focus();
+        }
+
+        private async void btnInhabilitar_Click(object sender, RoutedEventArgs e)
+        {
+            object objeto = tblArboles.SelectedItem;
+            Type t = objeto.GetType();
+            idTipoArbol = Convert.ToInt32(t.GetProperty("idTipoArbol").GetValue(objeto));
+
+            MovimientosArboles item = tblMovimientosArboles.SelectedItem as MovimientosArboles;
+
+            int idArbol = item.idArboles;
+            int cantidad = item.Cantidad;
+            DateTime fecha = item.Fecha;
+            int tipoArbol = this.idTipoArbol;
+            int idMovimientoArbol = item.idMovimientosArboles;
+
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Aceptar",
+                NegativeButtonText = "Cancelar",
+                ColorScheme = MetroDialogOptions.ColorScheme
+            };
+
+            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Eliminar el Registro? Esto puede llevar a Errores Posteriores", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+            if (result != MessageDialogResult.Negative)
+            {
+                string rpta = "";
+
+                rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(idTipoArbol), cantidad, fecha, idMovimientoArbol, 3).ToString();
+                await this.ShowMessageAsync("CoffeeLand", rpta);
+                Mostrar();
+                tblMovimientosArboles.ItemsSource = MArbol.GetInstance().ConsultarMovimiento(idArbol);
+            }
         }
     }
 }

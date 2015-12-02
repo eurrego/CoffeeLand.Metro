@@ -348,7 +348,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLotes_Result>("gestionLotes", nombreLoteParameter, observacionesParameter, cuadrasParameter, idLoteParameter, opcParameter);
         }
     
-        public virtual ObjectResult<gestionArboles_Result> gestionArboles(Nullable<short> idLote, Nullable<byte> idTipoArbol, Nullable<int> cantidad, Nullable<System.DateTime> fecha, Nullable<int> opcion)
+        public virtual ObjectResult<gestionArboles_Result> gestionArboles(Nullable<short> idLote, Nullable<byte> idTipoArbol, Nullable<int> cantidad, Nullable<System.DateTime> fecha, Nullable<int> idMovimiento, Nullable<int> opcion)
         {
             var idLoteParameter = idLote.HasValue ?
                 new ObjectParameter("idLote", idLote) :
@@ -366,11 +366,15 @@ namespace Modelo
                 new ObjectParameter("fecha", fecha) :
                 new ObjectParameter("fecha", typeof(System.DateTime));
     
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("idMovimiento", idMovimiento) :
+                new ObjectParameter("idMovimiento", typeof(int));
+    
             var opcionParameter = opcion.HasValue ?
                 new ObjectParameter("opcion", opcion) :
                 new ObjectParameter("opcion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionArboles_Result>("gestionArboles", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter, opcionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionArboles_Result>("gestionArboles", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter, idMovimientoParameter, opcionParameter);
         }
     }
 }

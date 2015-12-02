@@ -126,12 +126,12 @@ namespace Modelo
 
 
 
-        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha, int opcion)
+        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha, int idMovimiento, int opcion)
         {
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha, opcion).First();
+                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha, idMovimiento, opcion).First();
                 return rpta.Mensaje;
             }
         }

@@ -735,6 +735,7 @@
           <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
           <Parameter Name="cantidad" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="idMovimiento" Type="int" Mode="In" />
           <Parameter Name="opcion" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2040,6 +2041,7 @@
             <Parameter Name="idTipoArbol" Mode="In" Type="Byte" />
             <Parameter Name="cantidad" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="idMovimiento" Mode="In" Type="Int32" />
             <Parameter Name="opcion" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
