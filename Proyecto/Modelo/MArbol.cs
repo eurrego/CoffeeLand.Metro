@@ -119,18 +119,19 @@ namespace Modelo
                 var query = from c in entity.MovimientosArboles
                             where c.idArboles == parametroArboles
                             select c;
+
                 return query.ToList();
             }
         }
 
 
 
-        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha)
+        public string gestionArboles(short idLote, byte idTipoArbol, int cantidad, DateTime fecha, int opcion)
         {
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha).First();
+                var rpta = entity.gestionArboles(idLote, idTipoArbol, cantidad, fecha, opcion).First();
                 return rpta.Mensaje;
             }
         }

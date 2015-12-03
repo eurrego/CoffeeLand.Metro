@@ -6,6 +6,9 @@ begin
 
 	set nocount on
 	declare @mensaje varchar(50)
+
+	declare @idArboles int
+	set @idArboles = (select idArboles from Arboles where idTIpoArbol = @idTipoArbol and idLote = @idLote)
 	 
 	if( @opcion = 1 ) 
 	begin
@@ -23,9 +26,6 @@ begin
 					values (@idLote,@idTipoArbol,'0')
 			end
 		 end
-		
-	     declare @idArboles int
-		 set @idArboles = (select idArboles from Arboles where idTIpoArbol = @idTipoArbol and idLote = @idLote)
 					insert into MovimientosArboles (idArboles, Fecha, Cantidad)
 					values (@idArboles, @fecha,  @cantidad)
 		 set @mensaje = 'Registro exitoso!'

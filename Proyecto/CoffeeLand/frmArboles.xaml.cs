@@ -66,6 +66,7 @@ namespace CoffeeLand
             cmbTipoArbol.SelectedIndex = 0;
             txtCantidad.Text = string.Empty;
             dtdFecha.SelectedDate = null;
+            txtId.Text = string.Empty;
         }
 
         //mostrar
@@ -110,10 +111,18 @@ namespace CoffeeLand
 
             if (validarCampos())
             {
-                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue),Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text) , Convert.ToDateTime(dtdFecha.SelectedDate)).ToString();
+                if (txtId.Text == string.Empty)
+                {
+                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
-                    
+                }
+                else
+                {
+                    rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), 2).ToString();
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    Limpiar();
+                }    
             }
 
             Mostrar();
@@ -144,14 +153,13 @@ namespace CoffeeLand
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            MovimientosArboles item = tblArboles.SelectedItem as MovimientosArboles;
+            MovimientosArboles item = tblMovimientosArboles.SelectedItem as MovimientosArboles;
 
             txtCantidad.Text = item.Cantidad.ToString();
             dtdFecha.SelectedDate = item.Fecha;
             cmbTipoArbol.SelectedValue = idTipoArbol;
-
+            txtId.Text = cmbLote.SelectedValue.ToString();
             tabRegistrar.Focus();
-            
         }
     }
 }

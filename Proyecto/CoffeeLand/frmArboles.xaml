@@ -33,9 +33,7 @@
             <TabItem x:Name="tabRegistrar" Header="Registrar" GotFocus="tabRegistrar_GotFocus">
                 <Grid x:Name="gridRegistrar" Height="561" VerticalAlignment="Top" Background="White" Margin="-2,0,2,0">
 
-                    <TextBox x:Name="txtBuscarDocumento" Margin="24,22,537,0"
-                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
-                    	Controls:TextBoxHelper.Watermark="Documento" 
+                    <TextBox x:Name="txtId" Margin="24,22,537,0"
                         Height="42" VerticalAlignment="Top" 
                         Visibility="Collapsed"/>
 
