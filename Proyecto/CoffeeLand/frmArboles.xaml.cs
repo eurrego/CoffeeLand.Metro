@@ -122,6 +122,9 @@ namespace CoffeeLand
                     rpta = MArbol.GetInstance().gestionArboles(Convert.ToInt16(cmbLote.SelectedValue), Convert.ToByte(cmbTipoArbol.SelectedValue), Convert.ToInt32(txtCantidad.Text), Convert.ToDateTime(dtdFecha.SelectedDate), Convert.ToInt32(txtId.Text), 2).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
+                    btnCancelar.Visibility = Visibility.Collapsed;
+                    btnGuardar.Margin = new Thickness(105, 283, 0, 0);
+                    tblArboles.IsEnabled = true;
                 }
             }
 
@@ -158,7 +161,12 @@ namespace CoffeeLand
             txtCantidad.Text = item.Cantidad.ToString();
             dtdFecha.SelectedDate = item.Fecha;
             cmbTipoArbol.SelectedValue = idTipoArbol;
-            txtId.Text = cmbLote.SelectedValue.ToString();
+            txtId.Text = item.idMovimientosArboles.ToString();
+
+            btnCancelar.Visibility = Visibility.Visible;
+            btnGuardar.Margin = new Thickness(55, 283, 0, 0);
+            tblArboles.IsEnabled = false;
+
             tabRegistrar.Focus();
         }
 
@@ -184,7 +192,7 @@ namespace CoffeeLand
                 ColorScheme = MetroDialogOptions.ColorScheme
             };
 
-            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Eliminar el Registro? Esto puede llevar a Errores Posteriores", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+            MessageDialogResult result = await this.ShowMessageAsync("CoffeeLand", "¿Realmente desea Eliminar el Registro? ", MessageDialogStyle.AffirmativeAndNegative, mySettings);
 
             if (result != MessageDialogResult.Negative)
             {
@@ -195,6 +203,19 @@ namespace CoffeeLand
                 Mostrar();
                 tblMovimientosArboles.ItemsSource = MArbol.GetInstance().ConsultarMovimiento(idArbol);
             }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+      
+
+            Limpiar();
+            btnCancelar.Visibility = Visibility.Collapsed;
+            btnGuardar.Margin = new Thickness(105, 283, 0, 0);
+            tblArboles.IsEnabled = true;
+
+            tabConsultar.IsEnabled = true;
+            tabConsultar.Focus();
         }
     }
 }

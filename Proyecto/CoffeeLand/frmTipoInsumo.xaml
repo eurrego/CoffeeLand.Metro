@@ -15,6 +15,9 @@
         GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmTipoInsumo1_Loaded">
 
     <Window.Resources>
+
+
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
@@ -22,6 +25,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Window.Resources>
 
     <Grid x:Name="gridPrincipal">
@@ -102,7 +106,10 @@
         		Controls:TextBoxHelper.UseFloatingWatermark="True"
         		Controls:TextBoxHelper.Watermark="Nombre" 
         		Controls:TextBoxHelper.ClearTextButton="True" 
-                Height="42" VerticalAlignment="Top" />
+                Height="42" VerticalAlignment="Top"
+               >
+ 
+            </TextBox>
 
             <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
             	Margin="667,36,0,0" VerticalAlignment="Top" Width="90" 

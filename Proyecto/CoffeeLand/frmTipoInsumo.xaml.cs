@@ -18,6 +18,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Modelo;
 using System.Data;
 using System.Windows.Controls.Primitives;
+using System.Globalization;
 
 namespace CoffeeLand
 {
@@ -26,7 +27,7 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmTipoInsumo : MetroWindow
     {
-        bool validacion; 
+        bool validacion;
 
         public frmTipoInsumo()
         {
@@ -183,7 +184,7 @@ namespace CoffeeLand
 
             if (result != MessageDialogResult.Negative)
             {
-              
+
                 string rpta = "";
 
                 rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(nombre, descripcion, id, 3).ToString();
@@ -191,5 +192,6 @@ namespace CoffeeLand
                 Mostrar();
             }
         }
+
     }
 }

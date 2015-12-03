@@ -58,6 +58,17 @@
                                         Margin="18,190,0,0" VerticalAlignment="Top" 
                                         Controls:TextBoxHelper.Watermark="Fecha Evento "
                                         Width="267" Height="42" SelectedDateFormat="Long"/>
+                            
+                            <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
+                            	Margin="160,283,0,0" VerticalAlignment="Top" Width="82" 
+                            	Height="35" 
+                            	Style="{StaticResource AccentedSquareButtonStyle}"
+                            	Visibility="Collapsed" Background="#FFE4B9B9" Click="btnCancelar_Click"
+                                    />
+                            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+                            	Margin="105,283,0,0" VerticalAlignment="Top" Width="82" 
+                            	Height="35" 
+                            	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
                         </Grid>
                     </GroupBox>
 
@@ -108,10 +119,7 @@
                     	Width="317" Height="42"
                     	SelectedIndex="0" SelectionChanged="cmbLote_SelectionChanged"
                      />
-                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
-                    	Margin="125,420,0,0" VerticalAlignment="Top" Width="103" 
-                    	Height="37" 
-                    	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click" />
+
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabConsultar" Header=""  IsEnabled="False">
