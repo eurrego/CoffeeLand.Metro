@@ -16,9 +16,6 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 using Modelo;
-using System.Data;
-using System.Windows.Controls.Primitives;
-using System.Globalization;
 
 namespace CoffeeLand
 {
@@ -97,14 +94,14 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (validarCampos())
+                if (IsValid(txtNombre) && IsValid(txtDescripcion))
                 {
                     rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(txtNombre.Text, txtDescripcion.Text, 0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                 }
             }
-            else if (validarCampos())
+            else if (IsValid(txtNombre) && IsValid(txtDescripcion))
             {
                 rpta = MTipoInsumo.GetInstance().GestionTipoInsumo(txtNombre.Text, txtDescripcion.Text, Convert.ToByte(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
@@ -116,6 +113,7 @@ namespace CoffeeLand
             }
             Mostrar();
         }
+
 
         private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -136,24 +134,7 @@ namespace CoffeeLand
             gridConsultar.IsEnabled = false;
         }
 
-        public static T FindVisualChild<T>(DependencyObject obj)
-        where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                    return (T)child;
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-
-            return null;
-        }
+    
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -193,5 +174,14 @@ namespace CoffeeLand
             }
         }
 
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

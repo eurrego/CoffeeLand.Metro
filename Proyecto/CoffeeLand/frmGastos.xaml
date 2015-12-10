@@ -22,11 +22,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <local:Validator x:Key="validaciones"/>
         </ResourceDictionary>
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            
+
             <Button x:Name="btnCrearConcepto" Click="btnCrearConcepto_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"
@@ -66,7 +68,7 @@
             	    Height="38" 
                     Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click"  />
 
-                                        <Label x:Name="lblEstado" Content="REGISTRAR GASTOS" HorizontalAlignment="Left" Margin="96,31,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
+                    <Label x:Name="lblEstado" Content="REGISTRAR GASTOS" HorizontalAlignment="Left" Margin="96,31,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="16"/>
 
                     <TextBox x:Name="txtId" Margin="380,36,278,0"
             	    Controls:TextBoxHelper.Watermark="id"
@@ -87,16 +89,29 @@
                             <TextBox x:Name="txtValor" Margin="26,74,0,0"
                             	Controls:TextBoxHelper.Watermark="Valor" 
                             	Controls:TextBoxHelper.ClearTextButton="True" 
-                            	Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210
-                                     "
-                            />
+                            	Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210 "
+                            >
+                                <TextBox.Text>
+                                    <Binding Path="Valor" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <ExceptionValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
+                            </TextBox>
+
+
                             <DatePicker x:Name="dtdFechaGasto" HorizontalAlignment="Left" Margin="26,175,0,0" 
                             	VerticalAlignment="Top" 
                             	Height="28" Width="210"
                             	Controls:TextBoxHelper.Watermark="Fecha Evento "
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
-                                Controls:TextBoxHelper.ClearTextButton="True"
-                                />
+                                Controls:TextBoxHelper.ClearTextButton="True" SelectedDateFormat="Short"
+                                >
+                             
+                            </DatePicker>
                             <DataGrid x:Name="tblGastos" BorderThickness="1" Margin="262,22,0,23.8" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
@@ -116,7 +131,7 @@
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn Header="Valor " Binding="{Binding Valor}" Width="70" IsReadOnly="True" />
                                     <DataGridTextColumn Header="Pago " Binding="{Binding Pago}" Width="85" IsReadOnly="True" />
-                                   
+
 
                                     <DataGridTemplateColumn Width="70" Header="Editar">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -159,7 +174,17 @@
                             	Controls:TextBoxHelper.ClearTextButton="True" 
                             	Height="69" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210
                                      "
-                            />
+                            >
+                                <TextBox.Text>
+                                    <Binding Path="Descripcion" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <ExceptionValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+
+                            </TextBox>
                             <Button x:Name="btnAgregarGasto" Content="Agregar" HorizontalAlignment="Left" 
                             	Margin="84,337,0,0" VerticalAlignment="Top" Width="88" 
                             	Height="28" 
@@ -169,7 +194,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            
+
         </TabControl>
     </Grid>
 </Controls:MetroWindow>

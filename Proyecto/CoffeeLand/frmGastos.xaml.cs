@@ -88,8 +88,7 @@ namespace CoffeeLand
         {
             cmbConcepto.ItemsSource = MGastos.GetInstance().ConsultarConcepto();
             llenarCmbTipoPago();
-
-
+            dtdFechaGasto.DisplayDateEnd = DateTime.Now;
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)

@@ -96,14 +96,14 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (validarCampos())
+                if (IsValid(txtNombre) && IsValid(txtDescripcion))
                 {
                     rpta = MConcepto.GetInstance().GestionConcepto(txtNombre.Text, txtDescripcion.Text, 0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                 }
             }
-            else if (validarCampos())
+            else if (IsValid(txtNombre) && IsValid(txtDescripcion))
             {
                 rpta = MConcepto.GetInstance().GestionConcepto(txtNombre.Text, txtDescripcion.Text, Convert.ToByte(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
@@ -169,6 +169,16 @@ namespace CoffeeLand
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }
+        }
+
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
