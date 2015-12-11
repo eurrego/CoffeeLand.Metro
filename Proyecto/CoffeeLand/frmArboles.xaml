@@ -23,6 +23,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <local:Validator x:Key="validaciones"/>
+            
         </ResourceDictionary>
     </Window.Resources>
 
@@ -47,18 +50,36 @@
                             	Width="267" Height="42"
                             	DisplayMemberPath="NombreTipoArbol"
                             	SelectedValuePath="idTipoArbol"
-                             />
+                              >
+                                <ComboBox.SelectedIndex>
+                                    <Binding Path="Selected" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <ExceptionValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedIndex>
+                            </ComboBox>
                             <TextBox x:Name="txtCantidad" Margin="18,116,0,0"
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
                             	Controls:TextBoxHelper.Watermark="Cantidad" 
                             	Controls:TextBoxHelper.ClearTextButton="True" 
-                            	Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="267"
-                             />
+                            	Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="267">
+                                <TextBox.Text>
+                                <Binding Path="Valor" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <ExceptionValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <DatePicker x:Name="dtdFecha" HorizontalAlignment="Left" 
                                         Margin="18,190,0,0" VerticalAlignment="Top" 
                                         Controls:TextBoxHelper.Watermark="Fecha Evento "
-                                        Width="267" Height="42" SelectedDateFormat="Long"/>
-                            
+                                        Width="267" Height="42" SelectedDateFormat="Long">
+                            </DatePicker>
+
                             <Button x:Name="btnCancelar" Content="cancelar" HorizontalAlignment="Left" 
                             	Margin="160,283,0,0" VerticalAlignment="Top" Width="82" 
                             	Height="35" 
@@ -117,9 +138,10 @@
                     	SelectedValuePath="idLote"
                     	Margin="19,22,0,0" VerticalAlignment="Top"
                     	Width="317" Height="42"
-                    	SelectedIndex="0" SelectionChanged="cmbLote_SelectionChanged"
-                     />
-
+                    	SelectionChanged="cmbLote_SelectionChanged"
+                     >
+      
+                    </ComboBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabConsultar" Header=""  IsEnabled="False">

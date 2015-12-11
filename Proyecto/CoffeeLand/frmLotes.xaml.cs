@@ -95,14 +95,14 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (validarCampos())
+                if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(txtCuadras))
                 {
                     rpta = MLote.GetInstance().GestionLote(txtNombre.Text, txtDescripcion.Text, txtCuadras.Text,  0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
                     LimpiarControlesLote();
                 }
             }
-            else if (validarCampos())
+            else if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(txtCuadras))
             {
                 rpta = MLote.GetInstance().GestionLote(txtNombre.Text, txtDescripcion.Text, txtCuadras.Text, Convert.ToInt32(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
@@ -178,6 +178,16 @@ namespace CoffeeLand
             Lote item = tblLotes.SelectedItem as Lote;
             frmArboles misArboles = new frmArboles(item.idLote);
             misArboles.ShowDialog();
+        }
+
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

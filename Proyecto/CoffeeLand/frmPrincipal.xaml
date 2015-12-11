@@ -15,6 +15,27 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="LargeTileStyle"
+                   TargetType="Controls:Tile">
+                <Setter Property="Width"
+                        Value="300" />
+                <Setter Property="Height"
+                        Value="125" />
+                <Setter Property="TitleFontSize"
+                        Value="12" />
+            </Style>
+
+            <Style x:Key="SmallTileStyle"
+                   TargetType="Controls:Tile">
+                <Setter Property="Width"
+                        Value="147" />
+                <Setter Property="Height"
+                        Value="125" />
+                <Setter Property="TitleFontSize"
+                        Value="10" />
+            </Style>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -262,14 +283,78 @@
 
 
     <Grid>
-        <Grid x:Name="pnlBienvenida" HorizontalAlignment="Left" Height="219" Margin="210,10,0,0" VerticalAlignment="Top" Width="873">
-            <Label x:Name="label1" Content="Bienvenido" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="64" FontFamily="Segoe UI Light" Margin="48,0,0,0"/>
+        <Grid x:Name="pnlBienvenida" HorizontalAlignment="Left" Height="103" Margin="38,48,0,0" VerticalAlignment="Top" Width="364">
+            <Label x:Name="label1" Content="Bienvenido" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="64" FontFamily="Segoe UI Light" Margin="37,-2,0,0"/>
         </Grid>
-        <Controls:Tile x:Name="btnGestionTerrenos" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Gestión de Terrenos" Click="btnGestionTerrenos_Click" Margin="22,0,0,538" Height="81" Width="87" HorizontalAlignment="Left" TitleFontSize="10" VerticalAlignment="Bottom"/>
-        <Controls:Tile x:Name="btnAdministracionEmpleados" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Empleados" Click="btnAdministracionEmpleados_Click" Margin="22,0,0,430" Height="81" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <Controls:Tile x:Name="btnAdministracionCostos" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Costos" Click="btnAdministracionCostos_Click" Margin="22,0,0,323" Height="82" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-        <Controls:Tile x:Name="btnAdministracionVentas" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Administraciòn de Ventas" Margin="22,0,0,207" Height="82" Width="87" TitleFontSize="10" Click="btnAdministracionVentas_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-        <Controls:Tile x:Name="btnReportes" TiltFactor="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Title="Rerportes" Margin="22,0,0,96" Height="82" Width="87" TitleFontSize="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+
+        <Controls:Tile x:Name="btnGestionTerrenos" 
+                        Style="{StaticResource LargeTileStyle}"
+                               Background="Teal"
+                               Margin="84,140,0,394"
+                        Title="Gestión de Terrenos" TitleFontSize="15" Click="btnGestionTerrenos_Click" HorizontalAlignment="Left" >
+            <Grid Width="60" Height="70"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                         Visual="{DynamicResource appbar_map_satellite}" />
+                </Grid.OpacityMask>
+            </Grid>
+        </Controls:Tile>
+
+        <Controls:Tile x:Name="btnAdministracionEmpleados"  Click="btnAdministracionEmpleados_Click"  Style="{StaticResource LargeTileStyle}"
+                               Background="#D2691E"
+                               Margin="264,270,0,264"
+                        Title="Administraciòn de empledos" TitleFontSize="15" HorizontalAlignment="Left"  >
+            <Grid Width="60" Height="60"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                         Visual="{DynamicResource appbar_group}" />
+                </Grid.OpacityMask>
+            </Grid>
+        </Controls:Tile>
+
+        <Controls:Tile x:Name="btnAdministracionCostos"   Title="Administraciòn de Costos" Click="btnAdministracionCostos_Click" Style="{StaticResource SmallTileStyle}"
+                               Background="#1E90FF"
+                               Margin="388,140,0,394"
+                        TitleFontSize="12" Width="176" HorizontalAlignment="Left" >
+            <Grid Width="50" Height="45"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                         Visual="{DynamicResource appbar_money}" />
+                </Grid.OpacityMask>
+            </Grid>
+        </Controls:Tile>
+
+
+
+        <Controls:Tile x:Name="btnAdministracionVentas"  Title="Administraciòn de Ventas"  Click="btnAdministracionVentas_Click" Style="{StaticResource SmallTileStyle}"
+                               Background="#FF686868"
+                               Margin="84,270,0,264"
+                        TitleFontSize="12" Width="176" HorizontalAlignment="Left" >
+            <Grid Width="50" Height="45"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                         Visual="{DynamicResource appbar_marketplace}" />
+                </Grid.OpacityMask>
+            </Grid>
+        </Controls:Tile>
+
+
+        <Controls:Tile x:Name="btnReportes" Title="Rerportes" 
+                               Background="YellowGreen"
+                               Margin="84,420,0,119"
+                        TitleFontSize="12" Width="480" Height="Auto" HorizontalAlignment="Left" >
+            <Grid Width="50" Height="45"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill"
+                                         Visual="{DynamicResource appbar_newspaper}" />
+                </Grid.OpacityMask>
+            </Grid>
+        </Controls:Tile>
 
     </Grid>
 </Controls:MetroWindow>

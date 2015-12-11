@@ -44,6 +44,14 @@ namespace CoffeeLand
             set { fecha = value; }
         }
 
+        private int selected;
+
+        public int Selected
+        {
+            get { return selected; }
+            set { selected = value; }
+        }
+
         public string Error
         {
              
@@ -56,6 +64,7 @@ namespace CoffeeLand
             get
             {
                 string result = null;
+            
                 Regex numeros = new Regex("^[0-9]*$");
 
                 switch (name)
@@ -109,13 +118,20 @@ namespace CoffeeLand
                         break;
 
                     case "Fecha":
-                        if (fecha == null)
+                        if (Fecha == null)
                         {
                             result = "El campo es obligatorio.";
                         }
                        
                         break;
+                    case "Selected":
+                        if (selected == 0)
+                        {
+                            result = "Debe seleccionar un valor";
+                        }
 
+                        break;
+                  
 
                     default:
                         break;

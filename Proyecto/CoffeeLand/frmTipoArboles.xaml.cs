@@ -45,22 +45,6 @@ namespace CoffeeLand
             lblTotal.Content = tblTipoArbol.Items.Count.ToString(); ;
         }
 
-        // Validación de campos
-        private bool validarCampos()
-        {
-
-            if (txtNombre.Text == string.Empty || txtDescripcion.Text == string.Empty)
-            {
-                mensajeError("Debe Ingresar todos los Campos");
-                validacion = false;
-            }
-            else
-            {
-                validacion = true;
-            }
-
-            return validacion;
-        }
 
         // limpiar Controles
         private void Limpiar()
@@ -97,7 +81,7 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (validarCampos())
+                if (IsValid(txtNombre) && IsValid(txtDescripcion))
                 {
                     rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, 0, 1).ToString();
                     this.ShowMessageAsync("Mensaje", rpta);
@@ -105,7 +89,7 @@ namespace CoffeeLand
                     Limpiar();
                 }
             }
-            else if (validarCampos())
+            else if (IsValid(txtNombre) && IsValid(txtDescripcion))
             {
                 rpta = MTipoArbol.GetInstance().registrarTipoArbol(txtNombre.Text, txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2).ToString();
                 this.ShowMessageAsync("Mensaje", rpta);
@@ -176,6 +160,16 @@ namespace CoffeeLand
                 Mostrar();
             }
 
+        }
+
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -126,7 +126,7 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (validarCampos())
+                if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
                 {
                     rpta = MLabores.GetInstance().GestionLabor(Convert.ToString(cmbTipoPago.SelectedItem), txtNombre.Text,Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text ,0, 1);
                     this.ShowMessageAsync("Mensaje", rpta);
@@ -136,14 +136,17 @@ namespace CoffeeLand
             }
             else
             {
-                rpta = MLabores.GetInstance().GestionLabor(Convert.ToString(cmbTipoPago.SelectedItem), txtNombre.Text, Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2); 
-                this.ShowMessageAsync("Mensaje", rpta);
-                Limpiar();
-                lblEstado.Content = "REGISTRAR INSUMOS";
-                btnGuardar.Margin = new Thickness(520, 26, 0, 0);
-                btnCancelar.Visibility = Visibility.Collapsed;
-                tabConsultar.IsEnabled = true;
-                tabConsultar.Focus();
+                if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
+                {
+                    rpta = MLabores.GetInstance().GestionLabor(Convert.ToString(cmbTipoPago.SelectedItem), txtNombre.Text, Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2);
+                    this.ShowMessageAsync("Mensaje", rpta);
+                    Limpiar();
+                    lblEstado.Content = "REGISTRAR INSUMOS";
+                    btnGuardar.Margin = new Thickness(520, 26, 0, 0);
+                    btnCancelar.Visibility = Visibility.Collapsed;
+                    tabConsultar.IsEnabled = true;
+                    tabConsultar.Focus();
+                }
             }
             Mostrar();
         }
@@ -241,6 +244,16 @@ namespace CoffeeLand
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }
+        }
+
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

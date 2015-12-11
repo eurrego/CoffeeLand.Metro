@@ -74,6 +74,7 @@ namespace CoffeeLand
         {
             tblArboles.ItemsSource = MArbol.GetInstance().ConsultarArboles(Convert.ToInt32(cmbLote.SelectedValue)) as IEnumerable;
             cmbTipoArbol.SelectedValue = 0;
+            dtdFecha.SelectedDate = DateTime.Now;
         }
 
         // define el total de arboles
@@ -88,6 +89,7 @@ namespace CoffeeLand
             cmbTipoArbol.ItemsSource = MArbol.GetInstance().ConsultarTipoArbol();
             cmbLote.ItemsSource = MArbol.GetInstance().ConsultarLote();
             cmbLote.SelectedValue = lote;
+            dtdFecha.DisplayDateEnd = DateTime.Now;
             Mostrar();
         }
 
@@ -109,7 +111,7 @@ namespace CoffeeLand
         {
             string rpta = "";
 
-            if (validarCampos())
+            if (IsValid(txtCantidad) && IsValid(cmbTipoArbol))
             {
                 if (txtId.Text == string.Empty)
                 {
@@ -216,6 +218,17 @@ namespace CoffeeLand
 
             tabConsultar.IsEnabled = true;
             tabConsultar.Focus();
+        }
+
+
+        public static bool IsValid(DependencyObject parent)
+        {
+            if (Validation.GetHasError(parent))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -21,6 +21,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <local:Validator x:Key="validaciones"/>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -150,13 +153,31 @@
         		Controls:TextBoxHelper.UseFloatingWatermark="True"
         		Controls:TextBoxHelper.Watermark="Nombre" 
         		Controls:TextBoxHelper.ClearTextButton="True" 
-                Height="42" VerticalAlignment="Top" />
+                Height="42" VerticalAlignment="Top" >
+                <TextBox.Text>
+                    <Binding Path="Nombre" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
             <TextBox x:Name="txtCuadras" Margin="452,101,42,0"
         		Controls:TextBoxHelper.UseFloatingWatermark="True"
         		Controls:TextBoxHelper.Watermark="Cuadras" 
         		Controls:TextBoxHelper.ClearTextButton="True" 
-                Height="42" VerticalAlignment="Top" />
+                Height="42" VerticalAlignment="Top" >
+                <TextBox.Text>
+                    <Binding Path="Valor" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
 
 
             <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
@@ -181,7 +202,16 @@
             	Controls:TextBoxHelper.UseFloatingWatermark="True"
             	Controls:TextBoxHelper.Watermark="Descripción"
             	Controls:TextBoxHelper.ClearTextButton="True" 
-            	TextWrapping="Wrap" Height="42" VerticalAlignment="Top" />
+            	TextWrapping="Wrap" Height="42" VerticalAlignment="Top" >
+                <TextBox.Text>
+                    <Binding Path="Descripcion" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
     </Grid>
 </Controls:MetroWindow>

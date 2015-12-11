@@ -9,7 +9,9 @@
         Height="600"
         Width="692"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
+        Top="50"
+        Left="70"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmLabores1_Loaded">
@@ -21,6 +23,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <local:Validator x:Key="validaciones"/>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -63,8 +68,16 @@
         		            Controls:TextBoxHelper.UseFloatingWatermark="True"
         		            Controls:TextBoxHelper.Watermark="Nombre" 
         		            Controls:TextBoxHelper.ClearTextButton="True" 
-                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554"
-                        />
+                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554">
+                        <TextBox.Text>
+                            <Binding Path="Nombre" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <TextBox x:Name="txtId" Margin="380,36,278,0"
             	    Controls:TextBoxHelper.Watermark="id"
@@ -75,26 +88,44 @@
             	    Controls:TextBoxHelper.UseFloatingWatermark="True"
             	    Controls:TextBoxHelper.Watermark="Descripción"
             	    Controls:TextBoxHelper.ClearTextButton="True" 
-            	    TextWrapping="Wrap" Height="98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554" Grid.Row="1" />
+            	    TextWrapping="Wrap" Height="79" VerticalAlignment="Top" HorizontalAlignment="Left" Width="554" Grid.Row="1" >
+                        <TextBox.Text>
+                            <Binding Path="Descripcion" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <ComboBox x:Name="cmbTipoPago" HorizontalAlignment="Left"
                               Margin="57,2,0,0" VerticalAlignment="Top"
                               Width="554" Height="42"
-                              SelectedIndex="0" 
                               Grid.Row="1" 
                               Loaded="cmbTipoPago_Loaded"
-                              />
-                    
+                              >
+                        <ComboBox.SelectedIndex>
+                            <Binding Path="Selected" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
+                             UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.SelectedIndex>
+                    </ComboBox>
+
                     <GroupBox x:Name="groupModificaArbol" Header="¿ La labor modifica la cantidad de árboles?" HorizontalAlignment="Left" Margin="57,179,0,0" VerticalAlignment="Top" Height="86" Width="311" FontSize="8">
                         <Grid>
-                            <RadioButton x:Name="rbtnArbolesSi" Content="Si" HorizontalAlignment="Left" Margin="78,11,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
-                            <RadioButton x:Name="rbtnArbolesNo" Content="No" HorizontalAlignment="Left" Margin="159,10,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
+                            <RadioButton x:Name="rbtnArbolesSi" Content="Si" HorizontalAlignment="Left" Margin="78,11,0,0" VerticalAlignment="Top" Height="24" Width="45" />
+                            <RadioButton x:Name="rbtnArbolesNo" Content="No" HorizontalAlignment="Left" Margin="159,10,0,0" VerticalAlignment="Top" Height="26" Width="46" IsChecked="True" />
+                        
                         </Grid>
                     </GroupBox>
                     <GroupBox x:Name="groupRequiereInsumo" Header="¿ Requiere Insumo?" HorizontalAlignment="Left" Margin="392,179,0,0" VerticalAlignment="Top" Height="87" Width="218" FontSize="8">
                         <Grid>
                             <RadioButton x:Name="rbtnInsumoSi" Content="Si" HorizontalAlignment="Left" Margin="41,11,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
-                            <RadioButton x:Name="rbtnInsumoNo" Content="No" HorizontalAlignment="Left" Margin="122,10,0,0" VerticalAlignment="Top" Height="26" Width="46"/>
+                            <RadioButton x:Name="rbtnInsumoNo" Content="No" HorizontalAlignment="Left" Margin="122,10,0,0" VerticalAlignment="Top" Height="26" Width="46" IsChecked="True"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
