@@ -345,8 +345,8 @@
 
         <Controls:Tile x:Name="btnReportes" Title="Rerportes" 
                                Background="YellowGreen"
-                               Margin="84,420,0,119"
-                        TitleFontSize="12" Width="480" Height="Auto" HorizontalAlignment="Left" >
+                               Margin="84,0,0,119"
+                        TitleFontSize="12" Width="480" Height="174" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
             <Grid Width="50" Height="45"
                           Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
                 <Grid.OpacityMask>
