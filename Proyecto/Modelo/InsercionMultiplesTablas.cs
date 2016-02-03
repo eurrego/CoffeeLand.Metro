@@ -24,6 +24,29 @@ namespace Modelo
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
         }
+   
+
+    public virtual int SP_InsumoLaborLote(DataTable dtDatos)
+    {
+        var datos = new SqlParameter("DTInsumo", SqlDbType.Structured);
+        datos.Value = dtDatos;
+        datos.TypeName = "dbo.InsumoLaborLote";
+
+        string command = "EXEC InsercionInsumoLaborLote @DTInsumo";
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
     }
 
+        public virtual int SP_SalariosEmpleados(DataTable dtDatos)
+        {
+            var datos = new SqlParameter("DTsalario", SqlDbType.Structured);
+            datos.Value = dtDatos;
+            datos.TypeName = "dbo.SalarioPeronaTemporal";
+
+            string command = "EXEC SalariosEmpleados @DTsalario";
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
+        }
+
+    }
 }

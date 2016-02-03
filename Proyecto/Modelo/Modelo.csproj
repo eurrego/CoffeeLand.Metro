@@ -63,6 +63,9 @@
     <Compile Include="Arboles.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="asociarLaborLote_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="Compra.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>

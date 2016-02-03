@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
@@ -13,7 +14,7 @@
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
-        Height="694.656" Width="1213.636" Loaded="MetroWindow_Loaded" >
+        Height="800.256" Width="1213.636" Loaded="MetroWindow_Loaded" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -25,19 +26,18 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="gridPrincipalTerrenos">
+    <Grid x:Name="gridPrincipalTerrenos" Margin="0,0,-0.2,0.2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="671*"/>
+            <ColumnDefinition Width="534*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid x:Name="gridRegistrarTerrenos" Height="654" VerticalAlignment="Top" Background="White" Margin="3,8,-3.2,0">
-
-
-
-
-
-            <GroupBox x:Name="groupEmpleados" Header="Empleado" HorizontalAlignment="Left" Margin="647,170,0,0" VerticalAlignment="Top" Width="514" Height="463">
+        <Grid x:Name="gridRegistrarTerrenos" Background="White" Margin="3,8,-3.2,0" Height="654" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <GroupBox x:Name="groupEmpleados" Header="Empleado" HorizontalAlignment="Left" Margin="647,105,0,0" VerticalAlignment="Top" Width="514" Height="528">
                 <Grid>
                     <ComboBox x:Name="cmbEmpleado" HorizontalAlignment="Left"
-                            	DisplayMemberPath="NombreTipoContratoPersona" 
-                            	SelectedValuePath="idTipoContratoPersona"
+                            	DisplayMemberPath="NombrePersona" 
+                            	SelectedValuePath="DocumentoPersona"
                             	Margin="26,22,0,0" VerticalAlignment="Top"
                             	IsSynchronizedWithCurrentItem="true" 
                             	Width="210" Height="29"
@@ -48,27 +48,23 @@
                             	Controls:TextBoxHelper.ClearTextButton="True" 
                             	Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="206"
                             />
-                    <DataGrid x:Name="tblProductividad" BorderThickness="1" Margin="26,127,0,24" AutoGenerateColumns="False" 
+                    <DataGrid x:Name="tblProductividad" BorderThickness="1" Margin="30,127,0,24" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
                               CanUserAddRows="False" 
                               CanUserDeleteRows="False"
-                              Style="{StaticResource AzureDataGrid}" Width="452"
+                              Style="{StaticResource AzureDataGrid}" Width="438"
                               >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding DocumentoPersona}" Header="tipo Árbol " Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn   Binding="{Binding NombrePersona}"  Header="Cantidad " Width="85" IsReadOnly="True" />
-                            <DataGridTemplateColumn Header="Fecha"  Width="100" IsReadOnly ="False">
+                            <DataGridTextColumn Binding="{Binding NombrePersona}" Header="Empleado " Width="100" IsReadOnly="True"/>
+                            <DataGridTextColumn   Binding="{Binding Cantidad }"  Header="Cantidad " Width="85" IsReadOnly="True" />
+                            <DataGridTextColumn   Binding="{Binding Valor }"  Header="Valor " Width="80" IsReadOnly="True" />
+
+
+                            <DataGridTemplateColumn Width="90" Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Fecha}" IsEnabled="False"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="80" Header="Editar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                        <Button x:Name="btnModificarProductividadEmpleado"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificarProductividadEmpleado_Click"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
@@ -78,10 +74,10 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="100" Header="Eliminar">
+                            <DataGridTemplateColumn Width="90" Header="Eliminar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                        <Button x:Name="btnInhabilitarProductividadEmpleado"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitarProductividadEmpleado_Click"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
@@ -101,17 +97,17 @@
                     <Button x:Name="btnAgregarProductividad" Content="Agregar" HorizontalAlignment="Left" 
                     	Margin="314,75,0,0" VerticalAlignment="Top" Width="90" 
                     	Height="38" 
-                    	Style="{StaticResource AccentedSquareButtonStyle}"  />
+                    	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnAgregarProductividad_Click"   />
+                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+                    	Margin="-82,543,0,-91.4" VerticalAlignment="Top" Width="90" 
+                    	Height="38" 
+                    	Style="{StaticResource AccentedSquareButtonStyle}" Click="btnGuardar_Click"  />
 
                 </Grid>
             </GroupBox>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="138" Margin="647,10,0,0" VerticalAlignment="Top" Width="514"/>
-            <GroupBox x:Name="groupCantidad2" Header="Cantidad de Árboles" HorizontalAlignment="Left" Margin="990,31,0,0" VerticalAlignment="Top" Width="152" Height="103">
-                <Grid>
-                    <TextBlock x:Name="textBlockCantidadArboles" HorizontalAlignment="Left" Margin="59,3,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="40" Foreground="#FF92C6F9" FontWeight="Bold" RenderTransformOrigin="0.534,0.045"/>
-                </Grid>
-            </GroupBox>
-            <GroupBox x:Name="groupLabores" Header="Labor" HorizontalAlignment="Left" Margin="48,170,0,0" VerticalAlignment="Top" Height="158" Width="521" >
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="647,0,0,0" VerticalAlignment="Top" Width="514"/>
+
+            <GroupBox x:Name="groupLabores" Header="Labor" HorizontalAlignment="Left" Margin="48,73,0,0" VerticalAlignment="Top" Height="158" Width="521" >
                 <Grid>
                     <DatePicker x:Name="dtdFechaLabor" HorizontalAlignment="Left" Margin="30,81,0,0" 
                 		VerticalAlignment="Top" 
@@ -128,21 +124,17 @@
                     	Margin="30,10,0,0" VerticalAlignment="Top"
                     	IsSynchronizedWithCurrentItem="true" 
                     	Width="208" Height="29"
-                    	SelectedIndex="0" SelectionChanged="cmbLabores_SelectionChanged"
+                    	SelectedIndex="0" SelectionChanged="cmbLabores_SelectionChanged_1" 
                               />
                     <ComboBox x:Name="cmbTipoPago" HorizontalAlignment="Left"
-                    	
-                       
-                              
                     	Margin="268,10,0,0" VerticalAlignment="Top"
                     	IsSynchronizedWithCurrentItem="true" 
                     	Width="208" Height="29"
-                    	SelectedIndex="0" SelectionChanged="cmbLabores_SelectionChanged"
+                    	SelectedIndex="0" SelectionChanged="cmbTipoPago_SelectionChanged" 
                               />
-
                 </Grid>
             </GroupBox>
-            <Label x:Name="lblNombreLote" Content="Nombre Lote" HorizontalAlignment="Left" Margin="683,48,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="32" RenderTransformOrigin="1.456,0.625" Height="66" Width="260"/>
+            <Label x:Name="lblNombreLote" Content="Nombre Lote" HorizontalAlignment="Center" Margin="769,9,81,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="40" RenderTransformOrigin="1.456,0.625" Height="56" Width="355"/>
             <Label x:Name="lblEstado_Copy1" Content="Seleccionar Lote" HorizontalAlignment="Left" Margin="47,20,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="24" RenderTransformOrigin="1.456,0.625" Height="42" Width="182"/>
             <ComboBox x:Name="cmbLotes" HorizontalAlignment="Left"
             	DisplayMemberPath="NombreLote" 
@@ -150,9 +142,9 @@
             	Margin="248,28,0,0" VerticalAlignment="Top"
             	IsSynchronizedWithCurrentItem="true" 
             	Width="321" Height="29"
-            	SelectedIndex="0"
+            	SelectedIndex="0" SelectionChanged="cmbLotes_SelectionChanged" 
                               />
-            <GroupBox x:Name="groupInsumos" Header="Insumo" HorizontalAlignment="Left" Margin="48,356,0,0" VerticalAlignment="Top" Width="521" Height="277">
+            <GroupBox x:Name="groupInsumos" Header="Insumo" HorizontalAlignment="Left" Margin="48,250,0,0" VerticalAlignment="Top" Width="521" Height="383" Visibility="Visible">
                 <Grid>
                     <ComboBox x:Name="cmbInsumo" HorizontalAlignment="Left"
             			DisplayMemberPath="NombreInsumo" 
@@ -160,34 +152,28 @@
             			Margin="26,22,0,0" VerticalAlignment="Top"
             			IsSynchronizedWithCurrentItem="true" 
             			Width="210" Height="29"
-            			SelectedIndex="0"
+            			SelectedIndex="0" SelectionChanged="cmbInsumo_SelectionChanged" 
                               />
-                    <TextBox x:Name="txtCantidadInsumo" Margin="272,22,0,0"
+                    <TextBox x:Name="txtCantidadInsumo" Margin="272,66,0,0"
             			Controls:TextBoxHelper.Watermark="Cantidad" 
             			Controls:TextBoxHelper.ClearTextButton="True" 
-            			Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="206"
+            			Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="199"
                             />
-                    <DataGrid x:Name="tblInsumos" BorderThickness="1" Margin="26,73,0,53.4" AutoGenerateColumns="False" 
+                    <DataGrid x:Name="tblInsumos" BorderThickness="1" Margin="32,107,0,51" AutoGenerateColumns="False" 
             			HorizontalAlignment="Left" 
             			HorizontalContentAlignment="Stretch" 
             			CanUserAddRows="False" 
             			CanUserDeleteRows="False"
-            			Style="{StaticResource AzureDataGrid}" Width="452"
+            			Style="{StaticResource AzureDataGrid}" Width="439"
                               >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding DocumentoPersona}" Header="tipo Árbol " Width="100" IsReadOnly="True"/>
-                            <DataGridTextColumn   Binding="{Binding NombrePersona}"  Header="Cantidad " Width="85" IsReadOnly="True" />
-                            <DataGridTemplateColumn Header="Fecha"  Width="100" IsReadOnly ="False">
+                            <DataGridTextColumn Binding="{Binding NombreInsumo}" Header="Insumo " Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn   Binding="{Binding Cantidad}"  Header="Cantidad " Width="110" IsReadOnly="True" />
+
+                            <DataGridTemplateColumn Width="110" Header="Editar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Fecha}" IsEnabled="False"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="80" Header="Editar">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnModificar"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                        <Button x:Name="btnModificarInsumo"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnModificarInsumo_Click"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
@@ -197,10 +183,10 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="100" Header="Eliminar">
+                            <DataGridTemplateColumn Width="110" Header="Eliminar">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnInhabilitar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" >
+                                        <Button x:Name="btnInhabilitarInsumo"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnInhabilitarInsumo_Click"  >
                                             <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
                                                 <Rectangle.OpacityMask>
                                                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
@@ -213,15 +199,76 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="btnAgregarInsumos" Content="Agregar" HorizontalAlignment="Left" 
-            			Margin="195,190,0,0" VerticalAlignment="Top" Width="90" 
+            			Margin="212,298,0,0" VerticalAlignment="Top" Width="90" 
             			Height="38" 
-            			Style="{StaticResource AccentedSquareButtonStyle}" Click="btnAgregarInsumos_Click"  />
-
+            			Style="{StaticResource AccentedSquareButtonStyle}"  RenderTransformOrigin="0.482,1.335" Click="btnAgregarInsumos_Click"  />
+                    <TextBox x:Name="txtUnidadMedida" Margin="26,64,0,0" IsEnabled="False"
+                    	Controls:TextBoxHelper.Watermark="Unidad Medida" 
+                    	Controls:TextBoxHelper.ClearTextButton="True" 
+                    	Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="206"
+                            />
+                    <Label x:Name="lblStock" Content="Cantidad disponible" HorizontalAlignment="Left" Margin="270,23,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="15" RenderTransformOrigin="1.456,0.625" Height="29" Width="143"/>
+                    <Label x:Name="lblCantidad" Content="0" HorizontalAlignment="Left" Margin="424,25,0,0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="15" RenderTransformOrigin="1.456,0.625" Height="29" Width="43"/>
                 </Grid>
             </GroupBox>
+
         </Grid>
 
-
-
     </Grid>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="ControlesFlyouts">
+            <Controls:Flyout x:Name="FlyoutAbonos"
+                             Header="Editar Arboles"
+                             Position="Left"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="True"
+                             AnimateOpacity="True"
+                             IsModal="False"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="300"  >
+                <Grid Width="250">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="30">
+
+                        <ComboBox x:Name="cmbTipoArbolLote" Margin="10"
+                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
+                        DisplayMemberPath="NombreTipoArbol" 
+                        SelectedValuePath="idTIpoArbol"  
+                        IsSynchronizedWithCurrentItem="true" 
+                        Height="42" VerticalAlignment="Top" 
+                        SelectedIndex="0"
+                        Visibility="Visible" SelectionChanged="cmbTipoArbolLote_SelectionChanged" />
+
+                        <TextBox x:Name="txtCantidadArbolesLotes" Margin="10"
+                            Controls:TextBoxHelper.Watermark="Arboles Lote" 
+                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210"
+                            />
+                        <ComboBox x:Name="cmbTipoArbolModificar" Margin="10"
+                        DisplayMemberPath="NombreTipoArbol" 
+                        SelectedValuePath="idTipoArbol"
+                        Height="42" 
+                        IsSynchronizedWithCurrentItem="true" 
+                        SelectedIndex="0" 
+                        VerticalAlignment="Top" 
+                        Visibility="Visible"   />
+
+                        <TextBox x:Name="txtArbolesModicacion" Margin="10"
+                            Controls:TextBoxHelper.Watermark="Arboles A Modificar" 
+                            Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210"
+                            />
+
+                        <Button x:Name="btnConfirmarModificacionArbol" Content="Guardar" HorizontalAlignment="Center" 
+            	                    Margin="10" VerticalAlignment="Top" Width="80" 
+            	                    Height="28" 
+                                    Style="{StaticResource SquareButtonStyle}" Click="btnConfirmarModificacionArbol_Click"  />
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 </Controls:MetroWindow>

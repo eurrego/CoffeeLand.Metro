@@ -53,12 +53,12 @@ namespace Modelo
         }
 
 
-        public string GestionLabor(string TipoPagoLabor, string NombreLabor, bool ModificaArbol, bool RequiereInsumo, string Descripcion, int idLabor, int opc)
+        public string GestionLabor( string NombreLabor, bool ModificaArbol, bool RequiereInsumo, string Descripcion, int idLabor, int opc)
         {
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.gestionLabor(TipoPagoLabor, NombreLabor, ModificaArbol, RequiereInsumo, Descripcion, idLabor, opc).First();
+                var rpta = entity.gestionLabor(NombreLabor, ModificaArbol, RequiereInsumo, Descripcion, idLabor, opc).First();
                 return rpta.Mensaje;
             }
 

@@ -23,7 +23,6 @@ namespace Modelo
         public short idLabor { get; set; }
         public string NombreLabor { get; set; }
         public bool ModificaArboles { get; set; }
-        public string TipoPagoLabor { get; set; }
         public bool RequiereInsumo { get; set; }
         public string Descripcion { get; set; }
         public string EstadoLabor { get; set; }

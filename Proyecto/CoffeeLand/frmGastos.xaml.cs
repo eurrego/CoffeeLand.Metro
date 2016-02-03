@@ -39,14 +39,19 @@ namespace CoffeeLand
 
         public void crearTabla()
         {
-            dt = new DataTable();
-            dt.Columns.Add("idConcepto");
-            dt.Columns.Add("Concepto");
-            dt.Columns.Add("Descripcion");
-            dt.Columns.Add("Fecha", typeof(DateTime));
-            dt.Columns.Add("Valor");
-            dt.Columns.Add("Pago");
-            dt.Columns.Add("EstadoCuenta");
+
+            if (dt == null)
+            {
+                dt = new DataTable();
+                dt.Columns.Add("idConcepto");
+                dt.Columns.Add("Concepto");
+                dt.Columns.Add("Descripcion");
+                dt.Columns.Add("Fecha", typeof(DateTime));
+                dt.Columns.Add("Valor");
+                dt.Columns.Add("Pago");
+                dt.Columns.Add("EstadoCuenta");
+            }
+           
         }
 
         // mensaje de Error
@@ -55,7 +60,11 @@ namespace CoffeeLand
             await this.ShowMessageAsync("Error", mensaje);
         }
 
-      
+        private async void mensajeExitoso(string mensaje)
+        {
+            await this.ShowMessageAsync("", mensaje);
+        }
+
 
         // Validación de campos
         private bool validarCampos()
@@ -102,6 +111,8 @@ namespace CoffeeLand
                 dt.Columns.Remove("Pago");
                 db.SP_InsertMultiplesGastos(dt);
                 dt.Clear();
+                mensajeExitoso("Registro exitoso");
+
 
             }
             catch (Exception ex)
@@ -163,8 +174,9 @@ namespace CoffeeLand
             cmbTipoPago.SelectedValue = dt.Rows[index].ItemArray[5];
             dtdFechaGasto.SelectedDate= Convert.ToDateTime(dt.Rows[index].ItemArray[3]);
             txtDescripcionGasto.Text= dt.Rows[index].ItemArray[2].ToString();
-           
-            dt.Clear();
+
+            dt.Rows[index].Delete();
+
         }
 
         private void btnCrearConcepto_Click(object sender, RoutedEventArgs e)

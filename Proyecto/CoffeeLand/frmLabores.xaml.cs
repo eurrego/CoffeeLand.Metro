@@ -128,7 +128,7 @@ namespace CoffeeLand
             {
                 if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
                 {
-                    rpta = MLabores.GetInstance().GestionLabor(Convert.ToString(cmbTipoPago.SelectedItem), txtNombre.Text,Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text ,0, 1);
+                    rpta = MLabores.GetInstance().GestionLabor( txtNombre.Text,Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text ,0, 1);
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                     tabConsultar.Focus();
@@ -138,7 +138,7 @@ namespace CoffeeLand
             {
                 if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
                 {
-                    rpta = MLabores.GetInstance().GestionLabor(Convert.ToString(cmbTipoPago.SelectedItem), txtNombre.Text, Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2);
+                    rpta = MLabores.GetInstance().GestionLabor(txtNombre.Text, Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2);
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                     lblEstado.Content = "REGISTRAR INSUMOS";
@@ -173,7 +173,7 @@ namespace CoffeeLand
             txtId.Text = item.idLabor.ToString();
             txtNombre.Text = item.NombreLabor;
             txtDescripcion.Text = item.Descripcion;
-            cmbTipoPago.SelectedItem = item.TipoPagoLabor;
+           
          
             if (item.ModificaArboles == true)
             {
@@ -225,7 +225,7 @@ namespace CoffeeLand
             string descripcion = item.Descripcion;
             bool insumo = item.RequiereInsumo;
             bool modifica = item.ModificaArboles;
-            string tipoPago = item.TipoPagoLabor;
+            
 
             var mySettings = new MetroDialogSettings()
             {
@@ -240,7 +240,7 @@ namespace CoffeeLand
             {
                 string rpta = "";
 
-                rpta = MLabores.GetInstance().GestionLabor(tipoPago, nombre, insumo, modifica, descripcion, id, 3).ToString();
+                rpta = MLabores.GetInstance().GestionLabor( nombre, insumo, modifica, descripcion, id, 3).ToString();
                 await this.ShowMessageAsync("CoffeeLand", rpta);
                 Mostrar();
             }

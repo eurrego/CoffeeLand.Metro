@@ -29,6 +29,7 @@ namespace Modelo
         public string Marca { get; set; }
         public string UnidadMedida { get; set; }
         public string EstadoInsumo { get; set; }
+        public Nullable<int> PrecioPromedio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compra_Insumo> Compra_Insumo { get; set; }

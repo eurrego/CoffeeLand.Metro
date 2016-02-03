@@ -178,12 +178,8 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionInsumo_Result>("gestionInsumo", idTipoInsumoParameter, nombreInsumoParameter, descripcionParameter, marcaParameter, unidadMedidaParameter, idInsumoParameter, opcParameter);
         }
     
-        public virtual ObjectResult<gestionLabor_Result> gestionLabor(string tipoPagoLabor, string nombreLabor, Nullable<bool> modificaArbol, Nullable<bool> requiereInsumo, string descripcion, Nullable<int> idLabor, Nullable<int> opc)
+        public virtual ObjectResult<gestionLabor_Result> gestionLabor(string nombreLabor, Nullable<bool> modificaArbol, Nullable<bool> requiereInsumo, string descripcion, Nullable<int> idLabor, Nullable<int> opc)
         {
-            var tipoPagoLaborParameter = tipoPagoLabor != null ?
-                new ObjectParameter("TipoPagoLabor", tipoPagoLabor) :
-                new ObjectParameter("TipoPagoLabor", typeof(string));
-    
             var nombreLaborParameter = nombreLabor != null ?
                 new ObjectParameter("nombreLabor", nombreLabor) :
                 new ObjectParameter("nombreLabor", typeof(string));
@@ -208,7 +204,7 @@ namespace Modelo
                 new ObjectParameter("opc", opc) :
                 new ObjectParameter("opc", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLabor_Result>("gestionLabor", tipoPagoLaborParameter, nombreLaborParameter, modificaArbolParameter, requiereInsumoParameter, descripcionParameter, idLaborParameter, opcParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionLabor_Result>("gestionLabor", nombreLaborParameter, modificaArbolParameter, requiereInsumoParameter, descripcionParameter, idLaborParameter, opcParameter);
         }
     
         public virtual ObjectResult<gestionPersona_Result> gestionPersona(string nombrePersona, string genero, string telefono, Nullable<System.DateTime> fechaNacimiento, Nullable<int> documentoPerosna, Nullable<int> opc, Nullable<byte> idTipoDocumento, Nullable<byte> idTipoContrato)
@@ -375,6 +371,83 @@ namespace Modelo
                 new ObjectParameter("opcion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<gestionArboles_Result>("gestionArboles", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter, idMovimientoParameter, opcionParameter);
+        }
+    
+        public virtual ObjectResult<asociarLaborLote_Result> asociarLaborLote(Nullable<int> idLabor, Nullable<int> idLote, Nullable<System.DateTime> fecha)
+        {
+            var idLaborParameter = idLabor.HasValue ?
+                new ObjectParameter("idLabor", idLabor) :
+                new ObjectParameter("idLabor", typeof(int));
+    
+            var idLoteParameter = idLote.HasValue ?
+                new ObjectParameter("idLote", idLote) :
+                new ObjectParameter("idLote", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asociarLaborLote_Result>("asociarLaborLote", idLaborParameter, idLoteParameter, fechaParameter);
+        }
+    
+        public virtual int InsercionInsumoLaborLote()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsercionInsumoLaborLote");
+        }
+    
+        public virtual int SalariosEmpleados()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SalariosEmpleados");
+        }
+    
+        public virtual int registroProduccion(Nullable<int> idLote, Nullable<System.DateTime> fecha, Nullable<int> cantidad)
+        {
+            var idLoteParameter = idLote.HasValue ?
+                new ObjectParameter("idLote", idLote) :
+                new ObjectParameter("idLote", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("registroProduccion", idLoteParameter, fechaParameter, cantidadParameter);
+        }
+    
+        public virtual ObjectResult<string> gestionArboles2(Nullable<short> idLote, Nullable<byte> idTipoArbol, Nullable<int> cantidad, Nullable<System.DateTime> fecha, Nullable<int> idMovimiento, string tipoMovimiento, Nullable<int> opcion)
+        {
+            var idLoteParameter = idLote.HasValue ?
+                new ObjectParameter("idLote", idLote) :
+                new ObjectParameter("idLote", typeof(short));
+    
+            var idTipoArbolParameter = idTipoArbol.HasValue ?
+                new ObjectParameter("idTipoArbol", idTipoArbol) :
+                new ObjectParameter("idTipoArbol", typeof(byte));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var idMovimientoParameter = idMovimiento.HasValue ?
+                new ObjectParameter("idMovimiento", idMovimiento) :
+                new ObjectParameter("idMovimiento", typeof(int));
+    
+            var tipoMovimientoParameter = tipoMovimiento != null ?
+                new ObjectParameter("tipoMovimiento", tipoMovimiento) :
+                new ObjectParameter("tipoMovimiento", typeof(string));
+    
+            var opcionParameter = opcion.HasValue ?
+                new ObjectParameter("opcion", opcion) :
+                new ObjectParameter("opcion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionArboles2", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter, idMovimientoParameter, tipoMovimientoParameter, opcionParameter);
         }
     }
 }

@@ -10,16 +10,9 @@
 namespace Modelo
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class MovimientosArboles
+    public partial class asociarLaborLote_Result
     {
-        public int idMovimientosArboles { get; set; }
-        public int idArboles { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public int Cantidad { get; set; }
-        public string TipoMovimiento { get; set; }
-    
-        public virtual Arboles Arboles { get; set; }
+        public string mensaje { get; set; }
     }
 }

@@ -124,6 +124,7 @@
           <Property Name="Marca" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="UnidadMedida" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="EstadoInsumo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PrecioPromedio" Type="int" />
         </EntityType>
         <EntityType Name="Labor">
           <Key>
@@ -132,7 +133,6 @@
           <Property Name="idLabor" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreLabor" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="ModificaArboles" Type="bit" Nullable="false" />
-          <Property Name="TipoPagoLabor" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="RequiereInsumo" Type="bit" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="60" />
           <Property Name="EstadoLabor" Type="char" MaxLength="1" Nullable="false" />
@@ -165,7 +165,7 @@
           <Property Name="NombreLote" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Observaciones" Type="varchar" MaxLength="100" />
           <Property Name="EstadoLote" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Cuadras" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cuadras" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="MovimientoProduccion">
           <Key>
@@ -184,6 +184,7 @@
           <Property Name="idArboles" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="TipoMovimiento" Type="varchar" MaxLength="7" />
         </EntityType>
         <EntityType Name="Municipio">
           <Key>
@@ -730,12 +731,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="asociarLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idLabor" Type="int" Mode="In" />
+          <Parameter Name="idLote" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
         <Function Name="gestionArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLote" Type="smallint" Mode="In" />
           <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
           <Parameter Name="cantidad" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
           <Parameter Name="idMovimiento" Type="int" Mode="In" />
+          <Parameter Name="opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionArboles2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idLote" Type="smallint" Mode="In" />
+          <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="idMovimiento" Type="int" Mode="In" />
+          <Parameter Name="tipoMovimiento" Type="varchar" Mode="In" />
           <Parameter Name="opcion" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionConcepto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -754,19 +769,11 @@
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionLabor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TipoPagoLabor" Type="varchar" Mode="In" />
           <Parameter Name="nombreLabor" Type="varchar" Mode="In" />
           <Parameter Name="modificaArbol" Type="bit" Mode="In" />
           <Parameter Name="requiereInsumo" Type="bit" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idLabor" Type="int" Mode="In" />
-          <Parameter Name="opc" Type="int" Mode="In" />
-        </Function>
-        <Function Name="gestionLotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombreLote" Type="varchar" Mode="In" />
-          <Parameter Name="observaciones" Type="varchar" Mode="In" />
-          <Parameter Name="cuadras" Type="varchar" Mode="In" />
-          <Parameter Name="idLote" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -818,6 +825,13 @@
           <Parameter Name="fecha" Type="date" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="InsercionInsumoLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="registroProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idLote" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SalariosEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -1137,6 +1151,7 @@
           <NavigationProperty Name="Compra_Insumo" Relationship="Self.FK_AbonoCompra_Insumo" FromRole="Insumo" ToRole="Compra_Insumo" />
           <NavigationProperty Name="TipoInsumo" Relationship="Self.FK_Insumo_TipoInsumo" FromRole="Insumo" ToRole="TipoInsumo" />
           <NavigationProperty Name="LaborLote_Insumo" Relationship="Self.FK_LaborLoteInsumo_Insumo" FromRole="Insumo" ToRole="LaborLote_Insumo" />
+          <Property Name="PrecioPromedio" Type="Int32" />
         </EntityType>
         <EntityType Name="Labor">
           <Key>
@@ -1145,7 +1160,6 @@
           <Property Name="idLabor" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreLabor" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModificaArboles" Type="Boolean" Nullable="false" />
-          <Property Name="TipoPagoLabor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RequiereInsumo" Type="Boolean" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="EstadoLabor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
@@ -1184,7 +1198,7 @@
           <Property Name="idFinca" Type="Byte" Nullable="false" />
           <Property Name="NombreLote" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cuadras" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EstadoLote" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Arboles" Relationship="Self.FK_Arboles_Lote" FromRole="Lote" ToRole="Arboles" />
           <NavigationProperty Name="Finca" Relationship="Self.FK_Lote_Finca" FromRole="Lote" ToRole="Finca" />
@@ -1211,6 +1225,7 @@
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Arboles" Relationship="Self.FK_MovimientosArboles_Arboles" FromRole="MovimientosArboles" ToRole="Arboles" />
+          <Property Name="TipoMovimiento" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Municipio">
           <Key>
@@ -1990,7 +2005,6 @@
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="gestionLabor" ReturnType="Collection(DBFincaModel.gestionLabor_Result)">
-            <Parameter Name="TipoPagoLabor" Mode="In" Type="String" />
             <Parameter Name="nombreLabor" Mode="In" Type="String" />
             <Parameter Name="modificaArbol" Mode="In" Type="Boolean" />
             <Parameter Name="requiereInsumo" Mode="In" Type="Boolean" />
@@ -2044,6 +2058,27 @@
             <Parameter Name="idMovimiento" Mode="In" Type="Int32" />
             <Parameter Name="opcion" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="asociarLaborLote" ReturnType="Collection(DBFincaModel.asociarLaborLote_Result)">
+            <Parameter Name="idLabor" Mode="In" Type="Int32" />
+            <Parameter Name="idLote" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsercionInsumoLaborLote" />
+          <FunctionImport Name="SalariosEmpleados" />
+          <FunctionImport Name="registroProduccion">
+            <Parameter Name="idLote" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="gestionArboles2" ReturnType="Collection(String)">
+            <Parameter Name="idLote" Mode="In" Type="Int16" />
+            <Parameter Name="idTipoArbol" Mode="In" Type="Byte" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="idMovimiento" Mode="In" Type="Int32" />
+            <Parameter Name="tipoMovimiento" Mode="In" Type="String" />
+            <Parameter Name="opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2080,6 +2115,9 @@
         </ComplexType>
         <ComplexType Name="gestionArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="asociarLaborLote_Result">
+          <Property Type="String" Name="mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2208,6 +2246,7 @@
           <EntitySetMapping Name="Insumo">
             <EntityTypeMapping TypeName="DBFincaModel.Insumo">
               <MappingFragment StoreEntitySet="Insumo">
+                <ScalarProperty Name="PrecioPromedio" ColumnName="PrecioPromedio" />
                 <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
                 <ScalarProperty Name="idTipoInsumo" ColumnName="idTipoInsumo" />
                 <ScalarProperty Name="NombreInsumo" ColumnName="NombreInsumo" />
@@ -2225,7 +2264,6 @@
                 <ScalarProperty Name="idLabor" ColumnName="idLabor" />
                 <ScalarProperty Name="NombreLabor" ColumnName="NombreLabor" />
                 <ScalarProperty Name="ModificaArboles" ColumnName="ModificaArboles" />
-                <ScalarProperty Name="TipoPagoLabor" ColumnName="TipoPagoLabor" />
                 <ScalarProperty Name="RequiereInsumo" ColumnName="RequiereInsumo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstadoLabor" ColumnName="EstadoLabor" />
@@ -2278,6 +2316,7 @@
           <EntitySetMapping Name="MovimientosArboles">
             <EntityTypeMapping TypeName="DBFincaModel.MovimientosArboles">
               <MappingFragment StoreEntitySet="MovimientosArboles">
+                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
                 <ScalarProperty Name="idMovimientosArboles" ColumnName="idMovimientosArboles" />
                 <ScalarProperty Name="idArboles" ColumnName="idArboles" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
@@ -2507,13 +2546,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="gestionLotes" FunctionName="DBFincaModel.Store.gestionLotes" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DBFincaModel.gestionLotes_Result">
-                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="gestionArboles" FunctionName="DBFincaModel.Store.gestionArboles" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBFincaModel.gestionArboles_Result">
@@ -2521,6 +2553,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="asociarLaborLote" FunctionName="DBFincaModel.Store.asociarLaborLote" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.asociarLaborLote_Result">
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsercionInsumoLaborLote" FunctionName="DBFincaModel.Store.InsercionInsumoLaborLote" />
+          <FunctionImportMapping FunctionImportName="SalariosEmpleados" FunctionName="DBFincaModel.Store.SalariosEmpleados" />
+          <FunctionImportMapping FunctionImportName="registroProduccion" FunctionName="DBFincaModel.Store.registroProduccion" />
+          <FunctionImportMapping FunctionImportName="gestionArboles2" FunctionName="DBFincaModel.Store.gestionArboles2" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
