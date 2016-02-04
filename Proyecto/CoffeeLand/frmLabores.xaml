@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:CoffeeLand"
         mc:Ignorable="d"
-        Height="600"
+        Height="551"
         Width="692"
         ResizeMode="NoResize"
         WindowStartupLocation="Manual"
@@ -33,7 +33,7 @@
     <Grid x:Name="gridPrincipal">
         <TabControl Margin="0,10,0,-10">
             <TabItem x:Name="tabRegistrar" Header="Registrar">
-                <Grid x:Name="gridRegistrar" Height="513" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
+                <Grid x:Name="gridRegistrar" Height="457" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="293*"/>
                         <RowDefinition Height="220*"/>
@@ -84,7 +84,7 @@
             	    TextWrapping="Wrap" Height="38" VerticalAlignment="Top"
                     Visibility="Collapsed"/>
 
-                    <TextBox x:Name="txtDescripcion" Margin="56,70,0,0"
+                    <TextBox x:Name="txtDescripcion" Margin="57,32,0,0"
             	    Controls:TextBoxHelper.UseFloatingWatermark="True"
             	    Controls:TextBoxHelper.Watermark="Descripción"
             	    Controls:TextBoxHelper.ClearTextButton="True" 
@@ -99,30 +99,14 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <ComboBox x:Name="cmbTipoPago" HorizontalAlignment="Left"
-                              Margin="57,2,0,0" VerticalAlignment="Top"
-                              Width="554" Height="42"
-                              Grid.Row="1" 
-                              Loaded="cmbTipoPago_Loaded"
-                              >
-                        <ComboBox.SelectedIndex>
-                            <Binding Path="Selected" Source="{StaticResource validaciones}" ValidatesOnDataErrors="True" 
-                             UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </ComboBox.SelectedIndex>
-                    </ComboBox>
-
-                    <GroupBox x:Name="groupModificaArbol" Header="¿ La labor modifica la cantidad de árboles?" HorizontalAlignment="Left" Margin="57,179,0,0" VerticalAlignment="Top" Height="86" Width="311" FontSize="8">
+                    <GroupBox x:Name="groupModificaArbol" Header="¿ La labor modifica la cantidad de árboles?" HorizontalAlignment="Left" Margin="57,175,0,0" VerticalAlignment="Top" Height="86" Width="311" FontSize="8">
                         <Grid>
                             <RadioButton x:Name="rbtnArbolesSi" Content="Si" HorizontalAlignment="Left" Margin="78,11,0,0" VerticalAlignment="Top" Height="24" Width="45" />
                             <RadioButton x:Name="rbtnArbolesNo" Content="No" HorizontalAlignment="Left" Margin="159,10,0,0" VerticalAlignment="Top" Height="26" Width="46" IsChecked="True" />
                         
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="groupRequiereInsumo" Header="¿ Requiere Insumo?" HorizontalAlignment="Left" Margin="392,179,0,0" VerticalAlignment="Top" Height="87" Width="218" FontSize="8">
+                    <GroupBox x:Name="groupRequiereInsumo" Header="¿ Requiere Insumo?" HorizontalAlignment="Left" Margin="392,174,0,0" VerticalAlignment="Top" Height="87" Width="218" FontSize="8">
                         <Grid>
                             <RadioButton x:Name="rbtnInsumoSi" Content="Si" HorizontalAlignment="Left" Margin="41,11,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
                             <RadioButton x:Name="rbtnInsumoNo" Content="No" HorizontalAlignment="Left" Margin="122,10,0,0" VerticalAlignment="Top" Height="26" Width="46" IsChecked="True"/>

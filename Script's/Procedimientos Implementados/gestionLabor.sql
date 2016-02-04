@@ -1,7 +1,7 @@
 -------------------------------------------LABOR----------------------------------
 
 create proc gestionLabor
- (@TipoPagoLabor varchar(20), @nombreLabor varchar(25),@modificaArbol bit,@requiereInsumo bit,  
+ ( @nombreLabor varchar(25),@modificaArbol bit,@requiereInsumo bit,  
  @descripcion varchar(150),@idLabor int,@opc int)
 
  as
@@ -12,8 +12,8 @@ create proc gestionLabor
 		begin
 			if ((select count(NombreLabor) from Labor where NombreLabor = @nombreLabor) = 0)
 				 begin
-					 insert into Labor(TipoPagoLabor,NombreLabor,ModificaArboles,RequiereInsumo,Descripcion)
-					 values (@TipoPagoLabor,@nombreLabor,@modificaArbol,@requiereInsumo,@descripcion)
+					 insert into Labor(NombreLabor,ModificaArboles,RequiereInsumo,Descripcion)
+					 values (@nombreLabor,@modificaArbol,@requiereInsumo,@descripcion)
 					 set @mensaje = 'Registro exitoso!'
 				 end
 
@@ -28,7 +28,6 @@ create proc gestionLabor
 			 begin
 				 update Labor
 				 set
-				 TipoPagoLabor = @TipoPagoLabor,
 				 NombreLabor = @nombreLabor,
 				 ModificaArboles = @modificaArbol,
 				 RequiereInsumo=@requiereInsumo,

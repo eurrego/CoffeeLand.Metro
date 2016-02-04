@@ -49,7 +49,7 @@ namespace CoffeeLand
         private bool validarCampos()
         {
 
-            if (cmbTipoPago.SelectedIndex == 0 || txtNombre.Text == string.Empty || txtDescripcion.Text == string.Empty || validarGroupBox() == false)
+            if (txtNombre.Text == string.Empty || txtDescripcion.Text == string.Empty || validarGroupBox() == false)
             {
                 mensajeError("Debe Ingresar todos los Campos");
                 validacion = false;
@@ -93,7 +93,7 @@ namespace CoffeeLand
         // limpiar Controles
         private void Limpiar()
         {
-            cmbTipoPago.SelectedIndex = 0;
+            
             txtNombre.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
             txtId.Text = string.Empty;
@@ -117,7 +117,7 @@ namespace CoffeeLand
         private void frmLabores1_Loaded(object sender, RoutedEventArgs e)
         {
             Mostrar();
-            cmbTipoPago.SelectedIndex = 0;
+            
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -126,7 +126,7 @@ namespace CoffeeLand
 
             if (txtId.Text == string.Empty)
             {
-                if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
+                if (IsValid(txtNombre) && IsValid(txtDescripcion))
                 {
                     rpta = MLabores.GetInstance().GestionLabor( txtNombre.Text,Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text ,0, 1);
                     this.ShowMessageAsync("Mensaje", rpta);
@@ -136,7 +136,7 @@ namespace CoffeeLand
             }
             else
             {
-                if (IsValid(txtNombre) && IsValid(txtDescripcion) && IsValid(cmbTipoPago))
+                if (IsValid(txtNombre) && IsValid(txtDescripcion) )
                 {
                     rpta = MLabores.GetInstance().GestionLabor(txtNombre.Text, Convert.ToBoolean(rbtnArbolesSi.IsChecked), Convert.ToBoolean(rbtnInsumoSi.IsChecked), txtDescripcion.Text, Convert.ToInt32(txtId.Text), 2);
                     this.ShowMessageAsync("Mensaje", rpta);
@@ -151,15 +151,7 @@ namespace CoffeeLand
             Mostrar();
         }
 
-        private void cmbTipoPago_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<string> data = new List<string>();
-            data.Add("Seleccione un tipo de Pago...");
-            data.Add("Productividad");
-            data.Add("Jornal");
-
-            cmbTipoPago.ItemsSource = data;
-        }
+        
 
         private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
