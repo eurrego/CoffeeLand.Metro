@@ -118,5 +118,17 @@ namespace CoffeeLand
             frmTerrenos misTerrenos = new frmTerrenos();
             misTerrenos.ShowDialog();
         }
+
+        private void btnEstadoCuenta_Click(object sender, RoutedEventArgs e)
+        {
+            frmEstadoCuenta miCuenta = new frmEstadoCuenta();
+            miCuenta.ShowDialog();
+        }
+
+        private void btnCompras_Click(object sender, RoutedEventArgs e)
+        {
+            frmCompra miCompra = new frmCompra();
+            miCompra.ShowDialog();
+        }
     }
 }

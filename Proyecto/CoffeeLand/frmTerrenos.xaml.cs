@@ -236,7 +236,7 @@ namespace CoffeeLand
         private void btnModificarInsumo_Click(object sender, RoutedEventArgs e)
         {
             index = tblInsumos.SelectedIndex;
-            cmbInsumo.Text = dt.Rows[index].ItemArray[0].ToString();
+            cmbInsumo.Text = dt.Rows[index].ItemArray[4].ToString();
             txtCantidadInsumo.Text = dt.Rows[index].ItemArray[1].ToString();
 
             dt.Rows[index].Delete();

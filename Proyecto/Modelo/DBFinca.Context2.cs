@@ -449,5 +449,57 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("gestionArboles2", idLoteParameter, idTipoArbolParameter, cantidadParameter, fechaParameter, idMovimientoParameter, tipoMovimientoParameter, opcionParameter);
         }
+    
+        public virtual ObjectResult<AbonoCompraProveedor_Result> AbonoCompraProveedor(Nullable<int> idCompra, Nullable<decimal> valor, Nullable<System.DateTime> fecha, Nullable<decimal> total)
+        {
+            var idCompraParameter = idCompra.HasValue ?
+                new ObjectParameter("idCompra", idCompra) :
+                new ObjectParameter("idCompra", typeof(int));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var totalParameter = total.HasValue ?
+                new ObjectParameter("Total", total) :
+                new ObjectParameter("Total", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AbonoCompraProveedor_Result>("AbonoCompraProveedor", idCompraParameter, valorParameter, fechaParameter, totalParameter);
+        }
+    
+        public virtual ObjectResult<ComprasProveedor_Result1> ComprasProveedor(string nit)
+        {
+            var nitParameter = nit != null ?
+                new ObjectParameter("nit", nit) :
+                new ObjectParameter("nit", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprasProveedor_Result1>("ComprasProveedor", nitParameter);
+        }
+    
+        public virtual int InsertarDetalleCompra()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertarDetalleCompra");
+        }
+    
+        public virtual ObjectResult<RegistrarCompra_Result> RegistrarCompra(string nit, Nullable<System.DateTime> fecha, Nullable<int> numeroFactura)
+        {
+            var nitParameter = nit != null ?
+                new ObjectParameter("nit", nit) :
+                new ObjectParameter("nit", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var numeroFacturaParameter = numeroFactura.HasValue ?
+                new ObjectParameter("numeroFactura", numeroFactura) :
+                new ObjectParameter("numeroFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RegistrarCompra_Result>("RegistrarCompra", nitParameter, fechaParameter, numeroFacturaParameter);
+        }
     }
 }

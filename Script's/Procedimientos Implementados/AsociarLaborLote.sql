@@ -1,4 +1,4 @@
-alter proc asociarLaborLote
+create proc asociarLaborLote
 (@idLabor int, @idLote int, @fecha date)
 
 as

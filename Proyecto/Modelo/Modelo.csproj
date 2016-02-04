@@ -54,6 +54,9 @@
     <Compile Include="AbonoCompra.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="AbonoCompraProveedor_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="AbonoDeuda.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -67,6 +70,12 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="Compra.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasProveedor_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComprasProveedor_Result1.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="Compra_Insumo.cs">
@@ -155,7 +164,9 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="MArbol.cs" />
+    <Compile Include="MCompra.cs" />
     <Compile Include="MConcepto.cs" />
+    <Compile Include="MEstadoCuenta.cs" />
     <Compile Include="MGastos.cs" />
     <Compile Include="MInsumo.cs" />
     <Compile Include="MLabores.cs" />
@@ -187,6 +198,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarCompra_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="RegistroPago.cs">

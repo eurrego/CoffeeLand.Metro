@@ -1,0 +1,218 @@
+﻿<Controls:MetroWindow x:Name="frmEstadoCuenta1" x:Class="CoffeeLand.frmEstadoCuenta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        xmlns:local="clr-namespace:CoffeeLand"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual"
+        Left="50"
+        Top="35" 
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Height="650" Width="767.457" Loaded="frmEstadoCuenta1_Loaded">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+
+
+    
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="ControlesFlyouts">
+            <Controls:Flyout x:Name="FlyoutAbonos"
+                             Header="Realizar Abono"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="True"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="300">
+                <Grid Width="250">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="30">
+
+                        <TextBox x:Name="txtAbono" Margin="3"
+                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
+                    	Controls:TextBoxHelper.Watermark="Valor Abono" 
+                        Controls:TextBoxHelper.ClearTextButton="True"
+                        Height="42" VerticalAlignment="Top" 
+                        Visibility="Visible"/>
+
+                        <DatePicker x:Name="dtdFechaAbono" 
+                                    SelectedDate= "{x:Static sys:DateTime.Now}" IsEnabled="False"
+                                    Margin="5"
+                                    VerticalAlignment="Top" 
+                                    Height="42"/>
+
+                        <Button x:Name="btnConfirmarAbono" Content="Guardar" HorizontalAlignment="Center" 
+            	                    Margin="10" VerticalAlignment="Top" Width="80" 
+            	                    Height="28" 
+                                    Style="{StaticResource SquareButtonStyle}" Click="btnConfirmarAbono_Click"  />
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+    <Grid x:Name="gridPrincipal">
+        <TabControl Margin="0,10,0,-10">
+            <TabItem x:Name="tabCompra" Header="Compras" Margin="18,0,-18,0">
+                <Grid x:Name="gridPrestamos" Height="570" VerticalAlignment="Top" Background="White" Margin="-2,-9,2,0">
+
+                    <TextBox x:Name="txtBuscarDocumento" Margin="24,22,537,0"
+                    	Controls:TextBoxHelper.UseFloatingWatermark="True"
+                    	Controls:TextBoxHelper.Watermark="Documento" 
+                        Height="42" VerticalAlignment="Top" 
+                        Visibility="Collapsed"/>
+
+                    <Button x:Name="btnBuscarDocumento" Style="{DynamicResource MetroCircleButtonStyle}"
+                            
+                            Margin="301,22,538,506" 
+                            Visibility="Collapsed" 
+                            Background="#FF41B1E1" BorderBrush="#FF41B1E1">
+                        <Rectangle Width="15" Height="15" Fill="{DynamicResource WhiteBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_magnify}"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+
+                    <ComboBox x:Name="cmbProveedor" HorizontalAlignment="Left"
+                              DisplayMemberPath="NombreProveedor" 
+                    	      SelectedValuePath="Nit"
+                              Margin="20,22,0,0" VerticalAlignment="Top"
+                              IsSynchronizedWithCurrentItem="true" 
+                              Width="317" Height="42"
+                              SelectedIndex="0"
+                              Visibility="Visible" SelectionChanged="cmbProveedor_SelectionChanged" 
+                              />
+
+                    <TextBlock x:Name="lblProveedor" HorizontalAlignment="Left" Margin="353,26,0,0" TextWrapping="Wrap" Text="Seleccione un Proveedor" VerticalAlignment="Top" Height="30" Width="330" FontSize="28" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                    <GroupBox x:Name="groupDeudas" Header="Compras"
+                              HorizontalAlignment="Left" Margin="20,95,0,0" 
+                              VerticalAlignment="Top" Height="453" Width="723">
+                        <Grid>
+                            <TextBlock x:Name="lblTotal" HorizontalAlignment="Left" Margin="60,18,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="24"/>
+                            <TextBlock x:Name="info" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Total:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667"/>
+
+                            <DataGrid x:Name="tblCompras" BorderThickness="0" Margin="10,62,0,10" AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              HorizontalContentAlignment="Stretch" 
+                              CanUserAddRows="False" 
+                              CanUserDeleteRows="False"
+                              Style="{StaticResource AzureDataGrid}" Width="682"
+                              >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding NumeroFactura}"  Header="Numero Factura" Width="130" IsReadOnly="True"/>
+                                    <DataGridTemplateColumn   Header="Fecha"  Width="130" IsReadOnly ="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding Fecha,Mode=OneWay}"  IsEnabled="False"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding total,StringFormat={}{0:c}}"  Header="Valor Total" Width="130" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding adeuda,StringFormat={}{0:c}}"   Header="Valor A deuda" Width="130" IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Width="70" Header="Detalle compra">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="btnDetalleCompra" Click="btnDetalleCompra_Click"  Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}"  >
+                                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
+                                                        <Rectangle.OpacityMask>
+                                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="100" Header="ABonar">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="btnAbonar"  Width="40"  Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Click="btnAbonar_Click" >
+                                                    <Rectangle Width="10" Height="10" Fill="{DynamicResource BlackBrush}">
+                                                        <Rectangle.OpacityMask>
+                                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_delete}"/>
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabDetalleCompra" Header="Detalle Compra" Margin="18,0,-18,0" Visibility="Collapsed">
+                <Grid>
+
+
+                    <GroupBox x:Name="groupInfoDetalleCompra" Header="Información Compra" Margin="23,5,26,484">
+                        <Grid>
+                            <TextBlock x:Name="lbl1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nombre Proveedor:" VerticalAlignment="Top" Height="41" Width="80" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblProveedorDetalleCompra" HorizontalAlignment="Left" Margin="94,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="14" Width="144" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                            <TextBlock x:Name="lbl2" HorizontalAlignment="Left" Margin="255,10,0,0" TextWrapping="Wrap" Text="Numero de Factura:" VerticalAlignment="Top" Height="41" Width="80" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblFacturaDetalleCompra" HorizontalAlignment="Left" Margin="315,29,0,-4" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Width="69" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold" RenderTransformOrigin="6.214,1.13"/>
+                            <TextBlock x:Name="lbl3" HorizontalAlignment="Left" Margin="524,10,0,0" TextWrapping="Wrap" Text="Fecha de Compra:" VerticalAlignment="Top" Height="36" Width="80" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+                            <TextBlock x:Name="lblFechaDetalleCompra" HorizontalAlignment="Left" Margin="588,29,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="15" Width="94" FontSize="15" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+
+                        </Grid>
+
+                    </GroupBox>
+
+                    <GroupBox x:Name="groupDetalleCompra" Header="Detalle Compra"
+                              HorizontalAlignment="Left" Margin="23,95,0,0" 
+                              VerticalAlignment="Top" Height="443" Width="704">
+                        <Grid>
+                            <TextBlock x:Name="lblTotalDetalleCompra"  HorizontalAlignment="Left" Margin="73,17,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="24" Width="126"/>
+                            <TextBlock  HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Total:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667"/>
+                            <Button x:Name="btnAbono" Content="Abono" HorizontalAlignment="Left" 
+            	                    Margin="602,17,0,0" VerticalAlignment="Top" Width="80" 
+            	                    Height="28" 
+                                    Style="{StaticResource AccentedSquareButtonStyle}"  />
+
+                            <DataGrid x:Name="tblDetalleCompra" BorderThickness="0" Margin="10,62,0,10" AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              HorizontalContentAlignment="Stretch" 
+                              CanUserAddRows="False" 
+                              CanUserDeleteRows="False"
+                              Style="{StaticResource AzureDataGrid}" Width="672"
+                              >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding nombre}" Header="Producto" Width="178" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding cantidad}" Header="Cantidad"  Width="178" IsReadOnly ="False"/>
+                                    <DataGridTextColumn Binding="{Binding valor,StringFormat={}{0:c}}" Header="Valor" Width="178" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding subtotal,StringFormat={}{0:c}}" Header="Subtotal" Width="178" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>

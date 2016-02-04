@@ -731,10 +731,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AbonoCompraProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCompra" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="money" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Total" Type="money" Mode="In" />
+        </Function>
         <Function Name="asociarLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLabor" Type="int" Mode="In" />
           <Parameter Name="idLote" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ComprasProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nit" Type="varchar" Mode="In" />
         </Function>
         <Function Name="gestionArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLote" Type="smallint" Mode="In" />
@@ -826,6 +835,12 @@
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
         <Function Name="InsercionInsumoLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertarDetalleCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RegistrarCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nit" Type="varchar" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="numeroFactura" Type="int" Mode="In" />
+        </Function>
         <Function Name="registroProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLote" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
@@ -2079,6 +2094,21 @@
             <Parameter Name="tipoMovimiento" Mode="In" Type="String" />
             <Parameter Name="opcion" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AbonoCompraProveedor" ReturnType="Collection(DBFincaModel.AbonoCompraProveedor_Result)">
+            <Parameter Name="idCompra" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Total" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ComprasProveedor" ReturnType="Collection(DBFincaModel.ComprasProveedor_Result1)">
+          <Parameter Name="nit" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertarDetalleCompra" />
+          <FunctionImport Name="RegistrarCompra" ReturnType="Collection(DBFincaModel.RegistrarCompra_Result)">
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="numeroFactura" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2118,6 +2148,26 @@
         </ComplexType>
         <ComplexType Name="asociarLaborLote_Result">
           <Property Type="String" Name="mensaje" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ComprasProveedor_Result">
+          <Property Type="Int32" Name="idCompra" Nullable="false" />
+          <Property Type="Decimal" Name="total" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="adeuda" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Int32" Name="NumeroFactura" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AbonoCompraProveedor_Result">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="17" />
+        </ComplexType>
+        <ComplexType Name="ComprasProveedor_Result1">
+          <Property Type="Int32" Name="idCompra" Nullable="false" />
+          <Property Type="Decimal" Name="total" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="adeuda" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Int32" Name="NumeroFactura" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RegistrarCompra_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2564,6 +2614,32 @@
           <FunctionImportMapping FunctionImportName="SalariosEmpleados" FunctionName="DBFincaModel.Store.SalariosEmpleados" />
           <FunctionImportMapping FunctionImportName="registroProduccion" FunctionName="DBFincaModel.Store.registroProduccion" />
           <FunctionImportMapping FunctionImportName="gestionArboles2" FunctionName="DBFincaModel.Store.gestionArboles2" />
+          <FunctionImportMapping FunctionImportName="AbonoCompraProveedor" FunctionName="DBFincaModel.Store.AbonoCompraProveedor" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.AbonoCompraProveedor_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ComprasProveedor" FunctionName="DBFincaModel.Store.ComprasProveedor">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.ComprasProveedor_Result1">
+                <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="adeuda" ColumnName="adeuda" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertarDetalleCompra" FunctionName="DBFincaModel.Store.InsertarDetalleCompra" />
+          <FunctionImportMapping FunctionImportName="RegistrarCompra" FunctionName="DBFincaModel.Store.RegistrarCompra" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.RegistrarCompra_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

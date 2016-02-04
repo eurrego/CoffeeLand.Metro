@@ -48,5 +48,16 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
         }
 
+        public virtual int SP_InsertarDetalleCompra(DataTable dtDatos)
+        {
+            var datos = new SqlParameter("dtDetalleCompra", SqlDbType.Structured);
+            datos.Value = dtDatos;
+            datos.TypeName = "dbo.DetalleCompra";
+
+            string command = "EXEC InsertarDetalleCompra @dtDetalleCompra";
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
+        }
+
     }
 }
