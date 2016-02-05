@@ -16,6 +16,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
 using Modelo;
+using System.Collections;
 
 namespace CoffeeLand
 {
@@ -74,7 +75,7 @@ namespace CoffeeLand
             }
             else
             {
-                tblPrestamos.ItemsSource = MPrestamosEmpleados.GetInstance().ConsultarDeudaEmpleado(txtBuscarDocumento.Text);
+                tblPrestamos.ItemsSource = MPrestamosEmpleados.GetInstance().ConsultarDeudaEmpleado(txtBuscarDocumento.Text) ;
             }
             deudaTotal();
         }

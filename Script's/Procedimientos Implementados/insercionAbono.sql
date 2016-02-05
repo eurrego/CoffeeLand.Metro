@@ -19,8 +19,8 @@ declare @mensaje varchar(50)
 
 			update DeudaPersona 
 				   set
-				   EstadoCuenta = 'P',
-				   Valor = 0
+				   EstadoCuenta = 'P'
+				   --Valor = 0
 				   WHERE idDeudaPersona = @idDeuda 
 
 			set @mensaje = 'Prestamo de la fecha: '+ CONVERT(VARCHAR, (select fecha from DeudaPersona where idDeudaPersona = @idDeuda ), 101) +' Cancelado!';
@@ -31,10 +31,10 @@ declare @mensaje varchar(50)
 			insert into AbonoDeuda(idDeudaPersona ,Valor,Fecha)
 			values (@idDeuda,@valor,@fecha)
 
-			update DeudaPersona 
-				   set
-				   Valor =  @newValor
-				   WHERE idDeudaPersona = @idDeuda 
+			--update DeudaPersona 
+			--	   set
+			--	   Valor =  @newValor
+			--	   WHERE idDeudaPersona = @idDeuda 
 
 	   set @mensaje = 'Abono Exitoso'
 	 end
@@ -47,8 +47,8 @@ declare @mensaje varchar(50)
 
 			update DeudaPersona 
 				   set
-				   EstadoCuenta = 'P',
-		           Valor = 0
+				   EstadoCuenta = 'P'
+		           --Valor = 0
 				   WHERE idDeudaPersona = @idDeuda 
 
 			set @mensaje = 'Abono Exitoso'
