@@ -75,8 +75,6 @@
                     Visibility="Collapsed"/>
 
                     <ComboBox x:Name="cmbTipoDocumento"  HorizontalAlignment="Left"
-                              DisplayMemberPath="NombreTipoDocumento" 
-                              SelectedValuePath="idTipoDocumento"
                               IsSynchronizedWithCurrentItem="true" 
                               Margin="57,214,0,0" VerticalAlignment="Top"
                               Width="261" Height="42"
@@ -102,9 +100,7 @@
                               SelectedIndex="0" Loaded="cmbGenero_Loaded"
                               />
 
-                    <ComboBox x:Name="cmbTipoContrato" HorizontalAlignment="Left"
-                              DisplayMemberPath="NombreTipoContratoPersona" 
-                    	      SelectedValuePath="idTipoContratoPersona"
+                    <ComboBox x:Name="cmbTipoContrato" HorizontalAlignment="Left"                             
                               Margin="355,375,0,0" VerticalAlignment="Top"
                               IsSynchronizedWithCurrentItem="true" 
                               Width="261" Height="42"

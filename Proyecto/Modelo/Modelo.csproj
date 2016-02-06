@@ -84,6 +84,9 @@
     <Compile Include="Concepto.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="CostoBeneficio.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBFinca.Context2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,6 +190,7 @@
     <Compile Include="Municipio.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="MVentas.cs" />
     <Compile Include="Persona.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -219,12 +223,6 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoArbol.cs">
-      <DependentUpon>DBFinca.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TipoContratoPersona.cs">
-      <DependentUpon>DBFinca.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TipoDocumento.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoInsumo.cs">

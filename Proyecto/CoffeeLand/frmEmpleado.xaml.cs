@@ -81,8 +81,19 @@ namespace CoffeeLand
         private void Mostrar()
         {
             tblEmpleado.ItemsSource = MPersona.GetInstance().ConsultarPersona();
-            cmbTipoDocumento.ItemsSource = MPersona.GetInstance().ConsultarTipoDocumento();
-            cmbTipoContrato.ItemsSource = MPersona.GetInstance().ConsultarTipoContrato();
+            
+
+            List<string> dataTipoDocumento = new List<string>();
+            dataTipoDocumento.Add("Seleccione un Tipo De Documento");
+            dataTipoDocumento.Add("CC");
+            dataTipoDocumento.Add("TI");
+            cmbTipoDocumento.ItemsSource = dataTipoDocumento;
+
+            List<string> dataTipoContrato = new List<string>();
+            dataTipoContrato.Add("Seleccione un Tipo De Contrato");
+            dataTipoContrato.Add("Permanente");
+            dataTipoContrato.Add("Temporal");
+            cmbTipoContrato.ItemsSource = dataTipoContrato;
             EstilosCeldas();
         }
 
@@ -121,7 +132,7 @@ namespace CoffeeLand
             {
                 if (validarCampos())
                 {
-                    rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text, Convert.ToString(cmbGenero.SelectedItem), txtTelefono.Text, Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtDocumento.Text), 1, Convert.ToByte(cmbTipoDocumento.SelectedValue), Convert.ToByte(cmbTipoContrato.SelectedValue));
+                    rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text, Convert.ToString(cmbGenero.SelectedItem), txtTelefono.Text, Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtDocumento.Text), 1, Convert.ToString(cmbTipoDocumento.SelectedItem), Convert.ToString(cmbTipoContrato.SelectedItem));
                     this.ShowMessageAsync("Mensaje", rpta);
                     Limpiar();
                     tabConsultar.Focus();
@@ -129,7 +140,7 @@ namespace CoffeeLand
             }
             else
             {
-                rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text, Convert.ToString(cmbGenero.SelectedItem), txtTelefono.Text, Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtId.Text), 2, Convert.ToByte(cmbTipoDocumento.SelectedValue), Convert.ToByte(cmbTipoContrato.SelectedValue));
+                rpta = MPersona.GetInstance().GestionPersona(txtNombre.Text, Convert.ToString(cmbGenero.SelectedItem), txtTelefono.Text, Convert.ToDateTime(dtdFechaNacimiento.SelectedDate), Convert.ToInt32(txtId.Text), 2, Convert.ToString(cmbTipoDocumento.SelectedItem), Convert.ToString(cmbTipoContrato.SelectedItem));
                 this.ShowMessageAsync("Mensaje", rpta);
                 Limpiar();
                 lblEstado.Content = "REGISTRAR EMPLEADOS";
@@ -152,8 +163,8 @@ namespace CoffeeLand
             txtDocumento.Text = item.DocumentoPersona;
             txtTelefono.Text = item.Telefono;
             cmbGenero.SelectedItem = item.Genero;
-            cmbTipoContrato.SelectedValue = item.idTipoContratoPersona;
-            cmbTipoDocumento.SelectedValue = item.idTipoDocumento;
+            cmbTipoContrato.SelectedValue = item.TipoContratoPersona;
+            cmbTipoDocumento.SelectedValue = item.TipoDocumento;
             dtdFechaNacimiento.SelectedDate = item.FechaNacimineto;
 
             lblEstado.Content = "MODIFICAR EMPLEADOS";
@@ -185,8 +196,8 @@ namespace CoffeeLand
             string nombre = item.NombrePersona;
             string telefono = item.Telefono;
             string genero = item.Genero;
-            byte tipoContrato = item.idTipoContratoPersona;
-            byte tipoDocumento = item.idTipoDocumento;
+            string tipoContrato = item.TipoContratoPersona;
+            string tipoDocumento = item.TipoDocumento;
             DateTime fecha = item.FechaNacimineto;
 
             var mySettings = new MetroDialogSettings()
