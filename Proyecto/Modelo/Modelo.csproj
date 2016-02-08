@@ -177,6 +177,7 @@
     <Compile Include="MovimientosArboles.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="MPagos.cs" />
     <Compile Include="MPersona.cs" />
     <Compile Include="MPrestamosEmpleados.cs" />
     <Compile Include="MProducto.cs" />
