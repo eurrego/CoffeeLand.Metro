@@ -255,14 +255,6 @@
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="valor" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="RegistroPago_DeudaPersona">
-          <Key>
-            <PropertyRef Name="idRegistroPago_DeudaPersona" />
-          </Key>
-          <Property Name="idRegistroPago_DeudaPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idRegistroPago" Type="int" Nullable="false" />
-          <Property Name="idDeudaPersona" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
             <PropertyRef Name="idRegistroPagoSalario" />
@@ -619,30 +611,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_DeudaPersona">
-          <End Role="DeudaPersona" Type="Self.DeudaPersona" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_RegistroPago">
-          <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegistroPago">
-              <PropertyRef Name="idRegistroPago" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idRegistroPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RegistroPagoSalario_idSalarioPersonaTemporal">
           <End Role="SalarioPersonaTemporal" Type="Self.SalarioPersonaTemporal" Multiplicity="0..1" />
           <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
@@ -869,7 +837,6 @@
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistroPago" EntityType="Self.RegistroPago" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RegistroPago_DeudaPersona" EntityType="Self.RegistroPago_DeudaPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistroPagoSalario" EntityType="Self.RegistroPagoSalario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalarioPersonaPermanente" EntityType="Self.SalarioPersonaPermanente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalarioPersonaTemporal" EntityType="Self.SalarioPersonaTemporal" Schema="dbo" store:Type="Tables" />
@@ -975,14 +942,6 @@
           <AssociationSet Name="FK_Produccion_Lote" Association="Self.FK_Produccion_Lote">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Produccion" EntitySet="Produccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_DeudaPersona" Association="Self.FK_RegistroPagoDeudaPersona_DeudaPersona">
-            <End Role="DeudaPersona" EntitySet="DeudaPersona" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_RegistroPago" Association="Self.FK_RegistroPagoDeudaPersona_RegistroPago">
-            <End Role="RegistroPago" EntitySet="RegistroPago" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistroPagoSalario_idSalarioPersonaTemporal" Association="Self.FK_RegistroPagoSalario_idSalarioPersonaTemporal">
             <End Role="SalarioPersonaTemporal" EntitySet="SalarioPersonaTemporal" />
@@ -2426,15 +2385,6 @@
                 <ScalarProperty Name="idRegistroPago" ColumnName="idRegistroPago" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RegistroPago_DeudaPersona">
-            <EntityTypeMapping TypeName="DBFincaModel.RegistroPago_DeudaPersona">
-              <MappingFragment StoreEntitySet="RegistroPago_DeudaPersona">
-                <ScalarProperty Name="idRegistroPago_DeudaPersona" ColumnName="idRegistroPago_DeudaPersona" />
-                <ScalarProperty Name="idRegistroPago" ColumnName="idRegistroPago" />
-                <ScalarProperty Name="idDeudaPersona" ColumnName="idDeudaPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
