@@ -1074,7 +1074,6 @@
           <Property Name="EstadoCuenta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AbonoDeuda" Relationship="Self.FK_AbonoDeuda_DeudaPersona" FromRole="DeudaPersona" ToRole="AbonoDeuda" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_DeudaPersona_Persona" FromRole="DeudaPersona" ToRole="Persona" />
-          <NavigationProperty Name="RegistroPago_DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_DeudaPersona" FromRole="DeudaPersona" ToRole="RegistroPago_DeudaPersona" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Egreso">
@@ -1264,18 +1263,7 @@
           <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="RegistroPago_DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_RegistroPago" FromRole="RegistroPago" ToRole="RegistroPago_DeudaPersona" />
           <NavigationProperty Name="RegistroPagoSalario" Relationship="Self.FK_RegistroPagoSalario_RegistroPago" FromRole="RegistroPago" ToRole="RegistroPagoSalario" />
-        </EntityType>
-        <EntityType Name="RegistroPago_DeudaPersona">
-          <Key>
-            <PropertyRef Name="idRegistroPago_DeudaPersona" />
-          </Key>
-          <Property Name="idRegistroPago_DeudaPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
-          <Property Name="idDeudaPersona" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_DeudaPersona" FromRole="RegistroPago_DeudaPersona" ToRole="DeudaPersona" />
-          <NavigationProperty Name="RegistroPago" Relationship="Self.FK_RegistroPagoDeudaPersona_RegistroPago" FromRole="RegistroPago_DeudaPersona" ToRole="RegistroPago" />
         </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
@@ -1502,18 +1490,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_DeudaPersona">
-          <End Role="DeudaPersona" Type="Self.DeudaPersona" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Finca_Municipio">
           <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
           <End Role="Finca" Type="Self.Finca" Multiplicity="*" />
@@ -1682,18 +1658,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_RegistroPago">
-          <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegistroPago">
-              <PropertyRef Name="idRegistroPago" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idRegistroPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RegistroPagoSalario_RegistroPago">
           <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
           <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
@@ -1755,7 +1719,6 @@
           <EntitySet Name="Producto" EntityType="Self.Producto" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="RegistroPago" EntityType="Self.RegistroPago" />
-          <EntitySet Name="RegistroPago_DeudaPersona" EntityType="Self.RegistroPago_DeudaPersona" />
           <EntitySet Name="RegistroPagoSalario" EntityType="Self.RegistroPagoSalario" />
           <EntitySet Name="SalarioPersonaPermanente" EntityType="Self.SalarioPersonaPermanente" />
           <EntitySet Name="SalarioPersonaTemporal" EntityType="Self.SalarioPersonaTemporal" />
@@ -1814,10 +1777,6 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="DeudaPersona" EntitySet="DeudaPersona" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_DeudaPersona" Association="Self.FK_RegistroPagoDeudaPersona_DeudaPersona">
-            <End Role="DeudaPersona" EntitySet="DeudaPersona" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
-          </AssociationSet>
           <AssociationSet Name="FK_Finca_Municipio" Association="Self.FK_Finca_Municipio">
             <End Role="Municipio" EntitySet="Municipio" />
             <End Role="Finca" EntitySet="Finca" />
@@ -1873,10 +1832,6 @@
           <AssociationSet Name="FK_Venta_Producto" Association="Self.FK_Venta_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Venta" EntitySet="Venta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_RegistroPago" Association="Self.FK_RegistroPagoDeudaPersona_RegistroPago">
-            <End Role="RegistroPago" EntitySet="RegistroPago" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistroPagoSalario_RegistroPago" Association="Self.FK_RegistroPagoSalario_RegistroPago">
             <End Role="RegistroPago" EntitySet="RegistroPago" />

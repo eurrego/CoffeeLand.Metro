@@ -51,7 +51,6 @@ namespace Modelo
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<RegistroPago> RegistroPago { get; set; }
-        public virtual DbSet<RegistroPago_DeudaPersona> RegistroPago_DeudaPersona { get; set; }
         public virtual DbSet<RegistroPagoSalario> RegistroPagoSalario { get; set; }
         public virtual DbSet<SalarioPersonaPermanente> SalarioPersonaPermanente { get; set; }
         public virtual DbSet<SalarioPersonaTemporal> SalarioPersonaTemporal { get; set; }

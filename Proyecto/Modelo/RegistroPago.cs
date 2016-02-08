@@ -17,7 +17,6 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RegistroPago()
         {
-            this.RegistroPago_DeudaPersona = new HashSet<RegistroPago_DeudaPersona>();
             this.RegistroPagoSalario = new HashSet<RegistroPagoSalario>();
         }
     
@@ -25,8 +24,6 @@ namespace Modelo
         public System.DateTime Fecha { get; set; }
         public decimal valor { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RegistroPago_DeudaPersona> RegistroPago_DeudaPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistroPagoSalario> RegistroPagoSalario { get; set; }
     }
