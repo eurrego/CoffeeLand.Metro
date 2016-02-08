@@ -4,7 +4,7 @@
 create proc gestionPersona
 (
 @nombrePersona varchar(50),@genero char(1),@telefono varchar(10),@fechaNacimiento date, @documentoPerosna int, @opc int,
-@idTipoDocumento tinyint , @idTipoContrato tinyint
+@TipoDocumento varchar(10) , @TipoContrato Varchar(10)
 )
 
 as
@@ -18,8 +18,8 @@ if(@opc=1)
 		if ((select count(DocumentoPersona) from Persona where DocumentoPersona = @documentoPerosna) = 0)
 
 			begin
-				insert into Persona (idTipoDocumento, DocumentoPersona,idTipoContratoPersona,NombrePersona, Genero,Telefono,FechaNacimineto)
-				values (@idTipoDocumento,@documentoPerosna,@idTipoContrato,@nombrePersona,@genero,@telefono,@fechaNacimiento)
+				insert into Persona (TipoDocumento, DocumentoPersona,TipoContratoPersona,NombrePersona, Genero,Telefono,FechaNacimineto)
+				values (@TipoDocumento,@documentoPerosna,@TipoContrato,@nombrePersona,@genero,@telefono,@fechaNacimiento)
 				set @mensaje = 'Registro exitoso'
 			end
 		else
@@ -37,7 +37,7 @@ else if(@opc=2)
 			Genero=@genero,
 			Telefono=@telefono,
 			FechaNacimineto=@fechaNacimiento,
-			idTipoContratoPersona=@idTipoContrato
+			TipoContratoPersona=@TipoContrato
 			where DocumentoPersona = @documentoPerosna
 			set @mensaje = 'Actualización exitosa!'
 
@@ -58,10 +58,3 @@ else if (@opc = 3)
 
 end
 
-
-insert into TipoDocumento ( NombreTipoDocumento) values ('CC')
-insert into TipoDocumento ( NombreTipoDocumento) values ('RC')
-insert into TipoDocumento ( NombreTipoDocumento) values ('TI')
-
-insert into TipoContratoPersona( NombreTipoContratoPersona) values ('Temporal')
-insert into TipoContratoPersona( NombreTipoContratoPersona) values ('Permanente')

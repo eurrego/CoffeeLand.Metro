@@ -107,7 +107,7 @@ namespace Modelo
                 };
 
                 var query = lista.Union(from c in entity.Persona
-                                        where c.idTipoContratoPersona == 1
+                                        where c.TipoContratoPersona == "Temporal" && c.EstadoPersona == "A"
                                         select c);
                 return query.ToList();
             }

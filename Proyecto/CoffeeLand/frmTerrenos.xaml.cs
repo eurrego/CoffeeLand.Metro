@@ -332,7 +332,7 @@ namespace CoffeeLand
             MTerrenos.GetInstance().salarioEmpleado(dt1);
 
 
-            if (cmbLabores.Text.Equals("Produccion"))
+            if (cmbLabores.Text.Equals("Recoleccion"))
             {
                 int cantidad = 0;
                 foreach (DataRow itemCantidad in dt1.Rows)

@@ -50,57 +50,21 @@ namespace Modelo
             }
         }
 
-        public List<TipoDocumento> ConsultarTipoDocumento()
+       
+
+
+
+
+        public string GestionPersona(string nombre, string genero, string telefono, DateTime fechaNacimiento, int id, int opcion, string TipoDocumento, string TipoContrato)
         {
+
             using (var entity = new DBFincaEntities())
             {
-
-                List<TipoDocumento> lista = new List<TipoDocumento>()
-                {
-                    new TipoDocumento
-                    {
-                        idTipoDocumento = 0,
-                        NombreTipoDocumento = "Seleccione un Tipo de Documento...",
-                    }
-                };
-
-                var query = lista.Union(from c in entity.TipoDocumento
-                                        select c);
-                return query.ToList();
+                var rpta = entity.gestionPersona(nombre, genero, telefono, fechaNacimiento, id, opcion, TipoDocumento, TipoContrato).First();
+                return rpta.Mensaje;
             }
-
         }
-
-        public List<TipoContratoPersona> ConsultarTipoContrato()
-        {
-            using (var entity = new DBFincaEntities())
-            {
-                List<TipoContratoPersona> lista = new List<TipoContratoPersona>()
-                {
-                    new TipoContratoPersona
-                    {
-                        idTipoContratoPersona = 0,
-                        NombreTipoContratoPersona = "Seleccione un Tipo de Contrato",
-                    }
-                };
-
-                var query = lista.Union(from c in entity.TipoContratoPersona
-                                        select c);
-                return query.ToList();
-            }
-
-        }
-
-        public string GestionPersona(string nombre, string genero, string telefono, DateTime fechaNacimiento, int id, int opcion, byte idTipoDocumento, byte idTipoContrato)
-        {
-         
-                using (var entity = new DBFincaEntities())
-                {
-                    var rpta = entity.gestionPersona(nombre, genero, telefono, fechaNacimiento, id, opcion, idTipoDocumento, idTipoContrato).First();
-                    return rpta.Mensaje;
-                }
-          
-        }
-
     }
+
+
 }

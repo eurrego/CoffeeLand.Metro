@@ -70,6 +70,16 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="EstadoConcepto" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="CostoBeneficio">
+          <Key>
+            <PropertyRef Name="idCostoBeneficio" />
+          </Key>
+          <Property Name="idCostoBeneficio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVenta" Type="int" />
+          <Property Name="idCompra" Type="int" />
+          <Property Name="Precio" Type="money" />
+          <Property Name="EstadoCuenta" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="idDepartamento" />
@@ -199,8 +209,8 @@
             <PropertyRef Name="DocumentoPersona" />
           </Key>
           <Property Name="DocumentoPersona" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="idTipoDocumento" Type="tinyint" Nullable="false" />
-          <Property Name="idTipoContratoPersona" Type="tinyint" Nullable="false" />
+          <Property Name="TipoDocumento" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="TipoContratoPersona" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="NombrePersona" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Genero" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Telefono" Type="varchar" MaxLength="10" Nullable="false" />
@@ -245,14 +255,6 @@
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="valor" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="RegistroPago_DeudaPersona">
-          <Key>
-            <PropertyRef Name="idRegistroPago_DeudaPersona" />
-          </Key>
-          <Property Name="idRegistroPago_DeudaPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idRegistroPago" Type="int" Nullable="false" />
-          <Property Name="idDeudaPersona" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
             <PropertyRef Name="idRegistroPagoSalario" />
@@ -289,20 +291,6 @@
           <Property Name="NombreTipoArbol" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="EstadoTipoArbol" Type="char" MaxLength="1" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TipoContratoPersona">
-          <Key>
-            <PropertyRef Name="idTipoContratoPersona" />
-          </Key>
-          <Property Name="idTipoContratoPersona" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreTipoContratoPersona" Type="varchar" MaxLength="60" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TipoDocumento">
-          <Key>
-            <PropertyRef Name="idTipoDocumento" />
-          </Key>
-          <Property Name="idTipoDocumento" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreTipoDocumento" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoInsumo">
           <Key>
@@ -416,6 +404,30 @@
             </Principal>
             <Dependent Role="Compra_Insumo">
               <PropertyRef Name="idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostoBeneficio_Compra">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="0..1" />
+          <End Role="CostoBeneficio" Type="Self.CostoBeneficio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="CostoBeneficio">
+              <PropertyRef Name="idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostoBeneficio_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="CostoBeneficio" Type="Self.CostoBeneficio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="idVenta" />
+            </Principal>
+            <Dependent Role="CostoBeneficio">
+              <PropertyRef Name="idVenta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -587,30 +599,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Persona_TipoContratoPersona">
-          <End Role="TipoContratoPersona" Type="Self.TipoContratoPersona" Multiplicity="1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoContratoPersona">
-              <PropertyRef Name="idTipoContratoPersona" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="idTipoContratoPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Persona_TipoDocumento">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="idTipoDocumento" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="idTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Produccion_Lote">
           <End Role="Lote" Type="Self.Lote" Multiplicity="1" />
           <End Role="Produccion" Type="Self.Produccion" Multiplicity="*" />
@@ -620,30 +608,6 @@
             </Principal>
             <Dependent Role="Produccion">
               <PropertyRef Name="idLote" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_DeudaPersona">
-          <End Role="DeudaPersona" Type="Self.DeudaPersona" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_RegistroPago">
-          <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegistroPago">
-              <PropertyRef Name="idRegistroPago" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idRegistroPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -792,8 +756,8 @@
           <Parameter Name="fechaNacimiento" Type="date" Mode="In" />
           <Parameter Name="documentoPerosna" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
-          <Parameter Name="idTipoDocumento" Type="tinyint" Mode="In" />
-          <Parameter Name="idTipoContrato" Type="tinyint" Mode="In" />
+          <Parameter Name="TipoDocumento" Type="varchar" Mode="In" />
+          <Parameter Name="TipoContrato" Type="varchar" Mode="In" />
         </Function>
         <Function Name="gestionProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
@@ -855,6 +819,7 @@
           <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Compra_Insumo" EntityType="Self.Compra_Insumo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Concepto" EntityType="Self.Concepto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CostoBeneficio" EntityType="Self.CostoBeneficio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeudaPersona" EntityType="Self.DeudaPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Egreso" EntityType="Self.Egreso" Schema="dbo" store:Type="Tables" />
@@ -872,13 +837,10 @@
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistroPago" EntityType="Self.RegistroPago" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RegistroPago_DeudaPersona" EntityType="Self.RegistroPago_DeudaPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistroPagoSalario" EntityType="Self.RegistroPagoSalario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalarioPersonaPermanente" EntityType="Self.SalarioPersonaPermanente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalarioPersonaTemporal" EntityType="Self.SalarioPersonaTemporal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoArbol" EntityType="Self.TipoArbol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoContratoPersona" EntityType="Self.TipoContratoPersona" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoInsumo" EntityType="Self.TipoInsumo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AbonoCompra_Compra" Association="Self.FK_AbonoCompra_Compra">
@@ -912,6 +874,14 @@
           <AssociationSet Name="FK_CompraInsumo_Compra" Association="Self.FK_CompraInsumo_Compra">
             <End Role="Compra" EntitySet="Compra" />
             <End Role="Compra_Insumo" EntitySet="Compra_Insumo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoBeneficio_Compra" Association="Self.FK_CostoBeneficio_Compra">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoBeneficio_Venta" Association="Self.FK_CostoBeneficio_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
           </AssociationSet>
           <AssociationSet Name="FK_DeudaPersona_Persona" Association="Self.FK_DeudaPersona_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -969,25 +939,9 @@
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Municipio" EntitySet="Municipio" />
           </AssociationSet>
-          <AssociationSet Name="FK_Persona_TipoContratoPersona" Association="Self.FK_Persona_TipoContratoPersona">
-            <End Role="TipoContratoPersona" EntitySet="TipoContratoPersona" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Persona_TipoDocumento" Association="Self.FK_Persona_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
           <AssociationSet Name="FK_Produccion_Lote" Association="Self.FK_Produccion_Lote">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Produccion" EntitySet="Produccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_DeudaPersona" Association="Self.FK_RegistroPagoDeudaPersona_DeudaPersona">
-            <End Role="DeudaPersona" EntitySet="DeudaPersona" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_RegistroPago" Association="Self.FK_RegistroPagoDeudaPersona_RegistroPago">
-            <End Role="RegistroPago" EntitySet="RegistroPago" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistroPagoSalario_idSalarioPersonaTemporal" Association="Self.FK_RegistroPagoSalario_idSalarioPersonaTemporal">
             <End Role="SalarioPersonaTemporal" EntitySet="SalarioPersonaTemporal" />
@@ -1076,6 +1030,7 @@
           <NavigationProperty Name="AbonoCompra" Relationship="Self.FK_AbonoCompra_Compra" FromRole="Compra" ToRole="AbonoCompra" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_Compra_Proveedor" FromRole="Compra" ToRole="Proveedor" />
           <NavigationProperty Name="Compra_Insumo" Relationship="Self.FK_CompraInsumo_Compra" FromRole="Compra" ToRole="Compra_Insumo" />
+          <NavigationProperty Name="CostoBeneficio" Relationship="DBFincaModel.FK_CostoBeneficio_Compra" FromRole="Compra" ToRole="CostoBeneficio" />
         </EntityType>
         <EntityType Name="Compra_Insumo">
           <Key>
@@ -1119,7 +1074,6 @@
           <Property Name="EstadoCuenta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AbonoDeuda" Relationship="Self.FK_AbonoDeuda_DeudaPersona" FromRole="DeudaPersona" ToRole="AbonoDeuda" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_DeudaPersona_Persona" FromRole="DeudaPersona" ToRole="Persona" />
-          <NavigationProperty Name="RegistroPago_DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_DeudaPersona" FromRole="DeudaPersona" ToRole="RegistroPago_DeudaPersona" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Egreso">
@@ -1257,18 +1211,16 @@
             <PropertyRef Name="DocumentoPersona" />
           </Key>
           <Property Name="DocumentoPersona" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idTipoDocumento" Type="Byte" Nullable="false" />
-          <Property Name="idTipoContratoPersona" Type="Byte" Nullable="false" />
           <Property Name="NombrePersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Genero" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FechaNacimineto" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EstadoPersona" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="DeudaPersona" Relationship="Self.FK_DeudaPersona_Persona" FromRole="Persona" ToRole="DeudaPersona" />
-          <NavigationProperty Name="TipoContratoPersona" Relationship="Self.FK_Persona_TipoContratoPersona" FromRole="Persona" ToRole="TipoContratoPersona" />
-          <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Persona_TipoDocumento" FromRole="Persona" ToRole="TipoDocumento" />
           <NavigationProperty Name="SalarioPersonaPermanente" Relationship="Self.FK_SalarioPersonaPermanente_Persona" FromRole="Persona" ToRole="SalarioPersonaPermanente" />
           <NavigationProperty Name="SalarioPersonaTemporal" Relationship="Self.FK_SalarioPersonaTemporal_Persona" FromRole="Persona" ToRole="SalarioPersonaTemporal" />
+          <Property Name="TipoContratoPersona" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDocumento" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Produccion">
           <Key>
@@ -1311,18 +1263,7 @@
           <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="RegistroPago_DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_RegistroPago" FromRole="RegistroPago" ToRole="RegistroPago_DeudaPersona" />
           <NavigationProperty Name="RegistroPagoSalario" Relationship="Self.FK_RegistroPagoSalario_RegistroPago" FromRole="RegistroPago" ToRole="RegistroPagoSalario" />
-        </EntityType>
-        <EntityType Name="RegistroPago_DeudaPersona">
-          <Key>
-            <PropertyRef Name="idRegistroPago_DeudaPersona" />
-          </Key>
-          <Property Name="idRegistroPago_DeudaPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
-          <Property Name="idDeudaPersona" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DeudaPersona" Relationship="Self.FK_RegistroPagoDeudaPersona_DeudaPersona" FromRole="RegistroPago_DeudaPersona" ToRole="DeudaPersona" />
-          <NavigationProperty Name="RegistroPago" Relationship="Self.FK_RegistroPagoDeudaPersona_RegistroPago" FromRole="RegistroPago_DeudaPersona" ToRole="RegistroPago" />
         </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
@@ -1370,22 +1311,6 @@
           <Property Name="EstadoTipoArbol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Arboles" Relationship="Self.FK_Arboles_TipoArbol" FromRole="TipoArbol" ToRole="Arboles" />
         </EntityType>
-        <EntityType Name="TipoContratoPersona">
-          <Key>
-            <PropertyRef Name="idTipoContratoPersona" />
-          </Key>
-          <Property Name="idTipoContratoPersona" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreTipoContratoPersona" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoContratoPersona" FromRole="TipoContratoPersona" ToRole="Persona" />
-        </EntityType>
-        <EntityType Name="TipoDocumento">
-          <Key>
-            <PropertyRef Name="idTipoDocumento" />
-          </Key>
-          <Property Name="idTipoDocumento" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreTipoDocumento" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoDocumento" FromRole="TipoDocumento" ToRole="Persona" />
-        </EntityType>
         <EntityType Name="TipoInsumo">
           <Key>
             <PropertyRef Name="idTipoInsumo" />
@@ -1407,6 +1332,7 @@
           <Property Name="CantidadCargas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="MovimientoProduccion" Relationship="Self.FK_MovimientoProduccion_Venta" FromRole="Venta" ToRole="MovimientoProduccion" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Venta_Producto" FromRole="Venta" ToRole="Producto" />
+          <NavigationProperty Name="CostoBeneficio" Relationship="DBFincaModel.FK_CostoBeneficio_Venta" FromRole="Venta" ToRole="CostoBeneficio" />
         </EntityType>
         <Association Name="FK_AbonoCompra_Compra">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
@@ -1564,18 +1490,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_DeudaPersona">
-          <End Role="DeudaPersona" Type="Self.DeudaPersona" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idDeudaPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Finca_Municipio">
           <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
           <End Role="Finca" Type="Self.Finca" Multiplicity="*" />
@@ -1708,30 +1622,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Persona_TipoContratoPersona">
-          <End Role="TipoContratoPersona" Type="Self.TipoContratoPersona" Multiplicity="1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoContratoPersona">
-              <PropertyRef Name="idTipoContratoPersona" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="idTipoContratoPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Persona_TipoDocumento">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="idTipoDocumento" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="idTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SalarioPersonaPermanente_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="SalarioPersonaPermanente" Type="Self.SalarioPersonaPermanente" Multiplicity="*" />
@@ -1765,18 +1655,6 @@
             </Principal>
             <Dependent Role="Venta">
               <PropertyRef Name="idProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistroPagoDeudaPersona_RegistroPago">
-          <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
-          <End Role="RegistroPago_DeudaPersona" Type="Self.RegistroPago_DeudaPersona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegistroPago">
-              <PropertyRef Name="idRegistroPago" />
-            </Principal>
-            <Dependent Role="RegistroPago_DeudaPersona">
-              <PropertyRef Name="idRegistroPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1841,13 +1719,10 @@
           <EntitySet Name="Producto" EntityType="Self.Producto" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="RegistroPago" EntityType="Self.RegistroPago" />
-          <EntitySet Name="RegistroPago_DeudaPersona" EntityType="Self.RegistroPago_DeudaPersona" />
           <EntitySet Name="RegistroPagoSalario" EntityType="Self.RegistroPagoSalario" />
           <EntitySet Name="SalarioPersonaPermanente" EntityType="Self.SalarioPersonaPermanente" />
           <EntitySet Name="SalarioPersonaTemporal" EntityType="Self.SalarioPersonaTemporal" />
           <EntitySet Name="TipoArbol" EntityType="Self.TipoArbol" />
-          <EntitySet Name="TipoContratoPersona" EntityType="Self.TipoContratoPersona" />
-          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" />
           <EntitySet Name="TipoInsumo" EntityType="Self.TipoInsumo" />
           <EntitySet Name="Venta" EntityType="Self.Venta" />
           <AssociationSet Name="FK_AbonoCompra_Compra" Association="Self.FK_AbonoCompra_Compra">
@@ -1902,10 +1777,6 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="DeudaPersona" EntitySet="DeudaPersona" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_DeudaPersona" Association="Self.FK_RegistroPagoDeudaPersona_DeudaPersona">
-            <End Role="DeudaPersona" EntitySet="DeudaPersona" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
-          </AssociationSet>
           <AssociationSet Name="FK_Finca_Municipio" Association="Self.FK_Finca_Municipio">
             <End Role="Municipio" EntitySet="Municipio" />
             <End Role="Finca" EntitySet="Finca" />
@@ -1950,14 +1821,6 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="MovimientoProduccion" EntitySet="MovimientoProduccion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Persona_TipoContratoPersona" Association="Self.FK_Persona_TipoContratoPersona">
-            <End Role="TipoContratoPersona" EntitySet="TipoContratoPersona" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Persona_TipoDocumento" Association="Self.FK_Persona_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
           <AssociationSet Name="FK_SalarioPersonaPermanente_Persona" Association="Self.FK_SalarioPersonaPermanente_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
@@ -1969,10 +1832,6 @@
           <AssociationSet Name="FK_Venta_Producto" Association="Self.FK_Venta_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Venta" EntitySet="Venta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoDeudaPersona_RegistroPago" Association="Self.FK_RegistroPagoDeudaPersona_RegistroPago">
-            <End Role="RegistroPago" EntitySet="RegistroPago" />
-            <End Role="RegistroPago_DeudaPersona" EntitySet="RegistroPago_DeudaPersona" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistroPagoSalario_RegistroPago" Association="Self.FK_RegistroPagoSalario_RegistroPago">
             <End Role="RegistroPago" EntitySet="RegistroPago" />
@@ -2034,8 +1893,8 @@
             <Parameter Name="fechaNacimiento" Mode="In" Type="DateTime" />
             <Parameter Name="documentoPerosna" Mode="In" Type="Int32" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
-            <Parameter Name="idTipoDocumento" Mode="In" Type="Byte" />
-            <Parameter Name="idTipoContrato" Mode="In" Type="Byte" />
+            <Parameter Name="TipoDocumento" Mode="In" Type="String" />
+            <Parameter Name="TipoContrato" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="gestionProveedor" ReturnType="Collection(DBFincaModel.gestionProveedor_Result)">
             <Parameter Name="nit" Mode="In" Type="String" />
@@ -2109,6 +1968,15 @@
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="numeroFactura" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CostoBeneficio" EntityType="DBFincaModel.CostoBeneficio" />
+          <AssociationSet Name="FK_CostoBeneficio_Compra" Association="DBFincaModel.FK_CostoBeneficio_Compra">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostoBeneficio_Venta" Association="DBFincaModel.FK_CostoBeneficio_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2169,6 +2037,42 @@
         <ComplexType Name="RegistrarCompra_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="CostoBeneficio">
+          <Key>
+            <PropertyRef Name="idCostoBeneficio" />
+          </Key>
+          <Property Name="idCostoBeneficio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVenta" Type="Int32" />
+          <Property Name="idCompra" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="EstadoCuenta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Compra" Relationship="DBFincaModel.FK_CostoBeneficio_Compra" FromRole="CostoBeneficio" ToRole="Compra" />
+          <NavigationProperty Name="Venta" Relationship="DBFincaModel.FK_CostoBeneficio_Venta" FromRole="CostoBeneficio" ToRole="Venta" />
+        </EntityType>
+        <Association Name="FK_CostoBeneficio_Compra">
+          <End Type="DBFincaModel.Compra" Role="Compra" Multiplicity="0..1" />
+          <End Type="DBFincaModel.CostoBeneficio" Role="CostoBeneficio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="idCompra" />
+            </Principal>
+            <Dependent Role="CostoBeneficio">
+              <PropertyRef Name="idCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostoBeneficio_Venta">
+          <End Type="DBFincaModel.Venta" Role="Venta" Multiplicity="0..1" />
+          <End Type="DBFincaModel.CostoBeneficio" Role="CostoBeneficio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="idVenta" />
+            </Principal>
+            <Dependent Role="CostoBeneficio">
+              <PropertyRef Name="idVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2386,9 +2290,9 @@
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="DBFincaModel.Persona">
               <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="TipoContratoPersona" ColumnName="TipoContratoPersona" />
                 <ScalarProperty Name="DocumentoPersona" ColumnName="DocumentoPersona" />
-                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
-                <ScalarProperty Name="idTipoContratoPersona" ColumnName="idTipoContratoPersona" />
                 <ScalarProperty Name="NombrePersona" ColumnName="NombrePersona" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
@@ -2439,15 +2343,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RegistroPago_DeudaPersona">
-            <EntityTypeMapping TypeName="DBFincaModel.RegistroPago_DeudaPersona">
-              <MappingFragment StoreEntitySet="RegistroPago_DeudaPersona">
-                <ScalarProperty Name="idRegistroPago_DeudaPersona" ColumnName="idRegistroPago_DeudaPersona" />
-                <ScalarProperty Name="idRegistroPago" ColumnName="idRegistroPago" />
-                <ScalarProperty Name="idDeudaPersona" ColumnName="idDeudaPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RegistroPagoSalario">
             <EntityTypeMapping TypeName="DBFincaModel.RegistroPagoSalario">
               <MappingFragment StoreEntitySet="RegistroPagoSalario">
@@ -2486,22 +2381,6 @@
                 <ScalarProperty Name="NombreTipoArbol" ColumnName="NombreTipoArbol" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstadoTipoArbol" ColumnName="EstadoTipoArbol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoContratoPersona">
-            <EntityTypeMapping TypeName="DBFincaModel.TipoContratoPersona">
-              <MappingFragment StoreEntitySet="TipoContratoPersona">
-                <ScalarProperty Name="idTipoContratoPersona" ColumnName="idTipoContratoPersona" />
-                <ScalarProperty Name="NombreTipoContratoPersona" ColumnName="NombreTipoContratoPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoDocumento">
-            <EntityTypeMapping TypeName="DBFincaModel.TipoDocumento">
-              <MappingFragment StoreEntitySet="TipoDocumento">
-                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
-                <ScalarProperty Name="NombreTipoDocumento" ColumnName="NombreTipoDocumento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2640,6 +2519,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CostoBeneficio">
+            <EntityTypeMapping TypeName="DBFincaModel.CostoBeneficio">
+              <MappingFragment StoreEntitySet="CostoBeneficio">
+                <ScalarProperty Name="EstadoCuenta" ColumnName="EstadoCuenta" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+                <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+                <ScalarProperty Name="idCostoBeneficio" ColumnName="idCostoBeneficio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

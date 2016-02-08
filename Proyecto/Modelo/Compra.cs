@@ -19,6 +19,7 @@ namespace Modelo
         {
             this.AbonoCompra = new HashSet<AbonoCompra>();
             this.Compra_Insumo = new HashSet<Compra_Insumo>();
+            this.CostoBeneficio = new HashSet<CostoBeneficio>();
         }
     
         public int idCompra { get; set; }
@@ -32,5 +33,7 @@ namespace Modelo
         public virtual Proveedor Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compra_Insumo> Compra_Insumo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CostoBeneficio> CostoBeneficio { get; set; }
     }
 }

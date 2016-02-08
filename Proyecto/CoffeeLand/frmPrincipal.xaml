@@ -253,7 +253,7 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                         <Expander x:Name="expanderGestionVentas" Header="Gestionar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="92" IsExpanded="True">
                             <Grid Background="White">
-                                <Button x:Name="btnGestionarVentas"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}">
+                                <Button x:Name="btnGestionarVentas"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Click="btnGestionarVentas_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_bed}"/>

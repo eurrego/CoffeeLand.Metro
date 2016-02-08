@@ -12,13 +12,15 @@ namespace Modelo
     using System;
     using System.Collections.Generic;
     
-    public partial class RegistroPago_DeudaPersona
+    public partial class CostoBeneficio
     {
-        public int idRegistroPago_DeudaPersona { get; set; }
-        public int idRegistroPago { get; set; }
-        public int idDeudaPersona { get; set; }
+        public int idCostoBeneficio { get; set; }
+        public Nullable<int> idVenta { get; set; }
+        public Nullable<int> idCompra { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public string EstadoCuenta { get; set; }
     
-        public virtual DeudaPersona DeudaPersona { get; set; }
-        public virtual RegistroPago RegistroPago { get; set; }
+        public virtual Compra Compra { get; set; }
+        public virtual Venta Venta { get; set; }
     }
 }

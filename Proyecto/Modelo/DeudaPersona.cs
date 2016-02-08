@@ -18,7 +18,6 @@ namespace Modelo
         public DeudaPersona()
         {
             this.AbonoDeuda = new HashSet<AbonoDeuda>();
-            this.RegistroPago_DeudaPersona = new HashSet<RegistroPago_DeudaPersona>();
         }
     
         public int idDeudaPersona { get; set; }
@@ -31,7 +30,5 @@ namespace Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbonoDeuda> AbonoDeuda { get; set; }
         public virtual Persona Persona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RegistroPago_DeudaPersona> RegistroPago_DeudaPersona { get; set; }
     }
 }
