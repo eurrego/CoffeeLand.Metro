@@ -24,7 +24,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            
+
 
         </ResourceDictionary>
     </Window.Resources>
@@ -51,7 +51,7 @@
                         </Rectangle>
                     </Button>
 
-                    <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Left" 
+                    <Button x:Name="btnGuardar" Click="btnGuardar_Click" Content="Guardar" HorizontalAlignment="Left" 
             	            Margin="520,26,0,0" VerticalAlignment="Top" Width="90" 
             	            Height="38" 
                             Style="{StaticResource AccentedSquareButtonStyle}" />
@@ -60,23 +60,28 @@
 
 
 
-                    <GroupBox x:Name="groupModificaArbol" Header="Beneficio Café" HorizontalAlignment="Left" Margin="54,111,0,0" VerticalAlignment="Top" Height="140" Width="556" FontSize="8">
+                    <GroupBox x:Name="groupModificaArbol" Header="Beneficio Café" HorizontalAlignment="Left" Margin="54,94,0,0" VerticalAlignment="Top" Height="156" Width="556" FontSize="8">
                         <Grid>
 
-                            <TextBlock x:Name="info" HorizontalAlignment="Left" Margin="20,13,0,0" TextWrapping="Wrap" Text="Proveedor:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667"/>
+                            <TextBlock x:Name="info" HorizontalAlignment="Left" Margin="10,18,0,0" TextWrapping="Wrap" Text="Proveedor:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="24"/>
                             <ComboBox x:Name="cmbProveedor" HorizontalAlignment="Left"
                               DisplayMemberPath="NombreProveedor" 
-                    	      SelectedValuePath="idProveedor"        
-                              Margin="20,38,0,0" VerticalAlignment="Top"
+                    	      SelectedValuePath="Nit"    
+                              Margin="10,63,0,0" VerticalAlignment="Top"
                               IsSynchronizedWithCurrentItem="true" 
                               Width="212" Height="34"
                               SelectedIndex="0"
                               Visibility="Visible" 
                               />
-                            <TextBox x:Name="txtValor" Margin="301,38,0,0"
+                            <TextBox x:Name="txtValorBeneficio" Margin="302,63,0,0"
                             	Controls:TextBoxHelper.Watermark="Valor" 
                             	Controls:TextBoxHelper.ClearTextButton="True" 
                             	Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="212 "
+                            />
+                            <TextBox x:Name="txtNumeroFactura" Margin="302,10,0,0"
+                            	Controls:TextBoxHelper.Watermark="Número Factura" 
+                            	Controls:TextBoxHelper.ClearTextButton="True" 
+                            	Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="212 " RenderTransformOrigin="0.505,-0.971"
                             />
 
                         </Grid>
@@ -90,6 +95,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock x:Name="inf" HorizontalAlignment="Left" Margin="20,13,0,0" TextWrapping="Wrap" Text="Cargas Disponibles:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667" Height="25" Width="161"/>
+                            <TextBlock x:Name="lblcargas" HorizontalAlignment="Left" Margin="186,13,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667" Height="25" Width="89" Grid.ColumnSpan="3"/>
 
                             <ComboBox x:Name="cmbProducto" HorizontalAlignment="Left"
                               Margin="20,47,0,0" VerticalAlignment="Top"
@@ -107,13 +113,13 @@
                             	Controls:TextBoxHelper.UseFloatingWatermark="True"
                                 Controls:TextBoxHelper.ClearTextButton="True" Grid.Column="2"
                                 />
-                            <TextBox x:Name="txtVal" Margin="20,115,0,0"
+                            <TextBox x:Name="txtCantidadCarga" Margin="20,115,0,0"
                             	Controls:TextBoxHelper.Watermark="Cantidad de Cargas" 
                             	Controls:TextBoxHelper.ClearTextButton="True" 
                             	Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="207"
                             />
 
-                            <TextBox x:Name="txtValo" Margin="60,115,0,0"
+                            <TextBox x:Name="txtValorCarga" Margin="60,115,0,0"
                             	Controls:TextBoxHelper.Watermark="Valor Carga" 
                             	Controls:TextBoxHelper.ClearTextButton="True" 
                             	Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="207" Grid.Column="2"
@@ -180,16 +186,16 @@
 
                                         </Grid.RowDefinitions>
 
-                                      
 
-                                       
+
+
                                     </Grid>
                                 </Border>
                             </DataTemplate>
                         </DataGrid.RowDetailsTemplate>
                     </DataGrid>
 
-                    
+
 
                     <Label x:Name="label_Copy" Content="Cantidad de Registros:" Margin="436,31,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="172"/>
                     <Label x:Name="lblTotal" Content="10" Margin="608,31,0,0" VerticalAlignment="Top" FontSize="18.667" Background="#00000000" Foreground="#FF56BF87" FontWeight="Bold" HorizontalAlignment="Left" Width="50"/>

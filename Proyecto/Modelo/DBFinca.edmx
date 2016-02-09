@@ -709,6 +709,7 @@
         <Function Name="ComprasProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nit" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Consultasproduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="gestionArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLote" Type="smallint" Mode="In" />
           <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
@@ -784,6 +785,15 @@
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idTipoInsumo" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GestionVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nit" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="numeroFactura" Type="int" Mode="In" />
+          <Parameter Name="idProducto" Type="int" Mode="In" />
+          <Parameter Name="PrecioCarga" Type="money" Mode="In" />
+          <Parameter Name="CantidadCargas" Type="decimal" Mode="In" />
+          <Parameter Name="PrecioBeneficio" Type="money" Mode="In" />
         </Function>
         <Function Name="insercionAbonoDeuda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="valor" Type="money" Mode="In" />
@@ -1977,6 +1987,16 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
           </AssociationSet>
+          <FunctionImport Name="Consultasproduccion" ReturnType="Collection(DBFincaModel.Consultasproduccion_Result)" />
+          <FunctionImport Name="GestionVenta">
+            <Parameter Name="nit" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="numeroFactura" Mode="In" Type="Int32" />
+            <Parameter Name="idProducto" Mode="In" Type="Int32" />
+            <Parameter Name="PrecioCarga" Mode="In" Type="Decimal" />
+            <Parameter Name="CantidadCargas" Mode="In" Type="Decimal" />
+            <Parameter Name="PrecioBeneficio" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2073,6 +2093,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Consultasproduccion_Result">
+          <Property Type="Decimal" Name="Cargas" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2530,6 +2553,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Consultasproduccion" FunctionName="DBFincaModel.Store.Consultasproduccion" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.Consultasproduccion_Result">
+                <ScalarProperty Name="Cargas" ColumnName="Cargas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GestionVenta" FunctionName="DBFincaModel.Store.GestionVenta" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

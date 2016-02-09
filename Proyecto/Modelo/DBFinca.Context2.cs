@@ -499,5 +499,43 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RegistrarCompra_Result>("RegistrarCompra", nitParameter, fechaParameter, numeroFacturaParameter);
         }
+    
+        public virtual ObjectResult<Consultasproduccion_Result> Consultasproduccion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Consultasproduccion_Result>("Consultasproduccion");
+        }
+    
+        public virtual int GestionVenta(Nullable<int> nit, Nullable<System.DateTime> fecha, Nullable<int> numeroFactura, Nullable<int> idProducto, Nullable<decimal> precioCarga, Nullable<decimal> cantidadCargas, Nullable<decimal> precioBeneficio)
+        {
+            var nitParameter = nit.HasValue ?
+                new ObjectParameter("nit", nit) :
+                new ObjectParameter("nit", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var numeroFacturaParameter = numeroFactura.HasValue ?
+                new ObjectParameter("numeroFactura", numeroFactura) :
+                new ObjectParameter("numeroFactura", typeof(int));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("idProducto", idProducto) :
+                new ObjectParameter("idProducto", typeof(int));
+    
+            var precioCargaParameter = precioCarga.HasValue ?
+                new ObjectParameter("PrecioCarga", precioCarga) :
+                new ObjectParameter("PrecioCarga", typeof(decimal));
+    
+            var cantidadCargasParameter = cantidadCargas.HasValue ?
+                new ObjectParameter("CantidadCargas", cantidadCargas) :
+                new ObjectParameter("CantidadCargas", typeof(decimal));
+    
+            var precioBeneficioParameter = precioBeneficio.HasValue ?
+                new ObjectParameter("PrecioBeneficio", precioBeneficio) :
+                new ObjectParameter("PrecioBeneficio", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GestionVenta", nitParameter, fechaParameter, numeroFacturaParameter, idProductoParameter, precioCargaParameter, cantidadCargasParameter, precioBeneficioParameter);
+        }
     }
 }

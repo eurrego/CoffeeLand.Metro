@@ -406,8 +406,8 @@ namespace CoffeeLand
 
         private void btnConfirmarModificacionArbol_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
 
                 MTerrenos.GetInstance().MovimientoArboles(short.Parse(cmbLotes.SelectedValue.ToString()), byte.Parse(cmbTipoArbolLote.SelectedValue.ToString()), cantidadArboles, Convert.ToDateTime(dtdFechaLabor.SelectedDate), 0, "Salida", 1);
                 MTerrenos.GetInstance().MovimientoArboles(short.Parse(cmbLotes.SelectedValue.ToString()), byte.Parse(cmbTipoArbolModificar.SelectedValue.ToString()), cantidadArboles, Convert.ToDateTime(dtdFechaLabor.SelectedDate), 0, "Entrada", 1);
@@ -416,11 +416,11 @@ namespace CoffeeLand
                 FlyoutAbonos.IsOpen = false;
                 limpiarCampos(0);
                 dt1.Clear();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void cmbTipoPago_SelectionChanged(object sender, SelectionChangedEventArgs e)

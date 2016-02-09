@@ -58,7 +58,7 @@ namespace CoffeeLand
                 lblProveedor.Text = item.NombreProveedor;
 
                 var data = MEstadoCuenta.GetInstance().ConsultaCompraProveedor(item.Nit) as IEnumerable;
-                tblCompras.ItemsSource = data;
+                tblCompras.ItemsSource = MEstadoCuenta.GetInstance().ConsultaCompraProveedor(item.Nit) as IEnumerable; ;
 
                 TotalAdeuda(data);
 

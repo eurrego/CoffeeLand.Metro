@@ -84,6 +84,9 @@
     <Compile Include="Concepto.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="Consultasproduccion_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="CostoBeneficio.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -211,9 +214,6 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="RegistroPagoSalario.cs">
-      <DependentUpon>DBFinca.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RegistroPago_DeudaPersona.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="SalarioPersonaPermanente.cs">

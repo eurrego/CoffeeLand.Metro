@@ -66,5 +66,31 @@ namespace Modelo
                 return query.ToList();
             }
         }
+
+        public decimal ConsultarProduccion()
+
+        {
+            using (var entity = new DBFincaEntities())
+            {
+
+                var query = entity.Consultasproduccion().First();
+
+                return query.Cargas.Value;
+
+            }
+        }
+
+
+        public void GestionVenta(int nit ,DateTime fecha, int numeroFactura, int idProducto ,decimal PrecioCarga, decimal CantidadCargas , decimal PrecioBeneficio )
+        {
+
+            using (var entity = new DBFincaEntities())
+            {
+
+                var query = entity.GestionVenta(nit, fecha, numeroFactura, idProducto,PrecioCarga, CantidadCargas, PrecioBeneficio);
+
+
+            }
+        }
     }
 }

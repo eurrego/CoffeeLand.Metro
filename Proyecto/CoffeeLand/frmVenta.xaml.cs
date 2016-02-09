@@ -31,6 +31,14 @@ namespace CoffeeLand
             cmbProveedor.ItemsSource = MVentas.GetInstance().ConsultarProveedor();
             cmbProducto.ItemsSource = MVentas.GetInstance().ConsultarProducto();
 
+            lblcargas.Text = MVentas.GetInstance().ConsultarProduccion().ToString();
+
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            decimal precioBeneficio = decimal.Parse(txtValorBeneficio.Text) * decimal.Parse(txtCantidadCarga.Text);
+            MVentas.GetInstance().GestionVenta(int.Parse(cmbProveedor.SelectedValue.ToString()), Convert.ToDateTime(dtdFecha.SelectedDate),int.Parse(txtNumeroFactura.Text), int.Parse(cmbProducto.SelectedValue.ToString()),decimal.Parse(txtValorCarga.Text),decimal.Parse(txtCantidadCarga.Text),precioBeneficio);
         }
     }
 }
