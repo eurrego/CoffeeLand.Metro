@@ -821,6 +821,9 @@
           <Parameter Name="cantidad" Type="int" Mode="In" />
         </Function>
         <Function Name="SalariosEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VentaProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cantidad" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -1997,6 +2000,9 @@
             <Parameter Name="CantidadCargas" Mode="In" Type="Decimal" />
             <Parameter Name="PrecioBeneficio" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="VentaProduccion" ReturnType="Collection(DBFincaModel.VentaProduccion_Result1)">
+            <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2095,6 +2101,12 @@
         </Association>
         <ComplexType Name="Consultasproduccion_Result">
           <Property Type="Decimal" Name="Cargas" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="VentaProduccion_Result">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <ComplexType Name="VentaProduccion_Result1">
+          <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="16" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2561,6 +2573,13 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GestionVenta" FunctionName="DBFincaModel.Store.GestionVenta" />
+          <FunctionImportMapping FunctionImportName="VentaProduccion" FunctionName="DBFincaModel.Store.VentaProduccion" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.VentaProduccion_Result1">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

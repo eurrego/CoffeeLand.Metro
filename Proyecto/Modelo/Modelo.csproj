@@ -231,6 +231,12 @@
     <Compile Include="Venta.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="VentaProduccion_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentaProduccion_Result1.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DBFinca.edmx">

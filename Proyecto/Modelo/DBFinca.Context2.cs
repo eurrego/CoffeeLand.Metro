@@ -537,5 +537,14 @@ namespace Modelo
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GestionVenta", nitParameter, fechaParameter, numeroFacturaParameter, idProductoParameter, precioCargaParameter, cantidadCargasParameter, precioBeneficioParameter);
         }
+    
+        public virtual ObjectResult<VentaProduccion_Result1> VentaProduccion(Nullable<decimal> cantidad)
+        {
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaProduccion_Result1>("VentaProduccion", cantidadParameter);
+        }
     }
 }

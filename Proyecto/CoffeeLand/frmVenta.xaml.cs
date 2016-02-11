@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using Modelo;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CoffeeLand
 {
@@ -21,6 +22,8 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmVenta : MetroWindow
     {
+        bool validacion = false;
+
         public frmVenta()
         {
             InitializeComponent();
@@ -35,10 +38,61 @@ namespace CoffeeLand
 
         }
 
+        private async void mensajeError(string mensaje)
+        {
+            await this.ShowMessageAsync("Error", mensaje);
+        }
+
+        private async void mensajeExito(string mensaje)
+        {
+            await this.ShowMessageAsync("", mensaje);
+        }
+
+
+        public void limpiarCampos()
+        {
+            cmbProducto.SelectedIndex = 0;
+            cmbProveedor.SelectedIndex = 0;
+            txtCantidadCarga.Text = string.Empty;
+            txtNumeroFactura.Text = string.Empty;
+            txtValorBeneficio.Text = string.Empty;
+            txtValorCarga.Text = string.Empty;
+        }
+
+        public bool validarCampos()
+        {
+            if (cmbProducto.SelectedIndex == 0 || cmbProveedor.SelectedIndex == 0 || txtValorCarga.Text == string.Empty || txtValorBeneficio.Text == string.Empty || txtNumeroFactura.Text == string.Empty || txtCantidadCarga.Text == string.Empty)
+            {
+                mensajeError("Debe Ingresar todos los Campos");
+                validacion = false;
+            }
+            else
+            {
+                validacion = true;
+            }
+
+            return validacion;
+        }
+
+
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            decimal precioBeneficio = decimal.Parse(txtValorBeneficio.Text) * decimal.Parse(txtCantidadCarga.Text);
-            MVentas.GetInstance().GestionVenta(int.Parse(cmbProveedor.SelectedValue.ToString()), Convert.ToDateTime(dtdFecha.SelectedDate),int.Parse(txtNumeroFactura.Text), int.Parse(cmbProducto.SelectedValue.ToString()),decimal.Parse(txtValorCarga.Text),decimal.Parse(txtCantidadCarga.Text),precioBeneficio);
+            if (validarCampos())
+            {
+                if (decimal.Parse(txtCantidadCarga.Text.ToString()) > MVentas.GetInstance().ConsultarProduccion())
+                {
+                    mensajeError("La cantidad de cargas es superior a la existencia");
+                }
+                else
+                {
+                    decimal precioBeneficio = decimal.Parse(txtValorBeneficio.Text) * decimal.Parse(txtCantidadCarga.Text);
+                    MVentas.GetInstance().GestionVenta(int.Parse(cmbProveedor.SelectedValue.ToString()), Convert.ToDateTime(dtdFecha.SelectedDate), int.Parse(txtNumeroFactura.Text), int.Parse(cmbProducto.SelectedValue.ToString()), decimal.Parse(txtValorCarga.Text), decimal.Parse(txtCantidadCarga.Text), precioBeneficio);
+                    mensajeExito( MVentas.GetInstance().ventaProduccion(decimal.Parse(txtCantidadCarga.Text)));
+                    limpiarCampos();
+                    lblcargas.Text = MVentas.GetInstance().ConsultarProduccion().ToString();
+
+                }
+            }
         }
     }
 }

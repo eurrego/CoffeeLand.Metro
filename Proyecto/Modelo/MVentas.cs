@@ -92,5 +92,20 @@ namespace Modelo
 
             }
         }
+
+        public string ventaProduccion(decimal cantidad)
+
+        {
+            using (var entity = new DBFincaEntities())
+            {
+
+                var query = entity.VentaProduccion(cantidad).First();
+
+                return query.Mensaje;
+
+            }
+        }
+
+
     }
 }
