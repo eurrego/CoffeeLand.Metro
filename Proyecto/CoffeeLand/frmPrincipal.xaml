@@ -126,7 +126,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label212" Content="Prestamos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="btnPagos"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                <Button x:Name="btnPagos"  HorizontalAlignment="Left" Margin="10,52,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnPagos_Click">
                                     <Rectangle Width="17" Height="24" Fill="{DynamicResource BlackBrush}">
                                         <Rectangle.OpacityMask>
                                             <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_currency_dollar}"/>

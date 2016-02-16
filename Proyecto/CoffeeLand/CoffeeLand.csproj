@@ -78,6 +78,9 @@
     <Compile Include="frmEstadoCuenta.xaml.cs">
       <DependentUpon>frmEstadoCuenta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmPagos.xaml.cs">
+      <DependentUpon>frmPagos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmVenta.xaml.cs">
       <DependentUpon>frmVenta.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmLotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmPagos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

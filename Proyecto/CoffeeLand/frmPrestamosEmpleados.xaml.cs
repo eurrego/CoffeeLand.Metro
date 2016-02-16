@@ -293,18 +293,17 @@ namespace CoffeeLand
 
                         if (valor == valorTotal)
                         {
-                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda, 0, 1);
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda,  1);
                             valor = 0;
                         }
                         else if (valorTotal > valor)
                         {
-                            decimal newValor = valorTotal - valor;
-                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda, newValor, 2);
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valor, DateTime.Now, idDeuda,  2);
                             valor = 0;
                         }
                         else if (valorTotal < valor)
                         {
-                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valorTotal, DateTime.Now, idDeuda, 0, 3);
+                            rpta = MPrestamosEmpleados.GetInstance().insercionAbonoDeuda(valorTotal, DateTime.Now, idDeuda, 3);
                             valor = valor - valorTotal;
                         }
 

@@ -17,10 +17,8 @@ namespace Modelo
         public int idRegistroPagoSalario { get; set; }
         public int idRegistroPago { get; set; }
         public Nullable<int> idSalarioPersonaTemporal { get; set; }
-        public Nullable<int> idSalarioPersonaPermanente { get; set; }
     
         public virtual RegistroPago RegistroPago { get; set; }
         public virtual SalarioPersonaTemporal SalarioPersonaTemporal { get; set; }
-        public virtual SalarioPersonaPermanente SalarioPersonaPermanente { get; set; }
     }
 }

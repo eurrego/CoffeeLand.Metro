@@ -10,16 +10,13 @@
 namespace Modelo
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SalarioPersonaPermanente
+    public partial class DetalleSalario_Result
     {
-        public int idSalarioPersonaPermanente { get; set; }
-        public string DocumentoPersona { get; set; }
+        public string NombreLabor { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public int Cantidad { get; set; }
         public decimal Valor { get; set; }
-        public int IdRegistroPago { get; set; }
-    
-        public virtual Persona Persona { get; set; }
-        public virtual RegistroPago RegistroPago { get; set; }
+        public Nullable<decimal> subtotal { get; set; }
     }
 }

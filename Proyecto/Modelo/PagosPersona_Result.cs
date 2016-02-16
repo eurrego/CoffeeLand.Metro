@@ -10,16 +10,12 @@
 namespace Modelo
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class SalarioPersonaPermanente
+    public partial class PagosPersona_Result
     {
-        public int idSalarioPersonaPermanente { get; set; }
         public string DocumentoPersona { get; set; }
-        public decimal Valor { get; set; }
-        public int IdRegistroPago { get; set; }
-    
-        public virtual Persona Persona { get; set; }
-        public virtual RegistroPago RegistroPago { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<decimal> Valor_a_pagar { get; set; }
+        public Nullable<decimal> Valor_Deuda { get; set; }
     }
 }

@@ -59,5 +59,27 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
         }
 
+         public virtual int SP_InsertMultiplesSalariosPersonaPermanente(DataTable dtDatos)
+        {
+            var datos = new SqlParameter("DTPagosPersonaPermanente", SqlDbType.Structured);
+            datos.Value = dtDatos;
+            datos.TypeName = "dbo.SalarioPersonaPermanente";
+
+            string command = "EXEC SP_InsertMultiplesSalariosPersonaPermanente @DTPagosPersonaPermanente";
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
+        }
+
+        public virtual int SP_InsertMultiplesSalariosPersonaTemporal(DataTable dtDatos)
+        {
+            var datos = new SqlParameter("DTPagosPersonaTemporal", SqlDbType.Structured);
+            datos.Value = dtDatos;
+            datos.TypeName = "dbo.SalarioPersonaTemporal";
+
+            string command = "EXEC SP_InsertMultiplesSalariosTemporal @DTPagosPersonaTemporal";
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteStoreCommand(command, datos);
+        }
+
     }
 }

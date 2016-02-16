@@ -136,5 +136,11 @@ namespace CoffeeLand
             frmVenta miVenta = new frmVenta();
             miVenta.ShowDialog();
         }
+
+        private void btnPagos_Click(object sender, RoutedEventArgs e)
+        {
+            frmPagos miPago = new frmPagos();
+            miPago.ShowDialog();
+        }
     }
 }

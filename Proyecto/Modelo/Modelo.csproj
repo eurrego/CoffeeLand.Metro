@@ -105,6 +105,9 @@
     <Compile Include="Departamento.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="DetalleSalario_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="DeudaPersona.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -180,6 +183,7 @@
     <Compile Include="MovimientosArboles.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="MPagos.cs" />
     <Compile Include="MPersona.cs" />
     <Compile Include="MPrestamosEmpleados.cs" />
     <Compile Include="MProducto.cs" />
@@ -191,6 +195,12 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="MVentas.cs" />
+    <Compile Include="PagosPersona_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PagosPersona_Result1.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="Persona.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -213,13 +223,16 @@
     <Compile Include="RegistroPagoSalario.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
-    <Compile Include="RegistroPago_DeudaPersona.cs">
-      <DependentUpon>DBFinca.tt</DependentUpon>
-    </Compile>
     <Compile Include="SalarioPersonaPermanente.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="SalarioPersonaTemporal.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoArbol.cs">

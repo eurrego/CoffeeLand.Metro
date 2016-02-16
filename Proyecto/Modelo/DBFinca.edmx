@@ -251,9 +251,8 @@
           <Key>
             <PropertyRef Name="idRegistroPago" />
           </Key>
-          <Property Name="idRegistroPago" Type="int" Nullable="false" />
+          <Property Name="idRegistroPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
-          <Property Name="valor" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
@@ -262,7 +261,6 @@
           <Property Name="idRegistroPagoSalario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idRegistroPago" Type="int" Nullable="false" />
           <Property Name="idSalarioPersonaTemporal" Type="int" />
-          <Property Name="idSalarioPersonaPermanente" Type="int" />
         </EntityType>
         <EntityType Name="SalarioPersonaPermanente">
           <Key>
@@ -270,6 +268,7 @@
           </Key>
           <Property Name="idSalarioPersonaPermanente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DocumentoPersona" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdRegistroPago" Type="int" Nullable="false" />
           <Property Name="Valor" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="SalarioPersonaTemporal">
@@ -611,18 +610,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoSalario_idSalarioPersonaTemporal">
-          <End Role="SalarioPersonaTemporal" Type="Self.SalarioPersonaTemporal" Multiplicity="0..1" />
-          <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalarioPersonaTemporal">
-              <PropertyRef Name="idSalarioPersonaTemporal" />
-            </Principal>
-            <Dependent Role="RegistroPagoSalario">
-              <PropertyRef Name="idSalarioPersonaTemporal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RegistroPagoSalario_RegistroPago">
           <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
           <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
@@ -635,15 +622,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoSalario_SalarioPersonaPermanente">
-          <End Role="SalarioPersonaPermanente" Type="Self.SalarioPersonaPermanente" Multiplicity="0..1" />
+        <Association Name="FK_RegistroPagoSalario_SalarioPersonaTemporal">
+          <End Role="SalarioPersonaTemporal" Type="Self.SalarioPersonaTemporal" Multiplicity="0..1" />
           <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SalarioPersonaPermanente">
-              <PropertyRef Name="idSalarioPersonaPermanente" />
+            <Principal Role="SalarioPersonaTemporal">
+              <PropertyRef Name="idSalarioPersonaTemporal" />
             </Principal>
             <Dependent Role="RegistroPagoSalario">
-              <PropertyRef Name="idSalarioPersonaPermanente" />
+              <PropertyRef Name="idSalarioPersonaTemporal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -656,6 +643,18 @@
             </Principal>
             <Dependent Role="SalarioPersonaPermanente">
               <PropertyRef Name="DocumentoPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalarioPersonaPermanente_RegistroPago">
+          <End Role="RegistroPago" Type="Self.RegistroPago" Multiplicity="1" />
+          <End Role="SalarioPersonaPermanente" Type="Self.SalarioPersonaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistroPago">
+              <PropertyRef Name="idRegistroPago" />
+            </Principal>
+            <Dependent Role="SalarioPersonaPermanente">
+              <PropertyRef Name="IdRegistroPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -709,6 +708,10 @@
         <Function Name="ComprasProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nit" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="DetalleSalario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="gestionArboles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idLote" Type="smallint" Mode="In" />
           <Parameter Name="idTipoArbol" Type="tinyint" Mode="In" />
@@ -747,6 +750,13 @@
           <Parameter Name="requiereInsumo" Type="bit" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
           <Parameter Name="idLabor" Type="int" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="gestionLotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreLote" Type="varchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar" Mode="In" />
+          <Parameter Name="cuadras" Type="varchar" Mode="In" />
+          <Parameter Name="idLote" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="gestionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -789,7 +799,6 @@
           <Parameter Name="valor" Type="money" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
           <Parameter Name="idDeuda" Type="int" Mode="In" />
-          <Parameter Name="newValor" Type="money" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="insercionDeudaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -800,6 +809,9 @@
         </Function>
         <Function Name="InsercionInsumoLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="InsertarDetalleCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PagosPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="opcionPago" Type="int" Mode="In" />
+        </Function>
         <Function Name="RegistrarCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nit" Type="varchar" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
@@ -811,6 +823,39 @@
           <Parameter Name="cantidad" Type="int" Mode="In" />
         </Function>
         <Function Name="SalariosEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_InsertMultiplesGastos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertMultiplesSalariosPersonaPermanente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertMultiplesSalariosTemporal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBFincaModelStoreContainer">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" Schema="dbo" store:Type="Tables" />
@@ -943,20 +988,20 @@
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Produccion" EntitySet="Produccion" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoSalario_idSalarioPersonaTemporal" Association="Self.FK_RegistroPagoSalario_idSalarioPersonaTemporal">
-            <End Role="SalarioPersonaTemporal" EntitySet="SalarioPersonaTemporal" />
-            <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
-          </AssociationSet>
           <AssociationSet Name="FK_RegistroPagoSalario_RegistroPago" Association="Self.FK_RegistroPagoSalario_RegistroPago">
             <End Role="RegistroPago" EntitySet="RegistroPago" />
             <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoSalario_SalarioPersonaPermanente" Association="Self.FK_RegistroPagoSalario_SalarioPersonaPermanente">
-            <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
+          <AssociationSet Name="FK_RegistroPagoSalario_SalarioPersonaTemporal" Association="Self.FK_RegistroPagoSalario_SalarioPersonaTemporal">
+            <End Role="SalarioPersonaTemporal" EntitySet="SalarioPersonaTemporal" />
             <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
           </AssociationSet>
           <AssociationSet Name="FK_SalarioPersonaPermanente_Persona" Association="Self.FK_SalarioPersonaPermanente_Persona">
             <End Role="Persona" EntitySet="Persona" />
+            <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalarioPersonaPermanente_RegistroPago" Association="Self.FK_SalarioPersonaPermanente_RegistroPago">
+            <End Role="RegistroPago" EntitySet="RegistroPago" />
             <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
           </AssociationSet>
           <AssociationSet Name="FK_SalarioPersonaTemporal_LaborLote" Association="Self.FK_SalarioPersonaTemporal_LaborLote">
@@ -1262,8 +1307,8 @@
           </Key>
           <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="RegistroPagoSalario" Relationship="Self.FK_RegistroPagoSalario_RegistroPago" FromRole="RegistroPago" ToRole="RegistroPagoSalario" />
+          <NavigationProperty Name="SalarioPersonaPermanente" Relationship="DBFincaModel.FK_SalarioPersonaPermanente_RegistroPago" FromRole="RegistroPago" ToRole="SalarioPersonaPermanente" />
         </EntityType>
         <EntityType Name="RegistroPagoSalario">
           <Key>
@@ -1272,10 +1317,8 @@
           <Property Name="idRegistroPagoSalario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idRegistroPago" Type="Int32" Nullable="false" />
           <Property Name="idSalarioPersonaTemporal" Type="Int32" />
-          <Property Name="idSalarioPersonaPermanente" Type="Int32" />
           <NavigationProperty Name="RegistroPago" Relationship="Self.FK_RegistroPagoSalario_RegistroPago" FromRole="RegistroPagoSalario" ToRole="RegistroPago" />
           <NavigationProperty Name="SalarioPersonaTemporal" Relationship="Self.FK_RegistroPagoSalario_idSalarioPersonaTemporal" FromRole="RegistroPagoSalario" ToRole="SalarioPersonaTemporal" />
-          <NavigationProperty Name="SalarioPersonaPermanente" Relationship="Self.FK_RegistroPagoSalario_SalarioPersonaPermanente" FromRole="RegistroPagoSalario" ToRole="SalarioPersonaPermanente" />
         </EntityType>
         <EntityType Name="SalarioPersonaPermanente">
           <Key>
@@ -1285,7 +1328,8 @@
           <Property Name="DocumentoPersona" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Valor" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_SalarioPersonaPermanente_Persona" FromRole="SalarioPersonaPermanente" ToRole="Persona" />
-          <NavigationProperty Name="RegistroPagoSalario" Relationship="Self.FK_RegistroPagoSalario_SalarioPersonaPermanente" FromRole="SalarioPersonaPermanente" ToRole="RegistroPagoSalario" />
+          <Property Name="IdRegistroPago" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RegistroPago" Relationship="DBFincaModel.FK_SalarioPersonaPermanente_RegistroPago" FromRole="SalarioPersonaPermanente" ToRole="RegistroPago" />
         </EntityType>
         <EntityType Name="SalarioPersonaTemporal">
           <Key>
@@ -1682,18 +1726,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RegistroPagoSalario_SalarioPersonaPermanente">
-          <End Role="SalarioPersonaPermanente" Type="Self.SalarioPersonaPermanente" Multiplicity="0..1" />
-          <End Role="RegistroPagoSalario" Type="Self.RegistroPagoSalario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalarioPersonaPermanente">
-              <PropertyRef Name="idSalarioPersonaPermanente" />
-            </Principal>
-            <Dependent Role="RegistroPagoSalario">
-              <PropertyRef Name="idSalarioPersonaPermanente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DBFincaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AbonoCompra" EntityType="Self.AbonoCompra" />
           <EntitySet Name="AbonoDeuda" EntityType="Self.AbonoDeuda" />
@@ -1841,10 +1873,6 @@
             <End Role="SalarioPersonaTemporal" EntitySet="SalarioPersonaTemporal" />
             <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
           </AssociationSet>
-          <AssociationSet Name="FK_RegistroPagoSalario_SalarioPersonaPermanente" Association="Self.FK_RegistroPagoSalario_SalarioPersonaPermanente">
-            <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
-            <End Role="RegistroPagoSalario" EntitySet="RegistroPagoSalario" />
-          </AssociationSet>
           <FunctionImport Name="gestionTipoArboles" ReturnType="Collection(DBFincaModel.gestionTipoArboles_Result)">
             <Parameter Name="NombreArbol" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1914,7 +1942,6 @@
             <Parameter Name="valor" Mode="In" Type="Decimal" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="idDeuda" Mode="In" Type="Int32" />
-            <Parameter Name="newValor" Mode="In" Type="Decimal" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="gestionLotes" ReturnType="Collection(DBFincaModel.gestionLotes_Result)">
@@ -1977,6 +2004,56 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="CostoBeneficio" EntitySet="CostoBeneficio" />
           </AssociationSet>
+          <FunctionImport Name="PagosPersona" ReturnType="Collection(DBFincaModel.PagosPersona_Result1)">
+          <Parameter Name="opcionPago" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DetalleSalario" ReturnType="Collection(DBFincaModel.DetalleSalario_Result)">
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertMultiplesSalariosPersonaPermanente" />
+          <AssociationSet Name="FK_SalarioPersonaPermanente_RegistroPago" Association="DBFincaModel.FK_SalarioPersonaPermanente_RegistroPago">
+            <End Role="RegistroPago" EntitySet="RegistroPago" />
+            <End Role="SalarioPersonaPermanente" EntitySet="SalarioPersonaPermanente" />
+          </AssociationSet>
+          <FunctionImport Name="gestionLotes1" ReturnType="Collection(String)">
+            <Parameter Name="nombreLote" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+            <Parameter Name="cuadras" Mode="In" Type="String" />
+            <Parameter Name="idLote" Mode="In" Type="Int32" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBFincaModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBFincaModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertMultiplesGastos" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SP_InsertMultiplesSalariosTemporal" />
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2073,6 +2150,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="PagosPersona_Result">
+          <Property Type="String" Name="DocumentoPersona" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Valor_a_pagar" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Deuda" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="PagosPersona_Result1">
+          <Property Type="String" Name="DocumentoPersona" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Valor_a_pagar" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Deuda" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="DetalleSalario_Result">
+          <Property Type="String" Name="NombreLabor" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="subtotal" Nullable="true" Precision="19" />
+        </ComplexType>
+        <Association Name="FK_SalarioPersonaPermanente_RegistroPago">
+          <End Type="DBFincaModel.RegistroPago" Role="RegistroPago" Multiplicity="1" />
+          <End Type="DBFincaModel.SalarioPersonaPermanente" Role="SalarioPersonaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistroPago">
+              <PropertyRef Name="idRegistroPago" />
+            </Principal>
+            <Dependent Role="SalarioPersonaPermanente">
+              <PropertyRef Name="IdRegistroPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2339,7 +2458,6 @@
               <MappingFragment StoreEntitySet="RegistroPago">
                 <ScalarProperty Name="idRegistroPago" ColumnName="idRegistroPago" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2349,13 +2467,13 @@
                 <ScalarProperty Name="idRegistroPagoSalario" ColumnName="idRegistroPagoSalario" />
                 <ScalarProperty Name="idRegistroPago" ColumnName="idRegistroPago" />
                 <ScalarProperty Name="idSalarioPersonaTemporal" ColumnName="idSalarioPersonaTemporal" />
-                <ScalarProperty Name="idSalarioPersonaPermanente" ColumnName="idSalarioPersonaPermanente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SalarioPersonaPermanente">
             <EntityTypeMapping TypeName="DBFincaModel.SalarioPersonaPermanente">
               <MappingFragment StoreEntitySet="SalarioPersonaPermanente">
+                <ScalarProperty Name="IdRegistroPago" ColumnName="IdRegistroPago" />
                 <ScalarProperty Name="idSalarioPersonaPermanente" ColumnName="idSalarioPersonaPermanente" />
                 <ScalarProperty Name="DocumentoPersona" ColumnName="DocumentoPersona" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -2530,6 +2648,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PagosPersona" FunctionName="DBFincaModel.Store.PagosPersona">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.PagosPersona_Result1">
+                <ScalarProperty Name="DocumentoPersona" ColumnName="DocumentoPersona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
+                <ScalarProperty Name="Valor_Deuda" ColumnName="Valor_Deuda" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DetalleSalario" FunctionName="DBFincaModel.Store.DetalleSalario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.DetalleSalario_Result">
+                <ScalarProperty Name="NombreLabor" ColumnName="NombreLabor" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertMultiplesSalariosPersonaPermanente" FunctionName="DBFincaModel.Store.SP_InsertMultiplesSalariosPersonaPermanente" />
+          <FunctionImportMapping FunctionImportName="gestionLotes1" FunctionName="DBFincaModel.Store.gestionLotes" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DBFincaModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DBFincaModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBFincaModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DBFincaModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DBFincaModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertMultiplesGastos" FunctionName="DBFincaModel.Store.SP_InsertMultiplesGastos" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBFincaModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DBFincaModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SP_InsertMultiplesSalariosTemporal" FunctionName="DBFincaModel.Store.SP_InsertMultiplesSalariosTemporal" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

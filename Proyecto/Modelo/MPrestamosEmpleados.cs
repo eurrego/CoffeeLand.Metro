@@ -112,12 +112,12 @@ namespace Modelo
             }
         }
 
-        public string insercionAbonoDeuda(decimal valor, DateTime fecha, int idDeuda, decimal newValor, int opcion)
+        public string insercionAbonoDeuda(decimal valor, DateTime fecha, int idDeuda, int opcion)
         {
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.insercionAbonoDeuda(valor, fecha, idDeuda, newValor, opcion).First();
+                var rpta = entity.insercionAbonoDeuda(valor, fecha, idDeuda, opcion).First();
                 return rpta.Mensaje;
             }
         }

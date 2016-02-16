@@ -18,13 +18,15 @@ namespace Modelo
         public RegistroPago()
         {
             this.RegistroPagoSalario = new HashSet<RegistroPagoSalario>();
+            this.SalarioPersonaPermanente = new HashSet<SalarioPersonaPermanente>();
         }
     
         public int idRegistroPago { get; set; }
         public System.DateTime Fecha { get; set; }
-        public decimal valor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistroPagoSalario> RegistroPagoSalario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalarioPersonaPermanente> SalarioPersonaPermanente { get; set; }
     }
 }
