@@ -80,12 +80,60 @@ namespace CoffeeLand
                 fila["Precio"] = txtValor.Text;
                 fila["Subtotal"] = (int.Parse(txtValor.Text) * int.Parse(txtCantidad.Text)).ToString();
                 fila["TipoInsumo"] = cmbTipoInsumo.Text;
-                dtDetalleCompra.Rows.Add(fila);
+
+                int RindexRow = 0;
+                int indexRow = dtDetalleCompra.Rows.Count+1;
+                int DistintoPrecio = 0;
+
+                foreach (DataRow row in dtDetalleCompra.Rows)
+                {
+
+                    if (row["idInsumo"].Equals(item.idInsumo.ToString()))
+                    {
+
+                        if (row["Precio"].Equals(txtValor.Text))
+                        {
+
+                            fila["Cantidad"] = (int.Parse(row["Cantidad"].ToString()) + int.Parse(txtCantidad.Text)).ToString();
+                            fila["Subtotal"] = (int.Parse(txtValor.Text) * int.Parse(fila["Cantidad"].ToString())).ToString();
+
+                            indexRow = RindexRow;
+                        }
+
+                        else
+                        {
+                            mensajeError("El insumo ya existe en la factura con un valor distinto al cual desea ingresar");
+
+                            DistintoPrecio = 1;
+                        }
+
+                    }
+
+                    RindexRow++;
+                }
+               
+
+                if (indexRow != (dtDetalleCompra.Rows.Count + 1))
+                {
+                   dtDetalleCompra.Rows[indexRow].Delete();
+                }
+             
 
 
-                tblDetalleCompra.ItemsSource = dtDetalleCompra.DefaultView;
-                limpiarCampos();
-                TotalCompra();
+                if (DistintoPrecio == 0 )
+                {
+
+                    dtDetalleCompra.Rows.Add(fila);
+
+                    tblDetalleCompra.ItemsSource = dtDetalleCompra.DefaultView;
+                    limpiarCampos();
+                    TotalCompra();
+
+                }
+                
+
+
+              
             }
         }
 
@@ -98,12 +146,7 @@ namespace CoffeeLand
                 if (validarCampos(3))
                 {
 
-
-
-
-                    string compra = "";
-
-                    compra = MCompra.GetInstance().RegistroCompra(cmbProveedor.SelectedValue.ToString(), Convert.ToDateTime(dtdFecha.SelectedDate), int.Parse(txtNumeroFactura.Text)).ToString();
+                    string compra = MCompra.GetInstance().RegistroCompra(cmbProveedor.SelectedValue.ToString(), Convert.ToDateTime(dtdFecha.SelectedDate), int.Parse(txtNumeroFactura.Text)).ToString();
 
 
                     if (!compra.Equals("0"))
@@ -116,23 +159,25 @@ namespace CoffeeLand
                         }
 
                         dtDetalleCompra.Columns.Remove("TipoInsumo");
-                        MCompra.GetInstance().RegistroDetalleCompra(dtDetalleCompra);
 
-                        dtDetalleCompra.Clear();
-                        limpiarCamposCompra();
-                        dtDetalleCompra.Columns.Add("TipoInsumo");
+                        try
+                        {
+                            MCompra.GetInstance().RegistroDetalleCompra(dtDetalleCompra);
+                            dtDetalleCompra.Clear();
+                            limpiarCamposCompra();
+                            dtDetalleCompra.Columns.Add("TipoInsumo");
+                        }
+                        catch (Exception)
+                        {
+
+                            mensajeError("Ocurrio un error inesperado");
+
+                        }
+                        
+
+                       
 
                     }
-
-                    else
-                    {
-                        mensajeError("Este número de factura ya existe");
-                    }
-
-
-
-
-
 
                 }
             }
@@ -271,6 +316,11 @@ namespace CoffeeLand
                 cmbTipoInsumo.IsEnabled = true;
 
             }
+
+
+
+
+
         }
 
         private void cmbTipoInsumo_SelectionChanged(object sender, SelectionChangedEventArgs e)

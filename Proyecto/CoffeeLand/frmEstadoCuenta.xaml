@@ -23,7 +23,7 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            
+
 
         </ResourceDictionary>
     </Window.Resources>
@@ -31,7 +31,7 @@
 
 
 
-    
+
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="ControlesFlyouts">
@@ -115,7 +115,7 @@
                         <Grid>
                             <TextBlock x:Name="lblTotal" HorizontalAlignment="Left" Margin="60,18,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="#FF92C6F9" FontSize="24"/>
                             <TextBlock x:Name="info" HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Total:" VerticalAlignment="Top" Foreground="#FFA8A8CD" FontSize="18.667"/>
-
+                            
                             <DataGrid x:Name="tblCompras" BorderThickness="0" Margin="10,62,0,10" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
@@ -162,7 +162,7 @@
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-
+                            
                         </Grid>
                     </GroupBox>
                 </Grid>

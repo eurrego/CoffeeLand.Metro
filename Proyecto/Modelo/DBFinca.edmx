@@ -251,7 +251,7 @@
           <Key>
             <PropertyRef Name="idRegistroPago" />
           </Key>
-          <Property Name="idRegistroPago" Type="int" Nullable="false" />
+          <Property Name="idRegistroPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="valor" Type="money" Nullable="false" />
         </EntityType>
@@ -2001,7 +2001,7 @@
             <Parameter Name="PrecioBeneficio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="VentaProduccion" ReturnType="Collection(DBFincaModel.VentaProduccion_Result1)">
-            <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
+          <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">

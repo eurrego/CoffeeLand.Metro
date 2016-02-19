@@ -64,14 +64,17 @@ namespace CoffeeLand
 
 
 
+
             }
+
+
+
         }
+
+
 
         private void btnDetalleCompra_Click(object sender, RoutedEventArgs e)
         {
-
-
-
 
             ComprasProveedor_Result1 item = tblCompras.SelectedItem as ComprasProveedor_Result1;
 
