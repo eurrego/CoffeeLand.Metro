@@ -656,5 +656,18 @@ namespace Modelo
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertMultiplesSalariosTemporal");
         }
+    
+        public virtual ObjectResult<SP_CONSULTA_EGRESO_Result> SP_CONSULTA_EGRESO(Nullable<System.DateTime> fECHA_INI, Nullable<System.DateTime> fECHA_FIN)
+        {
+            var fECHA_INIParameter = fECHA_INI.HasValue ?
+                new ObjectParameter("FECHA_INI", fECHA_INI) :
+                new ObjectParameter("FECHA_INI", typeof(System.DateTime));
+    
+            var fECHA_FINParameter = fECHA_FIN.HasValue ?
+                new ObjectParameter("FECHA_FIN", fECHA_FIN) :
+                new ObjectParameter("FECHA_FIN", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CONSULTA_EGRESO_Result>("SP_CONSULTA_EGRESO", fECHA_INIParameter, fECHA_FINParameter);
+        }
     }
 }

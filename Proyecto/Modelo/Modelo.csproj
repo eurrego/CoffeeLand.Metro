@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Modelo</RootNamespace>
     <AssemblyName>Modelo</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -188,6 +189,7 @@
     <Compile Include="MPrestamosEmpleados.cs" />
     <Compile Include="MProducto.cs" />
     <Compile Include="MProveedor.cs" />
+    <Compile Include="MreporteGastos.cs" />
     <Compile Include="MTerrenos.cs" />
     <Compile Include="MTipoArbol.cs" />
     <Compile Include="MTipoInsumo.cs" />
@@ -229,6 +231,9 @@
     <Compile Include="SalarioPersonaTemporal.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_CONSULTA_EGRESO_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -252,7 +257,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DBFinca.edmx.diagram">
       <DependentUpon>DBFinca.edmx</DependentUpon>
     </None>

@@ -282,7 +282,7 @@
     </Controls:MetroWindow.Flyouts>
 
 
-    <Grid>
+    <Grid Height="659" VerticalAlignment="Top">
         <Grid x:Name="pnlBienvenida" HorizontalAlignment="Left" Height="103" Margin="38,48,0,0" VerticalAlignment="Top" Width="364">
             <Label x:Name="label1" Content="Bienvenido" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="64" FontFamily="Segoe UI Light" Margin="37,-2,0,0"/>
         </Grid>
@@ -346,7 +346,7 @@
         <Controls:Tile x:Name="btnReportes" Title="Rerportes" 
                                Background="YellowGreen"
                                Margin="84,0,0,119"
-                        TitleFontSize="12" Width="480" Height="174" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                        TitleFontSize="12" Width="480" Height="174" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnReportes_Click" >
             <Grid Width="50" Height="45"
                           Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
                 <Grid.OpacityMask>
