@@ -15,7 +15,7 @@
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         GlowBrush="{DynamicResource AccentColorBrush}"
-        Height="650" Width="1106.571"  >
+        Height="658" Width="1056.571"  >
 
     <Window.Resources>
 
@@ -76,23 +76,17 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <Grid x:Name="gridPrincipal">
-        <TabControl Margin="0,10,36,-10" >
-            <TabItem x:Name="tabReporte" Header="Pagos" Margin="18,0,-18,0">
-                <Grid x:Name="gridReporte" Height="570" VerticalAlignment="Top" Background="White" Margin="4,-9,0,0">
-
-
-
-
-
-                    <TextBlock x:Name="lblProveedor" HorizontalAlignment="Left" Margin="82,0,0,0" TextWrapping="Wrap" Text="Reporte de Gastos" VerticalAlignment="Top" Height="30" Width="330" FontSize="28" Foreground="#FF92C6F9" TextDecorations="{x:Null}" FontFamily="Quicksand" FontWeight="Bold"/>
+    <Grid x:Name="gridPrincipal" Margin="0,0,2,8">
+        <TabControl Margin="0,10,10,10" >
+            <TabItem x:Name="tabReporte" Header="Reporte de Gastos
+" Margin="18,0,-18,0">
+                <Grid x:Name="gridReporte" Height="564" VerticalAlignment="Top" Background="White" Margin="4,-9,-2,0">
                     <GroupBox x:Name="groupReporte" Header="Pagos"
-                              HorizontalAlignment="Left" Margin="20,95,0,0" 
-                              VerticalAlignment="Top" Height="453" Width="1023">
-                        <Grid>
+                              HorizontalAlignment="Left" Margin="20,10,0,0" 
+                              VerticalAlignment="Top" Height="548" Width="997">
+                        <Grid Margin="0,0,0,-29">
 
-                            <my:CrystalReportsViewer HorizontalAlignment ="Left" Name ="crystalReportsViewer1" 
-                                 VerticalAlignment ="Top" Height ="404" Width ="1001"/>
+                            <my:CrystalReportsViewer HorizontalAlignment ="Left" Name ="crystalReportsViewer1" Width ="975" Margin="2,0,0,34"/>
 
                             <!--<DataGrid x:Name="tblReporteGastos" BorderThickness="0" Margin="10,62,0,10" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
@@ -113,12 +107,8 @@
 
                         </Grid>
                     </GroupBox>
-                    <Button x:Name="btnGenerar" Content="Imprimir" HorizontalAlignment="Left" 
-                    	Margin="471,26,0,0" VerticalAlignment="Top" Width="90" 
-                    	Height="38"
-                    	Style="{StaticResource AccentedSquareButtonStyle}"  RenderTransformOrigin="-0.322,0.553"   />
-                    <DatePicker Name="dtdFechaInicio" HorizontalAlignment="Left" Margin="61,38,0,0" VerticalAlignment="Top" Width="161" />
-                    <DatePicker Name="dtdFechaFin" HorizontalAlignment="Left" Margin="251,38,0,0" VerticalAlignment="Top" Width="161" SelectedDateChanged="dtdFechaFin_SelectedDateChanged"/>
+                    <DatePicker Name="dtdFechaInicio" HorizontalAlignment="Left" Margin="521,50,0,0" VerticalAlignment="Top" Width="161" RenderTransformOrigin="0.484,-2.462" />
+                    <DatePicker Name="dtdFechaFin" HorizontalAlignment="Left" Margin="711,50,0,0" VerticalAlignment="Top" Width="161" SelectedDateChanged="dtdFechaFin_SelectedDateChanged" RenderTransformOrigin="0.484,-2.538"/>
                     <Button x:Name="btnExportarPDF" ToolTip="Exportar a PDF" Content="PDF" HorizontalAlignment="Left" Margin="83,127,0,0" VerticalAlignment="Top" Width="34" Height="37" RenderTransformOrigin="0.636,-0.04" Click="button_Click" BorderThickness="0" Opacity="0" Background="{x:Null}"/>
                 </Grid>
             </TabItem>
