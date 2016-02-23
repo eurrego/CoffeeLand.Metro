@@ -81,7 +81,7 @@
             <TabItem x:Name="tabReporte" Header="Pagos" Margin="18,0,-18,0">
                 <Grid x:Name="gridReporte" Height="570" VerticalAlignment="Top" Background="White" Margin="4,-9,0,0">
 
-                  
+
 
 
 
@@ -92,8 +92,8 @@
                         <Grid>
 
                             <my:CrystalReportsViewer HorizontalAlignment ="Left" Name ="crystalReportsViewer1" 
-                                 VerticalAlignment ="Top" Height ="404" Width ="1001" />
-                            
+                                 VerticalAlignment ="Top" Height ="404" Width ="1001"/>
+
                             <!--<DataGrid x:Name="tblReporteGastos" BorderThickness="0" Margin="10,62,0,10" AutoGenerateColumns="False" 
                               HorizontalAlignment="Left" 
                               HorizontalContentAlignment="Stretch" 
@@ -116,12 +116,13 @@
                     <Button x:Name="btnGenerar" Content="Imprimir" HorizontalAlignment="Left" 
                     	Margin="471,26,0,0" VerticalAlignment="Top" Width="90" 
                     	Height="38"
-                    	Style="{StaticResource AccentedSquareButtonStyle}"  RenderTransformOrigin="-0.322,0.553"  Click="btnGenerar_Click" />
-                    <DatePicker Name="dtdFechaInicio" HorizontalAlignment="Left" Margin="61,38,0,0" VerticalAlignment="Top" Width="161" SelectedDateChanged="dtdFechaInicio_SelectedDateChanged" />
+                    	Style="{StaticResource AccentedSquareButtonStyle}"  RenderTransformOrigin="-0.322,0.553"   />
+                    <DatePicker Name="dtdFechaInicio" HorizontalAlignment="Left" Margin="61,38,0,0" VerticalAlignment="Top" Width="161" />
                     <DatePicker Name="dtdFechaFin" HorizontalAlignment="Left" Margin="251,38,0,0" VerticalAlignment="Top" Width="161" SelectedDateChanged="dtdFechaFin_SelectedDateChanged"/>
+                    <Button x:Name="btnExportarPDF" ToolTip="Exportar a PDF" Content="PDF" HorizontalAlignment="Left" Margin="83,127,0,0" VerticalAlignment="Top" Width="34" Height="37" RenderTransformOrigin="0.636,-0.04" Click="button_Click" BorderThickness="0" Opacity="0" Background="{x:Null}"/>
                 </Grid>
             </TabItem>
-           
+
         </TabControl>
     </Grid>
 </Controls:MetroWindow>

@@ -10,6 +10,7 @@ using excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using MahApps.Metro.Controls.Dialogs;
 using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace CoffeeLand
 {
@@ -18,6 +19,8 @@ namespace CoffeeLand
     /// </summary>
     public partial class frmReporteGastos : MetroWindow
     {
+
+        CrystalReport1 rptDoc = new CrystalReport1();
         public frmReporteGastos()
         {
             InitializeComponent();
@@ -65,24 +68,7 @@ namespace CoffeeLand
 
 
 
-        private void btnGenerar_Click(object sender, RoutedEventArgs e)
-        {
 
-
-            //for (int i = 0; i < tblReporteGastos.Items.Count; i++)
-            //{
-
-            //    decimal valor = decimal.Round(((tblReporteGastos.Items[i] as SP_CONSULTA_EGRESO_Result).Valor), 0);
-            //    (tblReporteGastos.Items[i] as SP_CONSULTA_EGRESO_Result).Valor = valor;
-
-            //}
-
-
-            //System.Data.DataTable dt = DataGridtoDataTable(tblReporteGastos);
-
-            //WriteToExcel(dt, "C:\\Users\\Caty\\Desktop\\Teste.xlsm");
-
-        }
 
 
         private void WriteToExcel(System.Data.DataTable dt, string location)
@@ -126,7 +112,7 @@ namespace CoffeeLand
 
             if (!System.IO.File.Exists(location))
             {
-                
+
                 WbObj.SaveAs(location, excel.XlFileFormat.xlOpenXMLWorkbookMacroEnabled,
                     null, null, false, false, excel.XlSaveAsAccessMode.xlNoChange,
                         false, false, null, null, null);
@@ -150,19 +136,12 @@ namespace CoffeeLand
             {
                 if (dtdFechaInicio.SelectedDate <= dtdFechaFin.SelectedDate)
                 {
-                    
-                    CrystalReport1 rptDoc = new CrystalReport1();
-                
                     rptDoc.Load("C:\\Users\\Caty\\Documents\\GitHub\\CoffeeLand.Metro\\Proyecto\\CoffeeLand\\CrystalReport1.rpt");
-                   
 
-                   
-                        rptDoc.SetDataSource(MreporteGastos.GetInstance().funcionreportegastos(DateTime.Parse(dtdFechaInicio.SelectedDate.ToString()), DateTime.Parse(dtdFechaFin.SelectedDate.ToString())) as IEnumerable);
-                    
+                    rptDoc.SetDataSource(MreporteGastos.GetInstance().funcionreportegastos(DateTime.Parse(dtdFechaInicio.SelectedDate.ToString()), DateTime.Parse(dtdFechaFin.SelectedDate.ToString())) as IEnumerable);
 
                     crystalReportsViewer1.ViewerCore.ReportSource = rptDoc;
-                    crystalReportsViewer1.e;
-                    //tblReporteGastos.ItemsSource = MreporteGastos.GetInstance().funcionreportegastos(DateTime.Parse(dtdFechaInicio.SelectedDate.ToString()), DateTime.Parse(dtdFechaFin.SelectedDate.ToString())) as IEnumerable;
+                
                 }
                 else
                 {
@@ -177,9 +156,37 @@ namespace CoffeeLand
             }
         }
 
-        private void dtdFechaInicio_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+  
+
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-       
+
+            //CrystalReport1 cryRpt = new CrystalReport1();
+            try
+            {
+                ExportOptions CrExportOptions;
+                DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                CrDiskFileDestinationOptions.DiskFileName = "C:\\Users\\Caty\\Desktop\\InformeGastos.pdf";
+                CrExportOptions = rptDoc.ExportOptions;
+                {
+                    CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                    CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                    CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                    CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                }
+                rptDoc.Export();
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult.ToString().Equals("-2147215870"))
+                {
+                    mensajeError("Por favor seleccione las fechas para generar el informe.");
+                }
+              
+            }
+
+
         }
     }
 
