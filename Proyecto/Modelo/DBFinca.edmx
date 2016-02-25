@@ -116,7 +116,6 @@
           <Property Name="idFinca" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreFinca" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Propietario" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="idDepartamento" Type="tinyint" Nullable="false" />
           <Property Name="idMunicipio" Type="smallint" Nullable="false" />
           <Property Name="Vereda" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefono" Type="varchar" MaxLength="10" Nullable="false" />
@@ -301,6 +300,18 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="EstadoTipoInsumo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="PreguntaSeguridad" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EstadoUsuario" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
         <EntityType Name="Venta">
           <Key>
             <PropertyRef Name="idVenta" />
@@ -309,7 +320,7 @@
           <Property Name="idProducto" Type="tinyint" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="PrecioCarga" Type="money" Nullable="false" />
-          <Property Name="CantidadCargas" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CantidadCargas" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_AbonoCompra_Compra">
           <End Role="Compra" Type="Self.Compra" Multiplicity="1" />
@@ -452,18 +463,6 @@
             </Principal>
             <Dependent Role="Egreso">
               <PropertyRef Name="idConcepto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Finca_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Finca" Type="Self.Finca" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Principal>
-            <Dependent Role="Finca">
-              <PropertyRef Name="idDepartamento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -786,6 +785,15 @@
           <Parameter Name="idTipoInsumo" Type="int" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
+        <Function Name="GestionUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+          <Parameter Name="nickName" Type="varchar" Mode="In" />
+          <Parameter Name="rol" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="preguntaSeguridad" Type="varchar" Mode="In" />
+          <Parameter Name="respuesta" Type="varchar" Mode="In" />
+          <Parameter Name="opc" Type="int" Mode="In" />
+        </Function>
         <Function Name="GestionVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nit" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
@@ -799,7 +807,6 @@
           <Parameter Name="valor" Type="money" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
           <Parameter Name="idDeuda" Type="int" Mode="In" />
-          <Parameter Name="newValor" Type="money" Mode="In" />
           <Parameter Name="opc" Type="int" Mode="In" />
         </Function>
         <Function Name="insercionDeudaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -810,6 +817,14 @@
         </Function>
         <Function Name="InsercionInsumoLaborLote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="InsertarDetalleCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ModificarFinca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreFinca" Type="varchar" Mode="In" />
+          <Parameter Name="Propietario" Type="varchar" Mode="In" />
+          <Parameter Name="idMunicipio" Type="int" Mode="In" />
+          <Parameter Name="Vereda" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="hectareas" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="RegistrarCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nit" Type="varchar" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
@@ -855,6 +870,7 @@
           <EntitySet Name="SalarioPersonaTemporal" EntityType="Self.SalarioPersonaTemporal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoArbol" EntityType="Self.TipoArbol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoInsumo" EntityType="Self.TipoInsumo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AbonoCompra_Compra" Association="Self.FK_AbonoCompra_Compra">
             <End Role="Compra" EntitySet="Compra" />
@@ -903,10 +919,6 @@
           <AssociationSet Name="FK_Egreso_Concepto" Association="Self.FK_Egreso_Concepto">
             <End Role="Concepto" EntitySet="Concepto" />
             <End Role="Egreso" EntitySet="Egreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Finca_Departamento" Association="Self.FK_Finca_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Finca" EntitySet="Finca" />
           </AssociationSet>
           <AssociationSet Name="FK_Finca_Municipio" Association="Self.FK_Finca_Municipio">
             <End Role="Municipio" EntitySet="Municipio" />
@@ -1073,7 +1085,6 @@
           </Key>
           <Property Name="idDepartamento" Type="Byte" Nullable="false" />
           <Property Name="NombreDepartamento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Finca" Relationship="Self.FK_Finca_Departamento" FromRole="Departamento" ToRole="Finca" />
           <NavigationProperty Name="Municipio" Relationship="Self.FK_Municipio_Departamento" FromRole="Departamento" ToRole="Municipio" />
         </EntityType>
         <EntityType Name="DeudaPersona">
@@ -1109,12 +1120,10 @@
           <Property Name="idFinca" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreFinca" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Propietario" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="idDepartamento" Type="Byte" Nullable="false" />
           <Property Name="idMunicipio" Type="Int16" Nullable="false" />
           <Property Name="Vereda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Hectareas" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK_Finca_Departamento" FromRole="Finca" ToRole="Departamento" />
           <NavigationProperty Name="Municipio" Relationship="Self.FK_Finca_Municipio" FromRole="Finca" ToRole="Municipio" />
           <NavigationProperty Name="Lote" Relationship="Self.FK_Lote_Finca" FromRole="Finca" ToRole="Lote" />
         </EntityType>
@@ -1342,7 +1351,7 @@
           <Property Name="idProducto" Type="Byte" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PrecioCarga" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="CantidadCargas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CantidadCargas" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="MovimientoProduccion" Relationship="Self.FK_MovimientoProduccion_Venta" FromRole="Venta" ToRole="MovimientoProduccion" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Venta_Producto" FromRole="Venta" ToRole="Producto" />
           <NavigationProperty Name="CostoBeneficio" Relationship="DBFincaModel.FK_CostoBeneficio_Venta" FromRole="Venta" ToRole="CostoBeneficio" />
@@ -1464,18 +1473,6 @@
             </Principal>
             <Dependent Role="Egreso">
               <PropertyRef Name="idConcepto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Finca_Departamento">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Finca" Type="Self.Finca" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Principal>
-            <Dependent Role="Finca">
-              <PropertyRef Name="idDepartamento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1778,10 +1775,6 @@
             <End Role="Concepto" EntitySet="Concepto" />
             <End Role="Egreso" EntitySet="Egreso" />
           </AssociationSet>
-          <AssociationSet Name="FK_Finca_Departamento" Association="Self.FK_Finca_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Finca" EntitySet="Finca" />
-          </AssociationSet>
           <AssociationSet Name="FK_Municipio_Departamento" Association="Self.FK_Municipio_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Municipio" EntitySet="Municipio" />
@@ -1927,7 +1920,6 @@
             <Parameter Name="valor" Mode="In" Type="Decimal" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="idDeuda" Mode="In" Type="Int32" />
-            <Parameter Name="newValor" Mode="In" Type="Decimal" />
             <Parameter Name="opc" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="gestionLotes" ReturnType="Collection(DBFincaModel.gestionLotes_Result)">
@@ -2003,6 +1995,24 @@
           <FunctionImport Name="VentaProduccion" ReturnType="Collection(DBFincaModel.VentaProduccion_Result1)">
           <Parameter Name="Cantidad" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="ModificarFinca">
+            <Parameter Name="nombreFinca" Mode="In" Type="String" />
+            <Parameter Name="Propietario" Mode="In" Type="String" />
+            <Parameter Name="idMunicipio" Mode="In" Type="Int32" />
+            <Parameter Name="Vereda" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="hectareas" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GestionUsuario" ReturnType="Collection(DBFincaModel.GestionUsuario_Result)">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="nickName" Mode="In" Type="String" />
+            <Parameter Name="rol" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+            <Parameter Name="preguntaSeguridad" Mode="In" Type="String" />
+            <Parameter Name="respuesta" Mode="In" Type="String" />
+            <Parameter Name="opc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Usuario" EntityType="DBFincaModel.Usuario" />
         </EntityContainer>
         <ComplexType Name="gestionTipoArboles_Result">
           <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
@@ -2107,6 +2117,21 @@
         </ComplexType>
         <ComplexType Name="VentaProduccion_Result1">
           <Property Type="String" Name="Mensaje" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="PreguntaSeguridad" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Respuesta" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoUsuario" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GestionUsuario_Result">
+          <Property Type="String" Name="Mensaje" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2224,7 +2249,6 @@
                 <ScalarProperty Name="idFinca" ColumnName="idFinca" />
                 <ScalarProperty Name="NombreFinca" ColumnName="NombreFinca" />
                 <ScalarProperty Name="Propietario" ColumnName="Propietario" />
-                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
                 <ScalarProperty Name="idMunicipio" ColumnName="idMunicipio" />
                 <ScalarProperty Name="Vereda" ColumnName="Vereda" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
@@ -2580,6 +2604,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ModificarFinca" FunctionName="DBFincaModel.Store.ModificarFinca" />
+          <FunctionImportMapping FunctionImportName="GestionUsuario" FunctionName="DBFincaModel.Store.GestionUsuario" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBFincaModel.GestionUsuario_Result">
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="DBFincaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="EstadoUsuario" ColumnName="EstadoUsuario" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="PreguntaSeguridad" ColumnName="PreguntaSeguridad" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

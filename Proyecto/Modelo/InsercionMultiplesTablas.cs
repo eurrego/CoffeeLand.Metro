@@ -14,6 +14,13 @@ namespace Modelo
     public partial class DBFincaEntities : DbContext
     {
 
+        #region Conexión dinamica
+        public DBFincaEntities(string conn)
+           : base(conn)
+        {
+        }
+        #endregion
+
         public virtual int SP_InsertMultiplesGastos(DataTable dtDatos)
         {
             var datos = new SqlParameter("DTgastos", SqlDbType.Structured);

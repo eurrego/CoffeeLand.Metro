@@ -23,13 +23,11 @@ namespace Modelo
         public byte idFinca { get; set; }
         public string NombreFinca { get; set; }
         public string Propietario { get; set; }
-        public byte idDepartamento { get; set; }
         public short idMunicipio { get; set; }
         public string Vereda { get; set; }
         public string Telefono { get; set; }
         public string Hectareas { get; set; }
     
-        public virtual Departamento Departamento { get; set; }
         public virtual Municipio Municipio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lote> Lote { get; set; }

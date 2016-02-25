@@ -1,0 +1,82 @@
+﻿<Controls:MetroWindow x:Name="frmRecuperarContrasena1" x:Class="CoffeeLand.frmRecuperarContrasena"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:CoffeeLand"
+        Height="518.797"
+        Width="692"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        GlowBrush="{DynamicResource AccentColorBrush}" Loaded="frmRecuperarContrasena_Loaded" >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="gridPrincipal" Margin="0,0,0,2">
+        <TabControl Margin="0,10,0,41">
+            <TabItem x:Name="tabRegistrar" Header="Recuperar Contrasena">
+                <Grid x:Name="gridRegistrar" Height="430" VerticalAlignment="Top" Background="White" Margin="2,3,-2,0">
+
+                    <Button x:Name="btnRecuperar" Content="Recuperar" HorizontalAlignment="Left" 
+            	    Margin="291,338,0,0" VerticalAlignment="Top" Width="90" 
+            	    Height="38" 
+                    Style="{StaticResource AccentedSquareButtonStyle}" Click="btnRecuperar_Click"  />
+
+                    <TextBox x:Name="txtRepuestaSeguridad" Margin="69,227,0,0"
+        		    Controls:TextBoxHelper.UseFloatingWatermark="True"
+        		    Controls:TextBoxHelper.Watermark="Respuesta Seguridad" 
+        		    Controls:TextBoxHelper.ClearTextButton="True" 
+                    Height="42" VerticalAlignment="Top" HorizontalAlignment="Left" Width="542" />
+
+
+                    <ComboBox x:Name="cmbPreguntaSeguridad"  HorizontalAlignment="Left"
+                              IsSynchronizedWithCurrentItem="true" 
+                            
+                              Margin="69,151,0,0" VerticalAlignment="Top"
+                              Width="542" Height="42"
+                              SelectedIndex="0" 
+                             
+                              />
+
+
+
+                    <PasswordBox x:Name="txtConfirmarContrasena" 
+                         HorizontalAlignment="Left" 
+                         Margin="350,76,0,0" 
+                         VerticalAlignment="Top" 
+                         Width="261" Height="42"  
+                         Controls:TextBoxHelper.Watermark="Confirmar Contraseña" 
+                         Controls:TextBoxHelper.UseFloatingWatermark="True"
+                         VerticalContentAlignment="Center"
+                         FontSize="16" 
+                        />
+
+                    <PasswordBox x:Name="txtContraseña" 
+                         HorizontalAlignment="Left" 
+                         Margin="69,76,0,0" 
+                         VerticalAlignment="Top" 
+                         Width="250" Height="42"  
+                         Controls:TextBoxHelper.Watermark="Contraseña" 
+                         Controls:TextBoxHelper.UseFloatingWatermark="True"
+                         VerticalContentAlignment="Center"
+                         FontSize="16" 
+                        />
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+
+</Controls:MetroWindow>

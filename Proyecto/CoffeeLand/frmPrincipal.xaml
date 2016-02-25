@@ -54,7 +54,7 @@
                              CloseButtonVisibility="Visible"
                              TitleVisibility="Visible"
                              AreAnimationsEnabled="True"
-                             Width="400">
+                             Width="450">
                 <Grid Width="350">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                         <Expander x:Name="expanderGestionTerrenos" Header="Gestionar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="92" IsExpanded="True">
@@ -69,7 +69,7 @@
                                 <Label x:Name="label2" Content="Gestionar Terrenos" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
                             </Grid>
                         </Expander>
-                        <Expander x:Name="expanderConfiguracion" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="213" IsExpanded="True">
+                        <Expander x:Name="expanderConfiguracion" Header="Configuración" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="330" IsExpanded="True">
                             <Grid Background="White">
                                 <Button x:Name="btnLotes"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top" Click="btnLotes_Click">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
@@ -95,6 +95,25 @@
                                     </Rectangle>
                                 </Button>
                                 <Label x:Name="label22_Copy1" Content="Crear Tipos de Arboles" HorizontalAlignment="Left" Margin="68,124,0,0" VerticalAlignment="Top"/>
+
+                                <Button x:Name="btnFinca" Click="btnFinca_Click"  HorizontalAlignment="Left" Margin="10,171,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_at}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label22_Copy2" Content="Finca" HorizontalAlignment="Left" Margin="68,181,0,0" VerticalAlignment="Top"/>
+
+                                <Button x:Name="btnUsuairos" Click="btnUsuairos_Click"  HorizontalAlignment="Left" Margin="10,226,0,0" Width="53" RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}" Height="52" VerticalAlignment="Top">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_at}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label22_Copy22" Content="Usuarios" HorizontalAlignment="Left" Margin="68,236,0,0" VerticalAlignment="Top"/>
+
                             </Grid>
                         </Expander>
                     </StackPanel>
@@ -300,6 +319,8 @@
                 </Grid.OpacityMask>
             </Grid>
         </Controls:Tile>
+
+        
 
         <Controls:Tile x:Name="btnAdministracionEmpleados"  Click="btnAdministracionEmpleados_Click"  Style="{StaticResource LargeTileStyle}"
                                Background="#D2691E"

@@ -78,6 +78,15 @@
     <Compile Include="frmEstadoCuenta.xaml.cs">
       <DependentUpon>frmEstadoCuenta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmFinca.xaml.cs">
+      <DependentUpon>frmFinca.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecuperarContrasena.xaml.cs">
+      <DependentUpon>frmRecuperarContrasena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuarios.xaml.cs">
+      <DependentUpon>frmUsuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmVenta.xaml.cs">
       <DependentUpon>frmVenta.xaml</DependentUpon>
     </Compile>
@@ -99,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmEstadoCuenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmFinca.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmRecuperarContrasena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmTerrenos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmTipoInsumo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmUsuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -136,5 +136,20 @@ namespace CoffeeLand
             frmVenta miVenta = new frmVenta();
             miVenta.ShowDialog();
         }
+
+        private void btnFinca_Click(object sender, RoutedEventArgs e)
+        {
+
+            frmFinca miFinca = new frmFinca();
+            miFinca.ShowDialog();
+        }
+
+        private void btnUsuairos_Click(object sender, RoutedEventArgs e)
+        {
+            frmUsuarios misUsuarios = new frmUsuarios();
+            misUsuarios.ShowDialog();
+
+
+        }
     }
 }

@@ -117,7 +117,7 @@ namespace Modelo
 
             using (var entity = new DBFincaEntities())
             {
-                var rpta = entity.insercionAbonoDeuda(valor, fecha, idDeuda, newValor, opcion).First();
+                var rpta = entity.insercionAbonoDeuda(valor, fecha, idDeuda, opcion).First();
                 return rpta.Mensaje;
             }
         }

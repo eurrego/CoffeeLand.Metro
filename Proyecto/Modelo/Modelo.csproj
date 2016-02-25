@@ -111,6 +111,7 @@
     <Compile Include="DeudaPersona.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="EFChange.cs" />
     <Compile Include="Egreso.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
     <Compile Include="gestionTipoInsumo_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
+    <Compile Include="GestionUsuario_Result.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
     <Compile Include="insercionAbonoDeuda_Result.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
@@ -173,7 +177,9 @@
     <Compile Include="MCompra.cs" />
     <Compile Include="MConcepto.cs" />
     <Compile Include="MEstadoCuenta.cs" />
+    <Compile Include="MFinca.cs" />
     <Compile Include="MGastos.cs" />
+    <Compile Include="MUsuario.cs" />
     <Compile Include="MInsumo.cs" />
     <Compile Include="MLabores.cs" />
     <Compile Include="MLote.cs" />
@@ -226,6 +232,9 @@
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoInsumo.cs">
+      <DependentUpon>DBFinca.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
       <DependentUpon>DBFinca.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">

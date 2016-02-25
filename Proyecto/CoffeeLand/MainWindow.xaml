@@ -36,8 +36,8 @@
                         <DoubleAnimation
                                     Storyboard.TargetName="pnlLogin" 
                                     Storyboard.TargetProperty="Opacity"
-                                    From="0.0" To="9.0" Duration="0:0:5" 
-                                    BeginTime="0:0:5"
+                                    From="0.0" To="9.0" Duration="0:0:0" 
+                                    BeginTime="0:0:0"
                          />
                     </Storyboard>
                 </BeginStoryboard>
@@ -104,6 +104,15 @@
                     VerticalAlignment="Top" 
                     Width="105"  Height="38" 
                     Click="btnIngresar_Click"
+                    Style="{StaticResource AccentedSquareButtonStyle}"/>
+
+            <Button x:Name="btnRecuperarContraseña" 
+                    Content="Recuperar Contraseña" 
+                    HorizontalAlignment="Left" 
+                    Margin="117,450,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="105"  Height="38" 
+                    Click="btnRecuperarContraseña_Click"
                     Style="{StaticResource AccentedSquareButtonStyle}"/>
 
         </Grid>

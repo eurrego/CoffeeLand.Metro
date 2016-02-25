@@ -58,6 +58,7 @@ namespace Modelo
         public virtual DbSet<TipoInsumo> TipoInsumo { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<CostoBeneficio> CostoBeneficio { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     
         public virtual ObjectResult<gestionTipoArboles_Result> gestionTipoArboles(string nombreArbol, string descripcion, Nullable<int> idTipoArbol, Nullable<int> opc)
         {
@@ -292,7 +293,7 @@ namespace Modelo
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionDeudaEmpleado_Result>("insercionDeudaEmpleado", documentoPersonaParameter, valorParameter, fechaParameter, descripcionParameter);
         }
     
-        public virtual ObjectResult<insercionAbonoDeuda_Result> insercionAbonoDeuda(Nullable<decimal> valor, Nullable<System.DateTime> fecha, Nullable<int> idDeuda, Nullable<decimal> newValor, Nullable<int> opc)
+        public virtual ObjectResult<insercionAbonoDeuda_Result> insercionAbonoDeuda(Nullable<decimal> valor, Nullable<System.DateTime> fecha, Nullable<int> idDeuda, Nullable<int> opc)
         {
             var valorParameter = valor.HasValue ?
                 new ObjectParameter("valor", valor) :
@@ -306,15 +307,11 @@ namespace Modelo
                 new ObjectParameter("idDeuda", idDeuda) :
                 new ObjectParameter("idDeuda", typeof(int));
     
-            var newValorParameter = newValor.HasValue ?
-                new ObjectParameter("newValor", newValor) :
-                new ObjectParameter("newValor", typeof(decimal));
-    
             var opcParameter = opc.HasValue ?
                 new ObjectParameter("opc", opc) :
                 new ObjectParameter("opc", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionAbonoDeuda_Result>("insercionAbonoDeuda", valorParameter, fechaParameter, idDeudaParameter, newValorParameter, opcParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<insercionAbonoDeuda_Result>("insercionAbonoDeuda", valorParameter, fechaParameter, idDeudaParameter, opcParameter);
         }
     
         public virtual ObjectResult<gestionLotes_Result> gestionLotes(string nombreLote, string observaciones, string cuadras, Nullable<int> idLote, Nullable<int> opc)
@@ -545,6 +542,68 @@ namespace Modelo
                 new ObjectParameter("Cantidad", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaProduccion_Result1>("VentaProduccion", cantidadParameter);
+        }
+    
+        public virtual int ModificarFinca(string nombreFinca, string propietario, Nullable<int> idMunicipio, string vereda, string telefono, string hectareas)
+        {
+            var nombreFincaParameter = nombreFinca != null ?
+                new ObjectParameter("nombreFinca", nombreFinca) :
+                new ObjectParameter("nombreFinca", typeof(string));
+    
+            var propietarioParameter = propietario != null ?
+                new ObjectParameter("Propietario", propietario) :
+                new ObjectParameter("Propietario", typeof(string));
+    
+            var idMunicipioParameter = idMunicipio.HasValue ?
+                new ObjectParameter("idMunicipio", idMunicipio) :
+                new ObjectParameter("idMunicipio", typeof(int));
+    
+            var veredaParameter = vereda != null ?
+                new ObjectParameter("Vereda", vereda) :
+                new ObjectParameter("Vereda", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var hectareasParameter = hectareas != null ?
+                new ObjectParameter("hectareas", hectareas) :
+                new ObjectParameter("hectareas", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModificarFinca", nombreFincaParameter, propietarioParameter, idMunicipioParameter, veredaParameter, telefonoParameter, hectareasParameter);
+        }
+    
+        public virtual ObjectResult<GestionUsuario_Result> GestionUsuario(Nullable<int> idUsuario, string nickName, string rol, string contrasena, string preguntaSeguridad, string respuesta, Nullable<int> opc)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            var nickNameParameter = nickName != null ?
+                new ObjectParameter("nickName", nickName) :
+                new ObjectParameter("nickName", typeof(string));
+    
+            var rolParameter = rol != null ?
+                new ObjectParameter("rol", rol) :
+                new ObjectParameter("rol", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            var preguntaSeguridadParameter = preguntaSeguridad != null ?
+                new ObjectParameter("preguntaSeguridad", preguntaSeguridad) :
+                new ObjectParameter("preguntaSeguridad", typeof(string));
+    
+            var respuestaParameter = respuesta != null ?
+                new ObjectParameter("respuesta", respuesta) :
+                new ObjectParameter("respuesta", typeof(string));
+    
+            var opcParameter = opc.HasValue ?
+                new ObjectParameter("opc", opc) :
+                new ObjectParameter("opc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GestionUsuario_Result>("GestionUsuario", idUsuarioParameter, nickNameParameter, rolParameter, contrasenaParameter, preguntaSeguridadParameter, respuestaParameter, opcParameter);
         }
     }
 }
