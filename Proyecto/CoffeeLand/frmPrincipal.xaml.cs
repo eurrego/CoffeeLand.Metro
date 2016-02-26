@@ -130,5 +130,16 @@ namespace CoffeeLand
             frmCompra miCompra = new frmCompra();
             miCompra.ShowDialog();
         }
+
+        private void btnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            Reportes.IsOpen = true;
+        }
+
+        private void btnReportesDeudas_Click(object sender, RoutedEventArgs e)
+        {
+            frmReportesDeudasEmpleados miReporte = new frmReportesDeudasEmpleados();
+            miReporte.ShowDialog();
+        }
     }
 }

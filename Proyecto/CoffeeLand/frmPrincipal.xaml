@@ -278,6 +278,39 @@
                     </StackPanel>
                 </Grid>
             </Controls:Flyout>
+            <Controls:Flyout x:Name="Reportes"
+                             Header="Reportes"
+                             Position="Right"
+                             IsPinned="False"
+                             IsOpen="False"
+                             AnimateOnPositionChange="False"
+                             AnimateOpacity="True"
+                             IsModal="True"
+                             Theme="Accent"
+                             ExternalCloseButton="Left"
+                             CloseButtonVisibility="Visible"
+                             TitleVisibility="Visible"
+                             AreAnimationsEnabled="True"
+                             Width="400">
+                <Grid Width="350">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                        <Expander x:Name="expanderReportes" Header="Reportes" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="92" IsExpanded="True">
+                            <Grid Background="White">
+                                <Button x:Name="btnReportesDeudas"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="53" 
+                                        RenderTransformOrigin="0.467,0.419"  Style="{DynamicResource MetroCircleButtonStyle}"
+                                        Click="btnReportesDeudas_Click">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource BlackBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_bed}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Label x:Name="label2781" Content="Deudas Empleados" HorizontalAlignment="Left" Margin="68,12,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
@@ -346,6 +379,7 @@
         <Controls:Tile x:Name="btnReportes" Title="Rerportes" 
                                Background="YellowGreen"
                                Margin="84,0,0,119"
+                       Click="btnReportes_Click"
                         TitleFontSize="12" Width="480" Height="174" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
             <Grid Width="50" Height="45"
                           Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
