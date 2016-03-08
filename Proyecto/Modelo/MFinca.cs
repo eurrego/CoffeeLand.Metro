@@ -79,6 +79,27 @@ namespace Modelo
             }
         }
 
+        public List<Municipio> ConsultarMunicipios()
+        {
+            using (var entity = new DBFincaEntities())
+            {
+                List<Municipio> lista = new List<Municipio>()
+                {
+                    new Municipio
+                    {
+                        idMunicipio = 0,
+                        NombreMunicipio = "Seleccione un Municipio"
+                    }
+                };
+
+                var query = lista.Union(from c in entity.Municipio
+                                       
+                                        select c);
+
+                return query.ToList();
+            }
+        }
+
 
         public void modificarFinca(string nombreFinca, string propietario, int idMunicipio, string vereda, string telefono, string hectareas)
 
@@ -96,18 +117,18 @@ namespace Modelo
         }
 
 
-        //public List<Finca> ConsultarFinca()
-        //{
-        //    using (var entity = new DBFincaEntities())
-        //    {
+        public List<Finca> ConsultarFinca()
+        {
+            using (var entity = new DBFincaEntities())
+            {
 
 
-        //        var query = from c in entity.Finca
-        //                    select c;
+                var query = from c in entity.Finca
+                            select c;
 
-        //        return query.ToList();
-        //    }
-        //}
+                return query.ToList();
+            }
+        }
 
         //private string connectionString =
         //  "Data Source=DESKTOP-QI4E0BK;Initial Catalog=Usuarios;persist security info=True;"

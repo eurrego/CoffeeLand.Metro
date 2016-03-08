@@ -32,37 +32,39 @@ namespace CoffeeLand
         {
 
             cmbDepartamento.ItemsSource = MFinca.GetInstance().ConsultarDepartamento();
-            // var municipios = MFinca.GetInstance().ConsultarMunicipios();
+            var municipios = MFinca.GetInstance().ConsultarMunicipios();
 
-            // cmbMunicipio.ItemsSource = municipios;
+            
+
+            var finca = MFinca.GetInstance().ConsultarFinca();
+
+            foreach (var item in finca)
+            {
+                txtNombre.Text = item.NombreFinca.ToString();
+                txtPropietario.Text = item.Propietario.ToString();
+                txtTelefono.Text = item.Telefono.ToString();
+                txtVereda.Text = item.Vereda.ToString();
+                txtHectareas.Text = item.Hectareas.ToString();
+                cmbMunicipio.SelectedValue = item.idMunicipio;
+
+                //foreach (var item2 in municipios)
+                //     {
+                //         if (int.Parse(item2.idMunicipio.ToString()) == int.Parse(item.idMunicipio.ToString()))
+                //         {
+                //             cmbDepartamento.SelectedValue = item2.idDepartamento;
+                //             break;
+
+                //         }
+                //     }
+
+                
+            }
 
 
-            //var finca =  MFinca.GetInstance().ConsultarFinca();
-
-            // foreach (var item in finca)
-            // {
-            //     txtNombre.Text = item.NombreFinca.ToString();
-            //     txtPropietario.Text = item.Propietario.ToString();
-            //     txtTelefono.Text = item.Telefono.ToString();
-            //     txtVereda.Text = item.Vereda.ToString();
-            //     txtHectareas.Text = item.Hectareas.ToString();
-            //     cmbMunicipio.SelectedValue = item.idMunicipio;
-
-            //     foreach (var item2 in municipios)
-            //     {
-            //         if (item2.idMunicipio == item.idMunicipio)
-            //         {
-            //             cmbDepartamento.SelectedValue = item2.idDepartamento;
-
-            //         }
-            //     }
-            //}
 
 
 
-
-
-        }
+            }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {

@@ -41,43 +41,43 @@ namespace CoffeeLand
         {
 
 
-            if (txtUsuario.Text != string.Empty && txtPassword.Password.ToString() != string.Empty)
-            {
+            //if (txtUsuario.Text != string.Empty && txtPassword.Password.ToString() != string.Empty)
+            //{
                 
 
-                IEnumerable< Usuario> usua = MUsuario.GetInstance().InciarSesion(txtUsuario.Text) as IEnumerable<Usuario>;
+                //IEnumerable< Usuario> usua = MUsuario.GetInstance().InciarSesion(txtUsuario.Text) as IEnumerable<Usuario>;
 
-                foreach (var item in usua)
-                {                    
+                //foreach (var item in usua)
+                //{                    
 
-                    if (item.Nickname != null)
-                    {
+                //    if (item.Nickname != null)
+                //    {
 
-                        if (item.Contrasena.Equals(Encriptar(txtPassword.Password.ToString())))
-                        {
-                            MUsuario.GetInstance().rol = item.Rol;
+                //        if (item.Contrasena.Equals(Encriptar(txtPassword.Password.ToString())))
+                //        {
+                //            MUsuario.GetInstance().rol = item.Rol;
                             DialogResult = true;
-                        }
-                        else
-                        {
-                            mensajeError("Usuario y/o Contraseña incorrecta");
-                        }
+                    //    }
+                    //    else
+                    //    {
+                    //        mensajeError("Usuario y/o Contraseña incorrecta");
+                    //    }
 
 
-                    }
-                    else
-                    {
-                        mensajeError("Usuario y/o Contraseña incorrecta");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    mensajeError("Usuario y/o Contraseña incorrecta");
+                    //}
 
-                }
+            //    }
 
-            }
+            //}
 
-            else
-            {
-                mensajeError("Debe ingresar todos los campos");
-            }
+            //else
+            //{
+            //    mensajeError("Debe ingresar todos los campos");
+            //}
            
 
           
